@@ -1,0 +1,391 @@
+﻿@model MyWebsite.Models.Chapter
+
+@{
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+<div class="padding">
+    <div class="m-b black rounded">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/Account/UserManagment">Home</a></li>
+            <li class="breadcrumb-item"><a href="/Manga/ListManga">Danh sách truyện đã tạo</a></li>
+            <li class="breadcrumb-item"><a href="/Manga/ListChapter?MangaId=@Model.MangaId">Danh sách chương </a></li>
+            <li class="breadcrumb-item">Chi tiết chương</li>
+        </ol>
+    </div>
+    <div class="box-header blue" style="margin-bottom:5px">
+        <h2>CHI TIẾT CHƯƠNG</h2>
+    </div>
+    <div class="row">
+        <div class="col-sm-2" style="padding-left:12px;padding-right:12px">
+            <div class="box">
+                <div class="box-header">Menu</div>
+                <div class="p-y">
+                    <div class="nav-active-border left b-{{app.setting.theme.primary}}">
+                        <ul class="list-unstyled m-t-n-sm">
+
+                            <li class="nav-item">
+                                <a class="nav-link block" href data-toggle="tab" data-target="#tab-1">Thêm Trang</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link block" href data-toggle="tab" data-target="#tab-2">Chỉnh sửa trang</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link block" href data-toggle="tab" data-target="#tab-3">Trang đã xóa</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-10">
+            <div class="tab-content pos-rlt">
+
+                <div class="tab-pane" id="tab-1">
+                    <div style="margin:30px">
+                        @using (Html.BeginForm("AddNewPage", "Chapter", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            <div class="m-b text-sm">
+                                @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group">
+                                <label> Thứ tự trang mới nhất</label>
+                                <div class="row m-b">
+                                    <div class="col-md-3" style="margin-right:20px;margin-left:8px">
+                                        <input type="number" id="sotrang" class="form-control" value="@Model.Pages.LastOrDefault(m=>m.StatusActive == 0).OrderNumber" disabled>
+                                    </div>
+
+
+                                    <input type="hidden" id="ChapterId" name="ChapterId" value="@Model.ChapterId" />
+                                    <input type="hidden" id="FullName" name="FullName" value="@Model.FullName" />
+                                    <input type="hidden" id="MangaId" name="MangaId" value="@Model.MangaId" />
+                                    <input hidden id="PageFullName" name="PageFullName" />
+                                    <input hidden id="PageOrderNumber" name="PageOrderNumber" />
+
+                                    <button class="btn btn-icon black" type="button" onclick="myFunction() " style="margin-right:20px;"><i class="material-icons md-24">&#xe145;</i></button>
+
+
+                                    <button class="btn btn-icon black" type="button" onclick="myFunction1()" style="margin-right:20px;"><i class="material-icons md-24">&#xe872;</i></button>
+
+
+                                </div>
+
+                            </div>
+                            <div class="form-group " id="filex">
+
+                                <table class="table" id="myTable">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Trang</th>
+                                            <th>Tên Trang</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tablebody">
+                                        @foreach (var item in Model.Pages)
+                                        {
+                                            if (item.StatusActive == 0)
+                                            {
+                                                <tr>
+                                                    <td>@item.OrderNumber</td>
+                                                    <td><img style="max-width:300px" src="~/PageLink/@item.PageLink" /></td>
+                                                    <td>@item.FullName</td>
+                                                </tr>
+                                            }
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                            <button type="submit" class="md-btn md-raised m-b-sm w-xs blue">Lưu</button>
+
+                            <script>
+                                var x1 = Number(document.getElementById("sotrang").value);
+                                var fullname = document.getElementById("PageFullName");
+                                var ordernumber = document.getElementById("PageOrderNumber");
+                                function myFunction() {
+
+                                    var stringfullname = "";
+                                    var stringorder = "";
+                                    var x2 = x1 + 1;
+                                    var tr, td, tbody;
+                                    var tbody = document.getElementById("tablebody");
+                                    var inputfile = document.createElement("input");
+                                    inputfile.type = "file";
+                                    inputfile.id = "AnhTrang";
+                                    inputfile.name = "AnhTrang";
+
+                                    tbody.appendChild(tr = document.createElement("tr"));
+                                    tr.appendChild(td = document.createElement("td"));
+                                    td.textContent = x2;
+                                    stringorder += ";" + td.textContent;
+                                    td.id = "OrderNumber";
+                                    td.name = "OrderNumber";
+                                    tr.appendChild(td = document.createElement("td"));
+                                    td.appendChild(inputfile);
+                                    tr.appendChild(td = document.createElement("td"));
+
+                                    td.textContent = document.getElementById("FullName").value + "- trang " + x2;
+                                    stringfullname += ";" + td.textContent;
+                                    td.id = "FullName";
+                                    td.name = "FullName";
+                                    x1++;
+                                    fullname.value = stringfullname;
+                                    ordernumber.value = stringorder;
+                                    document.getElementById("sotrang").value = x1;
+                                }
+                                function myFunction1() {
+                                    if ((x1 + 1) == document.getElementById("sotrang").value) {
+                                        alert("Không thể xoá");
+                                    }
+                                    else {
+                                        tbody = document.getElementById("tablebody");
+                                        tbody.removeChild(tbody.childNodes[0]);
+
+                                        x1--;
+                                    }
+
+                                }
+                            </script>
+                        }
+                    </div>
+
+
+                </div>
+                <div class="tab-pane" id="tab-2">
+
+                    @*@Html.Action("CongCu", new { matruyen = ViewBag.MaTruyen, machuong = ViewBag.MaChuong })*@
+                    <div class="row">
+                        @foreach (var item in Model.Pages.Where(m=>m.CategoryId == 1))
+                        {
+                            if (item.StatusActive == 0)
+                            {
+                                <div id=@("Remove" + item.PageId) class="col-xs-6 col-sm-4 col-md-3" style="padding-left:12px;padding-right:12px">
+                                    <div class="box p-a-xs">
+                                        <form id=@("UpdatePage" + item.PageId) enctype="multipart/form-data">
+
+                                            <input type="hidden" name="PageId" id="PageId" value="@item.PageId" />
+
+                                            <a href="~/PageLink/@item.PageLink"><img style="max-height:300px" id=@item.PageId src="~/PageLink/@item.PageLink" alt="" class="img-responsive"></a>
+                                            <div class="p-a-sm">
+                                                <div class="text-ellipsis">
+                                                    <span>trang @item.OrderNumber</span>
+                                                    <br />
+                                                    <span>Có @Model.Pages.Where(m => m.PageId_Fa == item.PageId).Count() trang clear-text</span>
+                                                    <input hidden style="margin-left:10px" type="file" id=" @("file"+item.PageId)" name="fileupload" onchange="Upload(this)" />
+                                                </div>
+
+
+                                                <div style="padding-left:0px;padding-right:0px;padding-bottom:0px;" class="box-footer row">
+
+                                                    <button id="@item.PageId" type="button" class="UploadButton md-btn md-raised m-b-sm w-xs primary" style="display: block;margin-left: auto;margin-right: auto;">Upload</button>
+                                                    <button type="button" class="md-btn md-raised m-b-sm w-xs info" style="display: block;margin-left: auto;margin-right: auto;"><a href="/Page/PageSelect?PageId=@item.PageId"> Duyệt</a></button>
+                                                    <button onclick="SavePage(this)" type="button" disabled id=@("Save" + @item.PageId) class="md-btn md-raised m-b-sm w-xs success" style="display: block;margin-left: auto;margin-right: auto;">Lưu</button>
+                                                    <button onclick="ChangeStatusPage(this,1)" type="button" id=@("Save" + @item.PageId) class="md-btn md-raised m-b-sm w-xs danger" style="display: block;margin-left: auto;margin-right: auto;">Xóa</button>
+                                                </div>
+
+
+                                            </div>
+
+                                        </form>
+                                    </div>
+                                </div>
+                            }
+                            else
+                            {
+                                <div id=@("Remove" + item.PageId) class="col-xs-6 col-sm-4 col-md-3" style="padding-left:12px;padding-right:12px;display:none">
+                                    <div class="box p-a-xs">
+                                        <form id=@("UpdatePage" + item.PageId) enctype="multipart/form-data">
+
+                                            <input type="hidden" name="PageId" id="PageId" value="@item.PageId" />
+
+                                            <a href="~/PageLink/@item.PageLink"><img style="max-height:300px" id=@item.PageId src="~/PageLink/@item.PageLink" alt="" class="img-responsive"></a>
+                                            <div class="p-a-sm">
+                                                <div class="text-ellipsis">
+                                                    trang @item.OrderNumber
+                                                    <input hidden style="margin-left:10px" type="file" id="@("file"+item.PageId)" name="fileupload" onchange="Upload(this)" />
+                                                </div>
+
+
+                                                <div style="padding-left:0px;padding-right:0px;padding-bottom:0px;" class="box-footer row">
+
+                                                    <button id="@item.PageId" type="button" class="UploadButton md-btn md-raised m-b-sm w-xs primary" style="display: block;margin-left: auto;margin-right: auto;">Upload</button>
+                                                    <button type="button" class="md-btn md-raised m-b-sm w-xs info" style="display: block;margin-left: auto;margin-right: auto;">Duyệt</button>
+                                                    <button onclick="SavePage(this)" type="button" disabled id=@("Save" + @item.PageId) class="md-btn md-raised m-b-sm w-xs success" style="display: block;margin-left: auto;margin-right: auto;">Lưu</button>
+                                                    <button onclick="ChangeStatusPage(this,1)" type="button" id=@("Save" + @item.PageId) class="md-btn md-raised m-b-sm w-xs danger" style="display: block;margin-left: auto;margin-right: auto;">Xóa</button>
+                                                </div>
+
+                                            </div>
+
+                                        </form>
+                                    </div>
+                                </div>
+                            }
+
+                        }
+
+
+                    </div>
+                </div>
+                <div class="tab-pane" id="tab-3">
+
+                    @*@Html.Action("CongCu", new { matruyen = ViewBag.MaTruyen, machuong = ViewBag.MaChuong })*@
+                    <div class="row">
+                        @foreach (var item in Model.Pages.Where(m => m.CategoryId == 1))
+                        {
+                            if (item.StatusActive == 1)
+                            {
+                                <div id=@("Restore"+item.PageId) class="col-xs-6 col-sm-4 col-md-3" style="padding-left:12px;padding-right:12px">
+                                    <div class="box p-a-xs">
+                                        <form id=@("UpdatePage" + item.PageId) enctype="multipart/form-data">
+
+                                            <input type="hidden" name="PageId" id="PageId" value="@item.PageId" />
+
+                                            <a href="~/PageLink/@item.PageLink"><img style="max-height:300px" id=@item.PageId src="~/PageLink/@item.PageLink" alt="" class="img-responsive"></a>
+                                            <div class="p-a-sm">
+                                                <div class="text-ellipsis">
+                                                    trang @item.OrderNumber
+
+                                                </div>
+                                                <div>
+                                                    <button onclick="ChangeStatusPage(this,0)" type="button" id=@("Save" + @item.PageId) class="md-btn md-raised m-b-sm w-xs black" style="margin-top:10px;margin-bottom:2px">Khôi phục</button>
+                                                </div>
+
+                                            </div>
+
+                                        </form>
+                                    </div>
+                                </div>
+                            }
+                            else
+                            {
+                                <div id=@("Restore"+item.PageId) class="col-xs-6 col-sm-4 col-md-3" style="padding-left:12px;padding-right:12px;display:none">
+                                    <div class="box p-a-xs">
+                                        <form id=@("UpdatePage" + item.PageId) enctype="multipart/form-data">
+
+                                            <input type="hidden" name="PageId" id="PageId" value="@item.PageId" />
+
+                                            <a href="~/PageLink/@item.PageLink"><img style="max-height:300px" id=@item.PageId src="~/PageLink/@item.PageLink" alt="" class="img-responsive"></a>
+                                            <div class="p-a-sm">
+                                                <div class="text-ellipsis">
+                                                    trang @item.OrderNumber
+
+                                                </div>
+                                                <div>
+                                                    <button onclick="ChangeStatusPage(this,0)" type="button" id=@("Save" + @item.PageId) class="md-btn md-raised m-b-sm w-xs black" style="margin-top:10px;margin-bottom:2px">Khôi phục</button>
+                                                </div>
+
+                                            </div>
+
+                                        </form>
+                                    </div>
+                                </div>
+                            }
+
+                        }
+
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts
+{
+    <script>
+        function Upload(input) {
+
+            let value = "img" + "#" + input.id.replace("file","");
+            let valuebuttonSave = "#Save" + input.id.replace("file","");
+            console.log(valuebuttonSave);
+            if (input.files && input.files[0]) {
+
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $(value).prop("src", reader.result);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+                $(valuebuttonSave).prop("disabled", false);
+            }
+
+        }
+         $(".UploadButton").click(function () {
+            
+            let str = "#file" + this.id;
+            $(str).click();
+            })
+        function SavePage(input) {
+
+            let PageId = input.id.replace("Save", "");
+            let value = "#UpdatePage" + PageId;
+            let formdata = new FormData($(value).get(0));
+            console.log(value);
+            alert(formdata);
+            $.ajax({
+                url: "/Chapter/UpdateLinkPage",
+                type: "post",
+
+                data: formdata,
+                cache: false,
+                processData: false,
+                contentType: false,
+                success: function (result) {
+                    if (result == "Success") {
+                        alert("Lưu thành công");
+                    }
+                }
+            });
+        }
+        function ChangeStatusPage(input, status) {
+            let PageId = input.id.replace("Save", "");
+            let div;
+            if (status == 0) {
+
+                div = "#Restore" + PageId;
+            }
+            else {
+                 div = "#Remove" + PageId;
+            }
+            let value = "#UpdatePage" + PageId;
+
+            $.ajax({
+                url: "/Chapter/UpdateStatusPage",
+                type: "post",
+
+                data: {
+                    PageId: +PageId,
+                    StatusActive: status
+                },
+                success: function (result) {
+                    if (result == "Success") {
+                        if (status == 0) {
+                            alert("Khôi phục thành công");
+                            $(div).fadeOut();
+                            div = "#Remove" + PageId;
+                            $(div).show();
+                        }
+                        else {
+                             alert("Xóa thành công");
+                            $(div).fadeOut();
+                            div = "#Restore" + PageId;
+                            $(div).show();
+                        }
+                        
+                       
+                       
+                    }
+                }
+            });
+        }
+
+    </script>
+}
+
+

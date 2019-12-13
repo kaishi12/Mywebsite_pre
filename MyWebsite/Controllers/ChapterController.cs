@@ -35,27 +35,23 @@ namespace MyWebsite.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Create(ChapterModel model, HttpPostedFileBase[] AnhTrang, string PageOrderNumber, string PageFullName)
+        public ActionResult Create(ChapterModel model, HttpPostedFileBase[] fileupload)
         {
 
             AccountModel account = (AccountModel)Session["UserInfo"];
             if (ModelState.IsValid)
             {
-                string[] ListOrderNumber = PageOrderNumber.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
-                string[] ListFullName = PageFullName.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
-
-
                 List<PageModel> pageModels = new List<PageModel>();
-                for (int i = 0; i < AnhTrang.Count(); i++)
+                for (int i = 0; i < fileupload.Count(); i++)
                 {
                     PageModel pageModel = new PageModel();
-                    var filename = Path.GetFileName(AnhTrang[i].FileName);
+                    var filename = Path.GetFileName(fileupload[i].FileName);
                     var path = Path.Combine(Server.MapPath("~/PageLink"), filename);
-                    AnhTrang[i].SaveAs(path);
+                    fileupload[i].SaveAs(path);
                     pageModel.AccountId = account.AccountId;
                     pageModel.PageLink = filename;
-                    pageModel.OrderNumber = int.Parse(ListOrderNumber[i]);
-                    pageModel.FullName = ListFullName[i];
+                    pageModel.OrderNumber = i;
+                    pageModel.FullName = "Trang " + i + " " + model.FullName;
                     pageModels.Add(pageModel);
                 }
                 model.pageModels = pageModels;
@@ -114,26 +110,21 @@ namespace MyWebsite.Controllers
             return Json("Lưu thành công");
         }
         [HttpPost]
-        public ActionResult AddNewPage(Chapter model, string PageOrderNumber, string PageFullName, HttpPostedFileBase[] AnhTrang)
+        public ActionResult AddNewPage(Chapter model, HttpPostedFileBase[] fileupload,int CurrentPage)
         {
 
             AccountModel account = (AccountModel)Session["UserInfo"];
-
-            string[] ListOrderNumber = PageOrderNumber.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
-            string[] ListFullName = PageFullName.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
-
-
             List<PageModel> pageModels = new List<PageModel>();
-            for (int i = 0; i < AnhTrang.Count(); i++)
+            for (int i = 0; i < fileupload.Count(); i++)
             {
                 PageModel pageModel = new PageModel();
-                var filename = Path.GetFileName(AnhTrang[i].FileName);
+                var filename = Path.GetFileName(fileupload[i].FileName);
                 var path = Path.Combine(Server.MapPath("~/PageLink"), filename);
-                AnhTrang[i].SaveAs(path);
+                fileupload[i].SaveAs(path);
                 pageModel.AccountId = account.AccountId;
                 pageModel.PageLink = filename;
-                pageModel.OrderNumber = int.Parse(ListOrderNumber[i]);
-                pageModel.FullName = ListFullName[i];
+                pageModel.OrderNumber = CurrentPage +1 + i;
+                pageModel.FullName = "Trang " + (CurrentPage+i+1) + " " + model.FullName;
                 pageModels.Add(pageModel);
             }
 

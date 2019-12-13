@@ -44,9 +44,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Dapper, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\Dapper.2.0.30\lib\net461\Dapper.dll</HintPath>
-    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -135,6 +132,7 @@
     <Content Include="LayoutUser\assets\bootstrap\dist\css\bootstrap-reboot.min.css" />
     <Content Include="LayoutUser\assets\bootstrap\dist\css\bootstrap.css" />
     <Content Include="LayoutUser\assets\bootstrap\dist\css\bootstrap.min.css" />
+    <Content Include="LayoutUser\assets\flag-icon\license\license.html" />
     <Content Include="LayoutUser\assets\font-awesome\css\font-awesome.css" />
     <Content Include="LayoutUser\assets\font-awesome\css\font-awesome.min.css" />
     <Content Include="LayoutUser\assets\font-awesome\fonts\fontawesome-webfont.svg" />
@@ -449,17 +447,289 @@
     <Content Include="LayoutUser\Translation\TranslationManager.js" />
     <Content Include="LayoutUser\Truyen\ListChapter.js" />
     <Content Include="LayoutUser\Truyen\TaoMoi.js" />
-    <Content Include="Models\Model.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Model.Context.cs</LastGenOutput>
-      <DependentUpon>Model.edmx</DependentUpon>
+    <EntityDeploy Include="Models\Mywebsite.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Mywebsite.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Mywebsite.edmx.diagram">
+      <DependentUpon>Mywebsite.edmx</DependentUpon>
     </Content>
-    <Content Include="Models\Model.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Model.edmx</DependentUpon>
-      <LastGenOutput>Model.cs</LastGenOutput>
-    </Content>
+    <Content Include="LayoutUser\assets\flag-icon\eps\abkhazia.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\afghanistan.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\aland-islands.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\albania.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\algeria.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\american-samoa.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\andorra.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\angola.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\anguilla.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\antigua-and-barbuda.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\argentina.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\armenia.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\aruba.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\australia.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\austria.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\azerbaijan.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\azores-islands.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\bahamas.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\bahrain.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\balearic-islands.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\bangladesh.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\barbados.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\basque-country.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\belarus.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\belgium.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\belize.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\benin.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\bermuda.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\bhutan-1.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\bhutan.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\bolivia.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\bonaire.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\bosnia-and-herzegovina.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\botswana.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\brazil.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\british-columbia.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\british-indian-ocean-territory.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\british-virgin-islands.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\brunei.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\bulgaria.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\burkina-faso.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\burundi.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\cambodia.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\cameroon.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\canada.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\canary-islands.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\cape-verde.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\cayman-islands.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\central-african-republic.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\ceuta.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\chad.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\chile.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\china.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\christmas-island.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\cocos-island.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\colombia.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\comoros.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\cook-islands.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\corsica.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\costa-rica.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\croatia.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\cuba.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\curacao.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\cyprus.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\czech-republic.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\democratic-republic-of-congo.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\denmark.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\djibouti.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\dominica.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\dominican-republic.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\east-timor.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\ecuador.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\egypt.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\england.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\equatorial-guinea.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\eritrea.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\estonia.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\ethiopia.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\european-union.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\falkland-islands.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\faroe-islands.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\fiji.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\finland.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\france.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\french-polynesia.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\gabon.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\galapagos-islands.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\gambia.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\georgia.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\germany.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\ghana.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\gibraltar.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\greece.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\greenland.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\grenada.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\guam.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\guatemala.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\guernsey.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\guinea-bissau.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\guinea.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\guyana.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\haiti.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\hawaii.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\honduras.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\hong-kong.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\hungary.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\iceland.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\india.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\indonesia.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\iran.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\iraq.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\ireland.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\isle-of-man.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\israel.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\italy.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\ivory-coast.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\jamaica.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\japan.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\jersey.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\jordan.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\kazakhstan.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\kenya.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\kiribati.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\kosovo.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\kuwait.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\kyrgyzstan.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\laos.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\latvia.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\lebanon.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\lesotho.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\liberia.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\libya.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\liechtenstein.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\lithuania.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\luxembourg.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\macao.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\madagascar.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\madeira.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\malawi.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\malaysia.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\maldives.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\mali.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\malta.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\marshall-island.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\martinique.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\mauritania.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\mauritius.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\melilla.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\mexico.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\micronesia.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\moldova.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\monaco.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\mongolia.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\montenegro.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\montserrat.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\morocco.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\mozambique.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\myanmar.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\namibia.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\nato.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\nauru.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\nepal.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\netherlands.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\new-zealand.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\nicaragua.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\niger.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\nigeria.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\niue.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\norfolk-island.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\north-korea.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\northen-cyprus.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\northern-marianas-islands.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\norway.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\oman.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\orkney-islands.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\ossetia.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\pakistan.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\palau.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\palestine.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\panama.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\papua-new-guinea.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\paraguay.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\peru.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\philippines.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\pitcairn-islands.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\portugal.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\puerto-rico.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\qatar.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\rapa-nui.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\republic-of-macedonia.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\republic-of-poland.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\republic-of-the-congo.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\romania.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\russia.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\rwanda.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\saba-island.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\saint-kitts-and-nevis.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\salvador.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\samoa.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\san-marino.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\sao-tome-and-principe.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\sardinia.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\saudi-arabia.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\scotland.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\senegal.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\serbia.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\seychelles.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\sierra-leone.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\singapore.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\sint-eustatius.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\sint-maarten.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\slovakia.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\slovenia.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\solomon-islands.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\somalia.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\somaliland.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\south-africa.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\south-korea.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\south-sudan.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\spain.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\sri-lanka.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\st-barts.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\st-lucia.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\st-vincent-and-the-grenadines.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\sudan.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\suriname.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\swaziland.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\sweden.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\switzerland.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\syria.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\taiwan.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\tajikistan.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\tanzania.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\thailand.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\tibet.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\togo.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\tokelau.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\tonga.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\transnistria.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\trinidad-and-tobago.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\tunisia.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\turkey.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\turkmenistan.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\turks-and-caicos.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\tuvalu.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\uganda.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\ukraine.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\united-arab-emirates.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\united-kingdom.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\united-nations.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\united-states-of-america.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\uruguay.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\uzbekistn.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\vanuatu.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\vatican-city.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\venezuela.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\vietnam.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\virgin-islands.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\wales.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\western-sahara.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\yemen.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\zambia.eps" />
+    <Content Include="LayoutUser\assets\flag-icon\eps\zimbabwe.eps" />
     <None Include="Scripts\jquery-1.6.4-vsdoc.js" />
+    <Content Include="Models\Mywebsite.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Mywebsite.edmx</DependentUpon>
+      <LastGenOutput>Mywebsite.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\Mywebsite.edmx.sql" />
+    <Content Include="Models\Mywebsite.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Mywebsite.edmx</DependentUpon>
+      <LastGenOutput>Mywebsite.cs</LastGenOutput>
+    </Content>
+    <Content Include="RootPicture\tenor.gif" />
     <Content Include="Scripts\jquery-1.6.4.js" />
     <Content Include="Scripts\jquery-1.6.4.min.js" />
     <Content Include="Scripts\jquery.signalR-2.4.1.js" />
@@ -481,79 +751,82 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Account.cs">
-      <DependentUpon>Model.tt</DependentUpon>
+      <DependentUpon>Mywebsite.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Account_Detail.cs">
-      <DependentUpon>Model.tt</DependentUpon>
+      <DependentUpon>Mywebsite.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Category.cs">
-      <DependentUpon>Model.tt</DependentUpon>
+      <DependentUpon>Mywebsite.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Chapter.cs">
-      <DependentUpon>Model.tt</DependentUpon>
+      <DependentUpon>Mywebsite.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Font.cs">
-      <DependentUpon>Model.tt</DependentUpon>
+      <DependentUpon>Mywebsite.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Genre.cs">
-      <DependentUpon>Model.tt</DependentUpon>
+      <DependentUpon>Mywebsite.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Language.cs">
-      <DependentUpon>Model.tt</DependentUpon>
+      <DependentUpon>Mywebsite.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Manga.cs">
-      <DependentUpon>Model.tt</DependentUpon>
+      <DependentUpon>Mywebsite.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Manga_Detail.cs">
-      <DependentUpon>Model.tt</DependentUpon>
+      <DependentUpon>Mywebsite.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Manga_Genres.cs">
-      <DependentUpon>Model.tt</DependentUpon>
+      <DependentUpon>Mywebsite.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Model.Context.cs">
+    <Compile Include="Models\Mywebsite.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Model.Context.tt</DependentUpon>
+      <DependentUpon>Mywebsite.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Model.cs">
+    <Compile Include="Models\Mywebsite.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Model.tt</DependentUpon>
+      <DependentUpon>Mywebsite.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Model.Designer.cs">
+    <Compile Include="Models\Mywebsite.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Model.edmx</DependentUpon>
+      <DependentUpon>Mywebsite.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\Notification.cs">
-      <DependentUpon>Model.tt</DependentUpon>
+      <DependentUpon>Mywebsite.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\NotifyType.cs">
-      <DependentUpon>Model.tt</DependentUpon>
+      <DependentUpon>Mywebsite.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Page.cs">
-      <DependentUpon>Model.tt</DependentUpon>
+      <DependentUpon>Mywebsite.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Point.cs">
-      <DependentUpon>Model.tt</DependentUpon>
+      <DependentUpon>Mywebsite.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Role.cs">
-      <DependentUpon>Model.tt</DependentUpon>
+      <DependentUpon>Mywebsite.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Status.cs">
-      <DependentUpon>Model.tt</DependentUpon>
+      <DependentUpon>Mywebsite.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sysdiagram.cs">
+      <DependentUpon>Mywebsite.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Text.cs">
-      <DependentUpon>Model.tt</DependentUpon>
+      <DependentUpon>Mywebsite.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TextBox.cs">
-      <DependentUpon>Model.tt</DependentUpon>
+      <DependentUpon>Mywebsite.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Translation.cs">
-      <DependentUpon>Model.tt</DependentUpon>
+      <DependentUpon>Mywebsite.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Translation_Detail.cs">
-      <DependentUpon>Model.tt</DependentUpon>
+      <DependentUpon>Mywebsite.tt</DependentUpon>
     </Compile>
     <Compile Include="NotificationComponent.cs" />
     <Compile Include="NotificationHub.cs" />
@@ -561,19 +834,13 @@
     <Compile Include="Service\Account\AccountService.cs" />
     <Compile Include="Service\Chapter\ChapterService.cs" />
     <Compile Include="Service\Common\AccountStatusAttribute.cs" />
-    <Compile Include="Service\Common\DALHelper.cs" />
+    <Compile Include="Service\Common\Const.cs" />
     <Compile Include="Service\Common\DateDifference.cs" />
-    <Compile Include="Service\Common\Enum.cs" />
     <Compile Include="Service\Common\HashMD5.cs" />
     <Compile Include="Service\Common\ObjectAttribute.cs" />
-    <Compile Include="Service\Genre\GenreService.cs" />
-    <Compile Include="Service\Manga\MangaDetailService.cs" />
-    <Compile Include="Service\Manga\MangaGenreService.cs" />
     <Compile Include="Service\Manga\MangaService.cs" />
     <Compile Include="Service\Notification\NotificationService.cs" />
-    <Compile Include="Service\Role\RoleService.cs" />
     <Compile Include="Service\TextBox\TextBoxService.cs" />
-    <Compile Include="Service\Translation\TranslationService.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\Account\AccountModel.cs" />
     <Compile Include="ViewModels\Chapter\ChapterModel.cs" />
@@ -581,7 +848,6 @@
     <Compile Include="ViewModels\Notification\NotificationModel.cs" />
     <Compile Include="ViewModels\TextBox\TextBoxModel.cs" />
     <Compile Include="ViewModels\Text\Text.cs" />
-    <Compile Include="ViewModels\Translation\TranslationModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
@@ -807,13 +1073,6 @@
     <Content Include="LayoutUser\libs\jquery\waves\dist\waves.min.js.map" />
     <Content Include="LayoutUser\scripts\data.json" />
     <Content Include="LayoutUser\scripts\datatable" />
-    <EntityDeploy Include="Models\Model.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Model.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\Model.edmx.diagram">
-      <DependentUpon>Model.edmx</DependentUpon>
-    </Content>
     <None Include="packages.config" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
@@ -850,6 +1109,9 @@
     <Content Include="Views\Shared\AccountStatusRestriction.cshtml" />
     <Content Include="Views\Translation\ListAllowChapter.cshtml" />
     <Content Include="Views\Error\PageError.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Account\Document.cshtml" />
+    <Content Include="Views\Admin\ListLanguage.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -862,6 +1124,7 @@
     <Folder Include="Avatar\" />
     <Folder Include="Cover\" />
     <Folder Include="PageLink\" />
+    <Folder Include="Service\Translation\" />
     <Folder Include="Views\Notification\" />
   </ItemGroup>
   <ItemGroup>

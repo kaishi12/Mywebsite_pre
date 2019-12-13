@@ -21,8 +21,8 @@ namespace MyWebsite.ViewModels.Manga
         public string Author { get; set; }
         [Required]
         public int StatusId { get; set; }
-        public string status { get; set; }
-        public IEnumerable<int> ListGenre { get; set; }
+
+        public List<int> ListGenre { get; set; }
         public DateTime CreatAt { get; set; }
         public int StatusActive { get; set; }
     }
@@ -65,11 +65,5 @@ namespace MyWebsite.ViewModels.Manga
         public string UserName { get; set; }
         public string LanguageFullname { get; set; }
        
-    }
-    public class MangaJoinedModel
-    {
-        public string CoverLink { get; set; }
-        public string MangaName { get; set; }
-        public string RoleList { get; set; }
     }
 }

@@ -50,7 +50,7 @@ namespace MyWebsite.Controllers
                 model.MangaId = MangaService.AddnewManga(model);
                 AccountService accountService = new AccountService();
                 AccountModel accountModel = (AccountModel)Session["UserInfo"];
-                if (MangaDetailService.AddNewRole(model.MangaId, accountModel.AccountId, 1,null,null) && model.MangaId > -1)
+                if (accountService.AddNewRole(model.MangaId, accountModel.AccountId, 1) && model.MangaId > -1)
                 {
                     return RedirectToAction("Result", new { MangaId = model.MangaId, Status = 0 });
                 }
@@ -78,7 +78,7 @@ namespace MyWebsite.Controllers
             }
             return View();
         }
-      
+        [Object]
        public ActionResult UpdateManga(int MangaId)
         {
 
@@ -123,7 +123,7 @@ namespace MyWebsite.Controllers
         public ActionResult ListManga()
         {
             AccountModel accountModel = (AccountModel)Session["UserInfo"];
-           var list = MangaService.GetListMangaByAccountId(accountModel.AccountId, "MC");
+            List<Models.Manga> list = MangaService.GetListMangaByAccountId(accountModel.AccountId, "MC");
             return View(list);
 
         }
@@ -162,7 +162,8 @@ namespace MyWebsite.Controllers
         public JsonResult Search(string Name)
         {
             AccountModel accountModel = (AccountModel)Session["UserInfo"];
-            return Json(MangaService.Search(accountModel.AccountId, Name), JsonRequestBehavior.AllowGet);
+            List<MangaJoin> mangaJoins = MangaService.Search(accountModel.AccountId, Name);
+            return Json(mangaJoins, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
         public JsonResult Join(int id, string role, string language, int type, int? AccountId)
@@ -175,7 +176,7 @@ namespace MyWebsite.Controllers
             {
                 accid = AccountId.Value;
             }
-           if (MangaDetailService.CheckJoin(accid, id, role) == true)
+           if (MangaService.CheckJoin(accid, id, role) == true)
             {
                 int res = MangaService.Join(accid, id, role, language, type);
                 return Json(res);
@@ -189,8 +190,8 @@ namespace MyWebsite.Controllers
         [HttpPost]
         public JsonResult CheckNameManga(string FullName)
         {
-           
-            if (MangaService.CheckNameManga(FullName))
+            var list = data.Mangas.SqlQuery("select* from Manga where FullName like '%" + FullName + "%'");
+            if (list.Count() > 0)
             {
                 return Json(false);
             }

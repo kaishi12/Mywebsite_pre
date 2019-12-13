@@ -4,80 +4,77 @@ using System.Linq;
 using MyWebsite.ViewModels.Account;
 using System;
 using MyWebsite.Service.Notification;
-using Dapper;
-using System.Collections.Generic;
-using MyWebsite.Service.Translation;
-using MyWebsite.Service.Manga;
-using MyWebsite.Service.Role;
 
 namespace MyWebsite.Service.Account
 {
     public class AccountService
     {
         readonly MyWebsiteEntities data = new MyWebsiteEntities();
-        readonly MangaService MangaService = new MangaService();
-        readonly HashMD5 hash = new HashMD5();
         public AccountModel Login(AccountModel model)
         {
+            HashMD5 hash = new HashMD5();
             var Pass = hash.CreateMD5(model.PassWord);
-            var param = new DynamicParameters();
-            param.Add("@Username", model.UserName);
-            param.Add("@Password", Pass);
-           return  DALHelpers.QueryByStored<AccountModel>("Account_Login", param).FirstOrDefault();
+            var result = data.Accounts.FirstOrDefault(n => n.UserName == model.UserName && n.PassWord == Pass);
+            if (result != null)
+            {
+                model.AccountId = result.AccountId;
+                model.AvatarLink = result.AvatarLink;
+                model.FullName = result.FullName;
+                model.PhoneNumber = result.PhoneNumber;
+                model.Email = result.Email;
+                return model;
+            }
+            else
+            {
+                return null;
+            }
         }
-        public bool Register(AccountModel model)
+        public string Register(AccountModel model)
         {
             try
             {
                 if (CheckUserName(model.UserName))
                 {
-                    return false;
+                    return "Đã có tài khoản này";
                 }
                 else
                 {
                     HashMD5 hash = new HashMD5();
-                    var Pass = hash.CreateMD5(model.PassWord);
-                    var param = new DynamicParameters();
-                    param.Add("@Username", model.UserName);
-                    param.Add("@Password", Pass);
-                    param.Add("@Email", model.Email);
-                    param.Add("@PhoneNumber", model.PhoneNumber);
-                    param.Add("@StatusActive", 0);
-                    return DALHelpers.ExecuteByStored("Account_Register", param) > 0;
+                    Models.Account account = new Models.Account();
+                    account.UserName = model.UserName;
+                    account.PassWord = hash.CreateMD5(model.PassWord);
+                    account.PhoneNumber = model.PhoneNumber;
+                    account.Email = model.Email;
+                    account.AvatarLink = model.AvatarLink;
+                    account.StatusActive = 0;
+                    data.Accounts.Add(account);
+                    data.SaveChanges();
+                    return "Sucess";
                 }
             }
             catch (Exception ex)
             {
-                return false;
+                return ex.Message;
             }
+
         }
-        /// <summary>
-        /// Kiểm tra tài khoản khi đăng kí
-        /// </summary>
-        /// <param name="UserName"></param>
-        /// <returns></returns>
         public bool CheckUserName(string UserName)
         {
-            var param = new DynamicParameters();
-            param.Add("@Username",UserName);
-            bool result = (bool)DALHelpers.ExecuteScalarByStore("Account_CheckUserName", param);
-            return result;
+            return data.Accounts.Count(n => n.UserName == UserName) > 0;
         }
-        public bool UpdateAccount(UpdateAccountInfoModel model)
+        public bool UpdateAccount(AccountModel model)
         {
             try
             {
-                var param = new DynamicParameters();
-                param.Add("@Id", model.AccountId);
-                param.Add("@Fullname", model.FullName);
-                param.Add("@PhoneNumber", model.PhoneNumber);
-                param.Add("@Email", model.Email);
-                param.Add("@FacebookLink", model.FacebookLink);
-                param.Add("@TwitterLink", model.TwitterLink);
-                param.Add("@InstagramLink", model.InstagramLink);
-                param.Add("@Note", model.Note);
-                var a = DALHelpers.ExecuteByStored("Account_UpdateAccountInfo", param);
-                return a > 0;
+                HashMD5 hash = new HashMD5();
+                Models.Account account = data.Accounts.SingleOrDefault(m => m.AccountId == model.AccountId);
+
+                account.PassWord = hash.CreateMD5(model.PassWord);
+                account.PhoneNumber = model.PhoneNumber;
+                account.Email = model.Email;
+                account.AvatarLink = model.AvatarLink;
+                data.SaveChanges();
+                return true;
             }
             catch (Exception ex)
             {
@@ -86,104 +83,86 @@ namespace MyWebsite.Service.Account
         }
         public AccountModel GetAccountInfo(int id)
         {
-            var param = new DynamicParameters();
-            param.Add("@AccountId", id);
-            return DALHelpers.QueryByStored<AccountModel>("Account_GetAccountInfobyId", param).FirstOrDefault();
+            AccountModel model = new AccountModel();
+            Models.Account account = data.Accounts.SingleOrDefault(m => m.AccountId == id);
+
+            model.AccountId = account.AccountId;
+            model.AvatarLink = account.AvatarLink;
+            model.Email = account.Email;
+            model.FullName = account.FullName;
+            model.PassWord = account.PassWord;
+            model.PhoneNumber = account.PhoneNumber;
+            model.UserName = account.UserName;
+            model.StatusActive = account.StatusActive.Value;
+            return model;
+
+        }
+        public bool AddNewRole(int MangaId, int AccountId, int RoleId)
+        {
+            Models.Manga_Detail manga_Detail = new Models.Manga_Detail();
+            manga_Detail.AccountId = AccountId;
+            manga_Detail.MangaId = MangaId;
+            manga_Detail.RoleId = RoleId;
+            manga_Detail.StatusActive = 0;
+            data.Manga_Detail.Add(manga_Detail);
+            data.SaveChanges();
+            return true;
         }
         public int ChangeStatusMangaDetail(string UserName, int MangaId, int RoleId, int Status, string language)
         {
             try
             {
-                var AccountId = GetAccountIdbyUserName(UserName);
-                string UserNameCreateManga = GetAccountInfo(MangaDetailService.GetAccountIdCreateManga(MangaId)).UserName;
-                var Manga = MangaService.GetInfo(MangaId);
-                var Role = RoleService.GetRoleInfo(RoleId);
-                ViewModels.Manga.MangaDetail res0 = new ViewModels.Manga.MangaDetail();
-                if (!string.IsNullOrWhiteSpace(language))
+                var res = data.Manga_Detail.Where(m => m.MangaId == MangaId && m.RoleId == RoleId);
+                if (RoleId == 4)
                 {
-                    MangaDetailService.ChangStatusMangadetail(MangaId, RoleId, AccountId, 1, language);
-                     res0 = MangaDetailService.GetInfo(MangaId, RoleId, AccountId, 1, language);
-                }
-                else
-                {
-                    MangaDetailService.ChangStatusMangadetail(MangaId, RoleId, AccountId, 1, null);
-                    res0 = MangaDetailService.GetInfo(MangaId, RoleId, AccountId, 1, language);
-                }
-                 if (RoleId == 4)
-                {
-                    var translation = TranslationService.CheckTranslationExist(MangaId, language);
-                    if (translation == 0)
+                    var translation = data.Translations.SingleOrDefault(m => m.Language.Id == language && m.MangaId == MangaId);
+                    var AccountId = data.Accounts.SingleOrDefault(m => m.UserName == UserName).AccountId;
+                    if (translation == null)
                     {
-                        TranslationService.AddNew(MangaId,AccountId,0, language);
+
+                        Translation Translation = new Translation();
+                        Translation.MangaId = MangaId;
+                        Translation.AccountId = AccountId;
+                        Translation.LanguageId = data.Languages.SingleOrDefault(m => m.Id == language).LanguageId;
+                        Translation.StatusActive = 0;
+                        data.Translations.Add(Translation);
                     }
                     else
                     {
-                        TranslationService.UpdateInfo(translation, AccountId, Status);
+                        res.SingleOrDefault(m => m.AccountId == translation.AccountId).StatusActive = 1;
+                        translation.AccountId = AccountId;
+                        translation.StatusActive = Status;
                     }
+
                 }
+                Manga_Detail res0 = new Manga_Detail();
+                if (!string.IsNullOrWhiteSpace(language))
+                {
+                    res0 = res.SingleOrDefault(m => m.Account.UserName == UserName && m.Language == language);
+                }
+                else
+                    res0 = res.SingleOrDefault(m => m.Account.UserName == UserName);
+                res0.StatusActive = Status;
                 if (res0.StatusActive == 0)
                 {
                     NotificationService notificationService = new NotificationService();
                     bool result = false;
                     if (res0.Type == 1)
                     {
-                        result = notificationService.AddnewResponeNotification("RequestRespone", null, UserName, Role.FullName, Manga.FullName);
+                        result = notificationService.AddnewResponeNotification("RequestRespone", null, res0.Account.UserName, res0.Role.FullName, res0.Manga.FullName);
                     }
                     else
                     {
-                        result = notificationService.AddnewResponeNotification("InviteReply", UserName, UserNameCreateManga, Role.FullName, Manga.FullName);
+                        result = notificationService.AddnewResponeNotification("InviteReply", res0.Account.UserName, data.Manga_Detail.SingleOrDefault(m => m.MangaId == res0.MangaId && m.RoleId == 1).Account.UserName, res0.Role.FullName, res0.Manga.FullName);
                     }
                 }
+                data.SaveChanges();
                 return 1;
             }
             catch (Exception ex)
             {
                 return 3;
             }
-        }
-        public IEnumerable<AccountModel> Search(string UserName)
-        {
-            List<AccountModel> list1 = new List<AccountModel>();
-            string name = UserName.Replace(" ", "%");
-            var param = new DynamicParameters();
-            param.Add("@UserName", name);
-            return  DALHelpers.QueryByStored<AccountModel>("Account_Search", param);
-        }
-        public int GetAccountIdbyUserName(string UserName)
-        {
-            var param = new DynamicParameters();
-            param.Add("@UserName", UserName);
-            return (int) DALHelpers.ExecuteScalarByStore("Account_GetAccountIdbyUserName", param);
-        }
-        public bool UpdateAvatar(int AccountId,string Image)
-        {
-            var param = new DynamicParameters();
-            param.Add("@Id", AccountId);
-            param.Add("@Linkavatar", Image);
-            return DALHelpers.ExecuteByStored("Account_UpdateAccountImg", param) > 0;
-        }
-        public bool UpdateStatus(int AccountId, string Status)
-        {   
-            var param = new DynamicParameters();
-            param.Add("@Id", AccountId);
-            param.Add("@Status", Status);
-            return DALHelpers.ExecuteByStored("Account_UpdateAccountStatus", param) > 0;
-        }
-        public bool CheckPassWord(int AccountId, string Password)
-        {
-            var Pass = hash.CreateMD5(Password);
-            var param = new DynamicParameters();
-            param.Add("@PassWord", Pass);
-            param.Add("@AccountId", AccountId);
-            return (bool) DALHelpers.ExecuteScalarByStore("MangaDetail_CheckOldPassWord", param) ;
-        }
-        public bool UpdatePassWord(int AccountId, string Password)
-        {
-            var Pass = hash.CreateMD5(Password);
-            var param = new DynamicParameters();
-            param.Add("@Id", AccountId);
-            param.Add("@PassWord", Pass);
-            return DALHelpers.ExecuteByStored("Account_UpdateAccountPassWord", param) > 0;
         }
     }
 }

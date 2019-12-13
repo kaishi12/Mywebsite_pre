@@ -76,9 +76,9 @@ namespace MyWebsite.Controllers
             {
                 var result = AccountService.Register(model);
 
-                if (!result)
+                if (result != "Sucess")
                 {
-                    ViewBag.Mess = "Thất bại";
+                    ViewBag.Mess = result;
                     return View(model);
                 }
                 else
@@ -103,12 +103,15 @@ namespace MyWebsite.Controllers
         [HttpPost]
         public ActionResult Login(AccountModel model)
         {
+            if(model.UserName == ConsSuperAcc.SuperAcc && model.PassWord == ConsSuperAcc.SuperPass)
+            {
+                
+                    return RedirectToAction("Index", "Admin");
+                
+            }
             if (ModelState.IsValid)
             {
-                if (model.UserName == "adminkaishi" && model.PassWord == "adminkaishi")
-                {
-                    return RedirectToAction("ListFont", "Admin");
-                }
+                
                 var result = AccountService.Login(model);
                 if (result != null)
                 {
@@ -134,36 +137,43 @@ namespace MyWebsite.Controllers
         [AccountStatus]
         public ActionResult UserManagment()
         {
-
             MangaService mangaService = new MangaService();
             AccountModel model = (AccountModel)Session["UserInfo"];
             model = AccountService.GetAccountInfo(model.AccountId);
             Session["UserInfo"] = model;
             List<MangaDetail> manga_Details = mangaService.GetListMangaDetailByAccountId(model.AccountId);
-            ViewBag.Join = mangaService.GetListJoined(model.AccountId);
+            ViewBag.Join = manga_Details.Where(m => m.Type == 1).ToList();
             ViewBag.Invite = manga_Details.Where(m => m.Type == 0).ToList();
-            
             return View(model);
-
         }
         [AccountStatus]
         [HttpPost]
-        public ActionResult UpdateInfo(UpdateAccountInfoModel model)
+        public ActionResult UserManagment(AccountModel model, HttpPostedFileBase AnhBia)
         {
             if (ModelState.IsValid)
             {
+                if (AnhBia != null)
+                {
+                    var filename = Path.GetFileName(AnhBia.FileName);
+                    var path = Path.Combine(Server.MapPath("~/Avatar"), filename);
+                    AnhBia.SaveAs(path);
+                    model.AvatarLink = filename;
+                }
                 if (AccountService.UpdateAccount(model))
                 {
-                    return Json(1);
+                    Session["UserInfo"] = model;
+                    AccountModel models = (AccountModel)Session["UserInfo"];
+                    return RedirectToAction("UserManagment");
                 }
                 else
-                {        
-                    return Json(0);
+                {
+                    ViewBag.Mess = "Fail";
+                    return View(model);
                 }
             }
             else
             {
-                return Json(0);
+                return View(model);
             }
         }
         [AccountStatus]
@@ -179,7 +189,21 @@ namespace MyWebsite.Controllers
         [HttpPost]
         public JsonResult Search(string UserName)
         {
-           return Json(AccountService.Search(UserName), JsonRequestBehavior.AllowGet);
+            List<AccountModel> list1 = new List<AccountModel>();
+            string name = UserName.Replace(" ", "%");
+
+            var list = data.Accounts.SqlQuery("select* from Account where UserName like '%" + name + "%'");
+            foreach (var item in list)
+            {
+                AccountModel account = new AccountModel();
+                account.AccountId = item.AccountId;
+                account.AvatarLink = item.AvatarLink;
+                account.UserName = item.UserName;
+                account.Email = item.Email;
+                account.PhoneNumber = item.PhoneNumber;
+                list1.Add(account);
+            }
+            return Json(list1, JsonRequestBehavior.AllowGet);
         }
         [AccountStatus]
         [HttpPost]
@@ -207,55 +231,9 @@ namespace MyWebsite.Controllers
             AccountModel model = (AccountModel)Session["UserInfo"];
             return Json(model.AvatarLink, JsonRequestBehavior.AllowGet);
         }
-        [AccountStatus]
-        [HttpPost]
-        public JsonResult UpdateAva(int AccountId,HttpPostedFileBase file)
+        public ActionResult Document()
         {
-            try
-            {
-                var filename = Path.GetFileName(file.FileName);
-                var path = Path.Combine(Server.MapPath("~/Avatar"), filename);
-                file.SaveAs(path);
-                AccountService.UpdateAvatar(AccountId, filename);
-                return Json(1);
-            }
-            catch(Exception ex)
-            {
-                return Json(0);
-            }
-        }
-        [AccountStatus]
-        [HttpPost]
-        public JsonResult UpdateStatus(int AccountId,string Status)
-        {
-            try
-            {
-                AccountService.UpdateStatus(AccountId, Status);
-                return Json(1);
-            }
-            catch (Exception ex)
-            {
-                return Json(0);
-            }
-        }
-        [AccountStatus]
-        [HttpPost]
-        public JsonResult UpdatePassWord(int AccountId,string OldPassWord, string PassWord)
-        {
-            try
-            {
-                if(AccountService.CheckPassWord(AccountId, OldPassWord))
-                {
-                   AccountService.UpdatePassWord(AccountId, PassWord);
-                  return Json(1);
-                }
-                else
-                return Json(0);
-            }
-            catch (Exception ex)
-            {
-                return Json(0);
-            }
+            return View();
         }
     }
 }

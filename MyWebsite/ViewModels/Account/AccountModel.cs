@@ -25,21 +25,5 @@ namespace MyWebsite.ViewModels.Account
         public string PhoneNumber { get; set; }
         public string FullName { get; set; }
         public int StatusActive { get; set; }
-        public string Status { get; set; }
-        public string FacebookLink { get; set; }
-        public string TwitterLink { get; set; }
-        public string InstagramLink { get; set; }
-        public string Note { get; set; }
-    }
-    public class UpdateAccountInfoModel
-    {
-        public int AccountId { get; set; }
-        public string Email { get; set; }
-        public string PhoneNumber { get; set; }
-        public string FullName { get; set; }
-        public string FacebookLink { get; set; }
-        public string TwitterLink { get; set; }
-        public string InstagramLink { get; set; }
-        public string Note { get; set; }
     }
 }

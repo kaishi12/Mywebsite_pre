@@ -25,16 +25,10 @@
         <div class="box-header blue">
             <h2>DANH SÁCH CHƯƠNG: @Model.FirstOrDefault().Manga.FullName</h2>
         </div>
-        <div class="box-tool">
-            <ul class="nav">
-                <li class="nav-item inline dropdown"><a class="nav-link" data-toggle="dropdown"><i class="material-icons md-18"></i></a>
-                <div class="dropdown-menu dropdown-menu-scale pull-right">
-                    <a class="dropdown-item" href="/Chapter/Create/?MangaId=@ViewBag.MangaId">
-                    <span> <i class="fa fa-plus" style="color:red" title="Tạo khung truyện"></i> </span> Thêm chương mới</a>
-                    </div>
-                </li>
-            </ul>
+        <div style="top:6px" class="box-tool">
+            <a class="btn btn-default" href="/CreateChapter/@ViewBag.MangaId">Thêm chương mới</a>
         </div>
+       
 
         <div class="box-body">
             <div class="row m-b">

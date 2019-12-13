@@ -163,6 +163,8 @@ function SetRectangle() {
 }
 var count = 0;
 function RotateRec(cete, X, Y, W, H, degrees, cx, cy) {
+
+
     cete.save();
     cete.translate(cx, cy);              //translate to center of shape
     cete.rotate(degrees);  //rotate 25 degrees.

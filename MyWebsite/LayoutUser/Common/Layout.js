@@ -50,6 +50,7 @@ $(function () {
     })
     // Create a function that the hub can call to broadcast messages.
     notificationHub.client.notify = function (message) {
+        alert(1);
         if (message && message.toLowerCase() == "added") {
             $.ajax({
                 type: "GET",

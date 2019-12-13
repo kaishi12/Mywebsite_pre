@@ -1,0 +1,447 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+@model MyWebsite.ViewModels.Account.AccountModel
+<div class="padding">
+    <div class="m-b">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a>Thông tin cá nhân</a></li>
+        </ol>
+    </div>
+    <div class="box">
+
+        <div class="box-header">
+            <div class="b-b b-primary nav-active-primary">
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="" data-toggle="tab" data-target="#tab1" aria-expanded="true">Thông tin cá nhân</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="" data-toggle="tab" data-target="#tab2" aria-expanded="false">Quản lí đơn xin gia nhập</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="" data-toggle="tab" data-target="#tab3">Quản lí đơn mời gia nhập</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="tab-content p-a m-b-md" style="margin:0px;">
+            <div class="tab-pane animated fadeIn text-muted active" id="tab1" aria-expanded="true">
+                <div class="box">
+
+                    <form id="formupdate" action="/Account/UserManagment" method="post" enctype="multipart/form-data">
+                        <div class="box-body row">
+                            <div class="col-sm-3">
+                                <div class=" form-file col-sm-10">
+                                    <div id="formupload" style="padding-bottom:10px;">
+                                        @if (Model.AvatarLink != null)
+                                        {
+                                            <img src="~/Avatar/@Model.AvatarLink" id="Imganhbia" style=" width:250px; height:400px;" />
+                                        }
+                                        else
+                                        {
+                                            <img id="Imganhbia" style=" width:250px; height:400px;" />
+                                        }
+                                    </div>
+                                    <input hidden="hidden" type="file" id="AnhBia" name="AnhBia" class="form-control" onchange="readURL(this);" required>
+                                    <button type="button" class="btn btn-fw primary" id="uploadbutton">Chọn Ảnh Bìa</button>
+                                    <br />
+                                    <span class="notice">
+                                        *Nên chọn ảnh có kích thước 200x300 px
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-sm-8 offset-1">
+                                <div class="form-group row">
+                                    <label class="form-control-label col-sm-2">Email</label>
+                                    <input id="Email" name="Email" type="email" class="form-control col-sm-9" value="@Model.Email" ui-jp="parsley" required data-parsley-required-message="Không được để trống" data-parsley-type-message="Yêu cầu định dạng email" placeholder="Email" />
+                                </div>
+                                <div class="form-group row">
+                                    <label class="form-control-label col-sm-2">Số điện thoại</label>
+                                    <input id="PhoneNumber" name="PhoneNumber" type="text" class="form-control col-sm-9" ui-jp="parsley" required value="@Model.PhoneNumber" data-parsley-type="number" data-parsley-type-message="Chỉ được nhập số" data-parsley-required-message="Không được để trống" placeholder="Số điện thoại" />
+                                </div>
+                                <div class="form-group row">
+                                    <label class="form-control-label col-sm-2">Mật khẩu</label>
+                                    <input id="PassWord" name="PassWord" type="password" ui-jp="parsley" class="form-control col-sm-9" value="" placeholder="Mật khẩu" required data-parsley-length="[6, 32]" data-parsley-length-message="Yêu cầu từ 6-32 kí tự" data-parsley-required-message="Không được để trống" />
+                                </div>
+                                <input type="hidden" id="UserName" name="UserName" value="@Model.UserName" />
+                                <input type="hidden" id="AccountId" name="AccountId" value="@Model.AccountId" />
+                                <button type="submit" class="btn btn-info m-t offset-9">Cập nhật</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="tab-pane animated fadeIn text-muted" id="tab2" aria-expanded="false">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-4">
+                        <div class="box p-a dark">
+                            <div class="pull-left m-r">
+                                <span class="w-48 rounded accent">
+                                    <i class="material-icons"></i>
+                                </span>
+                            </div>
+                            <div class="clear">
+                                <h4 class="m-a-0 text-lg _300">
+                                    <a href="">
+                                        @ViewBag.mangas
+                                        <span class="text-sm">Truyện</span>
+                                    </a>
+                                </h4>
+                                <small class="text-muted">6 yêu cầu gia nhập.</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-6 col-sm-4">
+                        <div class="box p-a dark">
+                            <div class="pull-left m-r">
+                                <span class="w-48 rounded primary">
+                                    <i class="material-icons"></i>
+                                </span>
+                            </div>
+                            <div class="clear">
+                                <h4 class="m-a-0 text-lg _300">
+                                    <a href="">
+                                        40
+                                        <span class="text-sm">Trang clear-text</span>
+                                    </a>
+                                </h4>
+                                <small class="text-muted">38 Đã được duyệt.</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-6 col-sm-4">
+                        <div class="box p-a dark">
+                            <div class="pull-left m-r">
+                                <span class="w-48 rounded warn">
+                                    <i class="material-icons"></i>
+                                </span>
+                            </div>
+                            <div class="clear">
+                                <h4 class="m-a-0 text-lg _300">
+                                    <a href="">
+                                        600
+                                        <span class="text-sm">Khung đã dịch</span>
+                                    </a>
+                                </h4>
+                                <small class="text-muted">632 Đã được duyệt.</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 col-md-8">
+                        <div class="box">
+                            <div class="box-header primary">
+                                <h3>Danh sách xin gia nhập <span class="label warning">@ViewBag.Join.Count</span></h3>
+
+                            </div>
+                            <div class="table-responsive">
+                                <table ui-jp="dataTable" class="table table-striped b-t b-b">
+                                    <thead>
+                                        <tr>
+
+                                            <th class="text-center">Tên truyện</th>
+                                            <th class="text-center">Tên người dùng</th>
+                                            <th class="text-center">Vai trò</th>
+                                            <th class="text-center">Trạng thái</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in ViewBag.Join)
+                                        {
+                                            <tr>
+
+                                                <td>@item.MangaFullName</td>
+                                                <td style="text-align:center">@item.UserName</td>
+                                                @if (item.LanguageFullname == null)
+                                                {
+                                                    <td class="text-info">@item.RoleFullName</td>
+                                                }
+                                                else
+                                                {
+                                                    <td class="text-info">@item.RoleFullName <br />(@item.LanguageFullname)</td>
+                                                }
+                                                @if (item.StatusActive == 1)
+                                                {
+                                                    <td style="padding-top:3px;text-align:center"><button  id="ChangeStatus" value="@(item.UserName + ";" + item.MangaId + ";" + item.RoleId + ";0")" class="btn btn-danger ChangeStatus">Chưa duyệt</button>  </td>
+                                                }
+                                                else
+                                                {
+                                                    <td style="padding-top:3px;text-align:center"><button  id="ChangeStatus" value="@(item.UserName + ";" + item.MangaId + ";" + item.RoleId + ";1")" class="btn btn-info ChangeStatus">Đã duyệt</button> </td>
+                                                }
+                                            </tr>
+                                        }
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-4">
+
+                        <div class="box p-a dark">
+                            <div class="pull-left m-r">
+                                <span class="w-48 rounded accent">
+                                    <i class="material-icons"></i>
+                                </span>
+                            </div>
+                            <div class="clear">
+                                <h4 class="m-a-0 text-lg _300">
+                                    <a href="">
+                                        125
+                                        <span class="text-sm">Truyện</span>
+                                    </a>
+                                </h4>
+                                <small class="text-muted">6 yêu cầu gia nhập.</small>
+                            </div>
+                        </div>
+
+
+                        <div class="box p-a dark">
+                            <div class="pull-left m-r">
+                                <span class="w-48 rounded primary">
+                                    <i class="material-icons"></i>
+                                </span>
+                            </div>
+                            <div class="clear">
+                                <h4 class="m-a-0 text-lg _300">
+                                    <a href="">
+                                        40
+                                        <span class="text-sm">Trang clear-text</span>
+                                    </a>
+                                </h4>
+                                <small class="text-muted">38 Đã được duyệt.</small>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane animated fadeIn text-muted" id="tab3" aria-expanded="false">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-4">
+                        <div class="box p-a dark">
+                            <div class="pull-left m-r">
+                                <span class="w-48 rounded accent">
+                                    <i class="material-icons"></i>
+                                </span>
+                            </div>
+                            <div class="clear">
+                                <h4 class="m-a-0 text-lg _300">
+                                    <a href="">
+                                        @ViewBag.mangas
+                                        <span class="text-sm">Truyện</span>
+                                    </a>
+                                </h4>
+                                <small class="text-muted">6 yêu cầu gia nhập.</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-6 col-sm-4">
+                        <div class="box p-a dark">
+                            <div class="pull-left m-r">
+                                <span class="w-48 rounded primary">
+                                    <i class="material-icons"></i>
+                                </span>
+                            </div>
+                            <div class="clear">
+                                <h4 class="m-a-0 text-lg _300">
+                                    <a href="">
+                                        40
+                                        <span class="text-sm">Trang clear-text</span>
+                                    </a>
+                                </h4>
+                                <small class="text-muted">38 Đã được duyệt.</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-6 col-sm-4">
+                        <div class="box p-a dark">
+                            <div class="pull-left m-r">
+                                <span class="w-48 rounded warn">
+                                    <i class="material-icons"></i>
+                                </span>
+                            </div>
+                            <div class="clear">
+                                <h4 class="m-a-0 text-lg _300">
+                                    <a href="">
+                                        600
+                                        <span class="text-sm">Khung đã dịch</span>
+                                    </a>
+                                </h4>
+                                <small class="text-muted">632 Đã được duyệt.</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 col-md-8">
+                        <div class="box">
+                            <div class="box-header primary">
+                                <h3>Danh sách xin gia nhập <span class="label warning">@ViewBag.Join.Count</span></h3>
+
+                            </div>
+                            <div class="table-responsive">
+                                <table ui-jp="dataTable" class="table table-striped b-t b-b">
+                                    <thead>
+                                        <tr>
+
+                                            <th class="text-center">Tên truyện</th>
+                                            <th class="text-center">Tên người dùng</th>
+                                            <th class="text-center">Vai trò</th>
+                                            <th class="text-center">Trạng thái</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in ViewBag.Invite)
+                                        {
+                                            <tr>
+
+                                                <td>@item.MangaFullName</td>
+                                                <td style="text-align:center">@item.UserName</td>
+                                                @if (item.LanguageFullname == null)
+                                                {
+                                                    <td class="text-info">@item.RoleFullName</td>
+                                                }
+                                                else
+                                                {
+                                                    <td class="text-info">@item.RoleFullName <br />(@item.LanguageFullname)</td>
+                                                }
+                                                @if (item.StatusActive == 1)
+                                                {
+                                                    <td style="padding-top:3px;text-align:center"><button id="ChangeStatus" value="@(item.UserName + ";" + item.MangaId + ";" + item.RoleId + ";0")  " class="btn btn-danger ChangeStatus">Chưa duyệt</button>  </td>
+                                                }
+                                                else
+                                                {
+                                                    <td style="padding-top:3px;text-align:center"><button id="ChangeStatus" value="@(item.UserName + ";" + item.MangaId+";"+ item.RoleId + ";1")" class="btn btn-info ChangeStatus">Đã duyệt</button> </td>
+                                                }
+                                            </tr>
+                                        }
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-4">
+
+                        <div class="box p-a dark">
+                            <div class="pull-left m-r">
+                                <span class="w-48 rounded accent">
+                                    <i class="material-icons"></i>
+                                </span>
+                            </div>
+                            <div class="clear">
+                                <h4 class="m-a-0 text-lg _300">
+                                    <a href="">
+                                        125
+                                        <span class="text-sm">Truyện</span>
+                                    </a>
+                                </h4>
+                                <small class="text-muted">6 yêu cầu gia nhập.</small>
+                            </div>
+                        </div>
+
+
+                        <div class="box p-a dark">
+                            <div class="pull-left m-r">
+                                <span class="w-48 rounded primary">
+                                    <i class="material-icons"></i>
+                                </span>
+                            </div>
+                            <div class="clear">
+                                <h4 class="m-a-0 text-lg _300">
+                                    <a href="">
+                                        40
+                                        <span class="text-sm">Trang clear-text</span>
+                                    </a>
+                                </h4>
+                                <small class="text-muted">38 Đã được duyệt.</small>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+@if (ViewBag.Mess == "Fail")
+{
+    <script>
+        alert("Cập nhật tài khoản thất bại");
+
+    </script>
+}
+@section scripts
+
+{
+    <script>
+        $(".ChangeStatus").on("click", function () {
+            const btn = $(this);
+            console.log($(this).val());
+            const str = $(this).val().split(";");
+            $.ajax({
+                        url: "/Account/ChangeStatusMangaDetail",
+                        type: "post",
+                        dataType: "json",
+                        data: {
+
+                            UserName: str[0],
+                            MangaId: +str[1],
+                            RoleId: +str[2],
+                            Status: +str[3]
+                        },
+                              success: function (result) {
+                    if (result == true) {
+                        alert("Lưu thành công");
+                        if (str[3] == 1) {
+                           
+                           btn.removeClass("btn-info");
+                           btn.addClass("btn-danger");
+                           btn.val(str[0] + ";" + str[1] + ";" + str[2] + ";0");
+                            btn.text("Chưa duyệt");   
+                        }
+                        else {
+                          
+                            btn.removeClass("btn-danger");
+                            btn.addClass("btn-info");
+                            btn.val(str[0] + ";" + str[1] + ";" + str[2] + ";1");
+                             btn.text("Đã duyệt");
+                           
+                         
+                        }
+
+                    }
+                    else {
+                        alert("Thất bại");
+                    }
+                }
+                    });
+           
+          
+        })
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $("#Imganhbia").prop("src", reader.result);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        };
+        $("#uploadbutton").click(function () {
+            $("#AnhBia").click();
+        });
+    </script>
+}

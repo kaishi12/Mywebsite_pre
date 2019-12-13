@@ -24,7 +24,7 @@ namespace MyWebsite.Controllers
         {
 
             AccountModel accountModel = (AccountModel)Session["UserInfo"];
-            var list = MangaService.GetListMangaByAccountId(accountModel.AccountId, "Ed");
+            List<Models.Manga> list = MangaService.GetListMangaByAccountId(accountModel.AccountId, "Ed");
             return View(list);
 
         }
@@ -56,7 +56,7 @@ namespace MyWebsite.Controllers
         {
 
             AccountModel accountModel = (AccountModel)Session["UserInfo"];
-            var list = MangaService.GetListMangaByAccountId(accountModel.AccountId, "Tr");
+            List<Models.Manga> list = MangaService.GetListMangaByAccountId(accountModel.AccountId, "Tr");
             return View(list);
 
         }
@@ -185,10 +185,11 @@ namespace MyWebsite.Controllers
         {
             var Textbox = data.TextBoxes.Where(m => m.PageId == PageId && m.StatusActive == 0);
             List<ViewModels.Text.Text> Data = new List<ViewModels.Text.Text>();
-            ViewModels.Text.Text newtext = new ViewModels.Text.Text();
+            
             foreach (var item in Textbox)
             {
-                var text = data.Texts.SingleOrDefault(m => m.TranslationId == TranslationId && m.StatusActive == 0 && m.TextBoxId == item.TextBoxId);
+                ViewModels.Text.Text newtext = new ViewModels.Text.Text();
+                var text = data.Texts.SingleOrDefault(m => m.TranslationId == TranslationId && m.StatusAllow == 0 && m.TextBoxId == item.TextBoxId);
                 if (text != null)
                 {
                     var cor = item.Coordinate.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);

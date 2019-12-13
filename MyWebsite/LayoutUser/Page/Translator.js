@@ -46,7 +46,7 @@ $(".labellanguage").on("click", function () {
         },
         dataType: "json",
         success: function (result) {
-        
+
             LoadText(result);
             $("#DivCanvas").append(canvas1);
            
@@ -57,27 +57,29 @@ $(".labellanguage").on("click", function () {
     $(this).attr("disabled", true);
 })
 function LoadText(result) {
-
+    
     count = 0;
     ctx1.drawImage(img, 0, 0, img.width, img.height, 0, 0, canvas.width, canvas.height);
+    let text, size, font, outline, italic, bold;
     for (let i = 0; i < result.length ; i++)
     {
-        console.log(result);
+       
         count++;
         let CorX = result[i].CorX / scale;
         let CorY = result[i].CorY / scale;
         let CorW = result[i].Witdh / scale;
         let CorH = result[i].Height / scale;
         let De = parseInt(result[i].Degrees) * (Math.PI / 180);
-        bold = parseInt(result[i].Bold);
-        size = parseInt(result[i].Size);
+        bold = result[i].Bold;
+        size = result[i].Size;
         font = result[i].Font;
-        color = result[i].color;
-        italic = parseInt(result[i].Italic);
+        color = result[i].color.trim();
+        italic = result[i].Italic;
         let cx = CorX + 0.5 * CorW;   
         let cy = CorY + 0.5 * CorH;
         text = result[i].text;
-        RotateRec(1, ctx1, CorX, CorY, CorW, CorH, De, cx, cy, text, font, color, italic, bold, size, color);
+        
+        RotateRec(1, ctx1, CorX, CorY, CorW, CorH, De, cx, cy, text, font, outline, color, italic, bold, size, color);
     }
 
 }
@@ -127,7 +129,7 @@ function RotateRec(status, cete, X, Y, W, H, degrees, cx, cy, text, font, outlin
         fontTextBox += "Italic ";
     }
     let size1 = 24 / scale;
-    fontTextBox += bold + " " + size / scale + "px " + font;
+    fontTextBox += bold + " " + (size/scale) + "px " + font;
  cete.save();
     cete.translate(cx, cy);              //translate to center of shape
     cete.rotate(degrees);  //rotate 25 degrees.
@@ -287,7 +289,7 @@ $(".attText").on("input", function () {
     }
     LoadTable(1);
     flagChange = false;
-    $(".attText").each(function () {
+    $(".attText.New").each(function () {
         if ($(this).val().length != 0) {
 
             flagChange = true;
@@ -357,9 +359,7 @@ $("#Join").on("click", function () {
     else {
         $(id).data("outline", 0);
     }
-
-
-    LoadTable(1);
+LoadTable(1);
 })
 function loadjscssfile(filename, filetype) {
     if (filetype == "js") { //if filename is a external JavaScript file
@@ -385,10 +385,12 @@ $("#SelectColor").on("change", function () {
 function Save() {
     let model = new Array();
     $("#tblEntAttributes tbody tr.New").each(function () {
+        
         let row = $(this);
         
         let Text = {};
         Text.TextContent = row.find("td").eq(1).find("input").eq(0).val();
+       
         if (Text.TextContent != "") {
             $(this).removeClass("New");
             $(this).addClass("Default");
@@ -413,7 +415,7 @@ function Save() {
         model.push(Text);
         }
     });
-    console.log(model);
+   
     $.ajax({
             type: "POST",
             url: "/Contribute/AddNewTexts",
