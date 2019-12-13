@@ -1,0 +1,243 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="MyWebsiteModelStoreContainer" CdmEntityContainer="MyWebsiteEntities">
+    <EntitySetMapping Name="Accounts">
+      <EntityTypeMapping TypeName="MyWebsiteModel.Account">
+        <MappingFragment StoreEntitySet="Account">
+          <ScalarProperty Name="AccountId" ColumnName="AccountId" />
+          <ScalarProperty Name="FullName" ColumnName="FullName" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="AvatarLink" ColumnName="AvatarLink" />
+          <ScalarProperty Name="StatusActive" ColumnName="StatusActive" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="PassWord" ColumnName="PassWord" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Account_Detail">
+      <EntityTypeMapping TypeName="MyWebsiteModel.Account_Detail">
+        <MappingFragment StoreEntitySet="Account_Detail">
+          <ScalarProperty Name="AccountId" ColumnName="AccountId" />
+          <ScalarProperty Name="PointId" ColumnName="PointId" />
+          <ScalarProperty Name="Total" ColumnName="Total" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Categories">
+      <EntityTypeMapping TypeName="MyWebsiteModel.Category">
+        <MappingFragment StoreEntitySet="Category">
+          <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+          <ScalarProperty Name="FullName" ColumnName="FullName" />
+          <ScalarProperty Name="StatusActive" ColumnName="StatusActive" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Chapters">
+      <EntityTypeMapping TypeName="MyWebsiteModel.Chapter">
+        <MappingFragment StoreEntitySet="Chapter">
+          <ScalarProperty Name="ChapterId" ColumnName="ChapterId" />
+          <ScalarProperty Name="FullName" ColumnName="FullName" />
+          <ScalarProperty Name="OrderNumber" ColumnName="OrderNumber" />
+          <ScalarProperty Name="ViewNumber" ColumnName="ViewNumber" />
+          <ScalarProperty Name="CreateAt" ColumnName="CreateAt" />
+          <ScalarProperty Name="StatusActive" ColumnName="StatusActive" />
+          <ScalarProperty Name="MangaId" ColumnName="MangaId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Fonts">
+      <EntityTypeMapping TypeName="MyWebsiteModel.Font">
+        <MappingFragment StoreEntitySet="Font">
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="FontId" ColumnName="FontId" />
+          <ScalarProperty Name="FullName" ColumnName="FullName" />
+          <ScalarProperty Name="FontLink" ColumnName="FontLink" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="StatusActive" ColumnName="StatusActive" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Genres">
+      <EntityTypeMapping TypeName="MyWebsiteModel.Genre">
+        <MappingFragment StoreEntitySet="Genre">
+          <ScalarProperty Name="GenreId" ColumnName="GenreId" />
+          <ScalarProperty Name="FullName" ColumnName="FullName" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Alias" ColumnName="Alias" />
+          <ScalarProperty Name="StatusActive" ColumnName="StatusActive" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Languages">
+      <EntityTypeMapping TypeName="MyWebsiteModel.Language">
+        <MappingFragment StoreEntitySet="Language">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="LanguageId" ColumnName="LanguageId" />
+          <ScalarProperty Name="FullName" ColumnName="FullName" />
+          <ScalarProperty Name="Note" ColumnName="Note" />
+          <ScalarProperty Name="StatusActive" ColumnName="StatusActive" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Mangas">
+      <EntityTypeMapping TypeName="MyWebsiteModel.Manga">
+        <MappingFragment StoreEntitySet="Manga">
+          <ScalarProperty Name="MangaId" ColumnName="MangaId" />
+          <ScalarProperty Name="CoverLink" ColumnName="CoverLink" />
+          <ScalarProperty Name="FullName" ColumnName="FullName" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="CreateAt" ColumnName="CreateAt" />
+          <ScalarProperty Name="Author" ColumnName="Author" />
+          <ScalarProperty Name="StatusActive" ColumnName="StatusActive" />
+          <ScalarProperty Name="Alias" ColumnName="Alias" />
+          <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Manga_Detail">
+      <EntityTypeMapping TypeName="MyWebsiteModel.Manga_Detail">
+        <MappingFragment StoreEntitySet="Manga_Detail">
+          <ScalarProperty Name="Language" ColumnName="Language" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="AccountId" ColumnName="AccountId" />
+          <ScalarProperty Name="MangaId" ColumnName="MangaId" />
+          <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+          <ScalarProperty Name="StatusActive" ColumnName="StatusActive" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Manga_Genres">
+      <EntityTypeMapping TypeName="MyWebsiteModel.Manga_Genres">
+        <MappingFragment StoreEntitySet="Manga_Genres">
+          <ScalarProperty Name="MangaId" ColumnName="MangaId" />
+          <ScalarProperty Name="GenreId" ColumnName="GenreId" />
+          <ScalarProperty Name="StatusActive" ColumnName="StatusActive" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Pages">
+      <EntityTypeMapping TypeName="MyWebsiteModel.Page">
+        <MappingFragment StoreEntitySet="Page">
+          <ScalarProperty Name="PageId_Fa" ColumnName="PageId_Fa" />
+          <ScalarProperty Name="PageId" ColumnName="PageId" />
+          <ScalarProperty Name="FullName" ColumnName="FullName" />
+          <ScalarProperty Name="OrderNumber" ColumnName="OrderNumber" />
+          <ScalarProperty Name="PageLink" ColumnName="PageLink" />
+          <ScalarProperty Name="StatusActive" ColumnName="StatusActive" />
+          <ScalarProperty Name="ChapterId" ColumnName="ChapterId" />
+          <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+          <ScalarProperty Name="CreateAt" ColumnName="CreateAt" />
+          <ScalarProperty Name="AccountId" ColumnName="AccountId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Points">
+      <EntityTypeMapping TypeName="MyWebsiteModel.Point">
+        <MappingFragment StoreEntitySet="Point">
+          <ScalarProperty Name="PointId" ColumnName="PointId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FullName" ColumnName="FullName" />
+          <ScalarProperty Name="PointNumber" ColumnName="PointNumber" />
+          <ScalarProperty Name="StatusActive" ColumnName="StatusActive" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Roles">
+      <EntityTypeMapping TypeName="MyWebsiteModel.Role">
+        <MappingFragment StoreEntitySet="Role">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+          <ScalarProperty Name="FullName" ColumnName="FullName" />
+          <ScalarProperty Name="StatusActive" ColumnName="StatusActive" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Status">
+      <EntityTypeMapping TypeName="MyWebsiteModel.Status">
+        <MappingFragment StoreEntitySet="Status">
+          <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+          <ScalarProperty Name="FullName" ColumnName="FullName" />
+          <ScalarProperty Name="StatusActive" ColumnName="StatusActive" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Texts">
+      <EntityTypeMapping TypeName="MyWebsiteModel.Text">
+        <MappingFragment StoreEntitySet="Text">
+          <ScalarProperty Name="Italic" ColumnName="Italic" />
+          <ScalarProperty Name="FontSize" ColumnName="FontSize" />
+          <ScalarProperty Name="TextId" ColumnName="TextId" />
+          <ScalarProperty Name="TextContent" ColumnName="TextContent" />
+          <ScalarProperty Name="ColorText" ColumnName="ColorText" />
+          <ScalarProperty Name="ColorOutline" ColumnName="ColorOutline" />
+          <ScalarProperty Name="Bold" ColumnName="Bold" />
+          <ScalarProperty Name="StatusActive" ColumnName="StatusActive" />
+          <ScalarProperty Name="StatusAllow" ColumnName="StatusAllow" />
+          <ScalarProperty Name="TranslationId" ColumnName="TranslationId" />
+          <ScalarProperty Name="AccountId" ColumnName="AccountId" />
+          <ScalarProperty Name="TextBoxId" ColumnName="TextBoxId" />
+          <ScalarProperty Name="FontId" ColumnName="FontId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TextBoxes">
+      <EntityTypeMapping TypeName="MyWebsiteModel.TextBox">
+        <MappingFragment StoreEntitySet="TextBox">
+          <ScalarProperty Name="Degree" ColumnName="Degree" />
+          <ScalarProperty Name="TextBoxId" ColumnName="TextBoxId" />
+          <ScalarProperty Name="Coordinate" ColumnName="Coordinate" />
+          <ScalarProperty Name="Witdh" ColumnName="Witdh" />
+          <ScalarProperty Name="Height" ColumnName="Height" />
+          <ScalarProperty Name="PageId" ColumnName="PageId" />
+          <ScalarProperty Name="StatusActive" ColumnName="StatusActive" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Translations">
+      <EntityTypeMapping TypeName="MyWebsiteModel.Translation">
+        <MappingFragment StoreEntitySet="Translation">
+          <ScalarProperty Name="TransationId" ColumnName="TransationId" />
+          <ScalarProperty Name="MangaId" ColumnName="MangaId" />
+          <ScalarProperty Name="AccountId" ColumnName="AccountId" />
+          <ScalarProperty Name="LanguageId" ColumnName="LanguageId" />
+          <ScalarProperty Name="StatusActive" ColumnName="StatusActive" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Translation_Detail">
+      <EntityTypeMapping TypeName="MyWebsiteModel.Translation_Detail">
+        <MappingFragment StoreEntitySet="Translation_Detail">
+          <ScalarProperty Name="CreateAt" ColumnName="CreateAt" />
+          <ScalarProperty Name="StatusActive" ColumnName="StatusActive" />
+          <ScalarProperty Name="TranslationId" ColumnName="TranslationId" />
+          <ScalarProperty Name="ChapterId" ColumnName="ChapterId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Notifications">
+      <EntityTypeMapping TypeName="MyWebsiteModel.Notification">
+        <MappingFragment StoreEntitySet="Notification">
+          <ScalarProperty Name="NotifyTypeId" ColumnName="NotifyTypeId" />
+          <ScalarProperty Name="SeenStatus" ColumnName="SeenStatus" />
+          <ScalarProperty Name="AccountId" ColumnName="AccountId" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="CreateAt" ColumnName="CreateAt" />
+          <ScalarProperty Name="NContent" ColumnName="NContent" />
+          <ScalarProperty Name="NotificationId" ColumnName="NotificationId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NotifyTypes">
+      <EntityTypeMapping TypeName="MyWebsiteModel.NotifyType">
+        <MappingFragment StoreEntitySet="NotifyType">
+          <ScalarProperty Name="NTContent" ColumnName="NTContent" />
+          <ScalarProperty Name="StatusActive" ColumnName="StatusActive" />
+          <ScalarProperty Name="FullName" ColumnName="FullName" />
+          <ScalarProperty Name="NotifyTypeId" ColumnName="NotifyTypeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

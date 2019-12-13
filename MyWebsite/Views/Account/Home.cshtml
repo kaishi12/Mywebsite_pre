@@ -1,0 +1,84 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+@model MyWebsite.ViewModels.Account.AccountModel
+    
+<div class="padding">
+    <div class="m-b">
+        <ol class="breadcrumb black">
+            <li class="breadcrumb-item active"><a>Trang chủ</a></li>
+        </ol>
+    </div>
+    <div class="box">
+        <div class="box-header blue">
+            Home
+        </div>
+        <div class="box-body">
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="box p-a dark">
+                        <div class="pull-left m-r">
+                            <span class="w-48 rounded accent">
+                                <i class="material-icons"></i>
+                            </span>
+                        </div>
+                        <div class="clear">
+                            <h4 class="m-a-0 text-lg _300">
+                                <a href="">
+                                    @ViewBag.MangaCount
+                                    <span class="text-sm">Truyện đã đăng</span>
+                                </a>
+                            </h4>
+                            <small class="text-muted">@ViewBag.Join yêu cầu gia nhập.(Đã duyệt @ViewBag.Joined)</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="box p-a dark">
+                        <div class="pull-left m-r">
+                            <span class="w-48 rounded primary">
+                                <i class="material-icons"></i>
+                            </span>
+                        </div>
+                        <div class="clear">
+                            <h4 class="m-a-0 text-lg _300">
+                                <a href="">
+                                   @ViewBag.Invite
+                                    <span class="text-sm"> Lời mời tham gia</span>
+                                </a>
+                            </h4>
+                            <small class="text-muted">@ViewBag.Invited Đã được duyệt.</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="box p-a dark">
+                        <div class="pull-left m-r">
+                            <span class="w-48 rounded warn">
+                                <i class="material-icons"></i>
+                            </span>
+                        </div>
+                        <div class="clear">
+                            <h4 class="m-a-0 text-lg _300">
+                                <a href="">
+                                    @ViewBag.Translation
+                                    <span class="text-sm">Bản dịch đang quản lí</span>
+                                </a>
+                            </h4>
+                            <small class="text-muted">Các ngôn ngữ đã tham gia: <br />
+                                @foreach(var item in ViewBag.Language)
+                                {
+                                   <span>@(item+",")</span>
+                                }
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

@@ -1,0 +1,180 @@
+﻿@using MyWebsite.Models
+@model IEnumerable<MyWebsite.Models.Chapter>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+<style>
+    table th {
+        text-align: center
+    }
+
+    td {
+        text-align: center
+    }
+</style>
+<div class="padding">
+    <div class="m-b ">
+        <ol class="breadcrumb black">
+            <li class="breadcrumb-item"><a href="/Account/Home">Trang chủ</a></li>
+            <li class="breadcrumb-item"><a href="/Translation/ListManga">Quản lí bản dịch</a></li>
+            <li class="breadcrumb-item active">Duyệt chương</li>
+        </ol>
+    </div>
+    <div class="box">
+        <div class="box-header blue">
+            <h2>DANH SÁCH CHƯƠNG: @Model.FirstOrDefault().Manga.FullName</h2>
+            <input hidden id="Translation" value="@ViewBag.TranslationId" />
+        </div>
+        <div class="box-tool">
+            <ul class="nav">
+                <li class="nav-item inline dropdown">
+                    <a class="nav-link" data-toggle="dropdown"><i class="material-icons md-18"></i></a>
+                    <div class="dropdown-menu dropdown-menu-scale pull-right">
+                        <a class="dropdown-item" href="/Chapter/Create/?MangaId=@ViewBag.MangaId">
+                            <span> <i class="fa fa-plus" style="color:red" title="Tạo khung truyện"></i> </span> Thêm chương mới
+                        </a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="box-body">
+
+            <div class="table-responsive">
+                <table ui-jp="dataTable" class="table table-striped b-t b-b">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Tên</th>
+                            <th>Thời gian tạo</th>
+                            <th>Clear-text/Raw</th>
+                            <th>Thoại/Khung</th>
+                            <th>Lượt xem</th>
+                            <th style="text-align:center">Trạng thái</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @item.OrderNumber
+                                </td>
+                                <td class="center">
+
+                                    <span>
+
+                                        @Html.DisplayFor(modelItem => item.FullName)
+                                    </span>
+
+                                </td>
+                                <td class="center">
+                                    @Html.DisplayFor(modelItem => item.CreateAt)
+                                </td>
+
+                                <td class="center">
+                                    @{int parameterValue1 = item.Pages.Where(m => m.CategoryId == 2 && m.StatusActive == 0).Count();
+                                        @Html.DisplayFor(modelItem => parameterValue1)
+                                    }/@{int parameterValue = item.Pages.Where(m => m.CategoryId == 1 && m.StatusActive == 0).Count();
+                                        @Html.DisplayFor(modelItem => parameterValue)
+                                    }
+
+                                </td>
+                                <td class="center">
+                                    @{
+                                        var listpages = item.Pages.Where(m => m.CategoryId == 1 && m.StatusActive == 0);
+                                        var Text = 0;
+                                        foreach (var item1 in listpages)
+                                        {
+                                            foreach (var item2 in item1.TextBoxes.Where(m => m.StatusActive == 0))
+                                            {
+
+                                                Text += item2.Texts.Where(m => m.StatusActive == 0).Count();
+                                            }
+                                        }
+                                        @Html.DisplayFor(modelItem => Text)
+
+                                    }/ @{
+
+                                        var Textboxs = 0;
+
+                                        foreach (var item1 in listpages)
+                                        {
+                                            Textboxs += item1.TextBoxes.Where(m => m.StatusActive == 0).Count();
+                                        }
+                                        @Html.DisplayFor(modelItem => Textboxs)
+                                    }
+
+
+
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ViewNumber)
+                                </td>
+                                @if (Text == 0 || Textboxs == 0 || parameterValue1 == 0 || parameterValue == 0)
+                                {
+                                    <td>
+                                        Chưa thể xuất bản
+                                    </td>
+                                }
+                                else
+                                {
+                                    if (Text / Textboxs == 1 && parameterValue1 / parameterValue == 1)
+                                    {
+                                        <td>
+                                            Có thể xuất bản
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td>
+                                            Chưa thể xuất bản
+                                        </td>
+
+                                    }
+                                }
+                                <td>
+                                    @{
+                                        var res = item.Translation_Detail.SingleOrDefault(m => m.TranslationId == ViewBag.TranslationId);
+                                        if (Text == 0 || Textboxs == 0 || parameterValue1 == 0 || parameterValue == 0)
+                                        {
+                                        
+                                            <button disabled data-chapterId="@item.ChapterId" class="AllowButton btn dark">Chưa duyệt</button>
+
+                                        
+                                    }
+                                    else
+                                    if (Text / Textboxs == 1 && parameterValue1 / parameterValue == 1)
+                                    {
+                                        if (res != null && res.StatusActive == 0)
+                                        {
+                                            <button  data-status="1"  data-chapterId="@item.ChapterId" class="AllowButton btn dark">Đã duyệt</button>
+                                        }
+                                        else
+                                        {
+                                            <button data-status="1" data-chapterId="@item.ChapterId" class="AllowButton btn dark">Chưa duyệt</button>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <button disabled data-chapterId="@item.ChapterId" class="AllowButton btn dark">Chưa duyệt</button>
+
+                                    }
+                                    }
+                                    </td>
+                                </tr>
+                            }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+   <script src="~/LayoutUser/Translation/ListAllowChapter.js"></script>
+
+

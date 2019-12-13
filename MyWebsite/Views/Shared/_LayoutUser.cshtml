@@ -1,0 +1,361 @@
+﻿<!DOCTYPE html>
+@using MyWebsite.ViewModels.Account;
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>MangaKakaka</title>
+    <meta name="description" content="Admin, Dashboard, Bootstrap, Bootstrap 4, Angular, AngularJS" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimal-ui" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- for ios 7 style, multi-resolution icon of 152x152 -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-barstyle" content="black-translucent">
+    <link rel="apple-touch-icon" href="/LayoutUser/assets/images/logo.png">
+    <meta name="apple-mobile-web-app-title" content="Flatkit">
+    <!-- for Chrome on Android, multi-resolution icon of 196x196 -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="shortcut icon" sizes="196x196" href="/LayoutUser/assets/images/logo.png">
+
+    <!-- style -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/LayoutUser/assets/animate.css/animate.min.css" type="text/css" />
+    <link rel="stylesheet" href="/LayoutUser/assets/glyphicons/glyphicons.css" type="text/css" />
+    <link rel="stylesheet" href="/LayoutUser/assets/font-awesome/css/font-awesome.min.css" type="text/css" />
+    <link rel="stylesheet" href="/LayoutUser/assets/material-design-icons/material-design-icons.css" type="text/css" />
+    <link rel="stylesheet" href="/LayoutUser/assets/bootstrap/dist/css/bootstrap.min.css" type="text/css" />
+    <!-- build:css /LayoutUser/assets/styles/app.min.css -->
+    <link rel="stylesheet" href="/LayoutUser/assets/styles/app.css" type="text/css" />
+    <!-- endbuild -->
+    <link rel="stylesheet" href="/LayoutUser/assets/styles/font.css" type="text/css" />
+    <script src="~/LayoutUser/libs/jquery/jquery/dist/jquery.js"></script>
+    <!-- Bootstrap -->
+    
+    <style>
+        .breadcrumb-item {
+            color: white
+        }
+
+            .breadcrumb-item.active {
+                color: yellow;
+            }
+
+            .breadcrumb-item + .breadcrumb-item::before {
+                display: inline-block;
+                padding-right: .5rem;
+                padding-left: .5rem;
+                color: white;
+                content: "/";
+            }
+
+        .gray-white {
+            background-color: #d9d6d6;
+        }
+
+        .white-gray {
+            background-color: #fbfbfb;
+        }
+    </style>
+</head>
+@{
+    AccountModel accountModel = (AccountModel)HttpContext.Current.Session["Userinfo"];
+}
+<body>
+
+    <input id="AccountModel" value="@accountModel.UserName" />
+    <div class="app" id="app">
+        <!-- ############ LAYOUT START-->
+        <!-- aside -->
+        <div id="aside" class="app-aside modal nav-dropdown">
+            <!-- fluid app aside -->
+            <div class="left navside black dk" data-layout="column">
+                <div class="navbar no-radius">
+                    <!-- brand -->
+                    <a class="navbar-brand" href="/Account/Home">
+                        <div ui-include="'/LayoutUser/assets/images/logo.svg'"></div>
+                        <img src="~/Truyen/logo.png" alt="." class="hide">
+                        <span class="hidden-folded inline">MangaKakaka</span>
+                    </a>
+                    <!-- / brand -->
+                </div>
+                <div class="hide-scroll" data-flex>
+                    <nav class="scroll nav-light">
+
+                        <ul class="nav" ui-nav>
+                            <li class="nav-header hidden-folded">
+                                <small class="text-muted">Chức năng</small>
+                            </li>
+                            <li>
+                                <a href="/Account/Search">
+                                    <span class="nav-text">Tìm kiếm</span>
+                                </a>
+                            </li>
+                            <li class="nav-header hidden-folded">
+                                <small class="text-muted">Quản lý</small>
+                            </li>
+
+
+                            <li>
+                                <a>
+                                    <span class="nav-caret">
+                                        <i class="fa fa-caret-down"></i>
+                                    </span>
+
+                                    <span class="nav-text">Truyện</span>
+                                </a>
+                                <ul class="nav-sub">
+                                    <li>
+                                        <a href="/Manga/CreateManga">
+                                            <span class="nav-text">Tạo Truyện</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/Manga/ListManga">
+                                            <span class="nav-text">Truyện đã tạo</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/Manga/ListMangaJoin">
+                                            <span class="nav-text">Truyện đã tham gia</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="/Translation/ListManga">
+
+
+
+                                    <span class="nav-text">Bản Dịch</span>
+                                </a>
+
+                            </li>
+                            <li class="nav-header hidden-folded">
+                                <small class="text-muted">Đóng góp</small>
+                            </li>
+                            <li>
+                                <a href="/Contribute/EditorList">
+                                    <span class="nav-text">Upload Clear-Text</span>
+                                </a>
+
+                            </li>
+                            <li>
+                                <a href="/Contribute/TranslatorList">
+                                    <span class="nav-text">Dịch truyện</span>
+                                </a>
+
+                            </li>
+                            <li class="nav-header hidden-folded">
+                                <small class="text-muted">Hướng dẫn</small>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <span class="nav-text">Tài liệu</span>
+                                </a>
+                            </li>
+
+                        </ul>
+                    </nav>
+                </div>
+
+            </div>
+        </div>
+        <!-- / -->
+        <!-- content -->
+        <div id="content" class="app-content box-shadow-z0" role="main">
+            <div class="app-header info  box-shadow-z4 navbar-md">
+                <div class="navbar navbar-toggleable-sm flex-row align-items-center">
+                    <!-- Open side - Naviation on mobile -->
+                    <a data-toggle="modal" data-target="#aside" class="hidden-lg-up mr-3">
+                        <i class="material-icons">&#xe5d2;</i>
+                    </a>
+                    <!-- / -->
+                    <!-- Page title - Bind to $state's title -->
+                    <div class="mb-0 h5 no-wrap" ng-bind="$state.current.data.title" id="pageTitle"></div>
+
+                    <!-- navbar collapse -->
+                    <!-- / navbar collapse -->
+                    <!-- navbar right -->
+                    <ul class="nav navbar-nav ml-auto flex-row">
+                        <li class="nav-item dropdown pos-stc-xs">
+                            <a id="Notifcation" class="nav-link mr-2" href="#" data-toggle="dropdown">
+                                <i class="material-icons md-24" style="color:black">&#xe7f4;</i>
+                                <span id="NotificationCount" class="label label-sm up warning">0</span>
+                            </a>
+                            <div ui-include="'/LayoutUser/views/blocks/dropdown.notification.html'"></div>
+                            <div class="dropdown-menu pull-right w-xl animated fadeInUp no-bg no-border no-shadow ng-scope">
+                                <div class="scrollable" style="max-height: 500px">
+                                    <ul id="ABCZ" class="list-group list-group-gap m-a-0"></ul>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link p-0 clear" href="#" data-toggle="dropdown">
+                                <span class="avatar w-32">
+                                    <img id="AvatarIcon" src="~/Avatar/@accountModel.AvatarLink" alt="/LayoutUser.">
+                                    <i class="on b-white bottom"></i>
+                                </span>
+                            </a>
+                            <div ui-include="'/LayoutUser/views/blocks/dropdown.user.html'"></div>
+                            <div class="dropdown-menu pull-right dropdown-menu-scale ng-scope">
+
+                                <a class="dropdown-item" ui-sref="app.page.profile" href="/Account/UserManagment">
+                                    <span>Thông tin cá nhân</span>
+                                </a>
+                                <a class="dropdown-item" ui-sref="app.page.setting" href="#/app/page/setting">
+                                    <span>Cài đặt</span>
+                                    <span class="label primary m-l-xs">3/9</span>
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" ui-sref="app.docs" href="#/app/docs">Trợ giúp?</a>
+                                <a class="dropdown-item" ui-sref="access.signin" href="/Account/Logout">Đăng Xuất</a>
+                            </div>
+                        </li>
+                        <li class="nav-item hidden-md-up">
+                            <a class="nav-link pl-2" data-toggle="collapse" data-target="#collapse">
+                                <i class="material-icons">&#xe5d4;</i>
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- / navbar right -->
+                </div>
+            </div>
+            <div class="app-footer">
+                <div class="p-2 text-xs">
+                    <div class="pull-right text-muted py-1">
+                        &copy; Copyright <strong>Flatkit</strong> <span class="hidden-xs-down">- Built with Love v1.1.3</span>
+                        <a ui-scroll-to="content"><i class="fa fa-long-arrow-up p-x-sm"></i></a>
+                    </div>
+                    <div class="nav">
+                        <a class="nav-link" href="/LayoutUser/">About</a>
+                        <a class="nav-link" href="http://themeforest.net/user/flatfull/portfolio?ref=flatfull">Get it</a>
+                    </div>
+                </div>
+            </div>
+            <div ui-view class="app-body" id="view">
+                <!-- ############ PAGE START-->
+                @RenderBody()
+
+                <!-- ############ PAGE END-->
+            </div>
+        </div>
+        <!-- / -->
+        <!-- theme switcher -->
+        @*<div id="switcher">
+
+
+                <div class="switcher box-color dark-white text-color" id="sw-theme">
+                    <a href ui-toggle-class="active" target="#sw-theme" class="box-color dark-white text-color sw-btn">
+                        <i class="fa fa-gear"></i>
+                    </a>
+                    <div class="box-header">
+
+                        <h2>Giao diện</h2>
+                    </div>
+                    <div class="box-divider"></div>
+                    <div class="box-body">
+                        <p class="hidden-md-down">
+                            <label class="md-check m-y-xs" data-target="folded">
+                                <input type="checkbox">
+                                <i class="green"></i>
+                                <span class="hidden-folded">Folded Aside</span>
+                            </label>
+                            <label class="md-check m-y-xs" data-target="boxed">
+                                <input type="checkbox">
+                                <i class="green"></i>
+                                <span class="hidden-folded">Boxed Layout</span>
+                            </label>
+                            <label class="m-y-xs pointer" ui-fullscreen>
+                                <span class="fa fa-expand fa-fw m-r-xs"></span>
+                                <span>Fullscreen Mode</span>
+                            </label>
+                        </p>
+                        <p>Màu:</p>
+                        <p data-target="themeID">
+                            <label class="radio radio-inline m-0 ui-check ui-check-color ui-check-md" data-value="{primary:'primary', accent:'accent', warn:'warn'}">
+                                <input type="radio" name="color" value="1">
+                                <i class="primary"></i>
+                            </label>
+                            <label class="radio radio-inline m-0 ui-check ui-check-color ui-check-md" data-value="{primary:'accent', accent:'cyan', warn:'warn'}">
+                                <input type="radio" name="color" value="2">
+                                <i class="accent"></i>
+                            </label>
+                            <label class="radio radio-inline m-0 ui-check ui-check-color ui-check-md" data-value="{primary:'warn', accent:'light-blue', warn:'warning'}">
+                                <input type="radio" name="color" value="3">
+                                <i class="warn"></i>
+                            </label>
+                            <label class="radio radio-inline m-0 ui-check ui-check-color ui-check-md" data-value="{primary:'success', accent:'teal', warn:'lime'}">
+                                <input type="radio" name="color" value="4">
+                                <i class="success"></i>
+                            </label>
+                            <label class="radio radio-inline m-0 ui-check ui-check-color ui-check-md" data-value="{primary:'info', accent:'light-blue', warn:'success'}">
+                                <input type="radio" name="color" value="5">
+                                <i class="info"></i>
+                            </label>
+                            <label class="radio radio-inline m-0 ui-check ui-check-color ui-check-md" data-value="{primary:'blue', accent:'indigo', warn:'primary'}">
+                                <input type="radio" name="color" value="6">
+                                <i class="blue"></i>
+                            </label>
+                            <label class="radio radio-inline m-0 ui-check ui-check-color ui-check-md" data-value="{primary:'warning', accent:'grey-100', warn:'success'}">
+                                <input type="radio" name="color" value="7">
+                                <i class="warning"></i>
+                            </label>
+                            <label class="radio radio-inline m-0 ui-check ui-check-color ui-check-md" data-value="{primary:'danger', accent:'grey-100', warn:'grey-300'}">
+                                <input type="radio" name="color" value="8">
+                                <i class="danger"></i>
+                            </label>
+                        </p>
+                        <p>Themes:</p>
+                        <div data-target="bg" class="row no-gutter text-u-c text-center _600 clearfix">
+                            <label class="p-a col-sm-6 light pointer m-0">
+                                <input type="radio" name="theme" value="" hidden>
+                                Light
+                            </label>
+                            <label class="p-a col-sm-6 grey pointer m-0">
+                                <input type="radio" name="theme" value="grey" hidden>
+                                Grey
+                            </label>
+                            <label class="p-a col-sm-6 dark pointer m-0">
+                                <input type="radio" name="theme" value="dark" hidden>
+                                Dark
+                            </label>
+                            <label class="p-a col-sm-6 black pointer m-0">
+                                <input type="radio" name="theme" value="black" hidden>
+                                Black
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>*@
+        <!-- / -->
+        <!-- ############ LAYOUT END-->
+    </div>
+    <!-- build:js scripts/app.html.js -->
+    <!-- jQuery -->
+    <!-- endbuild -->
+    <script src="~/LayoutUser/libs/jquery/tether/dist/js/tether.min.js"></script>
+    <script src="~/LayoutUser/libs/jquery/bootstrap/dist/js/bootstrap.js"></script>
+    <!-- core -->
+    <script src="~/LayoutUser/libs/jquery/underscore/underscore-min.js"></script>
+    <script src="~/LayoutUser/libs/jquery/jQuery-Storage-API/jquery.storageapi.min.js"></script>
+    <script src="~/LayoutUser/libs/jquery/PACE/pace.min.js"></script>
+    <script src="~/LayoutUser/scripts/config.lazyload.js"></script>
+    <script src="~/LayoutUser/scripts/palette.js"></script>
+    <script src="~/LayoutUser/scripts/ui-load.js"></script>
+    <script src="~/LayoutUser/scripts/ui-jp.js"></script>
+    <script src="~/LayoutUser/scripts/ui-include.js"></script>
+    <script src="~/LayoutUser/scripts/ui-device.js"></script>
+    <script src="~/LayoutUser/scripts/ui-form.js"></script>
+    <script src="~/LayoutUser/scripts/ui-nav.js"></script>
+    <script src="~/LayoutUser/scripts/ui-screenfull.js"></script>
+    <script src="~/LayoutUser/scripts/ui-scroll-to.js"></script>
+    <script src="~/LayoutUser/scripts/ui-toggle-class.js"></script>
+    <script src="~/LayoutUser/scripts/app.js"></script>
+    <!-- ajax -->
+    <script src="~/LayoutUser/libs/jquery/jquery-pjax/jquery.pjax.js"></script>
+    <script src="~/LayoutUser/scripts/ajax.js"></script>
+    <script src="~/Scripts/jquery.signalR-2.4.1.js"></script>
+    <script src="/signalr/hubs"></script>
+    <script src="~/LayoutUser/Common/Layout.js"></script>
+</body>
+</html>

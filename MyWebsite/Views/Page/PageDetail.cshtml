@@ -1,0 +1,147 @@
+﻿@model MyWebsite.Models.Page
+@{
+    ViewBag.Title = "PageDetail";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+
+<style>
+
+
+    table {
+        border-collapse: collapse;
+    }
+
+    td, th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #dddddd;
+    }
+</style>
+<div class="padding">
+    <div class="m-b">
+        <ol class="breadcrumb black">
+            <li class="breadcrumb-item"><a href="/Account/Home">Trang chủ</a></li>
+            <li class="breadcrumb-item"><a href="/Manga/ListManga">Danh sách truyện đã tạo</a></li>
+            <li class="breadcrumb-item"><a href="/Manga/ListChapter?MangaId=@Model.Chapter.Manga.MangaId">Danh sách chương </a></li>
+            <li class="breadcrumb-item active">Tạo khung truyện</li>
+        </ol>
+    </div>
+    <div class="box">
+        <div class="box-header blue">
+            <h2>TẠO KHUNG TRUYỆN: @Model.FullName</h2>
+        </div>
+        <div class="box-body row m-b">
+            <div id="DivCanvas" class="col-sm-8">
+                <img id="girl" hidden src="~/PageLink/@Model.PageLink" />
+                <canvas id="canvas" style="border:1px solid #000000;">
+
+                    Your browser does not support the HTML5 canvas tag.
+                </canvas>
+                <input hidden value="@Model.PageId" id="PageId" />
+            </div>
+            <div class="col-sm-4">
+
+                <select class="form-control c-select" id="SelectPage" name="SelectPage">
+                    @foreach (var item in ViewBag.listpage)
+                    {
+                        if (item.PageId == Model.PageId)
+                        {
+                            <option selected value="@item.PageId">@item.FullName</option>
+                        }
+                        else
+                        {
+                            <option value="@item.PageId">@item.FullName</option>
+                        }
+                    }
+                </select>
+
+                <div class="box ">
+                    <div class="box-header primary">
+                        <h3>Danh sách khung</h3>
+                        <div class="box-tool">
+                            <ul class="nav">
+                                <li class="nav-item inline">
+                                    <a class="nav-link">
+                                        <i onclick="Reload()" class="material-icons md-18"></i>
+                                    </a>
+
+                                </li>
+                                <li class="nav-item inline dropdown">
+                                    <span class="nav-link" data-toggle="dropdown">
+                                        <i class="material-icons md-18"></i>
+                                    </span>
+                                    <div class="dropdown-menu dropdown-menu-scale pull-right dark">
+                                        <span class="dropdown-item" onclick="LoadTable()">Áp dụng xoay</span>
+                                        <span class="dropdown-item" onclick="DrawImg()">Xóa toàn bộ khung</span>
+                                        <span class="dropdown-item" onclick="SaveCor()">Lưu</span>
+
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-bordered m-0" id="tblEntAttributes">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                  
+                                    <th style="width:10%;text-align:center">
+                                        Độ Xoay
+                                    </th>
+                                    <th>
+
+                                    </th>
+                                </tr>
+                            </thead>
+
+
+                            <tbody>
+                                @if (Model.TextBoxes != null)
+                                {
+
+                                    int count = 1;
+
+                                    foreach (var item in Model.TextBoxes.Where(m => m.StatusActive == 0))
+                                    {
+
+                                        var Cor = item.Coordinate.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+                                        <tr>
+                                            <td class="Att" data-attX="@Cor[0]" data-attY="@Cor[1]" data-attW="@item.Witdh" data-attH="@item.Height"><span class="form-control">@count</span> </td>
+                                            <td><input style="width:60px" class="form-control attDe" type="number" id="1" value="@(item.Degree + 90)" />  </td>
+                                            <td>
+                                                <button  class="btn btn-fw danger" onclick="Remove(this)">Xóa</button>
+                                            </td>
+                                            <td hidden>@item.TextBoxId </td>
+                                        </tr>
+                                        count++;
+                                    }
+                                }
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--<canvas hidden id="canvas1" width="1000" height="1000" style="border:1px solid #000000;">
+        Your browser does not support the HTML5 canvas tag.
+    </canvas>-->
+
+     <script src="~/LayoutUser/Page/Canvas.js"></script>
+        <script>
+            $("#SelectPage").on("change", function () {
+                window.location.href = "/Page/PageDetail?PageId=" + $(this).val();
+            })
+            
+        </script>
+
+    
+

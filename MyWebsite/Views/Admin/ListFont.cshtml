@@ -1,0 +1,129 @@
+﻿
+@{
+    ViewBag.Title = "ListFont";
+    Layout = "~/Views/Shared/_layoutAdmin.cshtml";
+}
+
+
+@model IEnumerable<MyWebsite.Models.Font>
+
+<style>
+    table th {
+        text-align: center;
+    }
+
+    td {
+        text-align: center;
+    }
+</style>
+<div class="padding">
+    <div class="m-b black">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+
+        </ol>
+    </div>
+    <div class="box">
+        <div class="box-header blue">
+            <h2>Danh sách truyện</h2>
+
+        </div>
+        <div style="top:6px" class="box-tool">
+            <button class="btn btn-default" data-toggle="modal" data-target="#m-a-f">Thêm font</button>
+        </div>
+        <div class="box-body">
+            <div class="table-responsive">
+                <table ui-jp="dataTable" id="datatable" class="table table-striped b-t b-b">
+                    <thead>
+                        <tr>
+                            <th>FontId</th>
+                            <th>Tên font</th>
+                            <th>Đường link</th>
+                            <th>Mô tả</th>
+                            <th>Trạng thái</th>
+                            <th>Type</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td class="center">
+
+
+                                    @item.FontId
+
+                                </td>
+                                <td class="center">
+                                    @item.FullName
+                                </td>
+                                <td class="center">
+                                    @Html.DisplayFor(modelItem => item.FontLink)
+                                </td>
+                                <td class="center">
+                                    @Html.DisplayFor(modelItem => item.Description)
+                                </td>
+                                <td class="center">
+                                    @Html.DisplayFor(modelItem => item.StatusActive)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Type)
+
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+    <div id="m-a-f" class="modal fade" data-backdrop="true" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Thêm font mới</h5>
+                </div>
+                <form action="/Admin/Addfont" method="post" enctype="multipart/form-data">
+                    <div class="modal-body">
+
+
+                        <div class="form-group row">
+                            <label class="col-sm-4 form-control-label">
+                                <span>Tên font</span>
+                                <span style="color:red">(*)</span>
+                            </label>
+                            <div class="col-sm-8">
+
+                                <input name="fontname" class="form-control" />
+                            </div>
+
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-4 form-control-label">
+                                <span>File</span>
+                                <span style="color:red">(*)</span>
+                            </label>
+                            <div class="col-sm-8">
+
+                                <input name="fontupload" type="file" webkitdirectory mozdirectory class="form-control" />
+                            </div>
+
+                        </div>
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn dark-white p-x-md" data-dismiss="modal">Hủy</button>
+                        <button id="Invite" type="submit" class="btn danger p-x-md">Thêm</button>
+                    </div>
+                </form>
+            </div><!-- /.modal-content -->
+        </div>
+    </div>
+</div>
+
+
+
+
+

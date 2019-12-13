@@ -1,0 +1,194 @@
+﻿@model MyWebsite.Models.Page
+@{
+    ViewBag.Title = "PageDetail";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+
+<style>
+ table {
+        border-collapse: collapse;
+    }
+
+    td, th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #dddddd;
+    }
+</style>
+<div class="padding">
+    <div class="m-b black rounded">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/Account/Home">Trang chủ</a></li>
+            <li class="breadcrumb-item"><a href="/Translation/ListManga">Quản lí bản dịch</a></li>
+            <li class="breadcrumb-item active">Duyệt thoại</li>
+        </ol>
+    </div>
+    <div class="box">
+        <div class="box-header blue">
+            <h2>DUYỆT THOẠI: @ViewBag.MangaFullName</h2>
+            @*<span class="text-muted" >@ViewBag.Language</span>*@
+            <input hidden id="Translation"  value="@ViewBag.Traslation.TransationId"/>
+        </div>
+        <div class="box-body m-b">
+            <div class="row">
+                <div class="col-sm-4 " style="padding-bottom:10px;">
+                    <div class="form-group row">
+                        <label class="col-sm-3 form-control-label">
+                            <span>Chương</span>
+
+                        </label>
+                        <select class=" col-sm-8 form-control c-select" id="SelectChapter" name="SelectChapter">
+                            @foreach (var item in ViewBag.chapterlist)
+                            {
+                                if (ViewBag.ChapterId != null && ViewBag.ChapterId == item.ChapterId)
+                                {
+                                    <option selected value="@item.ChapterId">@item.FullName</option>
+                                }
+                                else
+                                {
+                                    <option value="@item.ChapterId">@item.FullName</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                      
+                        
+                    </div>
+                <div class="col-sm-4" style="padding-bottom:10px;">
+                    <div class="form-group row">
+                        <label class="col-sm-3 form-control-label">
+                            <span>Trang:</span>
+
+                        </label>
+                        <select class="col-sm-8 form-control c-select" id="SelectPage" name="SelectPage">
+                            @foreach (var item in ViewBag.listpage)
+                            {
+                                if (item.Key == Model.PageId)
+                                {
+                                    <option selected value="@item.Key">@item.Value</option>
+                                }
+                                else
+                                {
+                                    <option value="@item.Key">@item.Value</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                       
+                    </div>
+                </div>
+            <div class="row">
+                <div id="DivCanvas" class="col-sm-6">
+                    @if (ViewBag.PageClear != null)
+                    {
+                        <img id="girl" hidden src="~/PageLink/@ViewBag.PageClear.PageLink" />
+                    }
+                    else
+                    {
+                        <img id="girl" hidden src="~/PageLink/@Model.PageLink" />
+                    }
+                    <canvas id="canvas" style="border:1px solid #000000;">
+
+                        Your browser does not support the HTML5 canvas tag.
+                    </canvas>
+                    <input hidden value="@Model.PageId" id="PageId" />
+                </div>
+                <div class="col-sm-6">
+                    <div class="box ">
+                        <div class="box-header primary">
+                            <h3>Danh sách khung</h3>
+                            <div class="box-tool">
+                                <ul class="nav">
+                                    <li class="nav-item inline">
+                                        <a class="nav-link">
+                                            <i onclick="LoadTable(0)" class="material-icons md-18"></i>
+                                        </a>
+
+                                    </li>
+
+                                    <li class="nav-item inline">
+                                        <a class="nav-link">
+                                            <i onclick="Save()" class="material-icons md-18">&#xe146;</i>
+                                        </a>
+
+                                    </li>
+                                </ul>
+                            </div>
+
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-bordered m-0" id="tblEntAttributes">
+
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                      <th>
+                                            Lời thoại
+                                        </th>
+                                        <th>
+
+                                        </th>
+                                    </tr>
+                                </thead>
+
+
+                                <tbody>
+                                    @if (Model.TextBoxes != null)
+                                    {
+
+                                        int count = 1;
+
+                                        foreach (var item in Model.TextBoxes.Where(m => m.StatusActive == 0))
+                                        {
+
+                                            var Cor = item.Coordinate.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+                                            <tr>
+                                                <td class="Att " data-attDe="@item.Degree" data-attX="@Cor[0]" data-attY="@Cor[1]" data-attW="@item.Witdh" data-attH="@item.Height"><span class="form-control">@count</span> </td>
+                                                <td>
+                                                    <select class="AttText form-control c-select">
+                                                        @foreach (var text in item.Texts.Where(m => m.TranslationId == ViewBag.Traslation.TransationId))
+                                                        {
+                                                            if (text.StatusAllow == 0)
+                                                            {
+                                                                <option selected data-fontid="@text.FontId" data-Italic="@text.Italic" data-color="@text.ColorText" data-font="@text.Font.FullName" data-size="@text.FontSize" data-bold="@text.Bold" value="@text.TextId">@text.TextContent</option>
+                                                            }
+                                                            else
+                                                            {
+                                                                <option data-fontid="@text.FontId" data-Italic="@text.Italic" data-color="@text.ColorText" data-font="@text.Font.FullName" data-size="@text.FontSize" data-bold="@text.Bold" value="@text.TextId">@text.TextContent</option>
+
+                                                            }
+                                                        }
+                                                    </select>
+                                                </td>
+
+                                                <td ><button data-textboxid="@item.TextBoxId" data-id="1" class="AttBtn btn btn-fw danger">Duyệt</button></td>
+
+                                            </tr>
+                                            count++;
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--<canvas hidden id="canvas1" width="1000" height="1000" style="border:1px solid #000000;">
+    Your browser does not support the HTML5 canvas tag.
+</canvas>-->
+
+
+    <script src="~/LayoutUser/Translation/TranslationManager.js"></script>
+  
+
+
+

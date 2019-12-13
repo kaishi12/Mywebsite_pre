@@ -1,0 +1,563 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+@using MyWebsite.ViewModels.Account;
+@model MyWebsite.ViewModels.Account.AccountModel
+@{
+    AccountModel accountModel = (AccountModel)HttpContext.Current.Session["Userinfo"];
+}
+
+<div id="m" class="modal" data-backdrop="true" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Cập nhật hình ảnh</h5>
+                <button id="uploadbutton" type="button" class="btn danger p-x-md">Tải ảnh lên</button>
+            </div>
+            <div class="modal-body text-center p-lg">
+                <input id="AnhBia" hidden type="file" onchange="readURL(this);" />
+                <img id="Imganhbia" class="img-responsive" src="~/Avatar/@accountModel.AvatarLink">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn dark-white p-x-md" data-dismiss="modal">Hủy</button>
+                <button type="button" id="UploadImageButton" class="btn danger p-x-md">Lưu</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div>
+</div>
+<div id="Info" class="modal" data-backdrop="true" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form id="formUpdateInfo" role="form" class="p-a-md ">
+                <div class="modal-header">
+                    <h5 class="modal-title">Cập nhật thông tin</h5>
+
+                </div>
+                <div class="modal-body  p-lg">
+
+                    <input id="AccountId" class="form-control" name="AccountId" hidden value="@accountModel.AccountId" />
+                    <div class="form-group">
+                        <label>Tên</label>
+                        <input name="FullName" type="text" value="@accountModel.FullName" class="form-control">
+                    </div>
+
+                    <div class=" row m-b">
+                        <div class="form-group col-sm-6">
+                            <label>Số điện thoại</label>
+                            <input name="PhoneNumber" type="text" value="@accountModel.PhoneNumber" class="form-control">
+                        </div>
+                        <div class="form-group col-sm-6">
+                            <label>Email</label>
+                            <input name="Email" type="text" value="@accountModel.Email" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="form-group ">
+                        <label>FacebookLink</label>
+                        <input name="FacebookLink" type="text" value="@accountModel.FacebookLink" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>TwitterLink</label>
+                        <input name="TwitterLink" type="text" value="@accountModel.TwitterLink" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>InstagramLink</label>
+                        <input name="InstagramLink" type="text" value="@accountModel.InstagramLink" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Ghi chú</label>
+                        <textarea name="Note" class="form-control has-value" rows="3" placeholder="Type something...">@accountModel.Note</textarea>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn dark-white p-x-md" data-dismiss="modal">Hủy</button>
+                    <button class="btn danger p-x-md">Lưu</button>
+                </div>
+            </form>
+        </div><!-- /.modal-content -->
+    </div>
+</div>
+<div id="Pass" class="modal" data-backdrop="true" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Cập nhật mật khẩu</h5>
+            </div>
+            <form id="UpdatePasswordform" ui-jp="parsley" role="form" class=" p-a-0">
+                <div class="modal-body p-lg">
+                    <div class="p-a-md">
+                        <div class="clearfix m-b-lg">
+
+                            <div class="form-group">
+                                <label>Mật khẩu cũ</label>
+                                <input id="OldPassWord" name="OldPassWord" type="password" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>Mật khẩu mới</label>
+                                <input id="PassWord" name="PassWord" type="password" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>Nhập lại mật khẩu</label>
+                                <input type="password" class="form-control" data-parsley-equalto="#PassWord" data-parsley-equalto-message="Mật khẩu không trùng khớp" required="" data-parsley-id="10">
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn dark-white p-x-md" data-dismiss="modal">Hủy</button>
+                        <button id="UpdatePassword" type="button" class="btn danger p-x-md">Lưu</button>
+                    </div>
+
+                </div><!-- /.modal-content -->
+            </form>
+        </div>
+    </div>
+</div>
+<div class="item">
+    <div class="item-bg">
+        <img src="~/Avatar/@accountModel.AvatarLink" class="blur opacity-3" />
+
+    </div>
+    <div class="p-a-md">
+        <div class="row m-t">
+            <div class="col-sm-7">
+                <a data-toggle="modal" data-target="#m" class="pull-left m-r-md">
+                    <span class="avatar w-128">
+                        <img src="~/Avatar/@accountModel.AvatarLink">
+                        <i class="on b-white"></i>
+                    </span>
+                </a>
+
+                <div class="clear m-b">
+                    <h3 class="m-0 m-b-xs">@accountModel.FullName</h3>
+                    <p class="text-muted"><span class="m-r">UX/UI Director</span> <small><i class="fa fa-map-marker m-r-xs"></i>London, UK</small></p>
+                    <div class="block clearfix m-b">
+                        @if (accountModel.FacebookLink != null)
+                        {
+                            <a href="" class="btn btn-icon btn-social rounded white btn-sm">
+                                <i class="fa fa-facebook"></i>
+                                <i class="fa fa-facebook indigo"></i>
+                            </a>
+                        }
+                        @if (accountModel.TwitterLink != null)
+                        {
+                            <a href="" class="btn btn-icon btn-social rounded white btn-sm">
+                                <i class="fa fa-twitter"></i>
+                                <i class="fa fa-twitter light-blue"></i>
+                            </a>
+                        }
+                        @if (accountModel.InstagramLink != null)
+                        {
+                            <a href="" class="btn btn-icon btn-social rounded white btn-sm">
+                                <i class="fa fa-instagram"></i>
+                                <i class="fa fa-instagram red"></i>
+                            </a>
+                        }
+                    </div>
+                    <a href="" data-toggle="modal" data-target="#Info" class="btn btn-sm warn btn-rounded m-b">Cập nhật thông tin</a>
+                    <a href="" data-toggle="modal" data-target="#Pass" class="btn btn-sm warn btn-rounded m-b">Cập nhật mật khẩu</a>
+                </div>
+            </div>
+            <div class="col-sm-5">
+                <p class="text-md profile-status">@accountModel.Status</p>
+                <button id="EditStatus" class="btn btn-sm white collapsed" data-toggle="collapse" data-target="#editor" aria-expanded="false">Chỉnh sửa</button>
+                <div class="box m-t-sm collapse" id="editor" aria-expanded="false" style="">
+                    <textarea id="Editval" class="form-control no-border has-value" rows="2" placeholder="Type something..."></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="dker p-x">
+    <div class="row">
+        <div class="col-sm-6 push-sm-6">
+            <div class="p-y text-center text-sm-right">
+                <a href="" class="inline p-x text-center">
+                    <span class="h4 block m-0">2k</span>
+                    <small class="text-xs text-muted">Followers</small>
+                </a>
+                <a href="" class="inline p-x b-l b-r text-center">
+                    <span class="h4 block m-0">250</span>
+                    <small class="text-xs text-muted">Following</small>
+                </a>
+                <a href="" class="inline p-x text-center">
+                    <span class="h4 block m-0">89</span>
+                    <small class="text-xs text-muted">Activities</small>
+                </a>
+            </div>
+        </div>
+        <div class="col-sm-6 pull-sm-6">
+            <div class="p-y-md clearfix nav-active-primary">
+                <ul class="nav nav-pills nav-sm">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="" data-toggle="tab" data-target="#tab_4" aria-expanded="true">Thông tin cá nhân</a>
+                    </li>
+                    <li class="nav-item" aria-expanded="false">
+                        <a class="nav-link " href="" data-toggle="tab" data-target="#tab_1" aria-expanded="false">Mời gia nhập</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="" data-toggle="tab" data-target="#tab_2" aria-expanded="false">Xin gia nhập</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="" data-toggle="tab" data-target="#tab_3" aria-expanded="false">Friends</a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="padding">
+    <div class="row">
+        <div class="col-sm-8 col-lg-9">
+            <div class="tab-content">
+                <div class="tab-pane p-v-sm " id="tab_1" aria-expanded="false">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6">
+                            <div class="box">
+                                <div class="box-header">
+                                    <h3>Gửi đi</h3>
+                                    <small>Your data status</small>
+                                </div>
+                                <ul class="list inset">
+                                    <li class="list-item">
+                                        <a herf="" class="list-left"><span class="w-40 r-2x _600 text-lg accent">ABC</span></a>
+                                        <div class="list-body">
+                                            <div class="m-y-sm pull-right">
+                                                <a href="" class="btn btn-xs white">Manage</a>
+                                                <a href="" class="btn btn-xs white btn-icon"><i class="fa fa-pencil"></i></a>
+                                            </div>
+                                            <div>
+                                                <a href="">Tensei Shitara Slime Datta Ken</a>
+                                            </div>
+                                            <div class="text-sm">
+                                                <span class="text-muted"><strong>Tên:</strong> Kaishi, <strong>Vị trí:</strong> dịch truyện</span> <span class="label"></span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="list-item">
+                                        <a herf="" class="list-left"><span class="w-40 r-2x _600 text-lg accent">ABC</span></a>
+                                        <div class="list-body">
+                                            <div class="m-y-sm pull-right">
+                                                <a href="" class="btn btn-xs white">Manage</a>
+                                                <a href="" class="btn btn-xs white btn-icon"><i class="fa fa-pencil"></i></a>
+                                            </div>
+                                            <div>
+                                                <a href="">Tensei Shitara Slime Datta Ken</a>
+                                            </div>
+                                            <div class="text-sm">
+                                                <span class="text-muted"><strong>Tên:</strong> Kaishi, <strong>Vị trí:</strong> dịch truyện</span> <span class="label"></span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                            <div class="box">
+                                <div class="box-header">
+                                    <h3>Gửi tới</h3>
+                                    <small>Your data status</small>
+                                </div>
+                                <ul class="list inset">
+                                    <li class="list-item">
+                                        <a herf="" class="list-left"><span class="w-40 r-2x _600 text-lg accent">B</span></a>
+                                        <div class="list-body">
+                                            <div class="m-y-sm pull-right">
+                                                <a href="" class="btn btn-xs white">Manage</a>
+                                                <a href="" class="btn btn-xs white btn-icon"><i class="fa fa-pencil"></i></a>
+                                            </div>
+                                            <div>
+                                                <a href="">Broadcast web app mockup</a>
+                                            </div>
+                                            <div class="text-sm">
+                                                <span class="text-muted"><strong>5</strong> tasks, <strong>3</strong> issues</span> <span class="label"></span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane p-v-sm" id="tab_2" aria-expanded="false">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6">
+                            <div class="box">
+                                <div class="box-header">
+                                    <h3>Gửi đi <span class="label warning">9</span></h3>
+                                    <small>Your data status</small>
+                                </div>
+                                <ul class="list inset">
+                                    <li class="list-item">
+                                        <a herf="" class="list-left"><span class="w-40 r-2x _600 text-lg accent">B</span></a>
+                                        <div class="list-body">
+                                            <div class="m-y-sm pull-right">
+                                                <a href="" class="btn btn-xs white">Manage</a>
+                                                <a href="" class="btn btn-xs white btn-icon"><i class="fa fa-pencil"></i></a>
+                                            </div>
+                                            <div>
+                                                <a href="">Broadcast web app mockup</a>
+                                            </div>
+                                            <div class="text-sm">
+                                                <span class="text-muted"><strong>5</strong> tasks, <strong>3</strong> issues</span> <span class="label"></span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                            <div class="box">
+                                <div class="box-header">
+                                    <h3>Gửi tới</h3>
+                                    <small>Your data status</small>
+                                </div>
+                                <ul class="list inset">
+                                    <li class="list-item">
+                                        <a herf="" class="list-left"><span class="w-40 r-2x _600 text-lg accent">B</span></a>
+                                        <div class="list-body">
+                                            <div class="m-y-sm pull-right">
+                                                <a href="" class="btn btn-xs white">Manage</a>
+                                                <a href="" class="btn btn-xs white btn-icon"><i class="fa fa-pencil"></i></a>
+                                            </div>
+                                            <div>
+                                                <a href="">Broadcast web app mockup</a>
+                                            </div>
+                                            <div class="text-sm">
+                                                <span class="text-muted"><strong>5</strong> tasks, <strong>3</strong> issues</span> <span class="label"></span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane p-v-sm" id="tab_3" aria-expanded="false">
+                    <div ui-include="'../views/blocks/widget.friends.html'"></div>
+                </div>
+                <div class="tab-pane p-v-sm active" id="tab_4" aria-expanded="true">
+                    <div class="row m-b">
+                        <div class="col-xs-6">
+                            <small class="text-muted">Số điện thoại</small>
+                            <div class="_500">@accountModel.PhoneNumber</div>
+                        </div>
+                        <div class="col-xs-6">
+                            <small class="text-muted">Email</small>
+                            <div class="_500">@accountModel.Email</div>
+                        </div>
+                    </div>
+                    <div class="row m-b">
+                        <div class="col-xs-6">
+                            <small class="text-muted">Điểm</small>
+                            <div class="_500">1000</div>
+                        </div>
+                        <div class="col-xs-6">
+                            <small class="text-muted">Vai trò chính</small>
+                            <div class="_500">Dịch truyện</div>
+                        </div>
+                    </div>
+                    <div>
+                        <small class="text-muted">Ghi chú</small>
+                        <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi id neque quam. Aliquam sollicitudin venenatis ipsum ac feugiat. Vestibulum ullamcorper sodales nisi nec condimentum. Mauris convallis mauris at pellentesque volutpat. Phasellus at ultricies neque, quis malesuada augue.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4 col-lg-3">
+            <div>
+                <div class="box">
+                    <div class="box-header">
+                        <h3>Truyện đã tham gia</h3>
+                    </div>
+                    <div class="box-divider m-0"></div>
+                    <ul class="list no-border p-b">
+                        @foreach (var item in ViewBag.Join)
+                        {
+                            <li class="list-item">
+                                <a herf="" class="list-left">
+
+                                    <img class="img-rounded w-40" src="~/Cover/@item.CoverLink" alt="...">
+
+
+                                </a>
+                                <div class="list-body">
+                                    <div><a href="">@item.MangaName</a></div>
+                                    <small class="text-muted text-ellipsis">@item.RoleList</small>
+                                </div>
+                            </li>
+                        }
+
+
+                    </ul>
+                </div>
+                @*<div class="box info dk">
+                        <div class="box-body">
+                            <a href="" class="pull-left m-r">
+                                <img src="../assets/images/a0.jpg" class="img-circle w-40">
+                            </a>
+                            <div class="clear">
+                                <a href="">Mike Mcalidek</a>
+                                <small class="block text-muted">2,415 followers / 225 tweets</small>
+                                <a href="" class="btn btn-sm btn-rounded btn-info m-t-xs"><i class="fa fa-twitter m-t-xs"></i> Follow</a>
+                            </div>
+                        </div>
+                    </div>*@
+                @*<div class="box">
+                        <div class="box-header">
+                            <h2>Thông báo mới nhất</h2>
+                        </div>
+                        <div class="box-divider m-0"></div>
+                        <ul class="list">
+                            <li class="list-item">
+                                <div class="list-body">
+                                    <p>Wellcome <a href="" class="text-info">Drew Wllon</a> and play this web application template, have fun1 </p>
+                                    <small class="block text-muted"><i class="fa fa-fw fa-clock-o"></i> 2 minuts ago</small>
+                                </div>
+                            </li>
+                            <li class="list-item">
+                                <div class="list-body">
+                                    <p>Morbi nec <a href="" class="text-info">Jonathan George</a> nunc condimentum ipsum dolor sit amet, consectetur</p>
+                                    <small class="block text-muted"><i class="fa fa-fw fa-clock-o"></i> 1 hour ago</small>
+                                </div>
+                            </li>
+                            <li class="list-item">
+                                <div class="list-body">
+                                    <p><a href="" class="text-info">Josh Long</a> Vestibulum ullamcorper sodales nisi nec adipiscing elit. Morbi id neque quam. Aliquam sollicitudin venenatis</p>
+                                    <small class="block text-muted"><i class="fa fa-fw fa-clock-o"></i> 2 hours ago</small>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>*@
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    var file;
+    function readURL(input) {
+        console.log(input.files[0]);
+        if (input.files && input.files[0]) {
+
+            var reader = new FileReader();
+            file = input.files[0];
+            reader.onload = function (e) {
+                $("#Imganhbia").prop("src", reader.result);
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    };
+    $("#uploadbutton").click(function () {
+        $("#AnhBia").click();
+    });
+    $("#Editval").on("keyup", function () {
+        let text = $(this).val();
+        if (text.length != 0)
+            $("#EditStatus").html("Lưu");
+        else
+            $("#EditStatus").html("Chỉnh sửa");
+
+    })
+    $("#EditStatus").on("click", function () {
+        if ($("#EditStatus").html() == "Lưu") {
+            $.ajax({
+                type: 'post',
+                url: '/Account/UpdateStatus',
+                data: {
+                    Status: $("#Editval").val(),
+                    AccountId: $("#AccountId").val()
+                },
+                success: function (status) {
+                    if (!status) {
+                        alert("Vui lòng thử lại sau");
+                    }
+                    else {
+                        $(".profile-status").html($("#Editval").val());
+                        $("#EditStatus").html("Chỉnh sửa");
+                    }
+                },
+
+                error: function () {
+                    alert("Cập nhật thất bại, vui lòng thử lại sau!");
+                }
+            });
+        }
+    })
+    $("#UploadImageButton").on("click", function () {
+        var formData = new FormData();
+        formData.append('file', file);
+        formData.append('AccountId', $("#AccountId").val());
+        console.log(file);
+        $.ajax({
+            type: 'post',
+            url: '/Account/UpdateAva',
+            data: formData,
+            success: function (status) {
+                if (!status) {
+                    alert("Vui lòng thử lại sau");
+                }
+                else {
+                    location.reload();
+                }
+            },
+            processData: false,
+            contentType: false,
+            error: function () {
+                alert("Whoops something went wrong!");
+            }
+        });
+    })
+    $('#UpdatePassword').on("click", function () {
+        $.ajax({
+            url: '/Account/UpdatePassWord',
+            type: "POST",
+            data: {
+                AccountId: $("#AccountId").val(),
+                OldPassWord: $("#OldPassWord").val(),
+                PassWord: $("#PassWord").val()
+            },
+            success: function (result) {
+                if (result == 1) {
+                    alert("Cập nhật thành công");
+                }
+                else
+                    alert("Cập nhật thất bại, vui lòng thử lại sau");
+            },
+
+            error: function (result) {
+                alert("Cập nhật thất bại, vui lòng thử lại sau");
+            }
+
+        });
+        return false;
+    });
+    $("#formUpdateInfo").submit(function (e) {
+        console.log($("#formUpdateInfo").serialize());
+        e.preventDefault();
+        $.ajax({
+            url: "/Account/UpdateInfo",
+            type: 'post',
+            dataType: 'application/json',
+            data: $("#formUpdateInfo").serialize(),
+            success: function (result) {
+                if (result == 1) {
+                    alert("Cập nhật thành công!");
+
+                }
+                else
+                    alert("Cập nhật thất bại, vui lòng thử lại sau!");
+            },
+            error: function () {
+                alert("Whoops something went wrong!");
+            }
+        });
+    })
+</script>
+
