@@ -113,6 +113,8 @@ namespace MyWebsite.Controllers
                     translation_Detail.ChapterId = ChapterId;
                     translation_Detail.TranslationId = TranslationId;
                     translation_Detail.StatusActive = Status;
+                    translation_Detail.UpdateAt = DateTime.Now;
+                    translation_Detail.MangaId = data.Chapters.SingleOrDefault(m => m.ChapterId == ChapterId).MangaId;
                     data.Translation_Detail.Add(translation_Detail);
                     data.SaveChanges();
                 }

@@ -13,7 +13,7 @@
         dataType: "json",
         success: function (result) {
 
-            alet(Ok);
+            alert("Lưu thành công");
 
         }
     });

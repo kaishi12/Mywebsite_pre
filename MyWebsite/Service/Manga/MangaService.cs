@@ -5,10 +5,6 @@ using System.Web;
 using MyWebsite.ViewModels.Manga;
 using MyWebsite.Models;
 using MyWebsite.Service.Notification;
-using MyWebsite.Service.Account;
-using MyWebsite.Service.Role;
-using Dapper;
-using MyWebsite.Service.Common;
 
 namespace MyWebsite.Service.Manga
 {
@@ -19,53 +15,103 @@ namespace MyWebsite.Service.Manga
         {
             try
             {
-                var param = new DynamicParameters();
-                param.Add("@FullName", model.FullName);
-                param.Add("@CoverLink", model.CoverLink);
-                param.Add("@Alias", model.Alias);
-                param.Add("@Author", model.Author);
-                param.Add("@CreateAt", DateTime.Now);
-                param.Add("@Description", model.Description);
-                param.Add("@StatusId", model.StatusId);
-                param.Add("@StatusActive",0);
-                int MangaId = DALHelpers.QueryByStored<int>("Manga_AddnewManga", param).FirstOrDefault();
-               for (int i = 0; i < model.ListGenre.Count(); i++)
+                Models.Manga manga = new Models.Manga();
+                manga.Alias = model.Alias;
+                manga.CreateAt = DateTime.Now;
+                manga.Author = model.Author;
+                manga.CoverLink = model.CoverLink;
+                manga.Description = model.Description;
+                manga.StatusId = model.StatusId;
+                manga.StatusActive = model.StatusActive;
+                manga.FullName = model.FullName;
+                manga.StatusActive = 0;
+                data.Mangas.Add(manga);
+                data.SaveChanges();
+                for (int i = 0; i < model.ListGenre.Count(); i++)
                 {
-                    MangaGenreService.AddNewManga_Genres(MangaId, model.ListGenre.ToList()[i]);
+                    AddNewManga_Genres(manga.MangaId, model.ListGenre[i]);
                 }
-                return (int)MangaId;
+                return manga.MangaId;
             }
             catch (Exception ex)
             {
                 return -1;
             }
         }
-       
+        public bool AddNewManga_Genres(int MangaId, int GenreId)
+        {
+            try
+            {
+
+                Models.Manga_Genres manga_Genres = new Models.Manga_Genres();
+                manga_Genres.GenreId = GenreId;
+                manga_Genres.MangaId = MangaId;
+                manga_Genres.StatusActive = 0;
+                data.Manga_Genres.Add(manga_Genres);
+                data.SaveChanges();
+                return true;
+
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
         public MangaModel GetMangaModel(int MangaId)
         {
             try
             {
-                var param = new DynamicParameters();
-                param.Add("@MangaId", MangaId);
-                MangaModel manga = DALHelpers.QueryByStored<MangaModel>("Manga_GetMangaInfo", param).FirstOrDefault();
-                manga.ListGenre = MangaGenreService.GetListGenreId(MangaId);
+                Models.Manga manga = data.Mangas.FirstOrDefault(m => m.MangaId == MangaId);
+                MangaModel model = new MangaModel();
+                model.MangaId = MangaId;
+                model.Alias = manga.Alias;
+                model.CreatAt = manga.CreateAt.Value;
+                model.Author = manga.Author;
+                model.CoverLink = manga.CoverLink;
+                model.Description = manga.Description;
+                model.StatusId = manga.StatusId.Value;
+                model.StatusActive = manga.StatusActive.Value;
+                model.FullName = manga.FullName;
+                model.StatusActive = manga.StatusActive.Value;
+                model.ListGenre = (from row in manga.Manga_Genres.Where(m => m.StatusActive == 0) select row.GenreId).ToList();
 
-                return manga;
+                return model;
             }
             catch (Exception ex)
             {
                 return null;
             }
         }
-        public IEnumerable<MangaModel> GetListMangaByAccountId(int AccountId, string roleid)
+        public List<int> GetListGenres(int MangaId)
         {
             try
             {
-                var param = new DynamicParameters();
-                param.Add("@AccountId", AccountId);
-                param.Add("@RoleId", roleid);
-                return DALHelpers.QueryByStored<MangaModel>("Manga_GetListManga", param);
-             }
+                List<int> list = new List<int>();
+                List<Models.Manga_Genres> manga_Genres = data.Manga_Genres.Where(m => m.MangaId == MangaId && m.StatusActive == 0).ToList();
+                foreach (var item in manga_Genres)
+                {
+                    list.Add(item.GenreId);
+                }
+                return list;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+        public List<Models.Manga> GetListMangaByAccountId(int AccountId, string roleid)
+        {
+            try
+            {
+                List<Models.Manga> mangas = new List<Models.Manga>();
+                var list = data.Manga_Detail.Where(m => m.AccountId == AccountId && m.Role.Id.Trim() == roleid && m.StatusActive == 0);
+                foreach (var item in list)
+                {
+                    mangas.Add(item.Manga);
+                }
+                return mangas;
+
+            }
             catch (Exception ex)
             {
                 return null;
@@ -133,31 +179,30 @@ namespace MyWebsite.Service.Manga
         {
             try
             {
-                var param = new DynamicParameters();
-                param.Add("@Id", model.MangaId);
-                param.Add("@FullName", model.FullName);
-                param.Add("@CoverLink", model.CoverLink);
-                param.Add("@Alias", model.Alias);
-                param.Add("@Author", model.Author);
-                param.Add("@CreateAt", DateTime.Now);
-                param.Add("@Description", model.Description);
-                param.Add("@StatusId", model.StatusId);
-                param.Add("@StatusActive", 0);
-                DALHelpers.ExecuteByStored("Manga_UpdateInfoManga", param);
-               
-                var listgenre = MangaGenreService.GetListGenreId(model.MangaId);
-                var modellist = model.ListGenre.ToList();
-                foreach (var item in listgenre)
+                Models.Manga manga = data.Mangas.SingleOrDefault(m => m.MangaId == model.MangaId);
+                manga.Alias = model.Alias;
+                manga.CreateAt = DateTime.Now;
+                manga.Author = model.Author;
+                manga.CoverLink = model.CoverLink;
+                manga.Description = model.Description;
+                manga.StatusId = model.StatusId;
+                manga.StatusActive = model.StatusActive;
+                manga.FullName = model.FullName;
+                manga.StatusActive = 0;
+
+
+                foreach (var item in manga.Manga_Genres)
                 {
-                    if (model.ListGenre.Contains(item))
+                    if (!model.ListGenre.Contains(item.GenreId))
                     {
-                        MangaGenreService.ChangeStatus(model.MangaId, item, 1);
-                        modellist.Remove(item);
+                        item.StatusActive = 1;
+                        model.ListGenre.Remove(item.GenreId);
                     }
                 }
-                foreach (var item in modellist)
+                data.SaveChanges();
+                foreach (var item in model.ListGenre)
                 {
-                    MangaGenreService.AddNewManga_Genres(model.MangaId, item);
+                    AddNewManga_Genres(manga.MangaId, item);
                 }
 
                 return true;
@@ -217,26 +262,42 @@ namespace MyWebsite.Service.Manga
                 return null;
             }
         }
-        public IEnumerable<MangaJoin> Search(int AccountId, string Name)
+        public List<MangaJoin> Search(int AccountId, string Name)
         {
             try
             {
+                List<MangaJoin> mangaJoins = new List<MangaJoin>();
                 string name = Name.Replace(" ", "%");
-                var param = new DynamicParameters();
-                param.Add("@Fullname", name);
-                return DALHelpers.QueryByStored<MangaJoin>("Manga_Search", param);
+                var list = data.Mangas.SqlQuery("select* from Manga where FullName like '%" + name + "%'").ToList();
+                if (list.Count > 0)
+                {
+                    foreach (var item in list)
+                    {
+                        MangaJoin mangaJoin = new MangaJoin();
+                        mangaJoin.MangaId = item.MangaId;
+                        mangaJoin.Author = item.Author;
+                        mangaJoin.FullName = item.FullName;
+                        mangaJoin.Description = item.Description;
+                        mangaJoin.CoverLink = item.CoverLink;
+                        mangaJoin.CreatAt = item.CreateAt.Value;
+                        foreach (var chapter in item.Chapters)
+                        {
+                            mangaJoin.View += chapter.ViewNumber.Value;
+                        }
+                        foreach (var Genre in item.Manga_Genres)
+                        {
+                            mangaJoin.Genre += ";" + Genre.Genre.FullName;
+                        }
+                        mangaJoins.Add(mangaJoin);
+                    }
+
+                }
+                return mangaJoins;
             }
             catch (Exception ex)
             {
                 return null;
             }
-        }
-        public MangaModel GetInfo(int MangaId)
-        {
-           
-                var param = new DynamicParameters();
-                param.Add("@MangaId", MangaId);
-                return DALHelpers.QueryByStored<MangaModel>("Manga_Search", param).FirstOrDefault();
         }
         public int Join(int AccountId, int MangaId, string Role, string language, int type)
         {
@@ -244,17 +305,24 @@ namespace MyWebsite.Service.Manga
             {
                 NotificationService notificationService = new NotificationService();
                 bool result = false;
-                int AccountIdCreateManga = MangaDetailService.GetAccountIdCreateManga(MangaId);
-                var RoleId = RoleService.GetRoleId(Role);
-                MangaDetailService.AddNewRole(MangaId, AccountId, RoleId, type, language);
+                int AccountIdCreateManga = data.Manga_Detail.SingleOrDefault(m => m.MangaId == MangaId && m.RoleId == 1).AccountId;
+                Manga_Detail manga_Detail = new Manga_Detail();
+                manga_Detail.AccountId = AccountId;
+                manga_Detail.MangaId = MangaId;
+                manga_Detail.RoleId = data.Roles.SingleOrDefault(m => m.Id == Role).RoleId;
+                manga_Detail.StatusActive = 1;
+                manga_Detail.Type = type;
+                manga_Detail.Language = language;
+                data.Manga_Detail.Add(manga_Detail);
                 if (type == 1)
                 {
-                    result = notificationService.AddnewRequestNotification("Request", AccountId, AccountIdCreateManga, RoleId, MangaId);
+                    result = notificationService.AddnewRequestNotification("Request", AccountId, AccountIdCreateManga, manga_Detail.RoleId, MangaId);
                 }
                 else
                 {
-                    result = notificationService.AddnewRequestNotification("Invite", AccountIdCreateManga, AccountId,RoleId, MangaId);
+                    result = notificationService.AddnewRequestNotification("Invite", AccountIdCreateManga, AccountId, manga_Detail.RoleId, MangaId);
                 }
+                data.SaveChanges();
                 return 1;
             }
             catch (Exception ex)
@@ -262,17 +330,17 @@ namespace MyWebsite.Service.Manga
                 return 0;
             }
         }
-        public bool CheckNameManga(string Fullname)
+        public bool CheckJoin(int AccountId, int MangaId, string Role)
         {
-            var param = new DynamicParameters();
-            param.Add("@Fullname", Fullname);
-            return DALHelpers.QueryByStored<int>("Manga_CheckNameManga", param).FirstOrDefault() >0;
-        }
-        public IEnumerable<MangaJoinedModel> GetListJoined(int AccountId)
-        {
-            var param = new DynamicParameters();
-            param.Add("@AccountId", AccountId);
-            return DALHelpers.QueryByStored<MangaJoinedModel>("Manga_GetListJoined", param);
+            int RoleId = data.Roles.SingleOrDefault(m => m.Id == Role).RoleId;
+            if (data.Manga_Detail.Where(m => m.AccountId == AccountId && m.MangaId == MangaId && m.RoleId == RoleId).Count() > 0)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
     }
 }

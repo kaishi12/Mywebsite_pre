@@ -1,4 +1,5 @@
-﻿ function readURL(input) {
+﻿function readURL(input) {
+    console.log(input.files[0]);
                 if (input.files && input.files[0]) {
 
                     var reader = new FileReader();
@@ -25,7 +26,7 @@ $("#CheckNameManga").click(function () {
     let FullName = $("#FullName").val();
     $.ajax({
         type: "POST",
-        url: "/Manga/CheckNameManga",
+        url: "/Manga/ChecNameManga",
         data: JSON.stringify(FullName),
         contentType: "application/json; charset=utf-8",
         dataType: "json",

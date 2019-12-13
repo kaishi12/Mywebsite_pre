@@ -68,11 +68,6 @@ namespace MyWebsite
                new { controller = "Chapter", action = "ChapterDetail" }
            );
             routes.MapRoute(
-              name: "UpdateManga",
-              url: "UpdateManga/{MangaId}",
-              defaults: new { controller = "Manga", action = "UpdateManga" }
-          );
-            routes.MapRoute(
                 name: "Search",
                 url: "Search",
                 defaults: new { controller = "Account", action = "Search", id = UrlParameter.Optional }
@@ -82,7 +77,11 @@ namespace MyWebsite
                 url: "UserManagment",
                 defaults: new { controller = "Account", action = "UserManagment", id = UrlParameter.Optional }
             );
-          
+            routes.MapRoute(
+               name: "CreateChapter",
+               url: "CreateChapter/{MangaId}",
+               defaults: new { controller = "Chapter", action = "Create" }
+           );
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",

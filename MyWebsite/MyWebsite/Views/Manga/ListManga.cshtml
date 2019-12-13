@@ -1,0 +1,108 @@
+﻿
+@model IEnumerable<MyWebsite.Models.Manga>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+<style>
+    table th {
+        text-align:center;
+        
+    }
+    td {
+        text-align:center;
+    }
+</style>
+<div class="padding">
+    <div class="m-b black">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/Account/UserManagment">Home</a></li>
+            <li class="breadcrumb-item active">Danh sách truyện đã tạo</li>
+        </ol>
+    </div>
+    <div class="box">
+        <div class="box-header blue">
+            <h2>Danh sách truyện</h2> 
+        </div>
+        @using (Html.BeginForm("ListManga", "Manga", FormMethod.Post))
+        {
+            <div class="box-body">
+                <div class="table-responsive">
+                    <table ui-jp="dataTable" id="datatable" class="table table-striped b-t b-b">
+                        <thead>
+                            <tr>
+                                <th >Ảnh Bìa</th>
+                                <th >Tên Truyện</th>
+                                <th >Tác Giả</th>
+                                <th >Trạng Thái</th>
+                                <th >Ngày Tạo</th>
+                                <th ></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td class="center">
+                                       
+                                            <span>
+                                                <img src="~/Cover/@item.CoverLink" style="max-width:150px" />
+                                            </span>
+                                        
+
+                                    </td>
+                                    <td class="center">
+                                        <a href="/Truyen/QuanLyChuong/@item.MangaId">
+                                            <span>
+                                                @Html.DisplayFor(modelItem => item.FullName)
+                                            </span>
+                                        </a>
+                                    </td>
+                                    <td class="center">
+                                        @Html.DisplayFor(modelItem => item.Author)
+                                    </td>
+                                    <td class="center">
+                                        @Html.DisplayFor(modelItem => item.Status.FullName)
+                                    </td>
+                                    <td class="center">
+                                        @Html.DisplayFor(modelItem => item.CreateAt)
+                                    </td>
+                                    <td>
+                                        <a href="~/Manga/UpdateManga?MangaId=@item.MangaId">
+                                            <i class="fa fa-edit fa-lg" style="margin-right:10px;color:cornflowerblue" title="Cập nhật truyện"></i>
+
+                                        </a>
+                                        <a href="/Manga/ListChapter/?MangaId=@item.MangaId">
+                                            <i class="fa  fa-list-ol fa-lg" title="Danh sách chương" style="margin-right:10px;color:red"></i>
+                                        </a>
+
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        }
+    </div>
+
+</div>
+@section scripts
+{
+    <script>
+        jQuery(document).ready(function ($) {
+
+            $('#checkBoxAll').click(function () {
+                if ($(this).is(":checked")) {
+                    $(".chkCheckBoxId").prop("checked", true)
+                }
+                else {
+                    $(".chkCheckBoxId").prop("checked", false)
+                }
+            });
+        });
+    </script>
+
+}
+
+

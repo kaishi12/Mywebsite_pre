@@ -17,9 +17,9 @@ namespace MyWebsite
         AccountModel account = (AccountModel)HttpContext.Current.Session["UserInfo"];
         public void RegisterNotification(DateTime currentTime)
         {
-            
-            string conStr = "Data Source=DESKTOP-AT17OA3;Initial Catalog = MyWebsite; Integrated Security = True; MultipleActiveResultSets=True;Application Name = EntityFramework";
-            string sqlCommand = @"SELECT [NotificationId] from [dbo].[Notification] where [CreateAt] > @CreateAt";
+
+            string conStr = Const.conStr;
+            string sqlCommand = Const.sqlCommand;
             //you can notice here I have added table name like this [dbo].[Contacts] with [dbo], its mendatory when you use Sql Dependency  
             using (SqlConnection con = new SqlConnection(conStr))
             {
@@ -49,19 +49,19 @@ namespace MyWebsite
                 sqlDep.OnChange -= sqlDep_OnChange;
                 var notificationHub = GlobalHost.ConnectionManager.GetHubContext<NotificationHub>();
                 //from here we will send notification message to client  
-                notificationHub.Clients.Group("LoginGroup").notify("added");
+                notificationHub.Clients.All.notify("added");
                 //re-register notification  
                 RegisterNotification(DateTime.Now);
             }
         }
 
-        public List<NotificationModel> GetData(int AccountId,DateTime afterDate)
+        public List<NotificationModel> GetData(int AccountId, DateTime afterDate)
         {
             using (MyWebsiteEntities dc = new MyWebsiteEntities())
             {
                 List<NotificationModel> notificationModels = new List<NotificationModel>();
-                var data= dc.Notifications.Where(a => a.CreateAt > afterDate && a.AccountId == AccountId).OrderByDescending(a => a.CreateAt);
-                foreach(var item in data)
+                var data = dc.Notifications.Where(a => a.CreateAt > afterDate && a.AccountId == AccountId).OrderByDescending(a => a.CreateAt);
+                foreach (var item in data)
                 {
                     DateTime Tgcn = item.CreateAt.Value;
                     var month = new DateDifference(Tgcn, DateTime.Now);

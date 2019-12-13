@@ -1,0 +1,14 @@
+﻿
+@{
+    ViewBag.Title = "Result";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+@if (ViewBag.Mess == "Success")
+{
+    <h2>Thành công</h2>
+}
+@if(ViewBag.Mess == "Fail")
+{
+    <h1>Thất bại</h1>
+}
+

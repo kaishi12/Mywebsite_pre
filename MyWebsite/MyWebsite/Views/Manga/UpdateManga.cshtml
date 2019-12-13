@@ -1,0 +1,150 @@
+﻿@model MyWebsite.ViewModels.Manga.MangaModel
+@{
+    ViewBag.Title = "Update";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+<!-- Bootstrap -->
+
+<style>
+    .padding {
+        border: none;
+    }
+
+    .box {
+        border: none;
+    }
+
+    .notice {
+        color: red;
+    }
+</style>
+<div class="padding">
+    <div class="box">
+        <div class="box-header ">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item" aria-current="page">Home</li>
+                <li class="breadcrumb-item active" aria-current="page">Cập nhật truyện</li>
+            </ol>
+        </div>
+        <form id="form1" method="post" action="/Manga/UpdateManga" enctype="multipart/form-data">
+            @Html.AntiForgeryToken();
+            <div class="box-body row">
+                <div class="col-sm-3">
+                    <div class=" form-file col-sm-10">
+                        <div id="formupload" style="padding-bottom:10px;">
+                            @if (Model.CoverLink != null)
+                            {
+                                <img src="~/Cover/@Model.CoverLink" id="Imganhbia" style=" width:250px; height:400px;" />
+                            }
+                            else
+                            {
+                                <img id="Imganhbia" style=" width:250px; height:400px;" />
+                            }
+                        </div>
+                        <input hidden="hidden" type="file" id="AnhBia" name="AnhBia" class="form-control" onchange="readURL(this);" required>
+                        <button type="button" class="btn btn-fw primary" id="uploadbutton">Chọn Ảnh Bìa</button>
+                        <br />
+                        <span class="notice">
+                            *Nên chọn ảnh có kích thước 200x300 px
+                        </span>
+                    </div>
+                </div>
+                <div class="col-sm-9">
+
+                    <div class="form-group row">
+                        <label class="col-sm-2 form-control-label">
+                            <span>Tên Truyện</span>
+                            <span>(*)</span>
+                        </label>
+                        <div class="col-sm-8">
+                            <input value="@Model.FullName" id="FullName" name="FullName" ui-jp="parsley" class="form-control" type="text" placeholder="Tên Truyện" data-parsley-required-message="Không được để trống" required />
+                        </div>
+                        <div class="col-sm-2">
+                            <button class=" btn btn-fw info" id="CheckNameManga" type="button"> Kiểm tra</button>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 form-control-label">
+                            <span>Link đường dẫn</span>
+                            <span>(*)</span>
+                        </label>
+                        <div class="col-sm-10">
+                            <input value="@Model.Alias" id="Alias" name="Alias" ui-jp="parsley" class="form-control" type="text" disabled />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 form-control-label">
+                            <span>Tác giả</span>
+                        </label>
+                        <div class="col-sm-10">
+                            <input value="@Model.Author" class="form-control" type="text" placeholder="Tác giả" id="Author" name="Author" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 form-control-label">
+                            <span>Trạng thái</span>
+                        </label>
+                        <div class="col-sm-10">
+                            <select class="form-control c-select" id="StatusId" name="StatusId">
+                                @foreach (var item in ViewBag.Status)
+                                {
+                                    if (item.StatusId == Model.StatusId)
+                                    {
+                                        <option value="@item.StatusId" selected>@item.FullName</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@item.StatusId">@item.FullName</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 form-control-label">
+                            <span>Mô tả</span>
+                            <span>(*)</span>
+                        </label>
+                        <div class="col-sm-10">
+                            <textarea class="form-control" placeholder="Mô tả" id="Description" name="Description">@Model.Description</textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-2 form-control-label">
+                            <span>Thể loại</span>
+                            <span>(*)</span>
+                        </label>
+                        <div class="input-group select2-bootstrap-append col-sm-10">
+                            <select name="ListGenre" id="ListGenre" class="form-control select2" multiple multiple ui-jp="select2" ui-options="{theme: 'bootstrap'}" required>
+                                @foreach (var item in ViewBag.Genre)
+                                {
+                                    if (ViewBag.ListGenre.Contains(item.GenreId.ToString()))
+                                    {
+                                        <option value="@item.GenreId" selected>@item.FullName</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@item.GenreId">@item.FullName</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <input id="MangaId" name="MangaId" type="hidden" value="@Model.MangaId" />
+                    <button type="button" id="SaveManga" name="btnCreate" class="btn btn-fw info offset-md-10 " disabled> Tạo</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+@section scripts
+
+{
+    <script src="~/LayoutUser/Truyen/TaoMoi.js"></script>
+}
+
+
+
+
+

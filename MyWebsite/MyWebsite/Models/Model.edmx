@@ -1,0 +1,1366 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="MyWebsiteModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="AccountId" />
+          </Key>
+          <Property Name="AccountId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FullName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="AvatarLink" Type="nvarchar" MaxLength="50" />
+          <Property Name="StatusActive" Type="int" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="50" />
+          <Property Name="PassWord" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Account_Detail">
+          <Key>
+            <PropertyRef Name="AccountId" />
+            <PropertyRef Name="PointId" />
+          </Key>
+          <Property Name="AccountId" Type="int" Nullable="false" />
+          <Property Name="PointId" Type="int" Nullable="false" />
+          <Property Name="Total" Type="float" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="CategoryId" />
+          </Key>
+          <Property Name="CategoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FullName" Type="nvarchar" MaxLength="50" />
+          <Property Name="StatusActive" Type="int" />
+        </EntityType>
+        <EntityType Name="Chapter">
+          <Key>
+            <PropertyRef Name="ChapterId" />
+          </Key>
+          <Property Name="ChapterId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FullName" Type="nvarchar(max)" />
+          <Property Name="OrderNumber" Type="int" />
+          <Property Name="ViewNumber" Type="int" />
+          <Property Name="CreateAt" Type="datetime" />
+          <Property Name="StatusActive" Type="int" />
+          <Property Name="MangaId" Type="int" />
+        </EntityType>
+        <EntityType Name="Font">
+          <Key>
+            <PropertyRef Name="FontId" />
+          </Key>
+          <Property Name="FontId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FullName" Type="nvarchar" MaxLength="50" />
+          <Property Name="FontLink" Type="nvarchar" MaxLength="200" />
+          <Property Name="Description" Type="nvarchar" MaxLength="50" />
+          <Property Name="StatusActive" Type="int" />
+        </EntityType>
+        <EntityType Name="Genre">
+          <Key>
+            <PropertyRef Name="GenreId" />
+          </Key>
+          <Property Name="GenreId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FullName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Id" Type="nvarchar" MaxLength="50" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Alias" Type="nvarchar" MaxLength="50" />
+          <Property Name="StatusActive" Type="int" />
+        </EntityType>
+        <EntityType Name="Language">
+          <Key>
+            <PropertyRef Name="LanguageId" />
+          </Key>
+          <Property Name="LanguageId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FullName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Note" Type="nvarchar" MaxLength="50" />
+          <Property Name="StatusActive" Type="int" />
+        </EntityType>
+        <EntityType Name="Manga">
+          <Key>
+            <PropertyRef Name="MangaId" />
+          </Key>
+          <Property Name="MangaId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CoverLink" Type="nvarchar" MaxLength="50" />
+          <Property Name="FullName" Type="nvarchar(max)" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="CreateAt" Type="datetime" />
+          <Property Name="Author" Type="nvarchar" MaxLength="50" />
+          <Property Name="StatusActive" Type="int" />
+          <Property Name="Alias" Type="nvarchar(max)" />
+          <Property Name="StatusId" Type="int" />
+        </EntityType>
+        <EntityType Name="Manga_Detail">
+          <Key>
+            <PropertyRef Name="AccountId" />
+            <PropertyRef Name="MangaId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="AccountId" Type="int" Nullable="false" />
+          <Property Name="MangaId" Type="int" Nullable="false" />
+          <Property Name="RoleId" Type="int" Nullable="false" />
+          <Property Name="StatusActive" Type="int" />
+          <Property Name="Type" Type="int" />
+        </EntityType>
+        <EntityType Name="Manga_Genres">
+          <Key>
+            <PropertyRef Name="MangaId" />
+            <PropertyRef Name="GenreId" />
+          </Key>
+          <Property Name="MangaId" Type="int" Nullable="false" />
+          <Property Name="GenreId" Type="int" Nullable="false" />
+          <Property Name="StatusActive" Type="int" />
+        </EntityType>
+        <EntityType Name="Page">
+          <Key>
+            <PropertyRef Name="PageId" />
+          </Key>
+          <Property Name="PageId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FullName" Type="nvarchar" MaxLength="2000" />
+          <Property Name="OrderNumber" Type="int" />
+          <Property Name="PageLink" Type="nvarchar" MaxLength="2000" />
+          <Property Name="StatusActive" Type="int" />
+          <Property Name="ChapterId" Type="int" />
+          <Property Name="CategoryId" Type="int" />
+          <Property Name="CreateAt" Type="datetime" />
+          <Property Name="AccountId" Type="int" />
+          <Property Name="PageId_Fa" Type="int" />
+        </EntityType>
+        <EntityType Name="Point">
+          <Key>
+            <PropertyRef Name="PointId" />
+          </Key>
+          <Property Name="PointId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id" Type="nvarchar" MaxLength="50" />
+          <Property Name="FullName" Type="nvarchar" MaxLength="50" />
+          <Property Name="PointNumber" Type="float" />
+          <Property Name="StatusActive" Type="int" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FullName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Id" Type="nchar" MaxLength="10" />
+          <Property Name="StatusActive" Type="int" />
+        </EntityType>
+        <EntityType Name="Status">
+          <Key>
+            <PropertyRef Name="StatusId" />
+          </Key>
+          <Property Name="StatusId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FullName" Type="nvarchar" MaxLength="50" />
+          <Property Name="StatusActive" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Text">
+          <Key>
+            <PropertyRef Name="TextId" />
+          </Key>
+          <Property Name="TextId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TextContent" Type="nvarchar(max)" />
+          <Property Name="ColorText" Type="nchar" MaxLength="10" />
+          <Property Name="ColorOutline" Type="nchar" MaxLength="10" />
+          <Property Name="Bold" Type="int" />
+          <Property Name="StatusActive" Type="int" />
+          <Property Name="StatusAllow" Type="int" />
+          <Property Name="TranslationId" Type="int" />
+          <Property Name="AccountId" Type="int" />
+          <Property Name="TextBoxId" Type="int" />
+          <Property Name="FontId" Type="int" />
+        </EntityType>
+        <EntityType Name="TextBox">
+          <Key>
+            <PropertyRef Name="TextBoxId" />
+          </Key>
+          <Property Name="TextBoxId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Coordinate" Type="nvarchar" MaxLength="50" />
+          <Property Name="Witdh" Type="int" />
+          <Property Name="Height" Type="int" />
+          <Property Name="PageId" Type="int" />
+          <Property Name="StatusActive" Type="int" />
+          <Property Name="Degree" Type="int" />
+        </EntityType>
+        <EntityType Name="Translation">
+          <Key>
+            <PropertyRef Name="TransationId" />
+          </Key>
+          <Property Name="TransationId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MangaId" Type="int" />
+          <Property Name="AccountId" Type="int" />
+          <Property Name="LanguageId" Type="int" />
+          <Property Name="StatusActive" Type="int" />
+        </EntityType>
+        <Association Name="FK_Account_Detail_Account">
+          <End Role="Account" Type="Self.Account" Multiplicity="1" />
+          <End Role="Account_Detail" Type="Self.Account_Detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="AccountId" />
+            </Principal>
+            <Dependent Role="Account_Detail">
+              <PropertyRef Name="AccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Account_Detail_Point">
+          <End Role="Point" Type="Self.Point" Multiplicity="1" />
+          <End Role="Account_Detail" Type="Self.Account_Detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Point">
+              <PropertyRef Name="PointId" />
+            </Principal>
+            <Dependent Role="Account_Detail">
+              <PropertyRef Name="PointId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Chapter_Manga">
+          <End Role="Manga" Type="Self.Manga" Multiplicity="0..1" />
+          <End Role="Chapter" Type="Self.Chapter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Manga">
+              <PropertyRef Name="MangaId" />
+            </Principal>
+            <Dependent Role="Chapter">
+              <PropertyRef Name="MangaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Manga_Detail_Account">
+          <End Role="Account" Type="Self.Account" Multiplicity="1" />
+          <End Role="Manga_Detail" Type="Self.Manga_Detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="AccountId" />
+            </Principal>
+            <Dependent Role="Manga_Detail">
+              <PropertyRef Name="AccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Manga_Detail_Manga1">
+          <End Role="Manga" Type="Self.Manga" Multiplicity="1" />
+          <End Role="Manga_Detail" Type="Self.Manga_Detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Manga">
+              <PropertyRef Name="MangaId" />
+            </Principal>
+            <Dependent Role="Manga_Detail">
+              <PropertyRef Name="MangaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Manga_Detail_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="Manga_Detail" Type="Self.Manga_Detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="Manga_Detail">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Manga_Genres_Genre">
+          <End Role="Genre" Type="Self.Genre" Multiplicity="1" />
+          <End Role="Manga_Genres" Type="Self.Manga_Genres" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Genre">
+              <PropertyRef Name="GenreId" />
+            </Principal>
+            <Dependent Role="Manga_Genres">
+              <PropertyRef Name="GenreId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Manga_Genres_Manga">
+          <End Role="Manga" Type="Self.Manga" Multiplicity="1" />
+          <End Role="Manga_Genres" Type="Self.Manga_Genres" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Manga">
+              <PropertyRef Name="MangaId" />
+            </Principal>
+            <Dependent Role="Manga_Genres">
+              <PropertyRef Name="MangaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Manga_Status">
+          <End Role="Status" Type="Self.Status" Multiplicity="0..1" />
+          <End Role="Manga" Type="Self.Manga" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="StatusId" />
+            </Principal>
+            <Dependent Role="Manga">
+              <PropertyRef Name="StatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Page_Account">
+          <End Role="Account" Type="Self.Account" Multiplicity="0..1" />
+          <End Role="Page" Type="Self.Page" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="AccountId" />
+            </Principal>
+            <Dependent Role="Page">
+              <PropertyRef Name="AccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Page_Category">
+          <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+          <End Role="Page" Type="Self.Page" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="CategoryId" />
+            </Principal>
+            <Dependent Role="Page">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Page_Chapter">
+          <End Role="Chapter" Type="Self.Chapter" Multiplicity="0..1" />
+          <End Role="Page" Type="Self.Page" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Chapter">
+              <PropertyRef Name="ChapterId" />
+            </Principal>
+            <Dependent Role="Page">
+              <PropertyRef Name="ChapterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Text_Account">
+          <End Role="Account" Type="Self.Account" Multiplicity="0..1" />
+          <End Role="Text" Type="Self.Text" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="AccountId" />
+            </Principal>
+            <Dependent Role="Text">
+              <PropertyRef Name="AccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Text_Font">
+          <End Role="Font" Type="Self.Font" Multiplicity="0..1" />
+          <End Role="Text" Type="Self.Text" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Font">
+              <PropertyRef Name="FontId" />
+            </Principal>
+            <Dependent Role="Text">
+              <PropertyRef Name="FontId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Text_TextBox1">
+          <End Role="TextBox" Type="Self.TextBox" Multiplicity="0..1" />
+          <End Role="Text" Type="Self.Text" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TextBox">
+              <PropertyRef Name="TextBoxId" />
+            </Principal>
+            <Dependent Role="Text">
+              <PropertyRef Name="TextBoxId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Text_Translation">
+          <End Role="Translation" Type="Self.Translation" Multiplicity="0..1" />
+          <End Role="Text" Type="Self.Text" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Translation">
+              <PropertyRef Name="TransationId" />
+            </Principal>
+            <Dependent Role="Text">
+              <PropertyRef Name="TranslationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TextBox_Page">
+          <End Role="Page" Type="Self.Page" Multiplicity="0..1" />
+          <End Role="TextBox" Type="Self.TextBox" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Page">
+              <PropertyRef Name="PageId" />
+            </Principal>
+            <Dependent Role="TextBox">
+              <PropertyRef Name="PageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Translation_Account">
+          <End Role="Account" Type="Self.Account" Multiplicity="0..1" />
+          <End Role="Translation" Type="Self.Translation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="AccountId" />
+            </Principal>
+            <Dependent Role="Translation">
+              <PropertyRef Name="AccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Translation_Language">
+          <End Role="Language" Type="Self.Language" Multiplicity="0..1" />
+          <End Role="Translation" Type="Self.Translation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Language">
+              <PropertyRef Name="LanguageId" />
+            </Principal>
+            <Dependent Role="Translation">
+              <PropertyRef Name="LanguageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Translation_Manga">
+          <End Role="Manga" Type="Self.Manga" Multiplicity="0..1" />
+          <End Role="Translation" Type="Self.Translation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Manga">
+              <PropertyRef Name="MangaId" />
+            </Principal>
+            <Dependent Role="Translation">
+              <PropertyRef Name="MangaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MyWebsiteModelStoreContainer">
+          <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Account_Detail" EntityType="Self.Account_Detail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Chapter" EntityType="Self.Chapter" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Font" EntityType="Self.Font" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Genre" EntityType="Self.Genre" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Language" EntityType="Self.Language" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Manga" EntityType="Self.Manga" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Manga_Detail" EntityType="Self.Manga_Detail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Manga_Genres" EntityType="Self.Manga_Genres" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Page" EntityType="Self.Page" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Point" EntityType="Self.Point" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Status" EntityType="Self.Status" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Text" EntityType="Self.Text" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TextBox" EntityType="Self.TextBox" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Translation" EntityType="Self.Translation" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Account_Detail_Account" Association="Self.FK_Account_Detail_Account">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="Account_Detail" EntitySet="Account_Detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Account_Detail_Point" Association="Self.FK_Account_Detail_Point">
+            <End Role="Point" EntitySet="Point" />
+            <End Role="Account_Detail" EntitySet="Account_Detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Chapter_Manga" Association="Self.FK_Chapter_Manga">
+            <End Role="Manga" EntitySet="Manga" />
+            <End Role="Chapter" EntitySet="Chapter" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Manga_Detail_Account" Association="Self.FK_Manga_Detail_Account">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="Manga_Detail" EntitySet="Manga_Detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Manga_Detail_Manga1" Association="Self.FK_Manga_Detail_Manga1">
+            <End Role="Manga" EntitySet="Manga" />
+            <End Role="Manga_Detail" EntitySet="Manga_Detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Manga_Detail_Role" Association="Self.FK_Manga_Detail_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="Manga_Detail" EntitySet="Manga_Detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Manga_Genres_Genre" Association="Self.FK_Manga_Genres_Genre">
+            <End Role="Genre" EntitySet="Genre" />
+            <End Role="Manga_Genres" EntitySet="Manga_Genres" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Manga_Genres_Manga" Association="Self.FK_Manga_Genres_Manga">
+            <End Role="Manga" EntitySet="Manga" />
+            <End Role="Manga_Genres" EntitySet="Manga_Genres" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Manga_Status" Association="Self.FK_Manga_Status">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="Manga" EntitySet="Manga" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Page_Account" Association="Self.FK_Page_Account">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="Page" EntitySet="Page" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Page_Category" Association="Self.FK_Page_Category">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Page" EntitySet="Page" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Page_Chapter" Association="Self.FK_Page_Chapter">
+            <End Role="Chapter" EntitySet="Chapter" />
+            <End Role="Page" EntitySet="Page" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Text_Account" Association="Self.FK_Text_Account">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="Text" EntitySet="Text" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Text_Font" Association="Self.FK_Text_Font">
+            <End Role="Font" EntitySet="Font" />
+            <End Role="Text" EntitySet="Text" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Text_TextBox1" Association="Self.FK_Text_TextBox1">
+            <End Role="TextBox" EntitySet="TextBox" />
+            <End Role="Text" EntitySet="Text" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Text_Translation" Association="Self.FK_Text_Translation">
+            <End Role="Translation" EntitySet="Translation" />
+            <End Role="Text" EntitySet="Text" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TextBox_Page" Association="Self.FK_TextBox_Page">
+            <End Role="Page" EntitySet="Page" />
+            <End Role="TextBox" EntitySet="TextBox" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Translation_Account" Association="Self.FK_Translation_Account">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="Translation" EntitySet="Translation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Translation_Language" Association="Self.FK_Translation_Language">
+            <End Role="Language" EntitySet="Language" />
+            <End Role="Translation" EntitySet="Translation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Translation_Manga" Association="Self.FK_Translation_Manga">
+            <End Role="Manga" EntitySet="Manga" />
+            <End Role="Translation" EntitySet="Translation" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MyWebsiteModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="AccountId" />
+          </Key>
+          <Property Name="AccountId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FullName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AvatarLink" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="StatusActive" Type="Int32" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PassWord" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Account_Detail" Relationship="Self.FK_Account_Detail_Account" FromRole="Account" ToRole="Account_Detail" />
+          <NavigationProperty Name="Manga_Detail" Relationship="Self.FK_Manga_Detail_Account" FromRole="Account" ToRole="Manga_Detail" />
+          <NavigationProperty Name="Pages" Relationship="Self.FK_Page_Account" FromRole="Account" ToRole="Page" />
+          <NavigationProperty Name="Texts" Relationship="Self.FK_Text_Account" FromRole="Account" ToRole="Text" />
+          <NavigationProperty Name="Translations" Relationship="MyWebsiteModel.FK_Translation_Account" FromRole="Account" ToRole="Translation" />
+        </EntityType>
+        <EntityType Name="Account_Detail">
+          <Key>
+            <PropertyRef Name="AccountId" />
+            <PropertyRef Name="PointId" />
+          </Key>
+          <Property Name="AccountId" Type="Int32" Nullable="false" />
+          <Property Name="PointId" Type="Int32" Nullable="false" />
+          <Property Name="Total" Type="Double" />
+          <NavigationProperty Name="Account" Relationship="Self.FK_Account_Detail_Account" FromRole="Account_Detail" ToRole="Account" />
+          <NavigationProperty Name="Point" Relationship="Self.FK_Account_Detail_Point" FromRole="Account_Detail" ToRole="Point" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="CategoryId" />
+          </Key>
+          <Property Name="CategoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FullName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="StatusActive" Type="Int32" />
+          <NavigationProperty Name="Pages" Relationship="Self.FK_Page_Category" FromRole="Category" ToRole="Page" />
+        </EntityType>
+        <EntityType Name="Chapter">
+          <Key>
+            <PropertyRef Name="ChapterId" />
+          </Key>
+          <Property Name="ChapterId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FullName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="OrderNumber" Type="Int32" />
+          <Property Name="ViewNumber" Type="Int32" />
+          <Property Name="CreateAt" Type="DateTime" Precision="3" />
+          <Property Name="StatusActive" Type="Int32" />
+          <Property Name="MangaId" Type="Int32" />
+          <NavigationProperty Name="Manga" Relationship="Self.FK_Chapter_Manga" FromRole="Chapter" ToRole="Manga" />
+          <NavigationProperty Name="Pages" Relationship="Self.FK_Page_Chapter" FromRole="Chapter" ToRole="Page" />
+        </EntityType>
+        <EntityType Name="Font">
+          <Key>
+            <PropertyRef Name="FontId" />
+          </Key>
+          <Property Name="FontId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FullName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FontLink" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="StatusActive" Type="Int32" />
+          <NavigationProperty Name="Texts" Relationship="Self.FK_Text_Font" FromRole="Font" ToRole="Text" />
+        </EntityType>
+        <EntityType Name="Genre">
+          <Key>
+            <PropertyRef Name="GenreId" />
+          </Key>
+          <Property Name="GenreId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FullName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Alias" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="StatusActive" Type="Int32" />
+          <NavigationProperty Name="Manga_Genres" Relationship="Self.FK_Manga_Genres_Genre" FromRole="Genre" ToRole="Manga_Genres" />
+        </EntityType>
+        <EntityType Name="Language">
+          <Key>
+            <PropertyRef Name="LanguageId" />
+          </Key>
+          <Property Name="LanguageId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FullName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Note" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="StatusActive" Type="Int32" />
+          <NavigationProperty Name="Translations" Relationship="Self.FK_Translation_Language" FromRole="Language" ToRole="Translation" />
+        </EntityType>
+        <EntityType Name="Manga">
+          <Key>
+            <PropertyRef Name="MangaId" />
+          </Key>
+          <Property Name="MangaId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CoverLink" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FullName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreateAt" Type="DateTime" Precision="3" />
+          <Property Name="Author" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="StatusActive" Type="Int32" />
+          <Property Name="Alias" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="StatusId" Type="Int32" />
+          <NavigationProperty Name="Chapters" Relationship="Self.FK_Chapter_Manga" FromRole="Manga" ToRole="Chapter" />
+          <NavigationProperty Name="Manga_Detail" Relationship="Self.FK_Manga_Detail_Manga1" FromRole="Manga" ToRole="Manga_Detail" />
+          <NavigationProperty Name="Manga_Genres" Relationship="Self.FK_Manga_Genres_Manga" FromRole="Manga" ToRole="Manga_Genres" />
+          <NavigationProperty Name="Status" Relationship="Self.FK_Manga_Status" FromRole="Manga" ToRole="Status" />
+          <NavigationProperty Name="Translations" Relationship="Self.FK_Translation_Manga" FromRole="Manga" ToRole="Translation" />
+        </EntityType>
+        <EntityType Name="Manga_Detail">
+          <Key>
+            <PropertyRef Name="AccountId" />
+            <PropertyRef Name="MangaId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="AccountId" Type="Int32" Nullable="false" />
+          <Property Name="MangaId" Type="Int32" Nullable="false" />
+          <Property Name="RoleId" Type="Int32" Nullable="false" />
+          <Property Name="StatusActive" Type="Int32" />
+          <NavigationProperty Name="Account" Relationship="Self.FK_Manga_Detail_Account" FromRole="Manga_Detail" ToRole="Account" />
+          <NavigationProperty Name="Manga" Relationship="Self.FK_Manga_Detail_Manga1" FromRole="Manga_Detail" ToRole="Manga" />
+          <NavigationProperty Name="Role" Relationship="Self.FK_Manga_Detail_Role" FromRole="Manga_Detail" ToRole="Role" />
+          <Property Name="Type" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Manga_Genres">
+          <Key>
+            <PropertyRef Name="MangaId" />
+            <PropertyRef Name="GenreId" />
+          </Key>
+          <Property Name="MangaId" Type="Int32" Nullable="false" />
+          <Property Name="GenreId" Type="Int32" Nullable="false" />
+          <Property Name="StatusActive" Type="Int32" />
+          <NavigationProperty Name="Genre" Relationship="Self.FK_Manga_Genres_Genre" FromRole="Manga_Genres" ToRole="Genre" />
+          <NavigationProperty Name="Manga" Relationship="Self.FK_Manga_Genres_Manga" FromRole="Manga_Genres" ToRole="Manga" />
+        </EntityType>
+        <EntityType Name="Page">
+          <Key>
+            <PropertyRef Name="PageId" />
+          </Key>
+          <Property Name="PageId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FullName" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+          <Property Name="OrderNumber" Type="Int32" />
+          <Property Name="PageLink" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+          <Property Name="StatusActive" Type="Int32" />
+          <Property Name="ChapterId" Type="Int32" />
+          <Property Name="CategoryId" Type="Int32" />
+          <Property Name="CreateAt" Type="DateTime" Precision="3" />
+          <Property Name="AccountId" Type="Int32" />
+          <NavigationProperty Name="Account" Relationship="Self.FK_Page_Account" FromRole="Page" ToRole="Account" />
+          <NavigationProperty Name="Category" Relationship="Self.FK_Page_Category" FromRole="Page" ToRole="Category" />
+          <NavigationProperty Name="Chapter" Relationship="Self.FK_Page_Chapter" FromRole="Page" ToRole="Chapter" />
+          <NavigationProperty Name="TextBoxes" Relationship="Self.FK_TextBox_Page" FromRole="Page" ToRole="TextBox" />
+          <Property Name="PageId_Fa" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Point">
+          <Key>
+            <PropertyRef Name="PointId" />
+          </Key>
+          <Property Name="PointId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FullName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PointNumber" Type="Double" />
+          <Property Name="StatusActive" Type="Int32" />
+          <NavigationProperty Name="Account_Detail" Relationship="Self.FK_Account_Detail_Point" FromRole="Point" ToRole="Account_Detail" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FullName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="StatusActive" Type="Int32" />
+          <NavigationProperty Name="Manga_Detail" Relationship="Self.FK_Manga_Detail_Role" FromRole="Role" ToRole="Manga_Detail" />
+          <Property Name="Id" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Status">
+          <Key>
+            <PropertyRef Name="StatusId" />
+          </Key>
+          <Property Name="StatusId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FullName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="StatusActive" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Mangas" Relationship="Self.FK_Manga_Status" FromRole="Status" ToRole="Manga" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Text">
+          <Key>
+            <PropertyRef Name="TextId" />
+          </Key>
+          <Property Name="TextId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TextContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ColorText" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="ColorOutline" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Bold" Type="Int32" />
+          <Property Name="StatusActive" Type="Int32" />
+          <Property Name="StatusAllow" Type="Int32" />
+          <Property Name="TranslationId" Type="Int32" />
+          <Property Name="AccountId" Type="Int32" />
+          <Property Name="TextBoxId" Type="Int32" />
+          <Property Name="FontId" Type="Int32" />
+          <NavigationProperty Name="Account" Relationship="Self.FK_Text_Account" FromRole="Text" ToRole="Account" />
+          <NavigationProperty Name="Font" Relationship="Self.FK_Text_Font" FromRole="Text" ToRole="Font" />
+          <NavigationProperty Name="TextBox" Relationship="Self.FK_Text_TextBox1" FromRole="Text" ToRole="TextBox" />
+          <NavigationProperty Name="Translation" Relationship="Self.FK_Text_Translation" FromRole="Text" ToRole="Translation" />
+        </EntityType>
+        <EntityType Name="TextBox">
+          <Key>
+            <PropertyRef Name="TextBoxId" />
+          </Key>
+          <Property Name="TextBoxId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Coordinate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Witdh" Type="Int32" />
+          <Property Name="Height" Type="Int32" />
+          <Property Name="PageId" Type="Int32" />
+          <Property Name="StatusActive" Type="Int32" />
+          <NavigationProperty Name="Page" Relationship="Self.FK_TextBox_Page" FromRole="TextBox" ToRole="Page" />
+          <NavigationProperty Name="Texts" Relationship="Self.FK_Text_TextBox1" FromRole="TextBox" ToRole="Text" />
+          <Property Name="Degree" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Translation">
+          <Key>
+            <PropertyRef Name="TransationId" />
+          </Key>
+          <Property Name="TransationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MangaId" Type="Int32" />
+          <Property Name="AccountId" Type="Int32" />
+          <Property Name="LanguageId" Type="Int32" />
+          <Property Name="StatusActive" Type="Int32" />
+          <NavigationProperty Name="Language" Relationship="Self.FK_Translation_Language" FromRole="Translation" ToRole="Language" />
+          <NavigationProperty Name="Manga" Relationship="Self.FK_Translation_Manga" FromRole="Translation" ToRole="Manga" />
+          <NavigationProperty Name="Texts" Relationship="Self.FK_Text_Translation" FromRole="Translation" ToRole="Text" />
+          <NavigationProperty Name="Account" Relationship="MyWebsiteModel.FK_Translation_Account" FromRole="Translation" ToRole="Account" />
+        </EntityType>
+        <Association Name="FK_Account_Detail_Account">
+          <End Role="Account" Type="Self.Account" Multiplicity="1" />
+          <End Role="Account_Detail" Type="Self.Account_Detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="AccountId" />
+            </Principal>
+            <Dependent Role="Account_Detail">
+              <PropertyRef Name="AccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Manga_Detail_Account">
+          <End Role="Account" Type="Self.Account" Multiplicity="1" />
+          <End Role="Manga_Detail" Type="Self.Manga_Detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="AccountId" />
+            </Principal>
+            <Dependent Role="Manga_Detail">
+              <PropertyRef Name="AccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Page_Account">
+          <End Role="Account" Type="Self.Account" Multiplicity="0..1" />
+          <End Role="Page" Type="Self.Page" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="AccountId" />
+            </Principal>
+            <Dependent Role="Page">
+              <PropertyRef Name="AccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Text_Account">
+          <End Role="Account" Type="Self.Account" Multiplicity="0..1" />
+          <End Role="Text" Type="Self.Text" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="AccountId" />
+            </Principal>
+            <Dependent Role="Text">
+              <PropertyRef Name="AccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Account_Detail_Point">
+          <End Role="Point" Type="Self.Point" Multiplicity="1" />
+          <End Role="Account_Detail" Type="Self.Account_Detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Point">
+              <PropertyRef Name="PointId" />
+            </Principal>
+            <Dependent Role="Account_Detail">
+              <PropertyRef Name="PointId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Page_Category">
+          <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+          <End Role="Page" Type="Self.Page" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="CategoryId" />
+            </Principal>
+            <Dependent Role="Page">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Chapter_Manga">
+          <End Role="Manga" Type="Self.Manga" Multiplicity="0..1" />
+          <End Role="Chapter" Type="Self.Chapter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Manga">
+              <PropertyRef Name="MangaId" />
+            </Principal>
+            <Dependent Role="Chapter">
+              <PropertyRef Name="MangaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Page_Chapter">
+          <End Role="Chapter" Type="Self.Chapter" Multiplicity="0..1" />
+          <End Role="Page" Type="Self.Page" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Chapter">
+              <PropertyRef Name="ChapterId" />
+            </Principal>
+            <Dependent Role="Page">
+              <PropertyRef Name="ChapterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Text_Font">
+          <End Role="Font" Type="Self.Font" Multiplicity="0..1" />
+          <End Role="Text" Type="Self.Text" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Font">
+              <PropertyRef Name="FontId" />
+            </Principal>
+            <Dependent Role="Text">
+              <PropertyRef Name="FontId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Manga_Genres_Genre">
+          <End Role="Genre" Type="Self.Genre" Multiplicity="1" />
+          <End Role="Manga_Genres" Type="Self.Manga_Genres" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Genre">
+              <PropertyRef Name="GenreId" />
+            </Principal>
+            <Dependent Role="Manga_Genres">
+              <PropertyRef Name="GenreId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Translation_Language">
+          <End Role="Language" Type="Self.Language" Multiplicity="0..1" />
+          <End Role="Translation" Type="Self.Translation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Language">
+              <PropertyRef Name="LanguageId" />
+            </Principal>
+            <Dependent Role="Translation">
+              <PropertyRef Name="LanguageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Manga_Detail_Manga1">
+          <End Role="Manga" Type="Self.Manga" Multiplicity="1" />
+          <End Role="Manga_Detail" Type="Self.Manga_Detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Manga">
+              <PropertyRef Name="MangaId" />
+            </Principal>
+            <Dependent Role="Manga_Detail">
+              <PropertyRef Name="MangaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Manga_Genres_Manga">
+          <End Role="Manga" Type="Self.Manga" Multiplicity="1" />
+          <End Role="Manga_Genres" Type="Self.Manga_Genres" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Manga">
+              <PropertyRef Name="MangaId" />
+            </Principal>
+            <Dependent Role="Manga_Genres">
+              <PropertyRef Name="MangaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Manga_Status">
+          <End Role="Status" Type="Self.Status" Multiplicity="0..1" />
+          <End Role="Manga" Type="Self.Manga" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="StatusId" />
+            </Principal>
+            <Dependent Role="Manga">
+              <PropertyRef Name="StatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Translation_Manga">
+          <End Role="Manga" Type="Self.Manga" Multiplicity="0..1" />
+          <End Role="Translation" Type="Self.Translation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Manga">
+              <PropertyRef Name="MangaId" />
+            </Principal>
+            <Dependent Role="Translation">
+              <PropertyRef Name="MangaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Manga_Detail_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="Manga_Detail" Type="Self.Manga_Detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="Manga_Detail">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TextBox_Page">
+          <End Role="Page" Type="Self.Page" Multiplicity="0..1" />
+          <End Role="TextBox" Type="Self.TextBox" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Page">
+              <PropertyRef Name="PageId" />
+            </Principal>
+            <Dependent Role="TextBox">
+              <PropertyRef Name="PageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Text_TextBox1">
+          <End Role="TextBox" Type="Self.TextBox" Multiplicity="0..1" />
+          <End Role="Text" Type="Self.Text" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TextBox">
+              <PropertyRef Name="TextBoxId" />
+            </Principal>
+            <Dependent Role="Text">
+              <PropertyRef Name="TextBoxId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Text_Translation">
+          <End Role="Translation" Type="Self.Translation" Multiplicity="0..1" />
+          <End Role="Text" Type="Self.Text" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Translation">
+              <PropertyRef Name="TransationId" />
+            </Principal>
+            <Dependent Role="Text">
+              <PropertyRef Name="TranslationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MyWebsiteEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Accounts" EntityType="Self.Account" />
+          <EntitySet Name="Account_Detail" EntityType="Self.Account_Detail" />
+          <EntitySet Name="Categories" EntityType="Self.Category" />
+          <EntitySet Name="Chapters" EntityType="Self.Chapter" />
+          <EntitySet Name="Fonts" EntityType="Self.Font" />
+          <EntitySet Name="Genres" EntityType="Self.Genre" />
+          <EntitySet Name="Languages" EntityType="Self.Language" />
+          <EntitySet Name="Mangas" EntityType="Self.Manga" />
+          <EntitySet Name="Manga_Detail" EntityType="Self.Manga_Detail" />
+          <EntitySet Name="Manga_Genres" EntityType="Self.Manga_Genres" />
+          <EntitySet Name="Pages" EntityType="Self.Page" />
+          <EntitySet Name="Points" EntityType="Self.Point" />
+          <EntitySet Name="Roles" EntityType="Self.Role" />
+          <EntitySet Name="Status" EntityType="Self.Status" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="Texts" EntityType="Self.Text" />
+          <EntitySet Name="TextBoxes" EntityType="Self.TextBox" />
+          <EntitySet Name="Translations" EntityType="Self.Translation" />
+          <AssociationSet Name="FK_Account_Detail_Account" Association="Self.FK_Account_Detail_Account">
+            <End Role="Account" EntitySet="Accounts" />
+            <End Role="Account_Detail" EntitySet="Account_Detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Manga_Detail_Account" Association="Self.FK_Manga_Detail_Account">
+            <End Role="Account" EntitySet="Accounts" />
+            <End Role="Manga_Detail" EntitySet="Manga_Detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Page_Account" Association="Self.FK_Page_Account">
+            <End Role="Account" EntitySet="Accounts" />
+            <End Role="Page" EntitySet="Pages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Text_Account" Association="Self.FK_Text_Account">
+            <End Role="Account" EntitySet="Accounts" />
+            <End Role="Text" EntitySet="Texts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Account_Detail_Point" Association="Self.FK_Account_Detail_Point">
+            <End Role="Point" EntitySet="Points" />
+            <End Role="Account_Detail" EntitySet="Account_Detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Page_Category" Association="Self.FK_Page_Category">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="Page" EntitySet="Pages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Chapter_Manga" Association="Self.FK_Chapter_Manga">
+            <End Role="Manga" EntitySet="Mangas" />
+            <End Role="Chapter" EntitySet="Chapters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Page_Chapter" Association="Self.FK_Page_Chapter">
+            <End Role="Chapter" EntitySet="Chapters" />
+            <End Role="Page" EntitySet="Pages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Text_Font" Association="Self.FK_Text_Font">
+            <End Role="Font" EntitySet="Fonts" />
+            <End Role="Text" EntitySet="Texts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Manga_Genres_Genre" Association="Self.FK_Manga_Genres_Genre">
+            <End Role="Genre" EntitySet="Genres" />
+            <End Role="Manga_Genres" EntitySet="Manga_Genres" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Translation_Language" Association="Self.FK_Translation_Language">
+            <End Role="Language" EntitySet="Languages" />
+            <End Role="Translation" EntitySet="Translations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Manga_Detail_Manga1" Association="Self.FK_Manga_Detail_Manga1">
+            <End Role="Manga" EntitySet="Mangas" />
+            <End Role="Manga_Detail" EntitySet="Manga_Detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Manga_Genres_Manga" Association="Self.FK_Manga_Genres_Manga">
+            <End Role="Manga" EntitySet="Mangas" />
+            <End Role="Manga_Genres" EntitySet="Manga_Genres" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Manga_Status" Association="Self.FK_Manga_Status">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="Manga" EntitySet="Mangas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Translation_Manga" Association="Self.FK_Translation_Manga">
+            <End Role="Manga" EntitySet="Mangas" />
+            <End Role="Translation" EntitySet="Translations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Manga_Detail_Role" Association="Self.FK_Manga_Detail_Role">
+            <End Role="Role" EntitySet="Roles" />
+            <End Role="Manga_Detail" EntitySet="Manga_Detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TextBox_Page" Association="Self.FK_TextBox_Page">
+            <End Role="Page" EntitySet="Pages" />
+            <End Role="TextBox" EntitySet="TextBoxes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Text_TextBox1" Association="Self.FK_Text_TextBox1">
+            <End Role="TextBox" EntitySet="TextBoxes" />
+            <End Role="Text" EntitySet="Texts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Text_Translation" Association="Self.FK_Text_Translation">
+            <End Role="Translation" EntitySet="Translations" />
+            <End Role="Text" EntitySet="Texts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Translation_Account" Association="MyWebsiteModel.FK_Translation_Account">
+            <End Role="Account" EntitySet="Accounts" />
+            <End Role="Translation" EntitySet="Translations" />
+          </AssociationSet>
+        </EntityContainer>
+        <Association Name="FK_Translation_Account">
+          <End Type="MyWebsiteModel.Account" Role="Account" Multiplicity="0..1" />
+          <End Type="MyWebsiteModel.Translation" Role="Translation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="AccountId" />
+            </Principal>
+            <Dependent Role="Translation">
+              <PropertyRef Name="AccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MyWebsiteModelStoreContainer" CdmEntityContainer="MyWebsiteEntities">
+          <EntitySetMapping Name="Accounts">
+            <EntityTypeMapping TypeName="MyWebsiteModel.Account">
+              <MappingFragment StoreEntitySet="Account">
+                <ScalarProperty Name="AccountId" ColumnName="AccountId" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="AvatarLink" ColumnName="AvatarLink" />
+                <ScalarProperty Name="StatusActive" ColumnName="StatusActive" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="PassWord" ColumnName="PassWord" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Account_Detail">
+            <EntityTypeMapping TypeName="MyWebsiteModel.Account_Detail">
+              <MappingFragment StoreEntitySet="Account_Detail">
+                <ScalarProperty Name="AccountId" ColumnName="AccountId" />
+                <ScalarProperty Name="PointId" ColumnName="PointId" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="MyWebsiteModel.Category">
+              <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="StatusActive" ColumnName="StatusActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Chapters">
+            <EntityTypeMapping TypeName="MyWebsiteModel.Chapter">
+              <MappingFragment StoreEntitySet="Chapter">
+                <ScalarProperty Name="ChapterId" ColumnName="ChapterId" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="OrderNumber" ColumnName="OrderNumber" />
+                <ScalarProperty Name="ViewNumber" ColumnName="ViewNumber" />
+                <ScalarProperty Name="CreateAt" ColumnName="CreateAt" />
+                <ScalarProperty Name="StatusActive" ColumnName="StatusActive" />
+                <ScalarProperty Name="MangaId" ColumnName="MangaId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Fonts">
+            <EntityTypeMapping TypeName="MyWebsiteModel.Font">
+              <MappingFragment StoreEntitySet="Font">
+                <ScalarProperty Name="FontId" ColumnName="FontId" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="FontLink" ColumnName="FontLink" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="StatusActive" ColumnName="StatusActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Genres">
+            <EntityTypeMapping TypeName="MyWebsiteModel.Genre">
+              <MappingFragment StoreEntitySet="Genre">
+                <ScalarProperty Name="GenreId" ColumnName="GenreId" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Alias" ColumnName="Alias" />
+                <ScalarProperty Name="StatusActive" ColumnName="StatusActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Languages">
+            <EntityTypeMapping TypeName="MyWebsiteModel.Language">
+              <MappingFragment StoreEntitySet="Language">
+                <ScalarProperty Name="LanguageId" ColumnName="LanguageId" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="StatusActive" ColumnName="StatusActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Mangas">
+            <EntityTypeMapping TypeName="MyWebsiteModel.Manga">
+              <MappingFragment StoreEntitySet="Manga">
+                <ScalarProperty Name="MangaId" ColumnName="MangaId" />
+                <ScalarProperty Name="CoverLink" ColumnName="CoverLink" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="CreateAt" ColumnName="CreateAt" />
+                <ScalarProperty Name="Author" ColumnName="Author" />
+                <ScalarProperty Name="StatusActive" ColumnName="StatusActive" />
+                <ScalarProperty Name="Alias" ColumnName="Alias" />
+                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Manga_Detail">
+            <EntityTypeMapping TypeName="MyWebsiteModel.Manga_Detail">
+              <MappingFragment StoreEntitySet="Manga_Detail">
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="AccountId" ColumnName="AccountId" />
+                <ScalarProperty Name="MangaId" ColumnName="MangaId" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="StatusActive" ColumnName="StatusActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Manga_Genres">
+            <EntityTypeMapping TypeName="MyWebsiteModel.Manga_Genres">
+              <MappingFragment StoreEntitySet="Manga_Genres">
+                <ScalarProperty Name="MangaId" ColumnName="MangaId" />
+                <ScalarProperty Name="GenreId" ColumnName="GenreId" />
+                <ScalarProperty Name="StatusActive" ColumnName="StatusActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pages">
+            <EntityTypeMapping TypeName="MyWebsiteModel.Page">
+              <MappingFragment StoreEntitySet="Page">
+                <ScalarProperty Name="PageId_Fa" ColumnName="PageId_Fa" />
+                <ScalarProperty Name="PageId" ColumnName="PageId" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="OrderNumber" ColumnName="OrderNumber" />
+                <ScalarProperty Name="PageLink" ColumnName="PageLink" />
+                <ScalarProperty Name="StatusActive" ColumnName="StatusActive" />
+                <ScalarProperty Name="ChapterId" ColumnName="ChapterId" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="CreateAt" ColumnName="CreateAt" />
+                <ScalarProperty Name="AccountId" ColumnName="AccountId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Points">
+            <EntityTypeMapping TypeName="MyWebsiteModel.Point">
+              <MappingFragment StoreEntitySet="Point">
+                <ScalarProperty Name="PointId" ColumnName="PointId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="PointNumber" ColumnName="PointNumber" />
+                <ScalarProperty Name="StatusActive" ColumnName="StatusActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="MyWebsiteModel.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="StatusActive" ColumnName="StatusActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Status">
+            <EntityTypeMapping TypeName="MyWebsiteModel.Status">
+              <MappingFragment StoreEntitySet="Status">
+                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="StatusActive" ColumnName="StatusActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="MyWebsiteModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Texts">
+            <EntityTypeMapping TypeName="MyWebsiteModel.Text">
+              <MappingFragment StoreEntitySet="Text">
+                <ScalarProperty Name="TextId" ColumnName="TextId" />
+                <ScalarProperty Name="TextContent" ColumnName="TextContent" />
+                <ScalarProperty Name="ColorText" ColumnName="ColorText" />
+                <ScalarProperty Name="ColorOutline" ColumnName="ColorOutline" />
+                <ScalarProperty Name="Bold" ColumnName="Bold" />
+                <ScalarProperty Name="StatusActive" ColumnName="StatusActive" />
+                <ScalarProperty Name="StatusAllow" ColumnName="StatusAllow" />
+                <ScalarProperty Name="TranslationId" ColumnName="TranslationId" />
+                <ScalarProperty Name="AccountId" ColumnName="AccountId" />
+                <ScalarProperty Name="TextBoxId" ColumnName="TextBoxId" />
+                <ScalarProperty Name="FontId" ColumnName="FontId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TextBoxes">
+            <EntityTypeMapping TypeName="MyWebsiteModel.TextBox">
+              <MappingFragment StoreEntitySet="TextBox">
+                <ScalarProperty Name="Degree" ColumnName="Degree" />
+                <ScalarProperty Name="TextBoxId" ColumnName="TextBoxId" />
+                <ScalarProperty Name="Coordinate" ColumnName="Coordinate" />
+                <ScalarProperty Name="Witdh" ColumnName="Witdh" />
+                <ScalarProperty Name="Height" ColumnName="Height" />
+                <ScalarProperty Name="PageId" ColumnName="PageId" />
+                <ScalarProperty Name="StatusActive" ColumnName="StatusActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Translations">
+            <EntityTypeMapping TypeName="MyWebsiteModel.Translation">
+              <MappingFragment StoreEntitySet="Translation">
+                <ScalarProperty Name="TransationId" ColumnName="TransationId" />
+                <ScalarProperty Name="MangaId" ColumnName="MangaId" />
+                <ScalarProperty Name="AccountId" ColumnName="AccountId" />
+                <ScalarProperty Name="LanguageId" ColumnName="LanguageId" />
+                <ScalarProperty Name="StatusActive" ColumnName="StatusActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,49 +1,36 @@
-﻿
-    var x1 = 0;
-                    function myFunction() {
-
-                        var x = document.getElementById("sotrang").value;
-                        if (Number(x) < 0) {
-        alert("Hello! I am an alert box!!");
+﻿$("#addbtn").on("click", function () {
+    let numberpage = parseInt($("#Totalpage").val());
+    let chapterName = $("#FullName").val();
+    let count = 1;
+    for (count; count <= numberpage; count++) {
+        let pageorder = "trang " + count;
+        let pagename = pageorder + " " + chapterName;
+        let content = '<div class="col-xs-6 col-sm-4 col-md-3" style="padding-left:12px;padding-right:12px"><div class="box p-a-xs"><img id="img' + count + '" style="max-height:500px" src="/RootPicture/tenor.gif" alt="" class="img-responsive"> <div class="p-a-sm"><div class="text-ellipsis"> <span>' + pagename + '</span><input id="Upload' + count + '" hidden style="margin-left:10px" type="file" name="fileupload" onchange="Upload(this)" /></div><div style="padding-left:0px;padding-right:0px;padding-bottom:0px;" class="box-footer row"><button id="btnupload' + count + '" type="button" class="UploadButton md-btn md-raised m-b-sm w-xs primary" style="display: block;margin-left: auto;margin-right: auto;">Tải lên</button></div> </div></div></div>';
+        $("#UploadRaw").append(content);
+        
     }
-    else
-                            if (x1 > 0) {
-                                for (var i = 0; i < Number(x1); i++) {
-        document.getElementById("myTable").deleteRow(1);
+   
+})
+function Upload(input) {
+    let value = "#img"+ input.id.replace("Upload", "");
+    let valuebuttonSave = "#Save" + input.id.replace("file", "");
+    console.log(valuebuttonSave);
+    if (input.files && input.files[0]) {
+
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            $(value).prop("src", reader.result);
+        };
+
+        reader.readAsDataURL(input.files[0]);
+        $(valuebuttonSave).prop("disabled", false);
     }
-    x1 = 0;
-}
-var fullname = document.getElementById("PageFullName");
-var ordernumber = document.getElementById("PageOrderNumber");
-var stringfullname = "";
-var stringorder = "";
-                        for (var i = 0; i < Number(x); i++) {
-                            var x2 = x1 + 1;
-    var tr, td, tbody;
-    var table = document.getElementById("myTable");
-    var inputfile = document.createElement("input");
-    inputfile.type = "file";
-    inputfile.id = "AnhTrang";
-    inputfile.name = "AnhTrang";
-    table.appendChild(tbody = document.createElement("tbody"));
-    tbody.appendChild(tr = document.createElement("tr"));
-    tr.appendChild(td = document.createElement("td"));
-    td.textContent = x2;
-    stringorder += ";" + td.textContent;
-    td.id = "pageModels.OrderNumber";
-    td.name = "pageModels.OrderNumber";
-    tr.appendChild(td = document.createElement("td"));
-    td.appendChild(inputfile);
-    tr.appendChild(td = document.createElement("td"));
-
-    td.textContent = "trang " + x2 + "-" + document.getElementById("FullName").value  ;
-    stringfullname += ";" + td.textContent;
-    td.id = "pageModels.FullName";
-    td.name = "pageModels.FullName";
-    x1++;
-}
-fullname.value = stringfullname;
-ordernumber.value = stringorder;
 
 }
+$(document).on("click", ".UploadButton", function () {
+
+    let str = "#Upload" + this.id.replace("btnupload","");
+    $(str).click();
+})
                

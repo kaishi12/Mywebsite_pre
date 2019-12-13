@@ -1,0 +1,48 @@
+﻿@model MyWebsite.ViewModels.Account.AccountModel
+
+@{
+    ViewBag.Title = "Đăng Nhập";
+    Layout = "~/Views/Shared/ResAndLogLayout.cshtml";
+}
+
+
+<body style="font-family:'Times New Roman'">
+    <div class="center-block w-xxl w-auto-xs p-y-md">
+        <div class="navbar">
+            <div class="pull-center">
+                <div ui-include="'../views/blocks/navbar.brand.html'"></div>
+            </div>
+        </div>
+        <div class="p-a-md box-color r box-shadow-z1 text-color m-a">
+            <div class="m-b text-sm">
+                Đăng Nhập với tài khoản của bạn
+            </div>
+            <div class="form">
+                @using (Html.BeginForm("Login", "Account", FormMethod.Post, new { ui_jp = "parsley" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <div id="login">
+                        <div class="md-form-group float-label">
+                            @Html.TextBoxFor(model => model.UserName , new { @class = "md-input", type = "text", required = "required", data_parsley_required_message = "Không được để trống" })
+                            <label>
+                                Tài Khoản<span class="req">*</span>
+                            </label>
+                        </div>
+                        <div class="md-form-group float-label">
+                            @Html.PasswordFor(model => model.PassWord , new { @class = "md-input ", type = "password", required = "required", data_parsley_required_message = "Không được để trống" })
+                            <label>
+                                Mật Khẩu<span class="req">*</span>
+                            </label>
+                        </div>
+                        <button type="submit" class="btn primary btn-block p-x-md">Đăng Nhập</button>
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="p-v-lg text-center">
+            <div class="m-b"><a ui-sref="access.forgot-password" href="forgot-password.html" class="text-primary _600">Quên mật khẩu?</a></div>
+            <div>Chưa có tài khoản? <a ui-sref="access.signup" href="/Account/Register" class="text-primary _600">Đăng ký</a></div>
+        </div>
+    </div>
+</body>
+

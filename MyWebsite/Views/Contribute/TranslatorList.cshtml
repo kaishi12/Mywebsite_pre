@@ -1,5 +1,5 @@
 ﻿
-@model IEnumerable<MyWebsite.ViewModels.Manga.MangaModel>
+@model IEnumerable<MyWebsite.Models.Manga>
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_LayoutUser.cshtml";
@@ -57,20 +57,20 @@
                                     @Html.DisplayFor(modelItem => item.Author)
                                 </td>
                                 <td class="center">
-                                    @Html.DisplayFor(modelItem => item.status)
+                                    @Html.DisplayFor(modelItem => item.Status.FullName)
                                 </td>
                                 <td class="center">
-                                    @Html.DisplayFor(modelItem => item.CreatAt)
+                                    @Html.DisplayFor(modelItem => item.CreateAt)
                                 </td>
                                 <td style="text-align:center">
-                                    @*@if (item.Translations.Where(m => m.StatusActive == 0).Count() > 0)
+                                    @if (item.Translations.Where(m => m.StatusActive == 0).Count() > 0)
                                     {
                                         <button style="display:inline-block" class="btn  dark"><a href="/Contribute/Translator?PageId=@item.Chapters.FirstOrDefault(m=>m.StatusActive==0).Pages.FirstOrDefault(m=>m.StatusActive == 0).PageId">Dịch truyện</a></button>
                                     }
                                     else
                                     {
                                         <button style="display:inline-block" disabled class="btn  dark"> Chưa có bản dịch nào</button>
-                                    }*@
+                                    }
                                 </td>
                             </tr>
                         }

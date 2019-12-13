@@ -1,0 +1,192 @@
+﻿@using MyWebsite.Models
+@model IEnumerable<MyWebsite.Models.Chapter>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+<style>
+    table th {
+        text-align: center
+    }
+
+    td {
+        text-align: center
+    }
+</style>
+<div class="padding">
+    <div class="m-b ">
+        <ol class="breadcrumb black">
+            <li class="breadcrumb-item"><a href="/Account/UserManagment">Home</a></li>
+            <li class="breadcrumb-item"><a href="/Manga/ListManga">Danh sách truyện đã tạo</a></li>
+            <li class="breadcrumb-item">Danh sách chương</li>
+        </ol>
+    </div>
+    <div class="box">
+        <div class="box-header blue">
+            <h2>DANH SÁCH CHƯƠNG</h2>
+        </div>
+        <div class="box-tool">
+            <ul class="nav">
+                <li class="nav-item inline dropdown"><a class="nav-link" data-toggle="dropdown"><i class="material-icons md-18"></i></a><div class="dropdown-menu dropdown-menu-scale pull-right"><a class="dropdown-item" href="/Chapter/Create/?MangaId=@ViewBag.MangaId"><span> <i class="fa fa-plus" style="color:red" title="Tạo khung truyện"></i> </span> Thêm chương mới</a> </div></li>
+            </ul>
+        </div>
+
+        <div class="box-body">
+            <div class="row m-b">
+
+
+            </div>
+            <div class="table-responsive">
+                <table ui-jp="dataTable" class="table table-striped b-t b-b">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Tên</th>
+                            <th>Thời gian tạo</th>
+                            <th>Số trang Raw</th>
+                            <th>Số trang Clear-text</th>
+                            <th>Lượt xem</th>
+                            <th>Trạng thái</th>
+                            <th style="text-align:center"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @item.OrderNumber
+                                </td>
+                                <td class="center">
+
+                                    <span>
+
+                                        @Html.DisplayFor(modelItem => item.FullName)
+                                    </span>
+
+                                </td>
+                                <td class="center">
+                                    @Html.DisplayFor(modelItem => item.CreateAt)
+                                </td>
+
+                                <td class="center">
+                                    @{int parameterValue = item.Pages.Where(m => m.CategoryId == 1 && m.StatusActive == 0).Count();
+                                        @Html.DisplayFor(modelItem => parameterValue)
+                                    }
+
+                                </td>
+                                <td class="center">
+                                    @{int parameterValue1 = item.Pages.Where(m => m.CategoryId == 2 && m.StatusActive == 0).Count();
+                                        @Html.DisplayFor(modelItem => parameterValue1)
+                                    }
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ViewNumber)
+                                </td>
+                                @if (item.StatusActive == 0)
+                                {
+                                    <td>
+                                        Chỉnh sửa
+                                    </td>
+                                }
+                                else
+                                   if (item.StatusActive == 1)
+                                {
+                                    <td>
+                                        Khóa
+                                    </td>
+
+                                }
+                                else
+                                {
+                                    <td>
+                                        Xuất bản
+                                    </td>
+                                }
+                                <td>
+
+                                    <a href="/Chapter/ChapterDetail?ChapterId=@item.ChapterId">
+                                        <i class="fa  fa-list fa-lg" style="margin-right:10px;color:cornflowerblue" title="Chi tiết chương"></i>
+                                    </a>
+                                    <a href="/Page/PageDetail?PageId=@item.Pages.FirstOrDefault(m=>m.ChapterId == item.ChapterId && m.StatusActive == 0).PageId">
+                                        <i class="fa fa-image fa-lg" style="margin-right:10px;color:red" title="Tạo khung truyện"></i>
+                                    </a>
+                                    <i class="fa fa-edit fa-lg" style="margin-right:10px;color:red" title="Chỉnh sửa chương" data-toggle="modal" data-target="#m-a-f" onclick="UpdateInfo(@item.OrderNumber,'@item.FullName',@item.ChapterId)"></i>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div id="m-a-f" class="modal fade ng-scope" data-backdrop="true" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Chỉnh sửa chương</h5>
+                </div>
+                @using (Html.BeginForm("UpdateInfoChapter", "Chapter", FormMethod.Post))
+                {
+                    <div class="modal-body text-center p-lg row">
+
+                        <input id="ChapterId" name="ChapterId" hidden />
+                        <input id="MangaId" name="MangaId" hidden />
+                        <div class="col-sm-2">
+                            <label style="float:left">STT</label>
+                            <input type="number" class="form-control" required id="OrderNumber" name="OrderNumber" data-parsley-error-message="Yêu cầu nhập thứ tự chương" />
+                        </div>
+                        <div class="col-sm-4">
+                            <label style="float:left">Trạng thái</label>
+                            <select class="form-control c-select" id="StatusId" name="StatusId">
+
+                                <option value="1">Khóa</option>
+                                <option value="0">Chỉnh sửa</option>
+                                <option value="2">Xuất bản</option>
+
+                            </select>
+                        </div>
+                        <div class="col-sm-6">
+                            <label style="float:left">Tên chương truyện</label>
+                            <input type="text" class="form-control" id="FullName" name="FullName" required data-parsley-error-message="Yêu cầu nhập tên chương" />
+                        </div>
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="md-btn md-raised m-b-sm w-xs red" data-dismiss="modal">Hủy</button>
+                        <button type="submit" class="md-btn md-raised m-b-sm w-xs blue">Lưu</button>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts
+{
+    <script>
+        jQuery(document).ready(function ($) {
+
+            $('#checkBoxAll').click(function () {
+                if ($(this).is(":checked")) {
+                    $(".chkCheckBoxId").prop("checked", true)
+                }
+                else {
+                    $(".chkCheckBoxId").prop("checked", false)
+                }
+            });
+        });
+
+    </script>
+    <script>
+        function UpdateInfo(p1, p2, p3) {
+            $('#ChapterId').val(p3);
+            $('#OrderNumber').val(p1);
+            $('#FullName').val(p2);
+        }
+
+    </script>
+
+}
+
+

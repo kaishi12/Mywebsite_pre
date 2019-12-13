@@ -1,0 +1,128 @@
+﻿@model MyWebsite.Models.Chapter
+
+@{
+    ViewBag.Title = "TaoMoi";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+<style>
+    table, td, th {
+        border: 1px solid black;
+    }
+</style>
+<div class="padding">
+    <div class="box">
+        <div class="box-header">
+            <div class="m-b">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/User/Index">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/Manga/ListManga">Danh sách truyện đã tạo</a></li>
+                    <li class="breadcrumb-item"><a href="/Manga/ListChapter/?MangaId=@ViewBag.MaTruyen">Danh sách chương </a></li>
+                    <li class="breadcrumb-item active">Tạo chương mới</li>
+                </ol>
+            </div>
+        </div>
+
+
+        <div class="box-body">
+            <div class="form">
+
+                @using (Html.BeginForm("Create", "Chapter", FormMethod.Post, new { enctype = "multipart/form-data", ui_jp = "parsley" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <input hidden id="PageFullName" name="PageFullName" />
+                    <input hidden id="PageOrderNumber" name="PageOrderNumber" />
+                    <div class="row m-b">
+                        <input hidden value="@ViewBag.MangaId" id="MangaId" name="MangaId" />
+                        <div class="col-sm-3">
+                            <label>Thứ tự chương</label>
+                            <input type="number" class="form-control" required id="OrderNumber" name="OrderNumber" data-parsley-error-message="Yêu cầu nhập thứ tự chương">
+                        </div>
+                        <div class="col-sm-4">
+                            <label>Tên chương truyện</label>
+                            <input type="text" class="form-control " id="FullName" name="FullName" required data-parsley-error-message="Yêu cầu nhập tên chương">
+                        </div>
+                        <div class="col-sm-4">
+
+                            <label> Số trang </label>
+                            <div class="row m-b">
+                                <div class="col-sm-3 form-group">
+                                    <input type="number" id="sotrang" class="form-control">
+                                </div>
+                                <div class="col-sm-1 form-group">
+                                    <button class="btn btn-icon black" type="button" onclick="myFunction()"><i class="material-icons md-24">&#xe145;</i></button>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <button type="submit" class="md-btn md-raised m-b-sm w-xs blue">Tạo</button>
+                    <table class="table table-striped b-t" id="myTable">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Trang</th>
+                                <th>Tên Trang</th>
+                            </tr>
+                        </thead>
+                    </table>
+
+
+                }
+                <script>
+                    var x1 = 0;
+                    function myFunction() {
+
+                        var x = document.getElementById("sotrang").value;
+                        if (Number(x) < 0) {
+                            alert("Hello! I am an alert box!!");
+                        }
+                        else
+                            if (x1 > 0) {
+                                for (var i = 0; i < Number(x1); i++) {
+                                    document.getElementById("myTable").deleteRow(1);
+                                }
+                                x1 = 0;
+                            }
+                        var fullname = document.getElementById("PageFullName");
+                        var ordernumber = document.getElementById("PageOrderNumber");
+                        var stringfullname = "";
+                        var stringorder = "";
+                        for (var i = 0; i < Number(x); i++) {
+                            var x2 = x1 + 1;
+                            var tr, td, tbody;
+                            var table = document.getElementById("myTable");
+                            var inputfile = document.createElement("input");
+                            inputfile.type = "file";
+                            inputfile.id = "AnhTrang";
+                            inputfile.name = "AnhTrang";
+                            table.appendChild(tbody = document.createElement("tbody"));
+                            tbody.appendChild(tr = document.createElement("tr"));
+                            tr.appendChild(td = document.createElement("td"));
+                            td.textContent = x2;
+                            stringorder += ";" + td.textContent;
+                            td.id = "pageModels.OrderNumber";
+                            td.name = "pageModels.OrderNumber";
+                            tr.appendChild(td = document.createElement("td"));
+                            td.appendChild(inputfile);
+                            tr.appendChild(td = document.createElement("td"));
+
+                            td.textContent = document.getElementById("FullName").value + "- trang " + x2;
+                            stringfullname += ";" + td.textContent;
+                            td.id = "pageModels.FullName";
+                            td.name = "pageModels.FullName";
+                            x1++;
+                        }
+                        fullname.value = stringfullname;
+                        ordernumber.value = stringorder;
+                        
+                    }
+                </script>
+
+            </div>
+        </div>
+
+
+
+    </div>
+</div>

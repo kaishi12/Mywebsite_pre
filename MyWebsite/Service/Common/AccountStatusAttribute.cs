@@ -19,6 +19,8 @@ namespace MyWebsite.Service.Common
         {
             try
             {
+                
+                    
                 var userInfoSession = (AccountModel)HttpContext.Current.Session["UserInfo"];
                 if (userInfoSession == null)
                 {

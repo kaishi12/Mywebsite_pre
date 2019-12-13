@@ -28,6 +28,7 @@ namespace MyWebsite.Models
         public Nullable<System.DateTime> CreateAt { get; set; }
         public Nullable<int> StatusActive { get; set; }
         public Nullable<int> MangaId { get; set; }
+        public string Alias { get; set; }
     
         public virtual Manga Manga { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

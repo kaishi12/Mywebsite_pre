@@ -5,20 +5,35 @@ $(".UploadButton").click(function () {
     $(str).click();
 })
 function Upload(input) {
-
+    
+    var _URL = window.URL || window.webkitURL;
     let value = "img" + "#" + input.id.replace("file", "");
+    
     let valuebuttonSave = "#Save" + input.id.replace("file", "");
     console.log(input.id.replace("file", ""));
     if (input.files && input.files[0]) {
+        imgraw = new Image();
+        img = new Image();
+      
+        imgraw.src = $(value).attr("src");
+        imgraw.onload = function () {
+            if (this.width == img.width && this.height == img.height) {
+                var reader = new FileReader();
 
-        var reader = new FileReader();
+                reader.onload = function (e) {
+                    $(value).prop("src", reader.result);
+                };
 
-        reader.onload = function (e) {
-            $(value).prop("src", reader.result);
+                reader.readAsDataURL(input.files[0]);
+                $(valuebuttonSave).prop("disabled", false);
+            }
+            else {
+                alert(1);
+            }
         };
-
-        reader.readAsDataURL(input.files[0]);
-        $(valuebuttonSave).prop("disabled", false);
+        
+        img.src = _URL.createObjectURL(input.files[0]);
+       
     }
 
 }

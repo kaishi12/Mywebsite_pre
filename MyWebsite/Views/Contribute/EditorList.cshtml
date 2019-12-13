@@ -1,5 +1,5 @@
 ﻿
-@model IEnumerable<MyWebsite.ViewModels.Manga.MangaModel>
+@model IEnumerable<MyWebsite.Models.Manga>
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_LayoutUser.cshtml";
@@ -57,15 +57,15 @@
                                     @Html.DisplayFor(modelItem => item.Author)
                                 </td>
                                 <td class="center">
-                                    @Html.DisplayFor(modelItem => item.status)
+                                    @Html.DisplayFor(modelItem => item.Status.FullName)
                                 </td>
                                 <td class="center">
-                                    @Html.DisplayFor(modelItem => item.CreatAt)
+                                    @Html.DisplayFor(modelItem => item.CreateAt)
                                 </td>
                                 <td>
-                                    @*<a href="/Contribute/Editor?ChapterId=@item.Chapters.FirstOrDefault().ChapterId&CategoryId=1">
+                                    <a href="/Contribute/Editor?ChapterId=@item.Chapters.FirstOrDefault().ChapterId&CategoryId=1">
                                         <button class="btn  dark">Tải lên Clear-text</button>
-                                    </a>*@  
+                                    </a>  
                                    
 
                                 </td>

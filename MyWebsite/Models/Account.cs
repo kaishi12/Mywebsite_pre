@@ -22,6 +22,7 @@ namespace MyWebsite.Models
             this.Pages = new HashSet<Page>();
             this.Texts = new HashSet<Text>();
             this.Translations = new HashSet<Translation>();
+            this.Mangas = new HashSet<Manga>();
             this.Notifications = new HashSet<Notification>();
         }
     
@@ -33,6 +34,7 @@ namespace MyWebsite.Models
         public Nullable<int> StatusActive { get; set; }
         public string UserName { get; set; }
         public string PassWord { get; set; }
+        public string ResetPasswordCode { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Account_Detail> Account_Detail { get; set; }
@@ -44,6 +46,8 @@ namespace MyWebsite.Models
         public virtual ICollection<Text> Texts { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Translation> Translations { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Manga> Mangas { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Notification> Notifications { get; set; }
     }

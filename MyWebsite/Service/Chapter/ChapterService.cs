@@ -5,8 +5,6 @@ using System.Web;
 using MyWebsite.ViewModels.Chapter;
 using MyWebsite.Models;
 using MyWebsite.Service.Notification;
-using Dapper;
-using MyWebsite.Service.Common;
 
 namespace MyWebsite.Service.Chapter
 {
@@ -18,15 +16,17 @@ namespace MyWebsite.Service.Chapter
         {
             try
             {
-                var param = new DynamicParameters();
-                param.Add("@FullName", model.FullName);
-                param.Add("@OrderNumber", model.OrderNumber);
-                param.Add("@MangaId", model.MangaId);
-                param.Add("@CreateAt", DateTime.Now);
-                param.Add("@ViewNumber", model.ViewNumber);
-                param.Add("@StatusActive", 0);
-                int ChapterId = DALHelpers.QueryByStored<int>("Chapter_AddNewChapter", param).FirstOrDefault();
-                AddNewRawPages(model.pageModels, ChapterId);
+                Models.Chapter chapter = new Models.Chapter();
+                chapter.CreateAt = DateTime.Now;
+                chapter.FullName = model.FullName;
+                chapter.OrderNumber = model.OrderNumber;
+                chapter.MangaId = model.MangaId;
+
+                chapter.StatusActive = 0;
+                chapter.ViewNumber = 0;
+                data.Chapters.Add(chapter);
+                data.SaveChanges();
+                AddNewRawPages(model.pageModels, chapter.ChapterId);
                 return true;
             }
             catch (Exception ex)

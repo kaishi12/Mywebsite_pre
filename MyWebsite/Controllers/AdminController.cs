@@ -22,7 +22,7 @@ namespace MyWebsite.Controllers
             return View(listfont);
         }
         [HttpPost]
-        public ActionResult Addfont(string fontname,HttpPostedFileBase[] fontupload)
+        public ActionResult Addfont(string Note,string fontname,HttpPostedFileBase[] fontupload)
         {
            
             var foldername = @"~/LayoutUser/assets/fonts/" + fontname;
@@ -31,6 +31,7 @@ namespace MyWebsite.Controllers
             Font font = new Font();
             font.FontLink =   "/" + fontname + "/font.css";
             font.FullName = fontname;
+            font.Description = Note;
             font.StatusActive = 0;
             string Type = "";
             foreach (var item in fontupload)
@@ -51,6 +52,19 @@ namespace MyWebsite.Controllers
             return RedirectToAction("ListFont");
             
             
+        }
+        public ActionResult ListGenre()
+        {
+            return View();
+        }
+        public ActionResult ListNotificationType()
+        {
+            return View();
+        }
+        public ActionResult ListLanguage()
+        {
+            var listLanguage = data.Languages.SqlQuery("Select * from dbo.Language");
+            return View(listLanguage);
         }
     }
 }
