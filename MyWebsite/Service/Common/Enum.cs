@@ -13,4 +13,9 @@ namespace MyWebsite.Service.Common
     {
         public const string PassSuperSu = "1597348625";
     }
+    public enum TypeMember
+    {
+        Join = 0,
+        Invite = 1
+    }
 }

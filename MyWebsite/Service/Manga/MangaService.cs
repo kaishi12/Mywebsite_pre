@@ -71,64 +71,6 @@ namespace MyWebsite.Service.Manga
                 return null;
             }
         }
-        public List<MangaDetail> GetListMangaDetailByAccountId(int AccountId)
-        {
-            try
-            {
-                List<Manga_Detail> list = new List<Manga_Detail>();
-
-                var manga = data.Manga_Detail.Where(m => m.AccountId == AccountId && m.RoleId == 1);
-                foreach (var item in manga)
-                {
-                    list.AddRange(data.Manga_Detail.Where(m => m.MangaId == item.MangaId && m.RoleId != 1));
-                }
-                foreach(var item in data.Manga_Detail.Where(m => m.AccountId == AccountId && m.RoleId != 1))
-                {
-                    if(!list.Contains(item))
-                    {
-                        list.Add(item);
-                    }
-                }
-                List<MangaDetail> manga_Details = new List<MangaDetail>();
-                foreach (var trans in list)
-                {
-
-                    MangaDetail mangaDetail = new MangaDetail();
-                    mangaDetail.MangaFullName = trans.Manga.FullName;
-                    mangaDetail.UserName = trans.Account.UserName;
-                    mangaDetail.MangaId = trans.MangaId;
-                    mangaDetail.RoleFullName = trans.Role.FullName;
-                    mangaDetail.RoleId = trans.RoleId;
-                    mangaDetail.StatusActive = trans.StatusActive.Value;
-                    if (trans.Type != null)
-                    {
-                        mangaDetail.Type = trans.Type.Value;
-                    }
-                    if (trans.Role.Id.Trim() == "TM")
-                    {
-                        Language language = data.Languages.SingleOrDefault(m => m.Id == trans.Language);
-
-
-                        MangaDetail mangaDetail1 = mangaDetail;
-
-                        mangaDetail1.LanguageFullname = language.FullName;
-                        mangaDetail1.Language = language.Id;
-                        manga_Details.Add(mangaDetail1);
-
-                    }
-                    else
-                    {
-                        manga_Details.Add(mangaDetail);
-                    }
-
-                }
-                return manga_Details;
-            }
-            catch (Exception ex)
-            {
-                return null;
-            }
-        }
         public bool UpdateManga(MangaModel model)
         {
             try

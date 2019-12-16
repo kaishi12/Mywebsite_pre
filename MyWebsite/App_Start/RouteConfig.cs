@@ -18,6 +18,11 @@ namespace MyWebsite
                new { controller = "Manga", action = "ListChapter" }
            );
             routes.MapRoute(
+               "Profile",
+               "ProfileUser/{username}",
+               new { controller = "Account", action = "ProfileUser" }
+           );
+            routes.MapRoute(
                "EditorList",
                "EditorList",
                new { controller = "Contribute", action = "EditorList" }

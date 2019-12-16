@@ -185,5 +185,11 @@ namespace MyWebsite.Service.Account
             param.Add("@PassWord", Pass);
             return DALHelpers.ExecuteByStored("Account_UpdateAccountPassWord", param) > 0;
         }
+        public AccountModel GetProfile(string username)
+        {
+            var param = new DynamicParameters();
+            param.Add("@UserName", username);
+            return DALHelpers.QueryByStored<AccountModel>("Account_GetProfileByUserName", param).FirstOrDefault();
+        }
     }
 }

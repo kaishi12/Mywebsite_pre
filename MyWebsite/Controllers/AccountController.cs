@@ -18,9 +18,9 @@ namespace MyWebsite.Controllers
 
     public class AccountController : Controller
     {
-        MyWebsiteEntities data = new MyWebsiteEntities();
-
-        AccountService AccountService = new AccountService();
+        readonly MyWebsiteEntities data = new MyWebsiteEntities();
+        readonly MangaService MangaService = new MangaService();
+        readonly AccountService AccountService = new AccountService();
         // GET: Account
         public ActionResult Index()
         {
@@ -135,14 +135,12 @@ namespace MyWebsite.Controllers
         public ActionResult UserManagment()
         {
 
-            MangaService mangaService = new MangaService();
+         
             AccountModel model = (AccountModel)Session["UserInfo"];
             model = AccountService.GetAccountInfo(model.AccountId);
             Session["UserInfo"] = model;
-            List<MangaDetail> manga_Details = mangaService.GetListMangaDetailByAccountId(model.AccountId);
-            ViewBag.Join = mangaService.GetListJoined(model.AccountId);
-            ViewBag.Invite = manga_Details.Where(m => m.Type == 0).ToList();
-            
+            ViewBag.PeopleJoin = MangaDetailService.GetPeopleJoinManga(model.AccountId);
+            ViewBag.Join = MangaService.GetListJoined(model.AccountId);
             return View(model);
 
         }
@@ -256,6 +254,18 @@ namespace MyWebsite.Controllers
             {
                 return Json(0);
             }
+        }
+        /// <summary>
+        /// Người A xem thông tin account của người B
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns></returns>
+        public ActionResult ProfileUser(string username)
+        {
+            var model = AccountService.GetProfile(username);
+           
+            ViewBag.Join = MangaService.GetListJoined(model.AccountId);
+            return View(model);
         }
     }
 }

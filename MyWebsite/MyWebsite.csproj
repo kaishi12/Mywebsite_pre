@@ -850,6 +850,7 @@
     <Content Include="Views\Shared\AccountStatusRestriction.cshtml" />
     <Content Include="Views\Translation\ListAllowChapter.cshtml" />
     <Content Include="Views\Error\PageError.cshtml" />
+    <Content Include="Views\Account\ProfileUser.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
