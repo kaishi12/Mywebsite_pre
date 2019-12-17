@@ -63,14 +63,9 @@
                                     @Html.DisplayFor(modelItem => item.CreatAt)
                                 </td>
                                 <td style="text-align:center">
-                                    @*@if (item.Translations.Where(m => m.StatusActive == 0).Count() > 0)
-                                    {
-                                        <button style="display:inline-block" class="btn  dark"><a href="/Contribute/Translator?PageId=@item.Chapters.FirstOrDefault(m=>m.StatusActive==0).Pages.FirstOrDefault(m=>m.StatusActive == 0).PageId">Dịch truyện</a></button>
-                                    }
-                                    else
-                                    {
-                                        <button style="display:inline-block" disabled class="btn  dark"> Chưa có bản dịch nào</button>
-                                    }*@
+                                   
+                                        <button style="display:inline-block" class="btn  dark"><a href="/Contribute/Translator?PageId=@item.FirstPage">Dịch truyện</a></button>
+                                   
                                 </td>
                             </tr>
                         }

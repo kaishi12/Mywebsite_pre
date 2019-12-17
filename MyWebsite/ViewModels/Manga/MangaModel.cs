@@ -25,6 +25,8 @@ namespace MyWebsite.ViewModels.Manga
         public IEnumerable<int> ListGenre { get; set; }
         public DateTime CreatAt { get; set; }
         public int StatusActive { get; set; }
+        public int FirstPage { get; set; }
+        public int FirstChapter { get; set; }
     }
     public class MangaJoin
     {
@@ -72,4 +74,5 @@ namespace MyWebsite.ViewModels.Manga
         public string MangaName { get; set; }
         public string RoleList { get; set; }
     }
+
 }

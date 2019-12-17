@@ -119,6 +119,17 @@ namespace MyWebsite.Service.Chapter
                 return 2;
             }
         }
-
+        public int GetFirstChapter(int MangaId)
+        {
+            var param = new DynamicParameters();
+            param.Add("@MangaId", MangaId);
+            return (int)DALHelpers.ExecuteScalarByStore("Chapter_GetFirstChapter", param);
+        }
+        public int GetFirstPage(int MangaId)
+        {
+            var param = new DynamicParameters();
+            param.Add("@MangaId", MangaId);
+            return (int)DALHelpers.ExecuteScalarByStore("Page_GetFirstPage", param);
+        }
     }
 }

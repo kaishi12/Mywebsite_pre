@@ -1,4 +1,5 @@
 ﻿using MyWebsite.Models;
+using MyWebsite.Service.Chapter;
 using MyWebsite.Service.Common;
 using MyWebsite.Service.Manga;
 using MyWebsite.ViewModels.Account;
@@ -14,6 +15,8 @@ namespace MyWebsite.Controllers
     public class ContributeController : Controller
     {
         readonly MangaService MangaService = new MangaService();
+        readonly ChapterService ChapterService = new ChapterService();
+        
         readonly MyWebsiteEntities data = new MyWebsiteEntities();
         // GET: Contribute
         public ActionResult Index()
@@ -25,6 +28,10 @@ namespace MyWebsite.Controllers
 
             AccountModel accountModel = (AccountModel)Session["UserInfo"];
             var list = MangaService.GetListMangaByAccountId(accountModel.AccountId, "Ed");
+            foreach(var item in list)
+            {
+                item.FirstChapter = ChapterService.GetFirstChapter(item.MangaId);
+            }
             return View(list);
 
         }
@@ -57,6 +64,10 @@ namespace MyWebsite.Controllers
 
             AccountModel accountModel = (AccountModel)Session["UserInfo"];
             var list = MangaService.GetListMangaByAccountId(accountModel.AccountId, "Tr");
+            foreach (var item in list)
+            {
+                item.FirstPage = ChapterService.GetFirstPage(item.MangaId);
+            }
             return View(list);
 
         }
