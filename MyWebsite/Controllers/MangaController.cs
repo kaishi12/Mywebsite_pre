@@ -175,7 +175,7 @@ namespace MyWebsite.Controllers
             {
                 accid = AccountId.Value;
             }
-           if (MangaDetailService.CheckJoin(accid, id, role) == true)
+           if (MangaDetailService.CheckJoin(accid, id, role) != true)
             {
                 int res = MangaService.Join(accid, id, role, language, type);
                 return Json(res);

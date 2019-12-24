@@ -20,6 +20,7 @@
        
         <div class="row" style="padding-bottom:10px;padding-left:0px">
             <div class="col-sm-4">
+                Chương:
                 <select class="form-control c-select" id="ChapterList" name="ChapterList">
                     @foreach (var item in ViewBag.chapterlist)
                     {
@@ -35,6 +36,7 @@
                 </select>
             </div>
             <div class="col-sm-4">
+                Loại trang:
                 <select class="form-control c-select" id="CategoryId" name="CategoryId">
                     @if (ViewBag.CategoryId == 1)
                     {
@@ -70,7 +72,7 @@
 
                                     <input type="hidden" name="PageId" id="PageId" value="@item.PageId" />
 
-                                    <a href="~/PageLink/@item.PageLink"><img style="max-height:300px" data-target="#myModal" id=@item.PageId src="~/PageLink/@item.PageLink" alt="" class="img-responsive"></a>
+                                    <a href="~/PageLink/@item.PageLink"><img style=" height:300px; " data-target="#myModal" id=@item.PageId src="~/PageLink/@item.PageLink" alt="" class="img-responsive"></a>
                                     <div class="p-a-sm">
                                         <div class=" text-ellipsis">
                                             <span>trang @item.OrderNumber</span>
@@ -103,7 +105,7 @@
 
                                     <input type="hidden" name="PageId" id="PageId" value="@item.PageId" />
 
-                                    <a href="~/PageLink/@item.PageLink"><img style="max-height:300px" id=@item.PageId src="~/PageLink/@item.PageLink" alt="" class="img-responsive"></a>
+                                    <a href="~/PageLink/@item.PageLink"><img style=" height:300px" id=@item.PageId src="~/PageLink/@item.PageLink" alt="" class="img-responsive"></a>
                                     <div class="p-a-sm">
                                         <div class="text-ellipsis">
                                             trang @item.OrderNumber

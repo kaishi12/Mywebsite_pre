@@ -32,37 +32,58 @@
     <!-- endbuild -->
     <link rel="stylesheet" href="/LayoutUser/assets/styles/font.css" type="text/css" />
 </head>
-<body>
+<body @*style="background-image: url('../../RootPicture/Oshino Shinobu.jpg');"*@>
+    <style>
+        .item-bg img {
+            position:unset;
+            width:unset;
+            left:unset;
+            top:unset;
+            margin-left:unset;
+            margin-top:unset;
+           
+        }
+         .md-input {
+       
+             border-bottom-width:1px;
+             border-bottom-color:whitesmoke
+                      }
+    </style>
+    <div class="item-bg">
+        
+        <img src="/Avatar/Oshino Shinobu.jpg" class="blur">
+    </div>
     <div class="app" id="app">
+       
         @RenderBody()
     </div>
-        
-        <!-- build:js scripts/app.html.js -->
-        <!-- jQuery -->
-        <script src="~/LayoutUser/libs/jquery/jquery/dist/jquery.js"></script>
-        <!-- Bootstrap -->
-        <script src="~/LayoutUser/libs/jquery/tether/dist/js/tether.min.js"></script>
-        <script src="~/LayoutUser/libs/jquery/bootstrap/dist/js/bootstrap.js"></script>
-        <!-- core -->
-        <script src="~/LayoutUser/libs/jquery/underscore/underscore-min.js"></script>
-        <script src="~/LayoutUser/libs/jquery/jQuery-Storage-API/jquery.storageapi.min.js"></script>
-        <script src="~/LayoutUser/libs/jquery/PACE/pace.min.js"></script>
-        <script src="~/LayoutUser/scripts/config.lazyload.js"></script>
-        <script src="~/LayoutUser/scripts/palette.js"></script>
-        <script src="~/LayoutUser/scripts/ui-load.js"></script>
-        <script src="~/LayoutUser/scripts/ui-jp.js"></script>
-        <script src="~/LayoutUser/scripts/ui-include.js"></script>
-        <script src="~/LayoutUser/scripts/ui-device.js"></script>
-        <script src="~/LayoutUser/scripts/ui-form.js"></script>
-        <script src="~/LayoutUser/scripts/ui-nav.js"></script>
-        <script src="~/LayoutUser/scripts/ui-screenfull.js"></script>
-        <script src="~/LayoutUser/scripts/ui-scroll-to.js"></script>
-        <script src="~/LayoutUser/scripts/ui-toggle-class.js"></script>
-        <script src="~/LayoutUser/scripts/app.js"></script>
-        <!-- ajax -->
-        <script src="/LayoutUser/libs/jquery/jquery-pjax/jquery.pjax.js"></script>
-        <script src="/LayoutUser/scripts/ajax.js"></script>
-        <!-- endbuild -->
+
+    <!-- build:js scripts/app.html.js -->
+    <!-- jQuery -->
+    <script src="~/LayoutUser/libs/jquery/jquery/dist/jquery.js"></script>
+    <!-- Bootstrap -->
+    <script src="~/LayoutUser/libs/jquery/tether/dist/js/tether.min.js"></script>
+    <script src="~/LayoutUser/libs/jquery/bootstrap/dist/js/bootstrap.js"></script>
+    <!-- core -->
+    <script src="~/LayoutUser/libs/jquery/underscore/underscore-min.js"></script>
+    <script src="~/LayoutUser/libs/jquery/jQuery-Storage-API/jquery.storageapi.min.js"></script>
+    <script src="~/LayoutUser/libs/jquery/PACE/pace.min.js"></script>
+    <script src="~/LayoutUser/scripts/config.lazyload.js"></script>
+    <script src="~/LayoutUser/scripts/palette.js"></script>
+    <script src="~/LayoutUser/scripts/ui-load.js"></script>
+    <script src="~/LayoutUser/scripts/ui-jp.js"></script>
+    <script src="~/LayoutUser/scripts/ui-include.js"></script>
+    <script src="~/LayoutUser/scripts/ui-device.js"></script>
+    <script src="~/LayoutUser/scripts/ui-form.js"></script>
+    <script src="~/LayoutUser/scripts/ui-nav.js"></script>
+    <script src="~/LayoutUser/scripts/ui-screenfull.js"></script>
+    <script src="~/LayoutUser/scripts/ui-scroll-to.js"></script>
+    <script src="~/LayoutUser/scripts/ui-toggle-class.js"></script>
+    <script src="~/LayoutUser/scripts/app.js"></script>
+    <!-- ajax -->
+    <script src="/LayoutUser/libs/jquery/jquery-pjax/jquery.pjax.js"></script>
+    <script src="/LayoutUser/scripts/ajax.js"></script>
+    <!-- endbuild -->
 
 </body>
 </html>

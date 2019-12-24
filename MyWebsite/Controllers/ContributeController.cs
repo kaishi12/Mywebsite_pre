@@ -35,6 +35,7 @@ namespace MyWebsite.Controllers
             return View(list);
 
         }
+        
         public ActionResult Editor(int? ChapterId, int? CategoryId)
         {
             Chapter chapter = new Chapter();

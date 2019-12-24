@@ -460,6 +460,8 @@
       <LastGenOutput>Model.cs</LastGenOutput>
     </Content>
     <None Include="Scripts\jquery-1.6.4-vsdoc.js" />
+    <Content Include="RootPicture\Oshino Shinobu.jpg" />
+    <Content Include="RootPicture\tenor.gif" />
     <Content Include="Scripts\jquery-1.6.4.js" />
     <Content Include="Scripts\jquery-1.6.4.min.js" />
     <Content Include="Scripts\jquery.signalR-2.4.1.js" />
@@ -567,6 +569,7 @@
     <Compile Include="Service\Common\HashMD5.cs" />
     <Compile Include="Service\Common\ObjectAttribute.cs" />
     <Compile Include="Service\Genre\GenreService.cs" />
+    <Compile Include="Service\Language\LanguageService.cs" />
     <Compile Include="Service\Manga\MangaDetailService.cs" />
     <Compile Include="Service\Manga\MangaGenreService.cs" />
     <Compile Include="Service\Manga\MangaService.cs" />
@@ -577,6 +580,7 @@
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\Account\AccountModel.cs" />
     <Compile Include="ViewModels\Chapter\ChapterModel.cs" />
+    <Compile Include="ViewModels\Language\LanguageModel.cs" />
     <Compile Include="ViewModels\Manga\MangaModel.cs" />
     <Compile Include="ViewModels\Notification\NotificationModel.cs" />
     <Compile Include="ViewModels\TextBox\TextBoxModel.cs" />

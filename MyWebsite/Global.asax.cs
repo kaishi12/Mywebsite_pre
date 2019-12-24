@@ -11,7 +11,7 @@ namespace MyWebsite
 {
     public class MvcApplication : System.Web.HttpApplication
     {
-        string conStr = "Data Source=DESKTOP-AT17OA3;Initial Catalog = MyWebsite; Integrated Security = True; MultipleActiveResultSets=True;Application Name = EntityFramework";
+        string conStr = Service.Common.Const.conStr;
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();

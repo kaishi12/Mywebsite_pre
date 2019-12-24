@@ -12,6 +12,8 @@ using System.IO;
 using MyWebsite.Service.Manga;
 using System.Data.SqlClient;
 using Microsoft.AspNet.SignalR;
+using MyWebsite.Service.Role;
+using MyWebsite.Service.Language;
 
 namespace MyWebsite.Controllers
 {
@@ -31,6 +33,13 @@ namespace MyWebsite.Controllers
         {
 
             AccountModel model = (AccountModel)Session["UserInfo"];
+            ViewBag.ListMangaCreated = MangaService.GetListMangaByAccountId(model.AccountId, "MC");
+            ViewBag.ListMangaWithTranslateRole = MangaService.GetListMangaByAccountId(model.AccountId, "Tr");
+            ViewBag.ListMangaWithEditorRole = MangaService.GetListMangaByAccountId(model.AccountId, "Ed");
+            ViewBag.ListMangaWithTranslationManagerRole = MangaService.GetListMangaByAccountId(model.AccountId, "TM");
+            ViewBag.ListNewManga = MangaService.GetListNewManga();
+            ViewBag.ListLanguage = LanguageService.GetListLanguage();
+            ///
             var listmanga = data.Manga_Detail.Where(m => m.AccountId == model.AccountId);
             List<Manga_Detail> listjoin = new List<Manga_Detail>();
             var listinvite = listmanga.Where(m => m.Type == 0 && m.RoleId != 1);
@@ -263,7 +272,6 @@ namespace MyWebsite.Controllers
         public ActionResult ProfileUser(string username)
         {
             var model = AccountService.GetProfile(username);
-           
             ViewBag.Join = MangaService.GetListJoined(model.AccountId);
             return View(model);
         }

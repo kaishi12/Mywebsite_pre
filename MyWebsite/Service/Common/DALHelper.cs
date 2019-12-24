@@ -13,7 +13,7 @@ namespace MyWebsite.Service.Common
     public static class DALHelpers
     {
         //internal static string defaulConnectionString = ConfigurationManager.ConnectionStrings["MyWebsiteEntities"] == null ? "" : ConfigurationManager.ConnectionStrings["MyWebsiteEntities"].ConnectionString;
-        internal static string defaulConnectionString = "Data Source=DESKTOP-AT17OA3;Initial Catalog = MyWebsite; Integrated Security = True; MultipleActiveResultSets=True;Application Name = EntityFramework";
+        internal static string defaulConnectionString = "Data Source=DESKTOP-QU77M0A;Initial Catalog = MyWebsite; Integrated Security = True; MultipleActiveResultSets=True;Application Name = EntityFramework";
         /// <summary>
         /// Author:    Haott
         /// Get connection string by db type

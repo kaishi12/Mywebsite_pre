@@ -18,7 +18,7 @@ namespace MyWebsite.Service.Manga
             param.Add("@MangaId", MangaId);
             param.Add("@AccountId", AccountId);
             param.Add("@RoleId", RoleId);
-            return (int)DALHelpers.ExecuteScalarByStore("MangaDetail_CheckJoin", param) > 0;
+            return (int)DALHelpers.QueryByStored<int>("MangaDetail_CheckJoin", param).FirstOrDefault() > 0;
         }
         public static int GetAccountIdCreateManga(int MangaId)
         {

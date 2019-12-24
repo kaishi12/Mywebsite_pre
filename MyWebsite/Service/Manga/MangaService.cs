@@ -216,5 +216,9 @@ namespace MyWebsite.Service.Manga
             param.Add("@AccountId", AccountId);
             return DALHelpers.QueryByStored<MangaJoinedModel>("Manga_GetListJoined", param);
         }
+        public IEnumerable<MangaModel> GetListNewManga()
+        {
+            return DALHelpers.QueryByStored<MangaModel>("Manga_GetListNewManga", null);
+        }
     }
 }

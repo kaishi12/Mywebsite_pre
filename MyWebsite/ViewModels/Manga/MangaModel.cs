@@ -8,7 +8,7 @@ namespace MyWebsite.ViewModels.Manga
 {
     public class MangaModel
     {
-       
+       public string UserName { get; set; }
         public int MangaId { get; set; }
         [Required]
         public string FullName { get; set; }
@@ -27,6 +27,7 @@ namespace MyWebsite.ViewModels.Manga
         public int StatusActive { get; set; }
         public int FirstPage { get; set; }
         public int FirstChapter { get; set; }
+        public string GenreList { get; set; }
     }
     public class MangaJoin
     {

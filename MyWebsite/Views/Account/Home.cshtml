@@ -3,7 +3,18 @@
     Layout = "~/Views/Shared/_LayoutUser.cshtml";
 }
 @model MyWebsite.ViewModels.Account.AccountModel
-    
+<style>
+    .Info-BoxFooter {
+        text-align: center;
+        padding: inherit
+    }
+
+    img {
+        max-width: 100%;
+        max-height: 200px;
+        /*Scale down will take the necessary specified space that is 100px x 100px without stretching the image*/
+    }
+</style>
 <div class="padding">
     <div class="m-b">
         <ol class="breadcrumb black">
@@ -44,7 +55,7 @@
                         <div class="clear">
                             <h4 class="m-a-0 text-lg _300">
                                 <a href="">
-                                   @ViewBag.Invite
+                                    @ViewBag.Invite
                                     <span class="text-sm"> Lời mời tham gia</span>
                                 </a>
                             </h4>
@@ -66,19 +77,360 @@
                                     <span class="text-sm">Bản dịch đang quản lí</span>
                                 </a>
                             </h4>
-                            <small class="text-muted">Các ngôn ngữ đã tham gia: <br />
-                                @foreach(var item in ViewBag.Language)
+                            <small class="text-muted">
+                                Các ngôn ngữ đã tham gia: <br />
+                                @foreach (var item in ViewBag.Language)
                                 {
-                                   <span>@(item+",")</span>
+                                    <span>@(item + ",")</span>
                                 }
                             </small>
                         </div>
                     </div>
                 </div>
             </div>
+            <div class="row">
+
+
+                <div class="col-sm-7">
+                    @* Danh sách truyện bạn đang quản lí  *@
+                    <div class="box info">
+                        <div class="box-header info">
+                            <h3 style="display:inline">Danh sách truyện đang quản lí</h3>
+                            <a style="display:inline;float:right"><h3>Xem tất cả <i class="fa fa-caret-right"></i></h3></a>
+
+                        </div>
+                        <div class="box-divider black"></div>
+                        <div class="box-body  row">
+
+
+
+                            @foreach (var item in ViewBag.ListMangaCreated)
+                            {
+                                <div class="col-xs-6 col-sm-4 col-md-4">
+                                    <div class="box p-a-xs">
+                                        <div class="box-body  grey-900" style="padding:5px">
+                                            <img class="img-responsive" src="~/Cover/@item.CoverLink" />
+
+                                        </div>
+
+                                        <div class="box-footer grey-900 Info-BoxFooter">
+                                            <text class="text-ellipsis">@item.FullName</text>
+                                            <button class="btn btn-xs btn-md success ">
+                                                Chương
+                                            </button>
+                                            <button class="btn btn-xs btn-md danger">
+                                                Cập nhật
+
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+
+                        </div>
+                    </div>
+                    @* Danh sách truyện bạn đã đăng kí dịch*@
+                    <div class="box info">
+                        <div class="box-header info">
+                            <h3 style="display:inline">Truyện đã đăng kí dịch</h3>
+                            <a style="display:inline;float:right"><h3>Xem tất cả <i class="fa fa-caret-right"></i></h3></a>
+
+                        </div>
+                        <div class="box-divider black"></div>
+                        <div class="box-body row">
+                            @foreach (var item in ViewBag.ListMangaWithTranslateRole)
+                            {
+                                <div class="col-xs-6 col-sm-4 col-md-4">
+                                    <div class="box p-a-xs">
+                                        <div class="box-body  grey-900" style="padding:5px">
+                                            <img class="img-responsive" src="~/Cover/@item.CoverLink" />
+
+                                        </div>
+
+                                        <div class="box-footer grey-900 Info-BoxFooter">
+                                            <text class="text-ellipsis">@item.FullName</text>
+                                            <button class="btn btn-xs btn-md success ">
+                                                Dịch truyện
+                                            </button>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+
+
+
+                        </div>
+                    </div>
+                    @* Danh sách truyện bạn đã đăng kí Chỉnh sửa*@
+                    <div class="box info">
+                        <div class="box-header info">
+                            <h3 style="display:inline">Truyện đã đăng kí tải lên Clear-text</h3>
+                            <a style="display:inline;float:right"><h3>Xem tất cả <i class="fa fa-caret-right"></i></h3></a>
+
+                        </div>
+                        <div class="box-divider black"></div>
+                        <div class="box-body row">
+                            @foreach (var item in ViewBag.ListMangaWithEditorRole)
+                            {
+                                <div class="col-xs-6 col-sm-4 col-md-4">
+                                    <div class="box p-a-xs">
+                                        <div class="box-body  grey-900" style="padding:5px">
+                                            <img class="img-responsive" src="~/Cover/@item.CoverLink" />
+
+                                        </div>
+
+                                        <div class="box-footer grey-900 Info-BoxFooter">
+                                            <text class="text-ellipsis">@item.FullName</text>
+                                            <button class="btn btn-xs btn-md success ">
+                                                Tải lên clear-text
+                                            </button>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+
+
+
+                        </div>
+                    </div>
+                    @* Danh sách truyện bạn đã đăng kí quản lí bản dịch*@
+                    <div class="box info">
+                        <div class="box-header info">
+                            <h3 style="display:inline">Danh sách truyện đang quản lí</h3>
+                            <a style="display:inline;float:right"><h3>Xem tất cả <i class="fa fa-caret-right"></i></h3></a>
+
+                        </div>
+                        <div class="box-divider black"></div>
+                        <div class="box-body row">
+                            <div class="col-xs-6 col-sm-4 col-md-4">
+                                <div class="box p-a-sm">
+                                    <div class="box-body  grey-900" style="padding:5px">
+                                        <img class="img-responsive" src="~/RootPicture/tenor.gif" />
+
+                                    </div>
+
+                                    <div class="box-footer grey-900 Info-BoxFooter">
+                                        <text class="text-ellipsis">Dragon King of the World</text>
+                                        <button class="btn btn-xs btn-md success ">
+                                            <i class="fa  fa-list-ol" title="Danh sách chương"></i>
+
+                                        </button>
+                                        <button class="btn btn-xs btn-md danger">
+                                            <i class="fa fa-edit" title="Cập nhật truyện"> </i>
+
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xs-6 col-sm-4 col-md-4">
+                                <div class="box p-a-sm">
+                                    <div class="box-body  grey-900" style="padding:5px">
+                                        <img class="img-responsive" src="~/RootPicture/tenor.gif" />
+
+                                    </div>
+
+                                    <div class="box-footer grey-900 Info-BoxFooter">
+                                        <text class="text-ellipsis">Dragon King of the World</text>
+                                        <button class="btn btn-xs btn-md success ">
+                                            <i class="fa  fa-list-ol" title="Danh sách chương"></i>
+
+                                        </button>
+                                        <button class="btn btn-xs btn-md danger">
+                                            <i class="fa fa-edit" title="Cập nhật truyện"> </i>
+
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-6 col-sm-4 col-md-4">
+                                <div class="box p-a-sm">
+                                    <div class="box-body  grey-900" style="padding:5px">
+                                        <img class="img-responsive" src="~/RootPicture/tenor.gif" />
+
+                                    </div>
+
+                                    <div class="box-footer grey-900 Info-BoxFooter">
+                                        <text class="text-ellipsis">Dragon King of the World</text>
+                                        <button class="btn btn-xs btn-md success ">
+                                            <i class="fa  fa-list-ol" title="Danh sách chương"></i>
+
+                                        </button>
+                                        <button class="btn btn-xs btn-md danger">
+                                            <i class="fa fa-edit" title="Cập nhật truyện"> </i>
+
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-6 col-sm-4 col-md-4">
+                                <div class="box p-a-sm">
+                                    <div class="box-body  grey-900" style="padding:5px">
+                                        <img class="img-responsive" src="~/RootPicture/tenor.gif" />
+
+                                    </div>
+
+                                    <div class="box-footer grey-900 Info-BoxFooter">
+                                        <text class="text-ellipsis">Dragon King of the World</text>
+                                        <button class="btn btn-xs btn-md success ">
+                                            <i class="fa  fa-list-ol" title="Danh sách chương"></i>
+
+                                        </button>
+                                        <button class="btn btn-xs btn-md danger">
+                                            <i class="fa fa-edit" title="Cập nhật truyện"> </i>
+
+                                        </button>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-xs-6 col-sm-4 col-md-4">
+                                <div class="box p-a-sm">
+                                    <div class="box-body  grey-900" style="padding:5px">
+                                        <img class="img-responsive" src="~/RootPicture/tenor.gif" />
+
+                                    </div>
+
+                                    <div class="box-footer grey-900 Info-BoxFooter">
+                                        <text class="text-ellipsis">Dragon King of the World</text>
+                                        <button class="btn btn-xs btn-md success ">
+                                            <i class="fa  fa-list-ol" title="Danh sách chương"></i>
+
+                                        </button>
+                                        <button class="btn btn-xs btn-md danger">
+                                            <i class="fa fa-edit" title="Cập nhật truyện"> </i>
+
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-5">
+                    <div class="box black">
+                        <div class="box-header info">
+                            <h3 style="display:inline">Danh sách truyện vừa tạo</h3>
+                            <a style="display:inline;float:right"><h3>Xem tất cả <i class="fa fa-caret-right"></i></h3></a>
+
+                        </div>
+
+                        <ul class="list-group thumbnail scrollable list-inline">
+                            @foreach (var item in ViewBag.ListNewManga)
+                            {
+                                string a = item.MangaId.ToString() + ";" + item.FullName;
+                                <li class="list-item">
+                                    <a herf="" class="list-left"><img style="width:80px;height:120px;border:2px solid #999" src="~/Cover/@item.CoverLink" /></a>
+                                    <div class="list-body">
+                                        <div class="m-y-sm pull-right">
+                                            <button  id="XinGiaNhap" type="button" name="@a" class="btn btn-xs blue rounded my-2 my-sm-0 " data-toggle="modal" data-target="#m-a-f-X">
+                                                Xin gia nhập
+                                            </button>
+                                        </div>
+                                        <div>
+                                            <a class="text-info">@item.FullName </a>
+                                        </div>
+                                        <div class="text-sm">
+                                            <span><strong>Người quản lí:</strong> @item.UserName</span><br />
+                                            <span><strong>Thể loại:</strong><text>@item.GenreList</text> </span> <br />
+                                            <span><strong>Tác giả:</strong> @item.Author</span>
+                                            <br />
+                                            <text class="text-ellipsis"><strong>Mô tả:</strong> @item.Description </text>
+                                        </div>
+                                    </div>
+                                </li>
+
+                            }
+
+
+
+                        </ul>
+                        <div id="m-a-f-X" class="modal fade" data-backdrop="true" style="display: none;" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Xin gia nhập</h5>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form>
+                                            <input hidden id="MangaId" name="MangaId" />
+                                            <div class="form-group row">
+                                                <label class="col-sm-4 form-control-label">
+                                                    <span>Tên Truyện</span>
+                                                    <span style="color:red">(*)</span>
+                                                </label>
+                                                <div class="col-sm-8">
+
+                                                    <input style="overflow:hidden;text-overflow: ellipsis" disabled id="FullName" name="FullName" class="form-control" type="text" value="tensei shitara slime datta ken: the ways of strolling in the demon country" />
+                                                </div>
+
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-sm-4 form-control-label">
+                                                    <span>Vị trí</span>
+                                                    <span style="color:red">(*)</span>
+                                                </label>
+                                                <div class="col-sm-8">
+
+                                                    <select id="SelectRole" class="form-control select2-bootstrap-append">
+
+                                                        <option value="Tr">Dịch truyện</option>
+                                                        <option value="Ed">Tải lên clear-text</option>
+                                                        <option value="TM">Quản lí bản dịch</option>
+                                                    </select>
+                                                </div>
+
+                                            </div>
+                                            <div id="SelectLanguage" style="display:none" class="form-group row">
+                                                <label class="col-sm-4 form-control-label">
+                                                    <span>Ngôn ngữ</span>
+                                                    <span style="color:red">(*)</span>
+                                                </label>
+                                                <div class="col-sm-8">
+                                                    <select id="Language" class="form-control select2-bootstrap-append">
+                                                        @foreach (var item in ViewBag.ListLanguage)
+                                                        {
+                                                            <option value="@item.Id">@item.FullName</option>
+                                                        }
+                                                    </select>
+
+                                                </div>
+
+                                            </div>
+                                        </form>
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn dark-white p-x-md" data-dismiss="modal">Hủy</button>
+                                        <button id="Join" type="button" class="btn danger p-x-md" data-dismiss="modal">Xin gia nhập</button>
+                                    </div>
+                                </div><!-- /.modal-content -->
+                            </div>
+                        </div>
+
+
+
+
+
+                        @*<text class="text-ellipsis">Dragon King of the World</text>
+                            <button class="btn btn-xs btn-md success ">
+                                <i class="fa  fa-list-ol" title="Danh sách chương"></i>
+
+                            </button>
+                            <button class="btn btn-xs btn-md danger">
+                                <i class="fa fa-edit" title="Cập nhật truyện"> </i>
+
+                            </button>*@
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
+<script src="~/LayoutUser/Account/Search.js"></script>
 
 
 

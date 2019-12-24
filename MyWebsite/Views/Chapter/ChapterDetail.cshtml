@@ -19,7 +19,7 @@
     <div class="row">
         <div class="col-sm-2" style="padding-left:12px;padding-right:12px">
             <div class="box">
-                <div class="box-header">Menu</div>
+                <div class="box-header yellow">Menu</div>
                 <div class="p-y">
                     <div class="nav-active-border left b-{{app.setting.theme.primary}}">
                         <ul class="list-unstyled m-t-n-sm">
@@ -42,6 +42,7 @@
             <div class="tab-content pos-rlt">
 
                 <div class="tab-pane" id="tab-1">
+
                     <div style="margin:30px">
                         @using (Html.BeginForm("AddNewPage", "Chapter", FormMethod.Post, new { @enctype = "multipart/form-data" }))
                         {
@@ -53,7 +54,7 @@
                                 <label> Thứ tự trang mới nhất</label>
                                 <div class="row m-b">
                                     <div class="col-md-3" style="margin-right:20px;margin-left:8px">
-                                        <input type="number" id="sotrang" class="form-control" value="@Model.Pages.LastOrDefault(m=>m.StatusActive == 0).OrderNumber" disabled>
+                                        <input type="number" id="TotalNumber" class="form-control" value="@Model.Pages.LastOrDefault(m=>m.StatusActive == 0).OrderNumber" disabled>
                                     </div>
 
 
@@ -61,44 +62,37 @@
                                     <input type="hidden" id="FullName" name="FullName" value="@Model.FullName" />
                                     <input type="hidden" id="MangaId" name="MangaId" value="@Model.MangaId" />
                                     <input hidden id="PageFullName" name="PageFullName" />
+                                    <input hidden id="CurrentPage" name="CurrentPage" value="@Model.Pages.LastOrDefault(m=>m.StatusActive == 0).OrderNumber" />
                                     <input hidden id="PageOrderNumber" name="PageOrderNumber" />
 
-                                    <button class="btn btn-icon black" type="button" onclick="myFunction() " style="margin-right:20px;"><i class="material-icons md-24">&#xe145;</i></button>
+                                    <button id="addbtn" class="btn black" type="button" style="margin-right:20px;"><i class="material-icons md-18">&#xe145;</i></button>
 
 
-                                    <button class="btn btn-icon black" type="button" onclick="myFunction1()" style="margin-right:20px;"><i class="material-icons md-24">&#xe872;</i></button>
+                                    <button class="btn black" type="button" id="delbtn" style="margin-right:20px;"><i class="material-icons md-18">&#xe872;</i></button>
 
-
+                                    <button disabled type="submit" class="SaveNewPage btn blue">Lưu</button>
                                 </div>
 
                             </div>
-                            <div class="form-group " id="filex">
+                            <div class="row" id="UploadRaw">
+                                @foreach (var item in Model.Pages.Where(m => m.StatusActive == 0 && m.CategoryId == 1).OrderBy(m => m.OrderNumber))
+                                {
+                                    <div class="col-xs-6 col-sm-4 col-md-3" style="padding-left:12px;padding-right:12px">
+                                        <div class="box p-a-xs">
 
-                                <table class="table" id="myTable">
-                                    <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>Trang</th>
-                                            <th>Tên Trang</th>
+                                            <img id="img1" style="max-height:500px" src="~/PageLink/@item.PageLink" alt="" class="img-responsive">
+                                            <div class="p-a-sm">
+                                                <div class="text-ellipsis">
 
-                                        </tr>
-                                    </thead>
-                                    <tbody id="tablebody">
-                                        @foreach (var item in Model.Pages)
-                                        {
-                                            if (item.StatusActive == 0)
-                                            {
-                                                <tr>
-                                                    <td>@item.OrderNumber</td>
-                                                    <td><img style="max-width:300px" src="~/PageLink/@item.PageLink" /></td>
-                                                    <td>@item.FullName</td>
-                                                </tr>
-                                            }
-                                        }
-                                    </tbody>
-                                </table>
+                                                    <span>@item.FullName</span>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
                             </div>
-                            <button type="submit" class="md-btn md-raised m-b-sm w-xs blue">Lưu</button>
+                            <button disabled type="submit" class="SaveNewPage md-btn md-raised m-b-sm w-xs blue">Lưu</button>
 
 
                         }
@@ -153,7 +147,7 @@
 
                                             <input type="hidden" name="PageId" id="PageId" value="@item.PageId" />
 
-                                            <a href="~/PageLink/@item.PageLink"><img style="max-height:300px" id=@item.PageId src="~/PageLink/@item.PageLink" alt="" class="img-responsive"></a>
+                                            <a href="~/PageLink/@item.PageLink"><img style="max-height:500px" id=@item.PageId src="~/PageLink/@item.PageLink" alt="" class="img-responsive"></a>
                                             <div class="p-a-sm">
                                                 <div class="text-ellipsis">
                                                     trang @item.OrderNumber
@@ -193,7 +187,7 @@
 
                                             <input type="hidden" name="PageId" id="PageId" value="@item.PageId" />
 
-                                            <a href="~/PageLink/@item.PageLink"><img style="max-height:300px" id=@item.PageId src="~/PageLink/@item.PageLink" alt="" class="img-responsive"></a>
+                                            <a href="~/PageLink/@item.PageLink"><img style="max-height:500px" id=@item.PageId src="~/PageLink/@item.PageLink" alt="" class="img-responsive"></a>
                                             <div class="p-a-sm">
                                                 <div class="text-ellipsis">
                                                     trang @item.OrderNumber

@@ -65,11 +65,11 @@ function UpdatePage(input) {
 }
 $("#CategoryId").on("change", function () {
 
-    window.location.href = "/Contribute/Editor?ChapterId=" + $("#ChapterList").val() + "&CategoryId=" + $(this).val();
+    window.location.href = "/Editor/" + $("#ChapterList").val() + "/" + $(this).val();
 
 })
 $("#ChapterList").on("change", function () {
 
-    window.location.href = "/Contribute/Editor?ChapterId=" + $(this).val();
+    window.location.href = "/Editor/" + $(this).val();
 
 })

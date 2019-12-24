@@ -14,7 +14,7 @@ namespace MyWebsite.Service.Role
         {
             var param = new DynamicParameters();
             param.Add("@Role",role );
-            return (int)DALHelpers.ExecuteScalarByStore("Role_GetRoldIdbyId", param);
+            return DALHelpers.QueryByStored<int>("Role_GetRoldIdbyId", param).FirstOrDefault();
         }
         public static Models.Role GetRoleInfo(int Roleid)
         {

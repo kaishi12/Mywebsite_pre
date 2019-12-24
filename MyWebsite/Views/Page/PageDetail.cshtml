@@ -86,13 +86,13 @@
                         </div>
 
                     </div>
-                    <div class="table-responsive">
+                    <div class="table-responsive" style="height:300px;">
                         <table class="table table-bordered m-0" id="tblEntAttributes">
                             <thead>
                                 <tr>
                                     <th>#</th>
                                   
-                                    <th style="width:10%;text-align:center">
+                                    <th  >
                                         Độ Xoay
                                     </th>
                                     <th>
@@ -114,7 +114,7 @@
                                         var Cor = item.Coordinate.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
                                         <tr>
                                             <td class="Att" data-attX="@Cor[0]" data-attY="@Cor[1]" data-attW="@item.Witdh" data-attH="@item.Height"><span class="form-control">@count</span> </td>
-                                            <td><input style="width:60px" class="form-control attDe" type="number" id="1" value="@(item.Degree + 90)" />  </td>
+                                            <td><input   class="form-control attDe" type="number" id="1" value="@(item.Degree + 90)" />  </td>
                                             <td>
                                                 <button  class="btn btn-fw danger" onclick="Remove(this)">Xóa</button>
                                             </td>

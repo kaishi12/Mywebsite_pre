@@ -17,9 +17,9 @@ namespace MyWebsite
         AccountModel account = (AccountModel)HttpContext.Current.Session["UserInfo"];
         public void RegisterNotification(DateTime currentTime)
         {
-            
-            string conStr = "Data Source=DESKTOP-AT17OA3;Initial Catalog = MyWebsite; Integrated Security = True; MultipleActiveResultSets=True;Application Name = EntityFramework";
-            string sqlCommand = @"SELECT [NotificationId] from [dbo].[Notification] where [CreateAt] > @CreateAt";
+
+            string conStr = Const.conStr;
+            string sqlCommand = Const.sqlCommand;
             //you can notice here I have added table name like this [dbo].[Contacts] with [dbo], its mendatory when you use Sql Dependency  
             using (SqlConnection con = new SqlConnection(conStr))
             {
