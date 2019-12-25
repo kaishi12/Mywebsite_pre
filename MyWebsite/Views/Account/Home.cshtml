@@ -22,9 +22,6 @@
         </ol>
     </div>
     <div class="box">
-        <div class="box-header blue">
-            Home
-        </div>
         <div class="box-body">
             <div class="row">
                 <div class="col-sm-4">
@@ -93,8 +90,8 @@
 
                 <div class="col-sm-7">
                     @* Danh sách truyện bạn đang quản lí  *@
-                    <div class="box info">
-                        <div class="box-header info">
+                    <div class="box primary">
+                        <div class="box-header primary">
                             <h3 style="display:inline">Danh sách truyện đang quản lí</h3>
                             <a style="display:inline;float:right"><h3>Xem tất cả <i class="fa fa-caret-right"></i></h3></a>
 
@@ -130,8 +127,8 @@
                         </div>
                     </div>
                     @* Danh sách truyện bạn đã đăng kí dịch*@
-                    <div class="box info">
-                        <div class="box-header info">
+                    <div class="box primary">
+                        <div class="box-header primary">
                             <h3 style="display:inline">Truyện đã đăng kí dịch</h3>
                             <a style="display:inline;float:right"><h3>Xem tất cả <i class="fa fa-caret-right"></i></h3></a>
 
@@ -163,8 +160,8 @@
                         </div>
                     </div>
                     @* Danh sách truyện bạn đã đăng kí Chỉnh sửa*@
-                    <div class="box info">
-                        <div class="box-header info">
+                    <div class="box primary">
+                        <div class="box-header primary">
                             <h3 style="display:inline">Truyện đã đăng kí tải lên Clear-text</h3>
                             <a style="display:inline;float:right"><h3>Xem tất cả <i class="fa fa-caret-right"></i></h3></a>
 
@@ -312,7 +309,7 @@
                 </div>
                 <div class="col-sm-5">
                     <div class="box black">
-                        <div class="box-header info">
+                        <div class="box-header primary">
                             <h3 style="display:inline">Danh sách truyện vừa tạo</h3>
                             <a style="display:inline;float:right"><h3>Xem tất cả <i class="fa fa-caret-right"></i></h3></a>
 
@@ -326,12 +323,12 @@
                                     <a herf="" class="list-left"><img style="width:80px;height:120px;border:2px solid #999" src="~/Cover/@item.CoverLink" /></a>
                                     <div class="list-body">
                                         <div class="m-y-sm pull-right">
-                                            <button  id="XinGiaNhap" type="button" name="@a" class="btn btn-xs blue rounded my-2 my-sm-0 " data-toggle="modal" data-target="#m-a-f-X">
+                                            <button  id="XinGiaNhap" type="button" name="@a" class="btn btn-xs primary rounded my-2 my-sm-0 " data-toggle="modal" data-target="#m-a-f-X">
                                                 Xin gia nhập
                                             </button>
                                         </div>
                                         <div>
-                                            <a class="text-info">@item.FullName </a>
+                                            <a class="text-primary">@item.FullName </a>
                                         </div>
                                         <div class="text-sm">
                                             <span><strong>Người quản lí:</strong> @item.UserName</span><br />

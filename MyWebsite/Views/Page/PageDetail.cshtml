@@ -5,26 +5,10 @@
 }
 
 
-<style>
-
-
-    table {
-        border-collapse: collapse;
-    }
-
-    td, th {
-        border: 1px solid #dddddd;
-        text-align: left;
-        padding: 8px;
-    }
-
-    tr:nth-child(even) {
-        background-color: #dddddd;
-    }
-</style>
+ 
 <div class="padding">
     <div class="m-b">
-        <ol class="breadcrumb black">
+        <ol class="breadcrumb primary">
             <li class="breadcrumb-item"><a href="/Account/Home">Trang chủ</a></li>
             <li class="breadcrumb-item"><a href="/Manga/ListManga">Danh sách truyện đã tạo</a></li>
             <li class="breadcrumb-item"><a href="/Manga/ListChapter?MangaId=@Model.Chapter.Manga.MangaId">Danh sách chương </a></li>
@@ -32,8 +16,8 @@
         </ol>
     </div>
     <div class="box">
-        <div class="box-header blue">
-            <h2>TẠO KHUNG TRUYỆN: @Model.FullName</h2>
+        <div class="box-header primary">
+            <h2>@Model.FullName</h2>
         </div>
         <div class="box-body row m-b">
             <div id="DivCanvas" class="col-sm-8">
@@ -44,14 +28,14 @@
                 </canvas>
                 <input hidden value="@Model.PageId" id="PageId" />
             </div>
-            <div class="col-sm-4">
+            <div class="col-sm-4  ">
 
-                <select class="form-control c-select" id="SelectPage" name="SelectPage">
+                <select class="form-control c-select  " id="SelectPage" name="SelectPage">
                     @foreach (var item in ViewBag.listpage)
                     {
                         if (item.PageId == Model.PageId)
                         {
-                            <option selected value="@item.PageId">@item.FullName</option>
+                            <option class="primary" selected value="@item.PageId">@item.FullName</option>
                         }
                         else
                         {
@@ -87,7 +71,7 @@
 
                     </div>
                     <div class="table-responsive" style="height:300px;">
-                        <table class="table table-bordered m-0" id="tblEntAttributes">
+                        <table class="table table-bordered m-0 black" id="tblEntAttributes">
                             <thead>
                                 <tr>
                                     <th>#</th>

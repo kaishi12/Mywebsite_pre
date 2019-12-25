@@ -27,17 +27,15 @@
             {
                 @Html.AntiForgeryToken()
                 <div id="login">
-                    <div class="md-form-group float-label">
+                    <div class="md-form-group">
+                        <span style="color:whitesmoke">Tài khoản</span>
                         @Html.TextBoxFor(model => model.UserName, new { @class = "md-input",style="color:white", type = "text", required = "required", data_parsley_required_message = "Không được để trống" })
-                        <label>
-                            Tài Khoản<span class="req">*</span>
-                        </label>
+                        
                     </div>
-                    <div class="md-form-group float-label">
-                        @Html.PasswordFor(model => model.PassWord, new { @class = "md-input ",style="color:white", type = "password", required = "required", data_parsley_required_message = "Không được để trống" })
-                        <label>
-                            Mật Khẩu<span class="req">*</span>
-                        </label>
+                    <div class="md-form-group">
+                        <span style="color:whitesmoke">Mật khẩu</span>
+                        @Html.PasswordFor(model => model.PassWord, new { @class = "md-input ", style = "color:white", type = "password", required = "required", data_parsley_required_message = "Không được để trống" })
+                       
                     </div>
                     <div class="m-b-md  ">
                         <label class="md-check">

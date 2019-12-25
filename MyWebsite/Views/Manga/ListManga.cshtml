@@ -14,15 +14,12 @@
             <li class="breadcrumb-item active">Danh sách truyện đã tạo</li>
         </ol>
     </div>
-    <div class="box">
-        <div class="box-header blue">
-            <h2>Danh sách truyện</h2>
-        </div>
+    <div class="box black">
         @using (Html.BeginForm("ListManga", "Manga", FormMethod.Post))
         {
             <div class="box-body">
                 <div class="table-responsive">
-                    <table ui-jp="dataTable" id="datatable" class="table table-striped b-t b-b">
+                    <table ui-jp="dataTable" id="datatable" class="table table-striped b-t b-b black">
                         <thead>
                             <tr>
                                 <th>Ảnh Bìa</th>
@@ -48,19 +45,23 @@
                                 </td>
                                 <td class="center">
                                     <span>
-                                        <span style="color:blue">Tên truyện:</span> @Html.DisplayFor(modelItem => item.FullName)
+                                        <span class="text-primary">Tên truyện:</span>  @Html.DisplayFor(modelItem => item.FullName) 
                                     </span>
                                     <br />
                                     <span class="pull-left">
-                                        <span style="color:blue">Tác giả:</span>   @Html.DisplayFor(modelItem => item.Author)
+                                        <span class="text-primary">Tác giả:</span> <text class="text-muted">@Html.DisplayFor(modelItem => item.Author)</text>   
                                     </span>
 
                                     <span class="pull-right">
-                                        Trạng thái: @Html.DisplayFor(modelItem => item.status)
+                                        <span class="text-primary">Trạng thái:</span>   @Html.DisplayFor(modelItem => item.status)
                                     </span>
                                     <br />
                                     <span>
-                                        Cập nhật lần cuối: @Html.DisplayFor(modelItem => item.CreatAt)
+                                        <span class="text-primary">Cập nhật lần cuối:</span>     @Html.DisplayFor(modelItem => item.CreatAt)
+                                    </span>
+                                    <br />
+                                    <span>
+                                        <span class="text-primary">Mô tả:</span>     @Html.DisplayFor(modelItem => item.Description)
                                     </span>
                                 </td>
                                 <td>
@@ -73,7 +74,7 @@
                                     @Html.DisplayFor(modelItem => item.CreatAt)
                                 </td>
                                 <td>
-                                    <a href="~/Manga/UpdateManga/@item.MangaId">
+                                    <a href="~/UpdateManga/@item.MangaId">
                                         <i class="fa fa-edit fa-lg" style="margin-right:10px;color:cornflowerblue" title="Cập nhật truyện"></i>
 
                                     </a>
@@ -83,7 +84,7 @@
 
                                 </td>
                                 <td>
-                                    <a href="~/Manga/UpdateManga/@item.MangaId">
+                                    <a href="~/UpdateManga/@item.MangaId">
                                         <i class="fa fa-edit fa-lg" style="margin-right:10px;color:cornflowerblue" title="Cập nhật truyện"></i>
 
                                     </a>

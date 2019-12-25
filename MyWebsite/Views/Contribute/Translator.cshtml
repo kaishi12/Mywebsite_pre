@@ -74,7 +74,7 @@
     }
 </style>
 <div class="padding">
-    <div class="m-b black rounded">
+    <div class="m-b primary rounded">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="/Account/Home">Trang chủ</a></li>
             <li class="breadcrumb-item"><a href="/TranslatorList">Danh sách truyện dịch</a></li>
@@ -82,8 +82,8 @@
         </ol>
     </div>
     <div class="box">
-        <div class="box-header blue">
-            <h2>DỊCH TRUYỆN: @ViewBag.MangaFullName</h2>
+        <div class="box-header primary">
+            <h2>@ViewBag.MangaFullName</h2>
         </div>
         <div class="box-body m-b">
             <div class="row">
@@ -165,7 +165,7 @@
 
             <div class="row">
                 <div class="col-sm-6">
-                    <div class="box">
+                    <div class="box primary">
                         <div class="box-header primary"style="text-align:center">
                             <div style="display:inline-block">
                                 <span class="col-sm-2"><button class="btn btn-danger " id="buttonRaw">RAW</button></span>
@@ -175,8 +175,8 @@
                             </div>
                             
                         </div>
-
-                        <div class="box-body" style="text-align:center;margin:0px" id="DivCanvas">
+                        <div class="box-divider"></div>
+                        <div class="box-body primary" style="text-align:center;margin:0px" id="DivCanvas">
                             <div style="display:none" id="bybtnLanguage" class="row">
                                 @foreach (var item in ViewBag.Language)
                                 {
@@ -237,7 +237,7 @@
 
                         </div>
                         <div class="table-responsive">
-                            <table class="table table-bordered m-0" id="tblEntAttributes">
+                            <table class="table table-bordered m-0 black" id="tblEntAttributes">
 
                                 <thead>
                                     <tr>

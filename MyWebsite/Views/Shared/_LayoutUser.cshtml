@@ -33,11 +33,11 @@
     
     <style>
         .breadcrumb-item {
-            color: white
+            color: black
         }
 
             .breadcrumb-item.active {
-                color: yellow;
+                color: white;
             }
 
             .breadcrumb-item + .breadcrumb-item::before {
@@ -67,7 +67,7 @@
         <!-- ############ LAYOUT START-->
         <!-- aside -->
         <div id="aside" class="app-aside modal md nav-expand">
-            <div class="left navside indigo-900 dk" layout="column">
+            <div class="left navside black dk" layout="column">
                 <a href="/Home" class="navbar-brand">
                     <div class="navbar navbar-md no-radius" style="background-image:url('/RootPicture/Oshino Shinobu.jpg');background-size:cover;">
                         <!-- brand -->
@@ -244,22 +244,22 @@
 
             
         </div>
-        <div id="content" class="app-content box-shadow-z0" role="main">
-            <div class="app-header indigo-900  box-shadow-z4 navbar-md">
+        <div id="content" class="app-content box-shadow-z0 " role="main">
+            <div class="app-header black  box-shadow-z4 navbar-md">
                  <div class="navbar navbar-toggleable-sm flex-row align-items-center">
                     <form class="form-inline my-2 my-lg-0">
                        
-                        <div class="input-group-btn  ">
-                            <button type="button" class="form-control btn white-gray my-2 my-sm-0 dropdown-toggle  " data-toggle="dropdown" aria-expanded="false">
+                        <div class="input-group-btn primary">
+                            <button type="button" class="form-control btn primary my-2 my-sm-0 dropdown-toggle  " data-toggle="dropdown" aria-expanded="false">
                                 Tìm kiếm theo <span class="caret"></span>
                             </button>
-                            <ul class="dropdown-menu">
+                            <ul class="dropdown-menu black">
                                 <li><a href="#">Người dùng</a></li>
                                 <li><a href="#">Truyện</a></li>
                              </ul>
                         </div>
-                        <input class="form-control mr-sm-2  " type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn white-gray my-2 my-sm-0" type="submit">Search</button>
+                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn my-2 my-sm-0 primary" type="submit">Search</button>
                     </form>
                     <!-- Open side - Naviation on mobile -->
                     <a data-toggle="modal" data-target="#aside" class="hidden-lg-up mr-3">
@@ -275,7 +275,7 @@
                     <ul class="nav navbar-nav ml-auto flex-row">
                         <li class="nav-item dropdown pos-stc-xs">
                             <a id="Notifcation" class="nav-link mr-2" href="#" data-toggle="dropdown">
-                                <i class="material-icons md-24" style="color:black">&#xe7f4;</i>
+                                <i class="material-icons md-24">&#xe7f4;</i>
                                 <span id="NotificationCount" class="label label-sm up warning">0</span>
                             </a>
                             <div ui-include="'/LayoutUser/views/blocks/dropdown.notification.html'"></div>

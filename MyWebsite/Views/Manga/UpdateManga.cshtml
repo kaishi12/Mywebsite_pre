@@ -5,33 +5,18 @@
 }
 <!-- Bootstrap -->
 
-<style>
-    .padding {
-        border: none;
-    }
 
-    .box {
-        border: none;
-    }
-
-    .notice {
-        color: red;
-    }
-</style>
 <div class="padding">
     <div class="m-b">
-        <ol class="breadcrumb black">
-            <li class="breadcrumb-item"><a href="/Account/Home">Trang chủ</a></li>
-            <li class="breadcrumb-item"><a href="/Manga/ListManga">Danh sách truyện đã tạo</a></li>
+        <ol class="breadcrumb primary">
+            <li class="breadcrumb-item"><a href="/Home">Trang chủ</a></li>
+            <li class="breadcrumb-item"><a href="/ListManga">Danh sách truyện đã tạo</a></li>
             <li class="breadcrumb-item active">Cập nhật truyện</li>
         </ol>
     </div>
     <div class="box">
-        <div class="box-header blue">
-            <h2>CẬP NHẬT TRUYỆN : @Model.FullName</h2> 
-        </div>
         <form id="form1" method="post" action="/Manga/UpdateManga" enctype="multipart/form-data">
-            @Html.AntiForgeryToken();
+            @Html.AntiForgeryToken()
             <div class="box-body row">
                 <div class="col-sm-3">
                     <div class=" form-file col-sm-10">
