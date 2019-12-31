@@ -10,8 +10,8 @@
     }
 
     img {
-        max-width: 100%;
-        max-height: 200px;
+        width: initial;
+        max-height: 300px;
         /*Scale down will take the necessary specified space that is 100px x 100px without stretching the image*/
     }
 </style>
@@ -90,7 +90,7 @@
 
                 <div class="col-sm-7">
                     @* Danh sách truyện bạn đang quản lí  *@
-                    <div class="box primary">
+                    <div class="box black">
                         <div class="box-header primary">
                             <h3 style="display:inline">Danh sách truyện đang quản lí</h3>
                             <a style="display:inline;float:right"><h3>Xem tất cả <i class="fa fa-caret-right"></i></h3></a>
@@ -127,7 +127,7 @@
                         </div>
                     </div>
                     @* Danh sách truyện bạn đã đăng kí dịch*@
-                    <div class="box primary">
+                    <div class="box black">
                         <div class="box-header primary">
                             <h3 style="display:inline">Truyện đã đăng kí dịch</h3>
                             <a style="display:inline;float:right"><h3>Xem tất cả <i class="fa fa-caret-right"></i></h3></a>
@@ -160,7 +160,7 @@
                         </div>
                     </div>
                     @* Danh sách truyện bạn đã đăng kí Chỉnh sửa*@
-                    <div class="box primary">
+                    <div class="box black">
                         <div class="box-header primary">
                             <h3 style="display:inline">Truyện đã đăng kí tải lên Clear-text</h3>
                             <a style="display:inline;float:right"><h3>Xem tất cả <i class="fa fa-caret-right"></i></h3></a>
@@ -193,124 +193,43 @@
                         </div>
                     </div>
                     @* Danh sách truyện bạn đã đăng kí quản lí bản dịch*@
-                    <div class="box info">
-                        <div class="box-header info">
+                    <div class="box black">
+                        <div class="box-header primary">
                             <h3 style="display:inline">Danh sách truyện đang quản lí</h3>
                             <a style="display:inline;float:right"><h3>Xem tất cả <i class="fa fa-caret-right"></i></h3></a>
 
                         </div>
                         <div class="box-divider black"></div>
                         <div class="box-body row">
-                            <div class="col-xs-6 col-sm-4 col-md-4">
-                                <div class="box p-a-sm">
-                                    <div class="box-body  grey-900" style="padding:5px">
-                                        <img class="img-responsive" src="~/RootPicture/tenor.gif" />
+                            @foreach (var item in ViewBag.ListMangaWithTranslationManagerRole)
+                            {
+                                <div class="col-xs-6 col-sm-4 col-md-4">
+                                    <div class="box p-a-xs">
+                                        <div class="box-body  grey-900" style="padding:5px">
+                                            <img class="img-responsive" src="~/Cover/@item.CoverLink" />
 
-                                    </div>
+                                        </div>
 
-                                    <div class="box-footer grey-900 Info-BoxFooter">
-                                        <text class="text-ellipsis">Dragon King of the World</text>
-                                        <button class="btn btn-xs btn-md success ">
-                                            <i class="fa  fa-list-ol" title="Danh sách chương"></i>
+                                        <div class="box-footer grey-900 Info-BoxFooter">
+                                            <text class="text-ellipsis">@item.FullName</text>
+                                            <button class="btn btn-xs btn-md success ">
+                                                Chương
+                                            </button>
+                                            <button class="btn btn-xs btn-md danger">
+                                                Cập nhật
 
-                                        </button>
-                                        <button class="btn btn-xs btn-md danger">
-                                            <i class="fa fa-edit" title="Cập nhật truyện"> </i>
-
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-xs-6 col-sm-4 col-md-4">
-                                <div class="box p-a-sm">
-                                    <div class="box-body  grey-900" style="padding:5px">
-                                        <img class="img-responsive" src="~/RootPicture/tenor.gif" />
-
-                                    </div>
-
-                                    <div class="box-footer grey-900 Info-BoxFooter">
-                                        <text class="text-ellipsis">Dragon King of the World</text>
-                                        <button class="btn btn-xs btn-md success ">
-                                            <i class="fa  fa-list-ol" title="Danh sách chương"></i>
-
-                                        </button>
-                                        <button class="btn btn-xs btn-md danger">
-                                            <i class="fa fa-edit" title="Cập nhật truyện"> </i>
-
-                                        </button>
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-xs-6 col-sm-4 col-md-4">
-                                <div class="box p-a-sm">
-                                    <div class="box-body  grey-900" style="padding:5px">
-                                        <img class="img-responsive" src="~/RootPicture/tenor.gif" />
-
-                                    </div>
-
-                                    <div class="box-footer grey-900 Info-BoxFooter">
-                                        <text class="text-ellipsis">Dragon King of the World</text>
-                                        <button class="btn btn-xs btn-md success ">
-                                            <i class="fa  fa-list-ol" title="Danh sách chương"></i>
-
-                                        </button>
-                                        <button class="btn btn-xs btn-md danger">
-                                            <i class="fa fa-edit" title="Cập nhật truyện"> </i>
-
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xs-6 col-sm-4 col-md-4">
-                                <div class="box p-a-sm">
-                                    <div class="box-body  grey-900" style="padding:5px">
-                                        <img class="img-responsive" src="~/RootPicture/tenor.gif" />
-
-                                    </div>
-
-                                    <div class="box-footer grey-900 Info-BoxFooter">
-                                        <text class="text-ellipsis">Dragon King of the World</text>
-                                        <button class="btn btn-xs btn-md success ">
-                                            <i class="fa  fa-list-ol" title="Danh sách chương"></i>
-
-                                        </button>
-                                        <button class="btn btn-xs btn-md danger">
-                                            <i class="fa fa-edit" title="Cập nhật truyện"> </i>
-
-                                        </button>
-                                    </div>
-                                </div>
-
-                            </div>
-                            <div class="col-xs-6 col-sm-4 col-md-4">
-                                <div class="box p-a-sm">
-                                    <div class="box-body  grey-900" style="padding:5px">
-                                        <img class="img-responsive" src="~/RootPicture/tenor.gif" />
-
-                                    </div>
-
-                                    <div class="box-footer grey-900 Info-BoxFooter">
-                                        <text class="text-ellipsis">Dragon King of the World</text>
-                                        <button class="btn btn-xs btn-md success ">
-                                            <i class="fa  fa-list-ol" title="Danh sách chương"></i>
-
-                                        </button>
-                                        <button class="btn btn-xs btn-md danger">
-                                            <i class="fa fa-edit" title="Cập nhật truyện"> </i>
-
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-
+                            }
                         </div>
                     </div>
                 </div>
                 <div class="col-sm-5">
                     <div class="box black">
                         <div class="box-header primary">
-                            <h3 style="display:inline">Danh sách truyện vừa tạo</h3>
+                            <h3 style="display:inline">Truyện gần đây</h3>
                             <a style="display:inline;float:right"><h3>Xem tất cả <i class="fa fa-caret-right"></i></h3></a>
 
                         </div>
@@ -320,10 +239,11 @@
                             {
                                 string a = item.MangaId.ToString() + ";" + item.FullName;
                                 <li class="list-item">
-                                    <a herf="" class="list-left"><img style="width:80px;height:120px;border:2px solid #999" src="~/Cover/@item.CoverLink" /></a>
+                                    <span class="list-left w-128"><img src="~/Cover/@item.CoverLink" class="img-thumbnail" /></span>
+
                                     <div class="list-body">
                                         <div class="m-y-sm pull-right">
-                                            <button  id="XinGiaNhap" type="button" name="@a" class="btn btn-xs primary rounded my-2 my-sm-0 " data-toggle="modal" data-target="#m-a-f-X">
+                                            <button id="XinGiaNhap" type="button" name="@a" class="btn btn-xs primary rounded my-2 my-sm-0 " data-toggle="modal" data-target="#m-a-f-X">
                                                 Xin gia nhập
                                             </button>
                                         </div>
@@ -407,27 +327,215 @@
                                 </div><!-- /.modal-content -->
                             </div>
                         </div>
+                    </div>
+                    <!-- Yêu cầu xin gia nhập truyện -->
+                    <div class="box black">
+                        <div class="box-header">
+                            <h3>
+                                <strong class="text text-primary">
+                                    Yêu cầu xin gia nhập truyện
+                                </strong>
+
+                            </h3>
+                        </div>
+                        <ul class="list inset">
+                            @{
+                                int ListRequestByPeopleCount = 0;
+                                foreach (var item in ViewBag.ListRequestByPeople)
+                                {
+                                    ListRequestByPeopleCount++;
+                                    <li class="list-item">
+                                        <span class="list-left w-128"><img src="~/Cover/@item.Manga.CoverLink" class="img-thumbnail" /></span>
+                                        <div class="list-body">
+
+                                            <div class="m-y-sm pull-right">
+                                                <button class="btn btn-xs  danger">Chưa duyệt</button>
+                                                <button class="ChangeStatus btn btn-lg btn-xs btn-outline b-primary text-primary" data-toggle="tooltip" data-placement="top" title="Cập nhật" data-language="@item.Language" data-roleid="@item.RoleId" data-username="@item.Account.UserName" data-status="0" data-mangaid="@item.MangaId"><i class="fa fa-pencil"></i></button>
+                                            </div>
+                                            <div>
+                                                <a href="">@item.Manga.FullName</a>
+                                            </div>
+                                            <div class="text-sm">
+                                                <span class="text-muted"><strong>Tên:</strong> @item.Account.FullName, <strong>Vị trí:</strong> @item.Role.FullName</span> <span class="label"></span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                }
+                                if (ListRequestByPeopleCount == 0)
+                                {
+                                    <li class="list-item">
+                                        <span>Không có yêu cầu nào</span>
+                                    </li>
+                                }
+                            }
+                        </ul>
+                    </div>
+                    <!-- Yêu cầu mời gia nhập truyện -->
+                    <div class="box black">
+                        <div class="box-header">
+                            <h3>
+                                <strong class="text text-primary">
+                                    Lời mời gia nhập truyện
+                                </strong>
+
+                            </h3>
+                        </div>
+                        <ul class="list inset">
+                            @{
+                                int ListRequestToYouCount = 0;
+                                foreach (var item in ViewBag.ListRequestToYou)
+                                {
+                                    ListRequestToYouCount++;
+                                    <li class="list-item">
+                                        <span class="list-left w-128"><img src="~/Cover/@item.Manga.CoverLink" class="img-thumbnail" /></span>
+                                        <div class="list-body">
+
+                                            <div class="m-y-sm pull-right">
+                                                <button class="btn btn-xs  danger">Chưa duyệt</button>
+                                                <button class="ChangeStatus btn btn-lg btn-xs btn-outline b-primary text-primary" data-toggle="tooltip" data-placement="top" title="Cập nhật" data-language="@item.Language" data-roleid="@item.RoleId" data-username="@item.Account.UserName" data-status="0" data-mangaid="@item.MangaId"><i class="fa fa-pencil"></i></button>
+                                            </div>
+                                            <div>
+                                                <a href="">@item.Manga.FullName</a>
+                                            </div>
+                                            <div class="text-sm">
+                                                <span class="text-muted"><strong>Tên:</strong> @item.Account.FullName, <strong>Vị trí:</strong> @item.Role.FullName</span> <span class="label"></span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                }
+                                if (ListRequestToYouCount == 0)
+                                {
+                                    <li class="list-item">
+                                        <span>Không có yêu cầu nào</span>
+                                    </li>
+                                }
+                            }
 
 
+                        </ul>
+                    </div>
+                    <!-- Yêu cầu mời gia nhập đã gửi -->
+                    <div class="box black">
+                        <div class="box-header">
+                            <h3>
+                                <strong class="text text-primary">
+                                    Yêu cầu mời gia nhập đã gửi
+                                </strong>
 
+                            </h3>
+                        </div>
+                        <ul class="list inset">
+                            @if (ViewBag.ListRequestToPeople.Count <= 0)
+                            {
+                                <li class="list-item">
+                                    <span>Không có yêu cầu nào</span>
+                                </li>
+                            }
+                            else
+                            {
+                                foreach (var item in ViewBag.ListRequestToPeople)
+                                {
 
+                                    <li class="list-item">
+                                        <span class="list-left w-128"><img src="~/Cover/@item.Manga.CoverLink" class="img-thumbnail" /></span>
+                                        <div class="list-body">
 
-                        @*<text class="text-ellipsis">Dragon King of the World</text>
-                            <button class="btn btn-xs btn-md success ">
-                                <i class="fa  fa-list-ol" title="Danh sách chương"></i>
+                                            <div class="m-y-sm pull-right">
+                                                <label class="btn btn-xs danger">Chưa duyệt</label>
+                                                
+                                            </div>
+                                            <div>
+                                                <a href="">@item.Manga.FullName</a>
+                                            </div>
+                                            <div class="text-sm">
+                                                <span class="text-muted"><strong>Tên:</strong> @item.Account.FullName, <strong>Vị trí:</strong> @item.Role.FullName</span> <span class="label"></span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                }
+                            }
+                        </ul>
+                    </div>
+                    <!-- Yêu cầu xin gia nhập đã gửi -->
+                    <div class="box black">
+                        <div class="box-header">
+                            <h3>
+                                <strong class="text text-primary">
+                                    Yêu cầu xin gia nhập đã gửi
+                                </strong>
 
-                            </button>
-                            <button class="btn btn-xs btn-md danger">
-                                <i class="fa fa-edit" title="Cập nhật truyện"> </i>
+                            </h3>
+                        </div>
+                        <ul class="list inset">
 
-                            </button>*@
+                            @if (ViewBag.ListRequestByYou.Count <= 0)
+                            {
+                                <li class="list-item">
+                                    <span>Không có yêu cầu nào</span>
+                                </li>
+                            }
+                            else
+                            {
+                                foreach (var item in ViewBag.ListRequestByYou)
+                                {
+
+                                    <li class="list-item">
+                                        <span class="list-left w-128"><img src="~/Cover/@item.Manga.CoverLink" class="img-thumbnail" /></span>
+                                        <div class="list-body">
+
+                                            <div class="m-y-sm pull-right">
+                                                <label class="btn btn-xs  danger">Chưa duyệt</label>
+                                            </div>
+                                            <div>
+                                                <a href="">@item.Manga.FullName</a>
+                                            </div>
+                                            <div class="text-sm">
+                                                <span class="text-muted"><strong>Tên:</strong> @item.Account.FullName, <strong>Vị trí:</strong> @item.Role.FullName</span> <span class="label"></span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                }
+                            }
+                        </ul>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>
 </div>
 <script src="~/LayoutUser/Account/Search.js"></script>
+<script>
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+        $(".ChangeStatus").on("click", function () {
+            var thisbutton = $(this);
+            if (confirm("Bạn có đồng ý yêu cầu này?")) {
+                $.ajax({
+                    url: "/Account/ChangeStatusMangaDetail",
+                    type: 'post',
+                    dataType: 'application/json',
+                    data: {
+                        UserName: thisbutton.data("username")
+                        , MangaId: thisbutton.data("mangaid")
+                        , RoleId: thisbutton.data("roleid")
+                        , Status: thisbutton.data("status")
+                        , language: thisbutton.data("language")
+                    },
+                    success: function (result) {
+                        if (result == 1) {
+                            alert("Cập nhật thành công!");
+
+                        }
+                        else
+                            alert("Cập nhật thất bại, vui lòng thử lại sau!");
+                    },
+                });
+            };
+
+        })
+    })
+</script>
 
 
 

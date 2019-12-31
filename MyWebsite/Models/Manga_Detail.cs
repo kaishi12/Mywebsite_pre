@@ -20,6 +20,7 @@ namespace MyWebsite.Models
         public Nullable<int> StatusActive { get; set; }
         public Nullable<int> Type { get; set; }
         public string Language { get; set; }
+        public Nullable<System.DateTime> CreateAt { get; set; }
     
         public virtual Account Account { get; set; }
         public virtual Manga Manga { get; set; }

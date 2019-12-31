@@ -94,52 +94,30 @@ $(".ChangeStatus").on("click", function () {
 $(".Status").on("click", function (e) {
     let thisbutton = $(this);
     e.preventDefault();
-    if (+$(this).data("status") == 1) {
-        $.ajax({
-            url: "/Account/ChangeStatusMangaDetail",
-            type: 'post',
-            dataType: 'application/json',
-            data: {
+    $.ajax({
+        url: "/Account/ChangeStatusMangaDetail",
+        type: 'post',
+        dataType: 'application/json',
+        data: {
+            UserName: thisbutton.data("username")
+            , MangaId: thisbutton.data("mangaid")
+            , RoleId: thisbutton.data("roleid")
+            , Status: thisbutton.data("status")
+            , language: thisbutton.data("language")
+        },
+        success: function (result) {
+            if (result == 1) {
+                alert("Cập nhật thành công!");
 
-            },
-            success: function (result) {
-                if (result == 1) {
-                    alert("Cập nhật thành công!");
-
-                }
-                else
-                    alert("Cập nhật thất bại, vui lòng thử lại sau!");
-            },
-            error: function () {
-                alert("Whoops something went wrong!");
             }
-        });
-        $(this).parent().find(".Status.Deny").fadeOut();
+            else
+                alert("Cập nhật thất bại, vui lòng thử lại sau!");
+        },
+    });
+    if (+$(this).data("status") == 1) {
+         $(this).parent().find(".Status.Deny").fadeOut();
     }
     else {
-        $.ajax({
-            url: "/Account/ChangeStatusMangaDetail",
-            type: 'post',
-            dataType: 'application/json',
-            data: {
-                UserName: 1
-                , MangaId: 1
-                , RoleId: 1
-                , Status: 1
-                , language: "vn"
-            },
-            success: function (result) {
-                if (result == 1) {
-                    alert("Cập nhật thành công!");
-
-                }
-                else
-                    alert("Cập nhật thất bại, vui lòng thử lại sau!");
-            },
-            error: function () {
-                alert("Whoops something went wrong!");
-            }
-        });
         $(this).parent().find(".Status.Accept").fadeOut();
     }
     $(this).parent().find(".ChangeStatus").fadeIn();

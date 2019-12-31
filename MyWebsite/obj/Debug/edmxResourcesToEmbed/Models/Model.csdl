@@ -18,6 +18,13 @@
     <NavigationProperty Name="Texts" Relationship="Self.FK_Text_Account" FromRole="Account" ToRole="Text" />
     <NavigationProperty Name="Translations" Relationship="MyWebsiteModel.FK_Translation_Account" FromRole="Account" ToRole="Translation" />
     <NavigationProperty Name="Notifications" Relationship="MyWebsiteModel.FK_Notification_Account" FromRole="Account" ToRole="Notification" />
+    <Property Name="ResetPasswordCode" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="FacebookLink" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="TwitterLink" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="InstagramLink" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Mangas" Relationship="MyWebsiteModel.Bookmark" FromRole="Account" ToRole="Manga" />
   </EntityType>
   <EntityType Name="Account_Detail">
     <Key>
@@ -53,6 +60,7 @@
     <NavigationProperty Name="Manga" Relationship="Self.FK_Chapter_Manga" FromRole="Chapter" ToRole="Manga" />
     <NavigationProperty Name="Pages" Relationship="Self.FK_Page_Chapter" FromRole="Chapter" ToRole="Page" />
     <NavigationProperty Name="Translation_Detail" Relationship="MyWebsiteModel.FK_Translation_Detail_Chapter" FromRole="Chapter" ToRole="Translation_Detail" />
+    <Property Name="Alias" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="Font">
     <Key>
@@ -107,6 +115,9 @@
     <NavigationProperty Name="Manga_Genres" Relationship="Self.FK_Manga_Genres_Manga" FromRole="Manga" ToRole="Manga_Genres" />
     <NavigationProperty Name="Status" Relationship="Self.FK_Manga_Status" FromRole="Manga" ToRole="Status" />
     <NavigationProperty Name="Translations" Relationship="Self.FK_Translation_Manga" FromRole="Manga" ToRole="Translation" />
+    <Property Name="UpdateAt" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Translation_Detail" Relationship="MyWebsiteModel.FK_Translation_Detail_Manga" FromRole="Manga" ToRole="Translation_Detail" />
+    <NavigationProperty Name="Accounts" Relationship="MyWebsiteModel.Bookmark" FromRole="Manga" ToRole="Account" />
   </EntityType>
   <EntityType Name="Manga_Detail">
     <Key>
@@ -123,6 +134,7 @@
     <NavigationProperty Name="Role" Relationship="Self.FK_Manga_Detail_Role" FromRole="Manga_Detail" ToRole="Role" />
     <Property Name="Type" Type="Int32" />
     <Property Name="Language" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CreateAt" Type="DateTime" Precision="3" />
   </EntityType>
   <EntityType Name="Manga_Genres">
     <Key>
@@ -580,6 +592,14 @@
       <End Role="NotifyType" EntitySet="NotifyTypes" />
       <End Role="Notification" EntitySet="Notifications" />
     </AssociationSet>
+    <AssociationSet Name="FK_Translation_Detail_Manga" Association="MyWebsiteModel.FK_Translation_Detail_Manga">
+      <End Role="Manga" EntitySet="Mangas" />
+      <End Role="Translation_Detail" EntitySet="Translation_Detail" />
+    </AssociationSet>
+    <AssociationSet Name="Bookmark" Association="MyWebsiteModel.Bookmark">
+      <End Role="Account" EntitySet="Accounts" />
+      <End Role="Manga" EntitySet="Mangas" />
+    </AssociationSet>
   </EntityContainer>
   <Association Name="FK_Translation_Account">
     <End Type="MyWebsiteModel.Account" Role="Account" Multiplicity="0..1" />
@@ -603,6 +623,9 @@
     <Property Name="StatusActive" Type="Int32" />
     <NavigationProperty Name="Chapter" Relationship="MyWebsiteModel.FK_Translation_Detail_Chapter" FromRole="Translation_Detail" ToRole="Chapter" />
     <NavigationProperty Name="Translation" Relationship="MyWebsiteModel.FK_Translation_Detail_Translation" FromRole="Translation_Detail" ToRole="Translation" />
+    <Property Name="UpdateAt" Type="DateTime" Precision="3" />
+    <Property Name="MangaId" Type="Int32" />
+    <NavigationProperty Name="Manga" Relationship="MyWebsiteModel.FK_Translation_Detail_Manga" FromRole="Translation_Detail" ToRole="Manga" />
     <Property Name="CreateAt" Type="DateTime" Precision="3" />
   </EntityType>
   <Association Name="FK_Translation_Detail_Chapter">
@@ -676,5 +699,21 @@
         <PropertyRef Name="NotifyTypeId" />
       </Dependent>
     </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Translation_Detail_Manga">
+    <End Type="MyWebsiteModel.Manga" Role="Manga" Multiplicity="0..1" />
+    <End Type="MyWebsiteModel.Translation_Detail" Role="Translation_Detail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Manga">
+        <PropertyRef Name="MangaId" />
+      </Principal>
+      <Dependent Role="Translation_Detail">
+        <PropertyRef Name="MangaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Bookmark">
+    <End Type="MyWebsiteModel.Account" Role="Account" Multiplicity="*" />
+    <End Type="MyWebsiteModel.Manga" Role="Manga" Multiplicity="*" />
   </Association>
 </Schema>

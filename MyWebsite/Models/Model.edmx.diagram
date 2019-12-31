@@ -43,12 +43,26 @@
         <AssociationConnector Association="MyWebsiteModel.FK_Text_Translation" ManuallyRouted="false" />
         <AssociationConnector Association="MyWebsiteModel.FK_Translation_Account" />
         <EntityTypeShape EntityType="MyWebsiteModel.Translation_Detail" Width="1.5" PointX="12.5" PointY="5.125" />
-        <AssociationConnector Association="MyWebsiteModel.FK_Translation_Detail_Chapter" />
+        <AssociationConnector Association="MyWebsiteModel.FK_Translation_Detail_Chapter" ManuallyRouted="true" >
+          <ConnectorPoint PointX="6" PointY="10.625" />
+          <ConnectorPoint PointX="6" PointY="10.066793619791666" />
+          <ConnectorPoint PointX="7.75" PointY="10.066793619791666" />
+          <ConnectorPoint PointX="7.75" PointY="6.0123491199057186" />
+          <ConnectorPoint PointX="8.8854166666666661" PointY="6.0123491199057177" />
+          <ConnectorPoint PointX="9.0520833333333339" PointY="6.0123491199057186" />
+          <ConnectorPoint PointX="10.9325" PointY="6.0123491199057186" />
+          <ConnectorPoint PointX="10.9325" PointY="6.1440496458964349" />
+          <ConnectorPoint PointX="12.135416666666666" PointY="6.144049645896434" />
+          <ConnectorPoint PointX="12.302083333333334" PointY="6.1440496458964349" />
+          <ConnectorPoint PointX="12.5" PointY="6.1440496458964349" />
+        </AssociationConnector>
         <AssociationConnector Association="MyWebsiteModel.FK_Translation_Detail_Translation" />
         <EntityTypeShape EntityType="MyWebsiteModel.Notification" Width="1.5" PointX="5.25" PointY="20.75" />
         <AssociationConnector Association="MyWebsiteModel.FK_Notification_Account" />
         <EntityTypeShape EntityType="MyWebsiteModel.NotifyType" Width="1.5" PointX="0.75" PointY="0.875" />
         <AssociationConnector Association="MyWebsiteModel.FK_Notification_NotifyType" />
+        <AssociationConnector Association="MyWebsiteModel.FK_Translation_Detail_Manga" />
+        <AssociationConnector Association="MyWebsiteModel.Bookmark" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -4,6 +4,12 @@
     <EntitySetMapping Name="Accounts">
       <EntityTypeMapping TypeName="MyWebsiteModel.Account">
         <MappingFragment StoreEntitySet="Account">
+          <ScalarProperty Name="Note" ColumnName="Note" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="InstagramLink" ColumnName="InstagramLink" />
+          <ScalarProperty Name="TwitterLink" ColumnName="TwitterLink" />
+          <ScalarProperty Name="FacebookLink" ColumnName="FacebookLink" />
+          <ScalarProperty Name="ResetPasswordCode" ColumnName="ResetPasswordCode" />
           <ScalarProperty Name="AccountId" ColumnName="AccountId" />
           <ScalarProperty Name="FullName" ColumnName="FullName" />
           <ScalarProperty Name="Email" ColumnName="Email" />
@@ -36,6 +42,7 @@
     <EntitySetMapping Name="Chapters">
       <EntityTypeMapping TypeName="MyWebsiteModel.Chapter">
         <MappingFragment StoreEntitySet="Chapter">
+          <ScalarProperty Name="Alias" ColumnName="Alias" />
           <ScalarProperty Name="ChapterId" ColumnName="ChapterId" />
           <ScalarProperty Name="FullName" ColumnName="FullName" />
           <ScalarProperty Name="OrderNumber" ColumnName="OrderNumber" />
@@ -84,6 +91,7 @@
     <EntitySetMapping Name="Mangas">
       <EntityTypeMapping TypeName="MyWebsiteModel.Manga">
         <MappingFragment StoreEntitySet="Manga">
+          <ScalarProperty Name="UpdateAt" ColumnName="UpdateAt" />
           <ScalarProperty Name="MangaId" ColumnName="MangaId" />
           <ScalarProperty Name="CoverLink" ColumnName="CoverLink" />
           <ScalarProperty Name="FullName" ColumnName="FullName" />
@@ -99,6 +107,7 @@
     <EntitySetMapping Name="Manga_Detail">
       <EntityTypeMapping TypeName="MyWebsiteModel.Manga_Detail">
         <MappingFragment StoreEntitySet="Manga_Detail">
+          <ScalarProperty Name="CreateAt" ColumnName="CreateAt" />
           <ScalarProperty Name="Language" ColumnName="Language" />
           <ScalarProperty Name="Type" ColumnName="Type" />
           <ScalarProperty Name="AccountId" ColumnName="AccountId" />
@@ -210,6 +219,8 @@
       <EntityTypeMapping TypeName="MyWebsiteModel.Translation_Detail">
         <MappingFragment StoreEntitySet="Translation_Detail">
           <ScalarProperty Name="CreateAt" ColumnName="CreateAt" />
+          <ScalarProperty Name="MangaId" ColumnName="MangaId" />
+          <ScalarProperty Name="UpdateAt" ColumnName="UpdateAt" />
           <ScalarProperty Name="StatusActive" ColumnName="StatusActive" />
           <ScalarProperty Name="TranslationId" ColumnName="TranslationId" />
           <ScalarProperty Name="ChapterId" ColumnName="ChapterId" />
@@ -239,5 +250,13 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <AssociationSetMapping Name="Bookmark" TypeName="MyWebsiteModel.Bookmark" StoreEntitySet="Bookmark">
+      <EndProperty Name="Manga">
+        <ScalarProperty Name="MangaId" ColumnName="MangaId" />
+      </EndProperty>
+      <EndProperty Name="Account">
+        <ScalarProperty Name="AccountId" ColumnName="AccountId" />
+      </EndProperty>
+    </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping>

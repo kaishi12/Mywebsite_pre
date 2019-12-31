@@ -11,19 +11,17 @@
 </style>
 <div class="padding">
     <div class="m-b">
-        <ol class="breadcrumb black">
+        <ol class="breadcrumb primary">
             <li class="breadcrumb-item"><a href="/Account/Home">Trang chủ</a></li>
             <li class="breadcrumb-item active">Danh sách truyện</li>
         </ol>
     </div>
-    <div class="box">
-        <div class="box-header blue">
-            <h3>DANH SÁCH TRUYỆN THAM GIA TẢI LÊN CLEAR-TEXT</h3>
-        </div>
+    <div class="box black">
+       
 
         <div class="box-body">
             <div class="table-responsive">
-                <table ui-jp="dataTable" id="datatable" class="table table-striped b-t b-b">
+                <table ui-jp="dataTable" id="datatable" class="table table-striped b-t b-b black">
                     <thead>
                         <tr>
                             <th>Ảnh Bìa</th>
@@ -41,7 +39,7 @@
                                 <td class="center">
 
                                     <span>
-                                        <img src="~/Cover/@item.CoverLink" style="max-width:150px" />
+                                        <img class="img-thumbnail" src="~/Cover/@item.CoverLink" style="max-width:120px;max-height:80px" />
                                     </span>
 
 
@@ -63,8 +61,8 @@
                                     @Html.DisplayFor(modelItem => item.CreatAt)
                                 </td>
                                 <td>
-                                    <a href="/Contribute/Editor?ChapterId=@item.FirstChapter&CategoryId=1">
-                                        <button class="btn  dark">Tải lên Clear-text</button>
+                                    <a class="btn btn-default primary" href="/Contribute/Editor?ChapterId=@item.FirstChapter&CategoryId=1">
+                                       Tải lên clear-text
                                     </a>  
                                    
 

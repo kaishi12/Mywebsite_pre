@@ -31,14 +31,40 @@ namespace MyWebsite.Controllers
         [AccountStatus]
         public ActionResult Home()
         {
+            try
+            { 
+             AccountModel model = (AccountModel)Session["UserInfo"];
+            //Danh sách truyện đã đăng kí theo vai trò
+            ViewBag.ListMangaCreated = MangaService.GetListMangaByAccountId(model.AccountId, "MC").Take(3);
+            ViewBag.ListMangaWithTranslateRole = MangaService.GetListMangaByAccountId(model.AccountId, "Tr").Take(3);
+            ViewBag.ListMangaWithEditorRole = MangaService.GetListMangaByAccountId(model.AccountId, "Ed").Take(3);
+            ViewBag.ListMangaWithTranslationManagerRole = MangaService.GetListMangaByAccountId(model.AccountId, "TM").Take(3);
 
-            AccountModel model = (AccountModel)Session["UserInfo"];
-            ViewBag.ListMangaCreated = MangaService.GetListMangaByAccountId(model.AccountId, "MC");
-            ViewBag.ListMangaWithTranslateRole = MangaService.GetListMangaByAccountId(model.AccountId, "Tr");
-            ViewBag.ListMangaWithEditorRole = MangaService.GetListMangaByAccountId(model.AccountId, "Ed");
-            ViewBag.ListMangaWithTranslationManagerRole = MangaService.GetListMangaByAccountId(model.AccountId, "TM");
-            ViewBag.ListNewManga = MangaService.GetListNewManga();
+            //Danh sách truyện vừa tạo
+            ViewBag.ListNewManga = MangaService.GetListNewManga().Take(5);
+
+            //Danh sách người dùng đăng kí tham gia (bản rút gọn)
             ViewBag.ListLanguage = LanguageService.GetListLanguage();
+            ViewBag.ListRequestByPeople = data.Manga_Detail.Where(m => m.Type == 0 && m.RoleId != 1 && m.AccountId == model.AccountId && m.StatusActive == 1).OrderBy(m => m.CreateAt).Take(3);
+            ViewBag.ListRequestToYou = data.Manga_Detail.Where(m => m.Type == 1 && m.RoleId != 1 && m.AccountId == model.AccountId && m.StatusActive == 1).OrderBy(m => m.CreateAt).Take(3);
+            
+
+            //Danh sách đơn gửi tới người dùng(bản rút gọn)
+                var listMangaOwned = data.Manga_Detail.Where(m => m.AccountId == model.AccountId && m.RoleId == 1).Select(m=>m.MangaId);
+            List<Manga_Detail> ListRequestToPeople = new List<Manga_Detail>();
+            List<Manga_Detail> ListRequestByYou = new List<Manga_Detail>();
+            foreach (var item in listMangaOwned)
+            {
+                if(ListRequestToPeople.Count() <= 5)
+                    ListRequestToPeople.AddRange(data.Manga_Detail.Where(m => m.AccountId != model.AccountId && m.MangaId == item && m.Type == 1).OrderBy(m => m.CreateAt).Take(3));
+                if(ListRequestByYou.Count() <= 5)
+                    ListRequestByYou.AddRange(data.Manga_Detail.Where(m => m.AccountId == model.AccountId && m.Type == 1 && !listMangaOwned.Any(ma=>m.MangaId != ma)).OrderBy(m=>m.CreateAt).Take(3));
+                if (ListRequestByYou.Count() >= 5 && ListRequestByYou.Count() <= 5)
+                    break;
+            }
+            ViewBag.ListRequestToPeople = ListRequestToPeople;
+            ViewBag.ListRequestByYou = ListRequestByYou;
+
             ///
             var listmanga = data.Manga_Detail.Where(m => m.AccountId == model.AccountId);
             List<Manga_Detail> listjoin = new List<Manga_Detail>();
@@ -66,7 +92,11 @@ namespace MyWebsite.Controllers
             }
             ViewBag.Language = Language;
             return View();
-
+            }
+            catch(Exception ex)
+            {
+                return RedirectToAction("PageError","Error");
+            }
         }
         public ActionResult Register()
         {

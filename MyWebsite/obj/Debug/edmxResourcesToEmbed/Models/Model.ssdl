@@ -12,6 +12,12 @@
     <Property Name="StatusActive" Type="int" />
     <Property Name="UserName" Type="nvarchar" MaxLength="50" />
     <Property Name="PassWord" Type="nvarchar" MaxLength="50" />
+    <Property Name="ResetPasswordCode" Type="nvarchar" MaxLength="100" />
+    <Property Name="FacebookLink" Type="nvarchar" MaxLength="50" />
+    <Property Name="TwitterLink" Type="nvarchar" MaxLength="50" />
+    <Property Name="InstagramLink" Type="nvarchar" MaxLength="50" />
+    <Property Name="Status" Type="nvarchar(max)" />
+    <Property Name="Note" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="Account_Detail">
     <Key>
@@ -21,6 +27,16 @@
     <Property Name="AccountId" Type="int" Nullable="false" />
     <Property Name="PointId" Type="int" Nullable="false" />
     <Property Name="Total" Type="float" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'MyWebsite.dbo.Bookmark' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="Bookmark">
+    <Key>
+      <PropertyRef Name="AccountId" />
+      <PropertyRef Name="MangaId" />
+    </Key>
+    <Property Name="AccountId" Type="int" Nullable="false" />
+    <Property Name="MangaId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Category">
     <Key>
@@ -41,6 +57,7 @@
     <Property Name="CreateAt" Type="datetime" />
     <Property Name="StatusActive" Type="int" />
     <Property Name="MangaId" Type="int" />
+    <Property Name="Alias" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="Font">
     <Key>
@@ -87,6 +104,7 @@
     <Property Name="StatusActive" Type="int" />
     <Property Name="Alias" Type="nvarchar(max)" />
     <Property Name="StatusId" Type="int" />
+    <Property Name="UpdateAt" Type="datetime" />
   </EntityType>
   <EntityType Name="Manga_Detail">
     <Key>
@@ -100,6 +118,7 @@
     <Property Name="StatusActive" Type="int" />
     <Property Name="Type" Type="int" />
     <Property Name="Language" Type="nvarchar" MaxLength="50" />
+    <Property Name="CreateAt" Type="datetime" />
   </EntityType>
   <EntityType Name="Manga_Genres">
     <Key>
@@ -221,6 +240,8 @@
     <Property Name="ChapterId" Type="int" Nullable="false" />
     <Property Name="TranslationId" Type="int" Nullable="false" />
     <Property Name="StatusActive" Type="int" />
+    <Property Name="UpdateAt" Type="datetime" />
+    <Property Name="MangaId" Type="int" />
     <Property Name="CreateAt" Type="datetime" />
   </EntityType>
   <Association Name="FK_Account_Detail_Account">
@@ -244,6 +265,30 @@
       </Principal>
       <Dependent Role="Account_Detail">
         <PropertyRef Name="PointId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Bookmark_Account">
+    <End Role="Account" Type="Self.Account" Multiplicity="1" />
+    <End Role="Bookmark" Type="Self.Bookmark" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Account">
+        <PropertyRef Name="AccountId" />
+      </Principal>
+      <Dependent Role="Bookmark">
+        <PropertyRef Name="AccountId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Bookmark_Manga">
+    <End Role="Manga" Type="Self.Manga" Multiplicity="1" />
+    <End Role="Bookmark" Type="Self.Bookmark" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Manga">
+        <PropertyRef Name="MangaId" />
+      </Principal>
+      <Dependent Role="Bookmark">
+        <PropertyRef Name="MangaId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -475,6 +520,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Translation_Detail_Manga">
+    <End Role="Manga" Type="Self.Manga" Multiplicity="0..1" />
+    <End Role="Translation_Detail" Type="Self.Translation_Detail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Manga">
+        <PropertyRef Name="MangaId" />
+      </Principal>
+      <Dependent Role="Translation_Detail">
+        <PropertyRef Name="MangaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Translation_Detail_Translation">
     <End Role="Translation" Type="Self.Translation" Multiplicity="1" />
     <End Role="Translation_Detail" Type="Self.Translation_Detail" Multiplicity="*" />
@@ -532,6 +589,12 @@
     <EntitySet Name="TextBox" EntityType="Self.TextBox" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Translation" EntityType="Self.Translation" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Translation_Detail" EntityType="Self.Translation_Detail" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Bookmark" EntityType="Self.Bookmark" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Bookmark].[AccountId] AS [AccountId], 
+    [Bookmark].[MangaId] AS [MangaId]
+    FROM [dbo].[Bookmark] AS [Bookmark]</DefiningQuery>
+    </EntitySet>
     <AssociationSet Name="FK_Account_Detail_Account" Association="Self.FK_Account_Detail_Account">
       <End Role="Account" EntitySet="Account" />
       <End Role="Account_Detail" EntitySet="Account_Detail" />
@@ -539,6 +602,14 @@
     <AssociationSet Name="FK_Account_Detail_Point" Association="Self.FK_Account_Detail_Point">
       <End Role="Point" EntitySet="Point" />
       <End Role="Account_Detail" EntitySet="Account_Detail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Bookmark_Account" Association="Self.FK_Bookmark_Account">
+      <End Role="Account" EntitySet="Account" />
+      <End Role="Bookmark" EntitySet="Bookmark" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Bookmark_Manga" Association="Self.FK_Bookmark_Manga">
+      <End Role="Manga" EntitySet="Manga" />
+      <End Role="Bookmark" EntitySet="Bookmark" />
     </AssociationSet>
     <AssociationSet Name="FK_Chapter_Manga" Association="Self.FK_Chapter_Manga">
       <End Role="Manga" EntitySet="Manga" />
@@ -614,6 +685,10 @@
     </AssociationSet>
     <AssociationSet Name="FK_Translation_Detail_Chapter" Association="Self.FK_Translation_Detail_Chapter">
       <End Role="Chapter" EntitySet="Chapter" />
+      <End Role="Translation_Detail" EntitySet="Translation_Detail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Translation_Detail_Manga" Association="Self.FK_Translation_Detail_Manga">
+      <End Role="Manga" EntitySet="Manga" />
       <End Role="Translation_Detail" EntitySet="Translation_Detail" />
     </AssociationSet>
     <AssociationSet Name="FK_Translation_Detail_Translation" Association="Self.FK_Translation_Detail_Translation">

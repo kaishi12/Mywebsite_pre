@@ -38,7 +38,7 @@ namespace MyWebsite
             routes.MapRoute("ListAllowChapter","ListAllowChapter/{TranslationId}",new { controller = "Translation", action = "ListAllowChapter" });
             routes.MapRoute("TranslationManager","TranslationManager/{TranslationId}/{ChapterId}/{PageId}", new { controller = "Translation", action = "TranslationManager" , ChapterId = UrlParameter.Optional , PageId = UrlParameter.Optional });
             routes.MapRoute("TranslationList", "TranslationList", new { controller = "Translation", action = "ListManga" });
-
+           
             //Page
             routes.MapRoute("PageDetail","PageDetail/{PageId}",new { controller = "Page", action = "PageDetail" });
             routes.MapRoute( "PageSelect", "PageSelect/{PageId}",new { controller = "Page", action = "PageSelect" });

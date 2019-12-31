@@ -7,15 +7,13 @@
 </style>
 <div class="padding">
     <div class="m-b black rounded">
-        <ol class="breadcrumb">
+        <ol class="breadcrumb primary">
             <li class="breadcrumb-item"><a href="/Account/Home">Home</a></li>
             <li class="breadcrumb-item"><a href="/EditorList">Danh sách truyện</a></li>
             <li class="breadcrumb-item active">Tải lên clear-text</li>
         </ol>
     </div>
-    <div class="box-header blue" style="margin-bottom:5px">
-        <h2>Tải lên Clear-text: @ViewBag.MangaFullName</h2>
-    </div>
+   
     <div>
        
         <div class="row" style="padding-bottom:10px;padding-left:0px">
@@ -66,7 +64,7 @@
                     if (item.StatusActive == 0 && ViewBag.CategoryId == 1)
                     {
                         <div id=@("Raw" + item.PageId) class="raw col-xs-6 col-sm-4 col-md-3" style="padding-left:12px;padding-right:12px">
-                            <div class="box p-a-xs">
+                            <div class="box p-a-xs black">
 
                                 <form id=@("AddNewPage" + item.PageId) enctype="multipart/form-data">
 
@@ -100,7 +98,7 @@
                     {
 
                         <div id=@("Clear-text" + item.PageId) class="clear-text col-xs-6 col-sm-4 col-md-3" style="padding-left:12px;padding-right:12px">
-                            <div class="box p-a-xs">
+                            <div class="box p-a-xs black">
                                 <form id=@("UpdatePage" + item.PageId) enctype="multipart/form-data">
 
                                     <input type="hidden" name="PageId" id="PageId" value="@item.PageId" />
