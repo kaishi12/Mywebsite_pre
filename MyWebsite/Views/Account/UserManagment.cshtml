@@ -165,204 +165,15 @@
         </div>
     </div>
 </div>
-<div class="dker p-x">
-    <div class="row">
-        <div class="col-sm-6 push-sm-6">
-            
-        </div>
-        <div class="col-sm-6 pull-sm-6">
-            <div class="p-y-md clearfix nav-active-primary">
-                <ul class="nav nav-pills nav-sm">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="" data-toggle="tab" data-target="#tab_4" aria-expanded="true">Thông tin cá nhân</a>
-                    </li>
-                    <li class="nav-item" aria-expanded="false">
-                        <a class="nav-link " href="" data-toggle="tab" data-target="#tab_1" aria-expanded="false">Mời gia nhập</a>
-                    </li>
-
-
-                </ul>
-            </div>
-        </div>
-    </div>
-</div>
 <div class="padding">
     <div class="row">
        
         <div class="col-sm-8 col-lg-9">
-            <div class="tab-content">
-                <div class="tab-pane p-v-sm " id="tab_1" aria-expanded="false">
-                    <div class="row">
-                        @*Lời mời gia nhập tới người khác*@
-                        <div class="col-sm-12 col-md-6">
-                            <div class="box black">
-                                <div class="box-header">
-                                    <h3>
-
-                                        <strong class="text text-primary">
-                                            Lời mời gia nhập tới người khác
-                                        </strong>
-
-                                    </h3>
-                                </div>
-                                <ul class="list inset">
-                                    @foreach (var item in ViewBag.PeopleJoin)
-                                    {
-                                        if (item.Type == 1)
-                                        {
-                                            <li class="list-item">
-                                                <a herf="" class="list-left"><span class="w-40 r-2x _600 text-lg accent">A</span></a>
-                                                <div class="list-body">
-                                                    <div class="m-y-sm pull-right">
-                                                        @if (item.StatusActive == 0)
-                                                        {
-                                                            <a class="btn btn-xs success Status Accept" data-status="1">Duyệt</a>
-
-                                                        }
-                                                        else
-                                                        {
-
-                                                            <a class="btn btn-xs danger Status Deny" data-status="0">Chưa duyệt</a>
-                                                        }
+            
+                
 
 
-                                                    </div>
-                                                    <div>
-                                                        <a href="">@item.MangaFullName</a>
-                                                    </div>
-                                                    <div class="text-sm">
-                                                        <span class="text-muted"><strong>Tên:</strong> @item.UserName, <strong>Vị trí:</strong> @item.RoleFullName</span> <span class="label"></span>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                        }
-
-                                    }
-                                </ul>
-                            </div>
-                        </div>
-                        @*Lời mời gia nhập gửi tới bạn - thao tác được*@
-                        <div class="col-sm-12 col-md-6">
-                            <div class="box primary">
-                                <div class="box-header">
-                                    <h3><strong class="text-primary">Lời mời gia nhập gửi bạn</strong></h3>
-
-                                </div>
-                                <ul class="list inset">
-                                    @foreach (var item in ViewBag.PeopleJoin)
-                                    {
-                                        if (item.Type == 1)
-                                        {
-                                            <li class="list-item">
-                                                <a herf="" class="list-left"><span class="w-40 r-2x _600 text-lg accent">A</span></a>
-                                                <div class="list-body">
-                                                    <div class="m-y-sm pull-right">
-                                                        @if (item.StatusActive == 0)
-                                                        {
-                                                            <a href class="btn btn-xs success Status Accept" data-status="1">Duyệt</a>
-                                                            <a href class="btn btn-xs danger Status Deny" style="display:none" data-status="0">Chưa duyệt</a>
-                                                        }
-                                                        else
-                                                        {
-                                                            <a href class="btn btn-xs success Status Accept" style="display:none" data-status="1">Đã duyệt</a>
-                                                            <a href class="btn btn-xs danger Status Deny" data-status="0">Chưa duyệt</a>
-                                                        }
-
-                                                        <a class="btn btn-xs white btn-icon ChangeStatus"><i class="fa fa-pencil"></i></a>
-                                                    </div>
-                                                    <div>
-                                                        <a href="">@item.MangaFullName</a>
-                                                    </div>
-                                                    <div class="text-sm">
-                                                        <span class="text-muted"><strong>Tên:</strong> @item.UserName, <strong>Vị trí:</strong> @item.RoleFullName</span> <span class="label"></span>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                        }
-
-                                    }
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="col-sm-12 col-md-6">
-                            <div class="box black">
-                                <div class="box-header">
-                                    <h3><strong class="text-primary">Yêu cầu xin gia nhập của bạn</strong> </h3>
-
-                                </div>
-                                <ul class="list inset">
-                                    @foreach (var item in ViewBag.PeopleJoin)
-                                    {
-                                        if (item.Type == 1)
-                                        {
-                                            <li class="list-item">
-                                                <a herf="" class="list-left"><span class="w-40 r-2x _600 text-lg accent">A</span></a>
-                                                <div class="list-body">
-                                                    <div class="m-y-sm pull-right">
-                                                        <a href="" class="btn btn-xs white">Manage</a>
-                                                        <a href="" class="btn btn-xs white btn-icon"><i class="fa fa-pencil"></i></a>
-                                                    </div>
-                                                    <div>
-                                                        <a href="">@item.MangaFullName</a>
-                                                    </div>
-                                                    <div class="text-sm">
-                                                        <span class="text-muted"><strong>Tên:</strong> @item.UserName, <strong>Vị trí:</strong> @item.RoleFullName</span> <span class="label"></span>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                        }
-
-                                    }
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="col-sm-12 col-md-6">
-                            <div class="box black">
-                                <div class="box-header">
-                                    <h3><strong class="text-primary">Yêu cầu xin gia nhập truyện của bạn</strong></h3>
-
-                                </div>
-                                <ul class="list inset">
-                                    @foreach (var item in ViewBag.PeopleJoin)
-                                    {
-                                        if (item.Type == 0)
-                                        {
-                                            <li class="list-item">
-                                                <a herf="" class="list-left"><span class="w-40 r-2x _600 text-lg accent">A</span></a>
-                                                <div class="list-body">
-                                                    <div class="m-y-sm pull-right">
-                                                        @if (item.StatusActive == 0)
-                                                        {
-                                                            <a href class="btn btn-xs success Status Accept" data-language="@item.Language" data-roleid="@item.RoleId" data-username="@item.UserName" data-mangaid="@item.MangaId" data-status="1">Duyệt</a>
-                                                            <a href class="btn btn-xs danger Status Deny" style="display:none" data-language="@item.Language" data-roleid="@item.RoleId" data-username="@item.UserName" data-mangaid="@item.MangaId" data-status="1">Chưa duyệt</a>
-                                                        }
-                                                        else
-                                                        {
-                                                            <a href class="btn btn-xs success Status Accept" style="display:none" data-language="@item.Language" data-roleid="@item.RoleId" data-username="@item.UserName" data-status="1">Đã duyệt</a>
-                                                            <a href class="btn btn-xs danger Status Deny" data-language="@item.Language" data-roleid="@item.RoleId" data-username="@item.UserName" data-status="0">Chưa duyệt</a>
-                                                        }
-
-                                                        <a class="btn btn-xs white btn-icon ChangeStatus"><i class="fa fa-pencil"></i></a>
-                                                    </div>
-                                                    <div>
-                                                        <a href="">@item.MangaFullName</a>
-                                                    </div>
-                                                    <div class="text-sm">
-                                                        <span class="text-muted"><strong>Tên:</strong> @item.UserName, <strong>Vị trí:</strong> @item.RoleFullName</span> <span class="label"></span>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                        }
-
-                                    }
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="tab-pane p-v-sm active" id="tab_4" aria-expanded="true">
+              
                     <div class="row m-b">
                         <div class="col-xs-6">
                             <small class="text-muted">Số điện thoại</small>
@@ -387,8 +198,8 @@
                         <small class="text-muted">Ghi chú</small>
                         <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi id neque quam. Aliquam sollicitudin venenatis ipsum ac feugiat. Vestibulum ullamcorper sodales nisi nec condimentum. Mauris convallis mauris at pellentesque volutpat. Phasellus at ultricies neque, quis malesuada augue.</div>
                     </div>
-                </div>
-            </div>
+               
+            
         </div>
         @*Truyện đã tham gia*@
         <div class="col-sm-4 col-lg-3">

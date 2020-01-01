@@ -8,13 +8,13 @@
 <div class="padding">
 
     <div class="m-b">
-        <ol class="breadcrumb black">
+        <ol class="breadcrumb primary">
             <li class="breadcrumb-item"><a href="/Account/Home">Trang chủ</a></li>
             <li class="breadcrumb-item active">Tạo truyện mới</li>
         </ol>
     </div>
 
-    <div class="box grey-50">
+    <div class="box black">
         
         <form id="form1" method="post" action="/Manga/CreateManga" enctype="multipart/form-data">
             @Html.AntiForgeryToken()
@@ -22,12 +22,12 @@
                 <div class="col-sm-3">
                     <div class=" form-file col-sm-10">
                         <div id="formupload" style="padding-bottom:10px;">
-                            <img id="Imganhbia" src="~/RootPicture/tenor.gif" style=" width:400px; height:300px;" />
+                            <img id="Imganhbia" src="~/RootPicture/tenor.gif" style=" width:300px; height:400px;" />
                         </div>
                         <input hidden="hidden" type="file" id="AnhBia" name="AnhBia" class="form-control" onchange="readURL(this);" required>
                         <button type="button" class="btn btn-fw primary" id="uploadbutton">Chọn Ảnh Bìa</button>
                         <br />
-                        <span class="notice">
+                        <span class="text-danger">
                             *Nên chọn ảnh có kích thước 400x300 px
                         </span>
                     </div>
@@ -98,7 +98,7 @@
                             </select>
                         </div>
                     </div>
-                    <button type="button" id="SaveManga" name="btnCreate" class="btn btn-fw info offset-md-10 " disabled> Tạo</button>
+                    <button type="button" id="SaveManga" name="btnCreate" class="btn btn-fw primary offset-md-10 " disabled> Tạo</button>
                 </div>
             </div>
         </form>

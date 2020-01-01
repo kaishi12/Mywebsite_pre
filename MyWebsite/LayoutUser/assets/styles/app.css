@@ -386,8 +386,9 @@ font-family: inherit;
     left: 0; } }
 
 .form-control {
-  border-color: rgba(120, 130, 140, 0.2);
-  border-radius: 0; }
+    border-color: rgb(12, 194, 170);
+    border-radius: 0;
+}
   .form-control:focus {
     border-color: rgba(120, 130, 140, 0.3); }
 
