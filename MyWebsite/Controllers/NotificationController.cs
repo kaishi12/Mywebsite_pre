@@ -25,15 +25,15 @@ namespace MyWebsite.Controllers
              var res = data.Notifications.Where(m => m.AccountId == account.AccountId).OrderByDescending(m => m.CreateAt);
             foreach(var item in res)
             {
-                DateTime Tgcn = item.CreateAt.Value;
+                DateTime Tgcn = item.CreateAt;
                 var month = new DateDifference(Tgcn, DateTime.Now);
                 NotificationModel notification = new NotificationModel();
                 notification.NotificationId = item.NotificationId;
                 notification.Content = item.NContent;
                 notification.CreateAt = month.ToString();
-                notification.SeenStatus = item.SeenStatus.Value;
-                notification.Status = item.Status.Value;
-                notification.AccountId = item.AccountId.Value;
+                notification.SeenStatus = item.SeenStatus;
+                notification.Status = item.Status;
+                notification.AccountId = item.AccountId;
 
                 notificationModels.Add(notification);
             }
@@ -42,10 +42,10 @@ namespace MyWebsite.Controllers
         public JsonResult Seen()
         {
             AccountModel account = (AccountModel)Session["UserInfo"];
-          var res =  data.Notifications.Where(m => m.AccountId == account.AccountId && m.SeenStatus == 1);
+          var res =  data.Notifications.Where(m => m.AccountId == account.AccountId && m.SeenStatus == false);
             foreach(var item in res)
             {
-                item.SeenStatus = 0;
+                item.SeenStatus = true;
                 
             }
             data.SaveChanges();

@@ -352,8 +352,9 @@
                                         <div class="list-body">
 
                                             <div class="m-y-sm pull-right">
-                                                <button class="btn btn-xs  danger">Chưa duyệt</button>
-                                                <button class="ChangeStatus btn btn-lg btn-xs btn-outline b-primary text-primary" data-toggle="tooltip" data-placement="top" title="Cập nhật" data-language="@item.Language" data-roleid="@item.RoleId" data-username="@item.Account.UserName" data-status="0" data-mangaid="@item.MangaId"><i class="fa fa-pencil"></i></button>
+                                                <button class="btn btn-xs  Status Deny danger">Chưa duyệt</button>
+                                                <button class="btn btn-xs Status Accept primary" style="display:none">Đã duyệt</button>
+                                                <button class="ChangeStatus btn btn-lg btn-xs btn-outline b-primary text-primary" data-placement="top" title="Cập nhật" data-language="@item.Language" data-roleid="@item.RoleId" data-username="@item.Account.UserName" data-status="0" data-mangaid="@item.MangaId"><i class="fa fa-pencil"></i></button>
                                             </div>
                                             <div>
                                                 <a href="" class="text-primary">@item.Manga.FullName</a>
@@ -396,7 +397,7 @@
                                         <div class="list-body">
 
                                             <div class="m-y-sm pull-right">
-                                                <button class="btn btn-xs  danger">Chưa duyệt</button>
+                                                <button class="btn btn-xs danger">Chưa duyệt</button>
                                                 <button class="ChangeStatus btn btn-lg btn-xs btn-outline b-primary text-primary" data-toggle="tooltip" data-placement="top" title="Cập nhật" data-language="@item.Language" data-roleid="@item.RoleId" data-username="@item.Account.UserName" data-status="0" data-mangaid="@item.MangaId"><i class="fa fa-pencil"></i></button>
                                             </div>
                                             <div>
@@ -517,11 +518,11 @@
         $('[data-toggle="tooltip"]').tooltip()
         $(".ChangeStatus").on("click", function () {
             var thisbutton = $(this);
+            //console.log(thisbutton.data("language"));
             if (confirm("Bạn có đồng ý yêu cầu này?")) {
                 $.ajax({
                     url: "/Account/ChangeStatusMangaDetail",
-                    type: 'post',
-                    dataType: 'application/json',
+                    type: 'post', 
                     data: {
                         UserName: thisbutton.data("username")
                         , MangaId: thisbutton.data("mangaid")
@@ -532,14 +533,18 @@
                     success: function (result) {
                         if (result == "1") {
                             alert("Cập nhật thành công!");
+                            $(this).parent().find(".Status.Deny").fadeOut();
+                            $(this).parent().find(".Status.Accept").fadeIn();
 
+                            thisbutton.fadeOut();
                         }
                         else
                             alert("Cập nhật thất bại, vui lòng thử lại sau!");
                     },
                 });
             };
-
+           
+          
         })
     })
 </script>

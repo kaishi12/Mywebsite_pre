@@ -24,7 +24,7 @@ namespace MyWebsite.Service.Chapter
                 param.Add("@MangaId", model.MangaId);
                 param.Add("@CreateAt", DateTime.Now);
                 param.Add("@ViewNumber", model.ViewNumber);
-                param.Add("@StatusActive", 0);
+                param.Add("@StatusActive", 1);
                 int ChapterId = DALHelpers.QueryByStored<int>("Chapter_AddNewChapter", param).FirstOrDefault();
                 AddNewRawPages(model.pageModels, ChapterId);
                 return true;
@@ -46,7 +46,7 @@ namespace MyWebsite.Service.Chapter
                     page.AccountId = item.AccountId;
                     page.CreateAt = DateTime.Now;
                     page.PageLink = item.PageLink;
-                    page.StatusActive = 0;
+                    page.Active = true;
                     page.CategoryId = 1;
                     page.ChapterId = ChapterId;
                     data.Pages.Add(page);
@@ -59,20 +59,20 @@ namespace MyWebsite.Service.Chapter
                 return false;
             }
         }
-        public bool UpdateRawPage(int PageId, string PageLink, int StatusActive)
+        public bool UpdateRawPage(int PageId, string PageLink, bool StatusActive)
         {
             try
             {
                 Page page = data.Pages.SingleOrDefault(m => m.PageId == PageId);
                 if (PageLink != "")
                     page.PageLink = PageLink;
-                if (StatusActive != -1)
-                    page.StatusActive = StatusActive;
+                if (StatusActive)
+                    page.Active = StatusActive;
                 data.SaveChanges();
-                if (StatusActive == 0 && page.CategoryId == 2)
+                if (StatusActive && page.CategoryId == 2)
                 {
                     NotificationService notificationService = new NotificationService();
-                    var res = notificationService.AddnewNoticeSenpai("Upload", page.OrderNumber.Value,page.Chapter.OrderNumber.Value, page.Chapter.Manga.FullName, page.AccountId.Value,"");
+                    var res = notificationService.AddnewNoticeSenpai("Upload", page.OrderNumber,page.Chapter.OrderNumber, page.Chapter.Manga.FullName, page.AccountId,"");
                 }
                 return true;
             }
@@ -85,7 +85,7 @@ namespace MyWebsite.Service.Chapter
         {
             try
             {
-                var pageFA = data.Pages.SingleOrDefault(m => m.PageId == PageId && m.StatusActive == 0);
+                var pageFA = data.Pages.SingleOrDefault(m => m.PageId == PageId && m.Active == true);
                 if (pageFA != null)
                 {
                     var res = data.Pages.SingleOrDefault(m => m.AccountId == AccountId && m.PageId_Fa == PageId);
@@ -100,7 +100,7 @@ namespace MyWebsite.Service.Chapter
                         page.CreateAt = DateTime.Now;
                         page.FullName = pageFA.FullName + "-Clear-text-";
                         page.PageLink = PageLink;
-                        page.StatusActive = 1;
+                        page.Active = true;
                         data.Pages.Add(page);
                     }
                     else

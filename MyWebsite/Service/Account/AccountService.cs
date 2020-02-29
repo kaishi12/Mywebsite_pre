@@ -42,7 +42,7 @@ namespace MyWebsite.Service.Account
                     param.Add("@Password", Pass);
                     param.Add("@Email", model.Email);
                     param.Add("@PhoneNumber", model.PhoneNumber);
-                    param.Add("@StatusActive", 0);
+                    param.Add("@StatusActive", 1);
                     return DALHelpers.ExecuteByStored("Account_Register", param) > 0;
                 }
             }

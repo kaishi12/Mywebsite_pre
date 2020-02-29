@@ -21,7 +21,6 @@ namespace MyWebsite.Models
             this.Manga_Detail = new HashSet<Manga_Detail>();
             this.Manga_Genres = new HashSet<Manga_Genres>();
             this.Translations = new HashSet<Translation>();
-            this.Translation_Detail = new HashSet<Translation_Detail>();
             this.Accounts = new HashSet<Account>();
         }
     
@@ -29,12 +28,12 @@ namespace MyWebsite.Models
         public string CoverLink { get; set; }
         public string FullName { get; set; }
         public string Description { get; set; }
-        public Nullable<System.DateTime> CreateAt { get; set; }
+        public System.DateTime CreateAt { get; set; }
         public string Author { get; set; }
-        public Nullable<int> StatusActive { get; set; }
+        public bool Active { get; set; }
         public string Alias { get; set; }
-        public Nullable<int> StatusId { get; set; }
-        public Nullable<System.DateTime> UpdateAt { get; set; }
+        public int StatusId { get; set; }
+        public System.DateTime UpdateAt { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Chapter> Chapters { get; set; }
@@ -45,8 +44,6 @@ namespace MyWebsite.Models
         public virtual Status Status { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Translation> Translations { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Translation_Detail> Translation_Detail { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Account> Accounts { get; set; }
     }

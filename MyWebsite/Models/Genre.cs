@@ -25,7 +25,7 @@ namespace MyWebsite.Models
         public string Id { get; set; }
         public string Description { get; set; }
         public string Alias { get; set; }
-        public Nullable<int> StatusActive { get; set; }
+        public bool Active { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Manga_Genres> Manga_Genres { get; set; }

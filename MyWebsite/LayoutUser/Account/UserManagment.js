@@ -71,10 +71,9 @@ $("#formUpdateInfo").submit(function (e) {
     $.ajax({
         url: "/Account/UpdateInfo",
         type: 'post',
-        dataType: 'application/json',
         data: $("#formUpdateInfo").serialize(),
         success: function (result) {
-            if (result == 1) {
+            if (result == true) {
                 alert("Cập nhật thành công!");
 
             }

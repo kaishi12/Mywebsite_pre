@@ -18,15 +18,15 @@ namespace MyWebsite.Models
         public string TextContent { get; set; }
         public string ColorText { get; set; }
         public string ColorOutline { get; set; }
-        public Nullable<int> Bold { get; set; }
-        public Nullable<int> StatusActive { get; set; }
-        public Nullable<int> StatusAllow { get; set; }
-        public Nullable<int> TranslationId { get; set; }
-        public Nullable<int> AccountId { get; set; }
-        public Nullable<int> TextBoxId { get; set; }
-        public Nullable<int> FontId { get; set; }
-        public Nullable<int> FontSize { get; set; }
-        public string Italic { get; set; }
+        public bool Bold { get; set; }
+        public bool Active { get; set; }
+        public bool Allow { get; set; }
+        public int TranslationId { get; set; }
+        public int AccountId { get; set; }
+        public int TextBoxId { get; set; }
+        public int FontId { get; set; }
+        public int FontSize { get; set; }
+        public bool Italic { get; set; }
     
         public virtual Account Account { get; set; }
         public virtual Font Font { get; set; }

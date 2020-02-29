@@ -12,7 +12,7 @@ namespace MyWebsite.ViewModels.Chapter
         public string FullName { get; set; }
         public DateTime CreateAt { get; set; }
         public int ViewNumber { get; set; }
-        public int StatusActive { get; set; }
+        public bool StatusActive { get; set; }
         public int MangaId { get; set; }
         public List<PageModel> pageModels { get; set; }
     }

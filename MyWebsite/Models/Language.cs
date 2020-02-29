@@ -23,8 +23,8 @@ namespace MyWebsite.Models
         public int LanguageId { get; set; }
         public string FullName { get; set; }
         public string Note { get; set; }
-        public Nullable<int> StatusActive { get; set; }
-        public string Id { get; set; }
+        public bool Active { get; set; }
+        public string Code { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Translation> Translations { get; set; }

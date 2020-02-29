@@ -16,11 +16,11 @@ namespace MyWebsite.Models
     {
         public int NotificationId { get; set; }
         public string NContent { get; set; }
-        public Nullable<System.DateTime> CreateAt { get; set; }
-        public Nullable<int> Status { get; set; }
-        public Nullable<int> AccountId { get; set; }
-        public Nullable<int> SeenStatus { get; set; }
-        public Nullable<int> NotifyTypeId { get; set; }
+        public System.DateTime CreateAt { get; set; }
+        public bool Status { get; set; }
+        public int AccountId { get; set; }
+        public int NotifyTypeId { get; set; }
+        public bool SeenStatus { get; set; }
     
         public virtual Account Account { get; set; }
         public virtual NotifyType NotifyType { get; set; }

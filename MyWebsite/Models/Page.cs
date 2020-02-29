@@ -22,14 +22,14 @@ namespace MyWebsite.Models
     
         public int PageId { get; set; }
         public string FullName { get; set; }
-        public Nullable<int> OrderNumber { get; set; }
+        public int OrderNumber { get; set; }
         public string PageLink { get; set; }
-        public Nullable<int> StatusActive { get; set; }
-        public Nullable<int> ChapterId { get; set; }
-        public Nullable<int> CategoryId { get; set; }
-        public Nullable<System.DateTime> CreateAt { get; set; }
-        public Nullable<int> AccountId { get; set; }
-        public Nullable<int> PageId_Fa { get; set; }
+        public bool Active { get; set; }
+        public int ChapterId { get; set; }
+        public int CategoryId { get; set; }
+        public System.DateTime CreateAt { get; set; }
+        public int AccountId { get; set; }
+        public int PageId_Fa { get; set; }
     
         public virtual Account Account { get; set; }
         public virtual Category Category { get; set; }

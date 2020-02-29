@@ -63,15 +63,15 @@ namespace MyWebsite
                 var data= dc.Notifications.Where(a => a.CreateAt > afterDate && a.AccountId == AccountId).OrderByDescending(a => a.CreateAt);
                 foreach(var item in data)
                 {
-                    DateTime Tgcn = item.CreateAt.Value;
+                    DateTime Tgcn = item.CreateAt;
                     var month = new DateDifference(Tgcn, DateTime.Now);
                     NotificationModel notification = new NotificationModel();
                     notification.NotificationId = item.NotificationId;
                     notification.Content = item.NContent;
                     notification.CreateAt = month.ToString();
-                    notification.SeenStatus = item.SeenStatus.Value;
-                    notification.Status = item.Status.Value;
-                    notification.AccountId = item.AccountId.Value;
+                    notification.SeenStatus = item.SeenStatus;
+                    notification.Status = item.Status;
+                    notification.AccountId = item.AccountId;
 
                     notificationModels.Add(notification);
                 }

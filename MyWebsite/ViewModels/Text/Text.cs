@@ -13,8 +13,8 @@ namespace MyWebsite.ViewModels.Text
         public int Height { get; set; }
         public int Degrees { get; set; }
        public string text { get; set; }
-        public int Italic { get; set; }
-        public int Bold { get; set; }
+        public bool Italic { get; set; }
+        public bool Bold { get; set; }
         public string Font { get; set; }
         public int Size { get; set; }
         public string color { get; set; }

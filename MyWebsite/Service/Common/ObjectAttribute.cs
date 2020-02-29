@@ -79,7 +79,7 @@ namespace MyWebsite.Service.Common
                 if (routeValues["action"].ToString() == "ChapterDetail")
                 {
                     int chapterid = int.Parse(routeValues["ChapterId"].ToString());
-                    int mangaid = data.Chapters.SingleOrDefault(m => m.ChapterId == chapterid).MangaId.Value;
+                    int mangaid = data.Chapters.SingleOrDefault(m => m.ChapterId == chapterid).MangaId;
                     if (data.Manga_Detail.SingleOrDefault(m => m.MangaId == mangaid && m.AccountId == userInfoSession.AccountId && m.RoleId == 1) != null)
                     {
                         return true;
@@ -93,7 +93,7 @@ namespace MyWebsite.Service.Common
             if (routeValues["controller"].ToString() == "Page")
             {
                 int pageid = int.Parse(routeValues["PageId"].ToString());
-                int mangaid = data.Pages.SingleOrDefault(m => m.PageId == pageid).Chapter.MangaId.Value;
+                int mangaid = data.Pages.SingleOrDefault(m => m.PageId == pageid).Chapter.MangaId;
                 if (data.Manga_Detail.SingleOrDefault(m => m.MangaId == mangaid && m.AccountId == userInfoSession.AccountId && m.RoleId == 1) != null)
                 {
                     return true;

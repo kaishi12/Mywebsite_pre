@@ -17,10 +17,10 @@ namespace MyWebsite.Models
         public int AccountId { get; set; }
         public int MangaId { get; set; }
         public int RoleId { get; set; }
-        public Nullable<int> StatusActive { get; set; }
-        public Nullable<int> Type { get; set; }
-        public string Language { get; set; }
-        public Nullable<System.DateTime> CreateAt { get; set; }
+        public bool Active { get; set; }
+        public int Type { get; set; }
+        public Nullable<int> Language { get; set; }
+        public System.DateTime CreateAt { get; set; }
     
         public virtual Account Account { get; set; }
         public virtual Manga Manga { get; set; }

@@ -21,11 +21,10 @@ namespace MyWebsite.Controllers
         {
             return View();
         }
-        [Object]
         public ActionResult PageDetail(int PageId)
         {
             var page = data.Pages.SingleOrDefault(p => p.PageId == PageId);
-            var listPage = data.Pages.Where(m => m.ChapterId == page.ChapterId && m.CategoryId == 1 && m.StatusActive == 0).ToList();
+            var listPage = data.Pages.Where(m => m.ChapterId == page.ChapterId && m.CategoryId == 1 && m.Active == true).ToList();
            
             foreach(var item in listPage)
 
@@ -33,7 +32,7 @@ namespace MyWebsite.Controllers
                 List<TextBox> list = new List<TextBox>();
                 foreach (var textbox in item.TextBoxes)
                 {
-                    if(textbox.StatusActive == 1)
+                    if(textbox.Active == true)
                     {
                         list.Add(textbox);
                     }
@@ -68,7 +67,7 @@ namespace MyWebsite.Controllers
             ViewBag.MangaId = pagefa.Chapter.Manga.MangaId;
             ViewBag.ChapterId = pagefa.ChapterId;
             ViewBag.PageRawName = pagefa.FullName;
-            ViewBag.ListPage = data.Pages.Where(m => m.ChapterId == pagefa.ChapterId && m.StatusActive == 0 && m.CategoryId == 1);
+            ViewBag.ListPage = data.Pages.Where(m => m.ChapterId == pagefa.ChapterId && m.Active == true && m.CategoryId == 1);
             var listpage = data.Pages.Where(m => m.PageId_Fa == Pageid);
             return View(listpage);
         }

@@ -5,63 +5,50 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="8da845a04b344da7a5ff1bf28a4066c7" Name="Diagram1">
-        <EntityTypeShape EntityType="MyWebsiteModel.Account" Width="1.5" PointX="3" PointY="5.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="MyWebsiteModel.Account_Detail" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="MyWebsiteModel.Category" Width="1.5" PointX="5.25" PointY="18.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="MyWebsiteModel.Chapter" Width="1.5" PointX="5.25" PointY="10.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="MyWebsiteModel.Font" Width="1.5" PointX="9.75" PointY="2.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="MyWebsiteModel.Genre" Width="1.5" PointX="3" PointY="17.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="MyWebsiteModel.Language" Width="1.5" PointX="6" PointY="4" IsExpanded="true" />
-        <EntityTypeShape EntityType="MyWebsiteModel.Manga" Width="1.5" PointX="3" PointY="10.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="MyWebsiteModel.Manga_Detail" Width="1.5" PointX="5.25" PointY="6.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="MyWebsiteModel.Manga_Genres" Width="1.5" PointX="5.25" PointY="15" IsExpanded="true" />
-        <EntityTypeShape EntityType="MyWebsiteModel.Page" Width="1.5" PointX="7.5" PointY="10.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="MyWebsiteModel.Point" Width="1.5" PointX="3" PointY="21.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="MyWebsiteModel.Role" Width="1.5" PointX="3" PointY="15.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="MyWebsiteModel.Status" Width="1.5" PointX="0.75" PointY="11.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="MyWebsiteModel.Text" Width="1.5" PointX="12" PointY="8" IsExpanded="true" />
-        <EntityTypeShape EntityType="MyWebsiteModel.TextBox" Width="1.5" PointX="9.75" PointY="10.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="MyWebsiteModel.Translation" Width="1.5" PointX="8.25" PointY="6.75" IsExpanded="true" />
-        <AssociationConnector Association="MyWebsiteModel.FK_Account_Detail_Account" ManuallyRouted="false" />
-        <AssociationConnector Association="MyWebsiteModel.FK_Manga_Detail_Account" ManuallyRouted="false" />
-        <AssociationConnector Association="MyWebsiteModel.FK_Page_Account" ManuallyRouted="false" />
-        <AssociationConnector Association="MyWebsiteModel.FK_Text_Account" ManuallyRouted="false" />
-        <AssociationConnector Association="MyWebsiteModel.FK_Account_Detail_Point" ManuallyRouted="false" />
-        <AssociationConnector Association="MyWebsiteModel.FK_Page_Category" ManuallyRouted="false" />
-        <AssociationConnector Association="MyWebsiteModel.FK_Chapter_Manga" ManuallyRouted="false" />
-        <AssociationConnector Association="MyWebsiteModel.FK_Page_Chapter" ManuallyRouted="false" />
-        <AssociationConnector Association="MyWebsiteModel.FK_Text_Font" ManuallyRouted="false" />
-        <AssociationConnector Association="MyWebsiteModel.FK_Manga_Genres_Genre" ManuallyRouted="false" />
-        <AssociationConnector Association="MyWebsiteModel.FK_Translation_Language" ManuallyRouted="false" />
-        <AssociationConnector Association="MyWebsiteModel.FK_Manga_Detail_Manga1" ManuallyRouted="false" />
-        <AssociationConnector Association="MyWebsiteModel.FK_Manga_Genres_Manga" ManuallyRouted="false" />
-        <AssociationConnector Association="MyWebsiteModel.FK_Manga_Status" ManuallyRouted="false" />
-        <AssociationConnector Association="MyWebsiteModel.FK_Translation_Manga" ManuallyRouted="false" />
-        <AssociationConnector Association="MyWebsiteModel.FK_Manga_Detail_Role" ManuallyRouted="false" />
-        <AssociationConnector Association="MyWebsiteModel.FK_TextBox_Page" ManuallyRouted="false" />
-        <AssociationConnector Association="MyWebsiteModel.FK_Text_TextBox1" ManuallyRouted="false" />
-        <AssociationConnector Association="MyWebsiteModel.FK_Text_Translation" ManuallyRouted="false" />
-        <AssociationConnector Association="MyWebsiteModel.FK_Translation_Account" />
-        <EntityTypeShape EntityType="MyWebsiteModel.Translation_Detail" Width="1.5" PointX="12.5" PointY="5.125" />
-        <AssociationConnector Association="MyWebsiteModel.FK_Translation_Detail_Chapter" ManuallyRouted="true" >
-          <ConnectorPoint PointX="6" PointY="10.625" />
-          <ConnectorPoint PointX="6" PointY="10.066793619791666" />
-          <ConnectorPoint PointX="7.75" PointY="10.066793619791666" />
-          <ConnectorPoint PointX="7.75" PointY="6.0123491199057186" />
-          <ConnectorPoint PointX="8.8854166666666661" PointY="6.0123491199057177" />
-          <ConnectorPoint PointX="9.0520833333333339" PointY="6.0123491199057186" />
-          <ConnectorPoint PointX="10.9325" PointY="6.0123491199057186" />
-          <ConnectorPoint PointX="10.9325" PointY="6.1440496458964349" />
-          <ConnectorPoint PointX="12.135416666666666" PointY="6.144049645896434" />
-          <ConnectorPoint PointX="12.302083333333334" PointY="6.1440496458964349" />
-          <ConnectorPoint PointX="12.5" PointY="6.1440496458964349" />
-        </AssociationConnector>
-        <AssociationConnector Association="MyWebsiteModel.FK_Translation_Detail_Translation" />
-        <EntityTypeShape EntityType="MyWebsiteModel.Notification" Width="1.5" PointX="5.25" PointY="20.75" />
+        <EntityTypeShape EntityType="MyWebsiteModel.Account" Width="1.5" PointX="0.75" PointY="11.875" />
+        <EntityTypeShape EntityType="MyWebsiteModel.Account_Detail" Width="1.5" PointX="3" PointY="9.375" />
+        <EntityTypeShape EntityType="MyWebsiteModel.Category" Width="1.5" PointX="3.75" PointY="21.5" />
+        <EntityTypeShape EntityType="MyWebsiteModel.Chapter" Width="1.5" PointX="5.25" PointY="17.625" />
+        <EntityTypeShape EntityType="MyWebsiteModel.Font" Width="1.5" PointX="8.25" PointY="5.25" />
+        <EntityTypeShape EntityType="MyWebsiteModel.Genre" Width="1.5" PointX="9" PointY="1.25" />
+        <EntityTypeShape EntityType="MyWebsiteModel.Language" Width="1.5" PointX="6" PointY="22.375" />
+        <EntityTypeShape EntityType="MyWebsiteModel.Manga" Width="1.5" PointX="3" PointY="12.375" />
+        <EntityTypeShape EntityType="MyWebsiteModel.Manga_Detail" Width="1.5" PointX="8.25" PointY="9" />
+        <EntityTypeShape EntityType="MyWebsiteModel.Manga_Genres" Width="1.5" PointX="11.25" PointY="10.375" />
+        <EntityTypeShape EntityType="MyWebsiteModel.Notification" Width="1.5" PointX="6" PointY="9" />
+        <EntityTypeShape EntityType="MyWebsiteModel.NotifyType" Width="1.5" PointX="3.75" PointY="6.375" />
+        <EntityTypeShape EntityType="MyWebsiteModel.Page" Width="1.5" PointX="6" PointY="12.5" />
+        <EntityTypeShape EntityType="MyWebsiteModel.Point" Width="1.5" PointX="0.75" PointY="8.375" />
+        <EntityTypeShape EntityType="MyWebsiteModel.Role" Width="1.5" PointX="6" PointY="6.125" />
+        <EntityTypeShape EntityType="MyWebsiteModel.Status" Width="1.5" PointX="0.75" PointY="18.5" />
+        <EntityTypeShape EntityType="MyWebsiteModel.Text" Width="1.5" PointX="10.5" PointY="13.75" />
+        <EntityTypeShape EntityType="MyWebsiteModel.TextBox" Width="1.5" PointX="8.25" PointY="17" />
+        <EntityTypeShape EntityType="MyWebsiteModel.Translation" Width="1.5" PointX="8.25" PointY="13" />
+        <EntityTypeShape EntityType="MyWebsiteModel.Translation_Detail" Width="1.5" PointX="13.5" PointY="15.625" />
+        <AssociationConnector Association="MyWebsiteModel.FK_Account_Detail_Account" />
+        <AssociationConnector Association="MyWebsiteModel.FK_Manga_Detail_Account" />
         <AssociationConnector Association="MyWebsiteModel.FK_Notification_Account" />
-        <EntityTypeShape EntityType="MyWebsiteModel.NotifyType" Width="1.5" PointX="0.75" PointY="0.875" />
+        <AssociationConnector Association="MyWebsiteModel.FK_Page_Account" />
+        <AssociationConnector Association="MyWebsiteModel.FK_Text_Account" />
+        <AssociationConnector Association="MyWebsiteModel.FK_Translation_Account" />
+        <AssociationConnector Association="MyWebsiteModel.FK_Account_Detail_Point" />
+        <AssociationConnector Association="MyWebsiteModel.FK_Page_Category" />
+        <AssociationConnector Association="MyWebsiteModel.FK_Chapter_Manga" />
+        <AssociationConnector Association="MyWebsiteModel.FK_Page_Chapter" />
+        <AssociationConnector Association="MyWebsiteModel.FK_Translation_Detail_Chapter" />
+        <AssociationConnector Association="MyWebsiteModel.FK_Text_Font" />
+        <AssociationConnector Association="MyWebsiteModel.FK_Manga_Genres_Genre" />
+        <AssociationConnector Association="MyWebsiteModel.FK_Translation_Language" />
+        <AssociationConnector Association="MyWebsiteModel.FK_Manga_Detail_Manga1" />
+        <AssociationConnector Association="MyWebsiteModel.FK_Manga_Genres_Manga" />
+        <AssociationConnector Association="MyWebsiteModel.FK_Manga_Status" />
+        <AssociationConnector Association="MyWebsiteModel.FK_Translation_Manga" />
+        <AssociationConnector Association="MyWebsiteModel.FK_Manga_Detail_Role" />
         <AssociationConnector Association="MyWebsiteModel.FK_Notification_NotifyType" />
-        <AssociationConnector Association="MyWebsiteModel.FK_Translation_Detail_Manga" />
+        <AssociationConnector Association="MyWebsiteModel.FK_TextBox_Page" />
+        <AssociationConnector Association="MyWebsiteModel.FK_Text_TextBox1" />
+        <AssociationConnector Association="MyWebsiteModel.FK_Text_Translation" />
+        <AssociationConnector Association="MyWebsiteModel.FK_Translation_Detail_Translation" />
         <AssociationConnector Association="MyWebsiteModel.Bookmark" />
       </Diagram>
     </edmx:Diagrams>

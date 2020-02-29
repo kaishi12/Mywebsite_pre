@@ -51,7 +51,7 @@ namespace MyWebsite.ViewModels.Manga
         public List<RoleModel> roles { get; set; }
        
         public DateTime CreatAt { get; set; }
-        public int StatusActive { get; set; }
+        public bool StatusActive { get; set; }
     }
     public class RoleModel
     {

@@ -16,9 +16,9 @@ namespace MyWebsite.Service.Notification
             string content = notifyType.NTContent;
             notification.AccountId = ReciveId;
             notification.CreateAt = DateTime.Now;
-            notification.Status = 0;
+            notification.Status = true;
             notification.NotifyTypeId = notifyType.NotifyTypeId;
-            notification.SeenStatus = 1;
+            notification.SeenStatus = false;
             content= content.Replace("UserName", data.Accounts.SingleOrDefault(m => m.AccountId == SendId).UserName);
              content = content.Replace("RoleName", data.Roles.SingleOrDefault(m => m.RoleId == RoleId).FullName);
             content = content.Replace("MangaName", data.Mangas.SingleOrDefault(m => m.MangaId == MangaId).FullName);
@@ -34,9 +34,9 @@ namespace MyWebsite.Service.Notification
             string content = notifyType.NTContent;
             notification.AccountId = data.Accounts.SingleOrDefault(m => m.UserName == Recive).AccountId;
             notification.CreateAt = DateTime.Now;
-            notification.Status = 0;
+            notification.Status = true;
             notification.NotifyTypeId = notifyType.NotifyTypeId;
-            notification.SeenStatus = 1;
+            notification.SeenStatus = false;
             content = content.Replace("UserName", Send);
             content = content.Replace("RoleName", RoleName);
             content = content.Replace("MangaName", MangaName);
@@ -52,9 +52,9 @@ namespace MyWebsite.Service.Notification
             string content = notifyType.NTContent;
             notification.AccountId = AccountId;
             notification.CreateAt = DateTime.Now;
-            notification.Status = 0;
+            notification.Status = true;
             notification.NotifyTypeId = notifyType.NotifyTypeId;
-            notification.SeenStatus = 1;
+            notification.SeenStatus = false;
             content = content.Replace("ChapterOrder", ChapterOrder.ToString());
             content = content.Replace("PageOrder", PageOrder.ToString());
             content = content.Replace("MangaName", MangaName);

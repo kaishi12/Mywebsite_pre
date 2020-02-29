@@ -82,7 +82,7 @@ namespace MyWebsite.Controllers
             var path = Path.Combine(Server.MapPath("~/PageLink"), filename);
             fileupload.SaveAs(path);
             string PageLink = filename;
-            if (chapterService.UpdateRawPage(PageId, PageLink, -1))
+            if (chapterService.UpdateRawPage(PageId, PageLink,true))
             {
                 return Json(true);
             }
@@ -92,7 +92,7 @@ namespace MyWebsite.Controllers
             }
         }
         [HttpPost]
-        public JsonResult UpdateStatusPage(int PageId, int StatusActive)
+        public JsonResult UpdateStatusPage(int PageId, bool StatusActive)
         {
             if (chapterService.UpdateRawPage(PageId, "", StatusActive))
             {
@@ -109,7 +109,7 @@ namespace MyWebsite.Controllers
             var res = data.Chapters.SingleOrDefault(m => m.ChapterId == model.ChapterId);
             res.OrderNumber = model.OrderNumber;
             res.FullName = model.FullName;
-            res.StatusActive = model.StatusActive;
+            res.Active = model.StatusActive;
             data.SaveChanges();
             return Json("Lưu thành công");
         }

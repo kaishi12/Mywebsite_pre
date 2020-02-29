@@ -13,7 +13,7 @@ namespace MyWebsite.Service.Manga
         {       var param = new DynamicParameters();
                 param.Add("@GenreId", GenreId);
                 param.Add("@MangaId", MangaId);
-                param.Add("@StatusActive", 0);
+                param.Add("@StatusActive", 1);
                 return DALHelpers.ExecuteByStored("MangaGenre_Addnew", param) > 0;
         }
         public static IEnumerable<int> GetListGenreId(int MangaId)

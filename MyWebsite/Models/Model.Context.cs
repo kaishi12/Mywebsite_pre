@@ -35,6 +35,8 @@ namespace MyWebsite.Models
         public virtual DbSet<Manga> Mangas { get; set; }
         public virtual DbSet<Manga_Detail> Manga_Detail { get; set; }
         public virtual DbSet<Manga_Genres> Manga_Genres { get; set; }
+        public virtual DbSet<Notification> Notifications { get; set; }
+        public virtual DbSet<NotifyType> NotifyTypes { get; set; }
         public virtual DbSet<Page> Pages { get; set; }
         public virtual DbSet<Point> Points { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
@@ -43,7 +45,5 @@ namespace MyWebsite.Models
         public virtual DbSet<TextBox> TextBoxes { get; set; }
         public virtual DbSet<Translation> Translations { get; set; }
         public virtual DbSet<Translation_Detail> Translation_Detail { get; set; }
-        public virtual DbSet<Notification> Notifications { get; set; }
-        public virtual DbSet<NotifyType> NotifyTypes { get; set; }
     }
 }

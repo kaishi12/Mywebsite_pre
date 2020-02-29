@@ -46,15 +46,15 @@ namespace MyWebsite.Service.Manga
             param.Add("@Language", Language);
             return DALHelpers.QueryByStored<MangaDetail>("MangaDetail_GetInfo", param).FirstOrDefault();
         }
-        public static bool AddNewRole(int MangaId, int AccountId, int RoleId, int? type, string language)
+        public static bool AddNewRole(int MangaId, int AccountId, int RoleId, int type, int language)
         {
             var param = new DynamicParameters();
             param.Add("@MangaId", MangaId);
             param.Add("@AccountId", AccountId);
             param.Add("@RoleId", RoleId);
-            param.Add("@StatusActive", 0);
-            param.Add("@Type", null);
-            param.Add("@Language", null);
+            param.Add("@StatusActive", 1);
+            param.Add("@Type", 2);
+            param.Add("@Language", language);
             return DALHelpers.ExecuteByStored("MangaDetail_AddNewRole", param) > 0;
         }
         public static IEnumerable<MangaDetail> GetPeopleJoinManga(int AccountId)

@@ -10,8 +10,8 @@ namespace MyWebsite.ViewModels.Notification
         public int NotificationId { get; set; }
         public string Content { get; set; }
         public int AccountId { get; set; }
-        public int SeenStatus { get; set; }
-        public int Status { get; set; }
+        public bool SeenStatus { get; set; }
+        public bool Status { get; set; }
         public string CreateAt { get; set; }
 
     }

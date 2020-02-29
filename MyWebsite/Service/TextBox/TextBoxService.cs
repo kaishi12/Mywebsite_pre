@@ -23,7 +23,7 @@ namespace MyWebsite.Service.TextBox
                         textbox.Degree = item.Degrees;
                         textbox.Height = item.Height;
                         textbox.Witdh = item.Witdh;
-                        textbox.StatusActive = 0;
+                        textbox.Active = true;
                         data.TextBoxes.Add(textbox);
                         data.SaveChanges();
                     }
@@ -32,7 +32,7 @@ namespace MyWebsite.Service.TextBox
                         Models.TextBox textBox = data.TextBoxes.SingleOrDefault(m => m.TextBoxId == item.TextBoxId);
                         if (item.StatusActive == 1)
                         {
-                            textBox.StatusActive = 1;
+                            textBox.Active = false;
                         }
                         else
                         {

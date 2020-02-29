@@ -9,7 +9,7 @@
     <Property Name="Email" Type="nvarchar" MaxLength="50" />
     <Property Name="PhoneNumber" Type="nvarchar" MaxLength="50" />
     <Property Name="AvatarLink" Type="nvarchar" MaxLength="50" />
-    <Property Name="StatusActive" Type="int" />
+    <Property Name="Active" Type="bit" Nullable="false" />
     <Property Name="UserName" Type="nvarchar" MaxLength="50" />
     <Property Name="PassWord" Type="nvarchar" MaxLength="50" />
     <Property Name="ResetPasswordCode" Type="nvarchar" MaxLength="100" />
@@ -27,6 +27,7 @@
     <Property Name="AccountId" Type="int" Nullable="false" />
     <Property Name="PointId" Type="int" Nullable="false" />
     <Property Name="Total" Type="float" />
+    <Property Name="Active" Type="bit" Nullable="false" />
   </EntityType>
   <!--Errors Found During Generation:
 warning 6002: The table/view 'MyWebsite.dbo.Bookmark' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -43,68 +44,68 @@ warning 6002: The table/view 'MyWebsite.dbo.Bookmark' does not have a primary ke
       <PropertyRef Name="CategoryId" />
     </Key>
     <Property Name="CategoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="FullName" Type="nvarchar" MaxLength="50" />
-    <Property Name="StatusActive" Type="int" />
+    <Property Name="FullName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Active" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="Chapter">
     <Key>
       <PropertyRef Name="ChapterId" />
     </Key>
     <Property Name="ChapterId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="FullName" Type="nvarchar(max)" />
-    <Property Name="OrderNumber" Type="int" />
-    <Property Name="ViewNumber" Type="int" />
-    <Property Name="CreateAt" Type="datetime" />
-    <Property Name="StatusActive" Type="int" />
-    <Property Name="MangaId" Type="int" />
-    <Property Name="Alias" Type="nvarchar(max)" />
+    <Property Name="FullName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="OrderNumber" Type="int" Nullable="false" />
+    <Property Name="ViewNumber" Type="int" Nullable="false" />
+    <Property Name="CreateAt" Type="datetime" Nullable="false" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+    <Property Name="MangaId" Type="int" Nullable="false" />
+    <Property Name="Alias" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="Font">
     <Key>
       <PropertyRef Name="FontId" />
     </Key>
     <Property Name="FontId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="FullName" Type="nvarchar" MaxLength="50" />
-    <Property Name="FontLink" Type="nvarchar" MaxLength="200" />
-    <Property Name="Description" Type="nvarchar" MaxLength="50" />
-    <Property Name="StatusActive" Type="int" />
-    <Property Name="Type" Type="nvarchar" MaxLength="100" />
+    <Property Name="FullName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="FontLink" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+    <Property Name="Type" Type="nvarchar" MaxLength="100" Nullable="false" />
   </EntityType>
   <EntityType Name="Genre">
     <Key>
       <PropertyRef Name="GenreId" />
     </Key>
     <Property Name="GenreId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="FullName" Type="nvarchar" MaxLength="50" />
-    <Property Name="Id" Type="nvarchar" MaxLength="50" />
-    <Property Name="Description" Type="nvarchar(max)" />
-    <Property Name="Alias" Type="nvarchar" MaxLength="50" />
-    <Property Name="StatusActive" Type="int" />
+    <Property Name="FullName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Id" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Alias" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Active" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="Language">
     <Key>
       <PropertyRef Name="LanguageId" />
     </Key>
     <Property Name="LanguageId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="FullName" Type="nvarchar" MaxLength="50" />
-    <Property Name="Note" Type="nvarchar" MaxLength="50" />
-    <Property Name="StatusActive" Type="int" />
-    <Property Name="Id" Type="nvarchar" MaxLength="50" />
+    <Property Name="FullName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Note" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+    <Property Name="Code" Type="nvarchar" MaxLength="50" Nullable="false" />
   </EntityType>
   <EntityType Name="Manga">
     <Key>
       <PropertyRef Name="MangaId" />
     </Key>
     <Property Name="MangaId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="CoverLink" Type="nvarchar" MaxLength="50" />
-    <Property Name="FullName" Type="nvarchar(max)" />
-    <Property Name="Description" Type="nvarchar(max)" />
-    <Property Name="CreateAt" Type="datetime" />
+    <Property Name="CoverLink" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="FullName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CreateAt" Type="datetime" Nullable="false" />
     <Property Name="Author" Type="nvarchar" MaxLength="50" />
-    <Property Name="StatusActive" Type="int" />
-    <Property Name="Alias" Type="nvarchar(max)" />
-    <Property Name="StatusId" Type="int" />
-    <Property Name="UpdateAt" Type="datetime" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+    <Property Name="Alias" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="StatusId" Type="int" Nullable="false" />
+    <Property Name="UpdateAt" Type="datetime" Nullable="false" />
   </EntityType>
   <EntityType Name="Manga_Detail">
     <Key>
@@ -115,10 +116,10 @@ warning 6002: The table/view 'MyWebsite.dbo.Bookmark' does not have a primary ke
     <Property Name="AccountId" Type="int" Nullable="false" />
     <Property Name="MangaId" Type="int" Nullable="false" />
     <Property Name="RoleId" Type="int" Nullable="false" />
-    <Property Name="StatusActive" Type="int" />
-    <Property Name="Type" Type="int" />
-    <Property Name="Language" Type="nvarchar" MaxLength="50" />
-    <Property Name="CreateAt" Type="datetime" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+    <Property Name="Type" Type="int" Nullable="false" />
+    <Property Name="Language" Type="int" />
+    <Property Name="CreateAt" Type="datetime" Nullable="false" />
   </EntityType>
   <EntityType Name="Manga_Genres">
     <Key>
@@ -127,110 +128,110 @@ warning 6002: The table/view 'MyWebsite.dbo.Bookmark' does not have a primary ke
     </Key>
     <Property Name="MangaId" Type="int" Nullable="false" />
     <Property Name="GenreId" Type="int" Nullable="false" />
-    <Property Name="StatusActive" Type="int" />
+    <Property Name="Active" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="Notification">
     <Key>
       <PropertyRef Name="NotificationId" />
     </Key>
     <Property Name="NotificationId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="NContent" Type="nvarchar(max)" />
-    <Property Name="CreateAt" Type="datetime" />
-    <Property Name="Status" Type="int" />
-    <Property Name="AccountId" Type="int" />
-    <Property Name="NotifyTypeId" Type="int" />
-    <Property Name="SeenStatus" Type="int" />
+    <Property Name="NContent" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CreateAt" Type="datetime" Nullable="false" />
+    <Property Name="Status" Type="bit" Nullable="false" />
+    <Property Name="AccountId" Type="int" Nullable="false" />
+    <Property Name="NotifyTypeId" Type="int" Nullable="false" />
+    <Property Name="SeenStatus" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="NotifyType">
     <Key>
       <PropertyRef Name="NotifyTypeId" />
     </Key>
     <Property Name="NotifyTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="FullName" Type="nvarchar(max)" />
-    <Property Name="StatusActive" Type="int" />
-    <Property Name="NTContent" Type="nvarchar(max)" />
+    <Property Name="FullName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+    <Property Name="NTContent" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="Page">
     <Key>
       <PropertyRef Name="PageId" />
     </Key>
     <Property Name="PageId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="FullName" Type="nvarchar" MaxLength="2000" />
-    <Property Name="OrderNumber" Type="int" />
-    <Property Name="PageLink" Type="nvarchar" MaxLength="2000" />
-    <Property Name="StatusActive" Type="int" />
-    <Property Name="ChapterId" Type="int" />
-    <Property Name="CategoryId" Type="int" />
-    <Property Name="CreateAt" Type="datetime" />
-    <Property Name="AccountId" Type="int" />
-    <Property Name="PageId_Fa" Type="int" />
+    <Property Name="FullName" Type="nvarchar" MaxLength="2000" Nullable="false" />
+    <Property Name="OrderNumber" Type="int" Nullable="false" />
+    <Property Name="PageLink" Type="nvarchar" MaxLength="2000" Nullable="false" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+    <Property Name="ChapterId" Type="int" Nullable="false" />
+    <Property Name="CategoryId" Type="int" Nullable="false" />
+    <Property Name="CreateAt" Type="datetime" Nullable="false" />
+    <Property Name="AccountId" Type="int" Nullable="false" />
+    <Property Name="PageId_Fa" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Point">
     <Key>
       <PropertyRef Name="PointId" />
     </Key>
     <Property Name="PointId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Id" Type="nvarchar" MaxLength="50" />
-    <Property Name="FullName" Type="nvarchar" MaxLength="50" />
-    <Property Name="PointNumber" Type="float" />
-    <Property Name="StatusActive" Type="int" />
+    <Property Name="Code" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="FullName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="PointNumber" Type="float" Nullable="false" />
+    <Property Name="Active" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="Role">
     <Key>
       <PropertyRef Name="RoleId" />
     </Key>
     <Property Name="RoleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="FullName" Type="nvarchar" MaxLength="50" />
-    <Property Name="Id" Type="nchar" MaxLength="10" />
-    <Property Name="StatusActive" Type="int" />
+    <Property Name="FullName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+    <Property Name="Code" Type="nchar" MaxLength="10" Nullable="false" />
   </EntityType>
   <EntityType Name="Status">
     <Key>
       <PropertyRef Name="StatusId" />
     </Key>
     <Property Name="StatusId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="FullName" Type="nvarchar" MaxLength="50" />
-    <Property Name="StatusActive" Type="nvarchar" MaxLength="50" />
+    <Property Name="FullName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Active" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="Text">
     <Key>
       <PropertyRef Name="TextId" />
     </Key>
     <Property Name="TextId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="TextContent" Type="nvarchar(max)" />
-    <Property Name="ColorText" Type="nchar" MaxLength="10" />
-    <Property Name="ColorOutline" Type="nchar" MaxLength="10" />
-    <Property Name="Bold" Type="int" />
-    <Property Name="StatusActive" Type="int" />
-    <Property Name="StatusAllow" Type="int" />
-    <Property Name="TranslationId" Type="int" />
-    <Property Name="AccountId" Type="int" />
-    <Property Name="TextBoxId" Type="int" />
-    <Property Name="FontId" Type="int" />
-    <Property Name="FontSize" Type="int" />
-    <Property Name="Italic" Type="nchar" MaxLength="10" />
+    <Property Name="TextContent" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ColorText" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="ColorOutline" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="Bold" Type="bit" Nullable="false" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+    <Property Name="Allow" Type="bit" Nullable="false" />
+    <Property Name="TranslationId" Type="int" Nullable="false" />
+    <Property Name="AccountId" Type="int" Nullable="false" />
+    <Property Name="TextBoxId" Type="int" Nullable="false" />
+    <Property Name="FontId" Type="int" Nullable="false" />
+    <Property Name="FontSize" Type="int" Nullable="false" />
+    <Property Name="Italic" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="TextBox">
     <Key>
       <PropertyRef Name="TextBoxId" />
     </Key>
     <Property Name="TextBoxId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Coordinate" Type="nvarchar" MaxLength="50" />
-    <Property Name="Witdh" Type="int" />
-    <Property Name="Height" Type="int" />
-    <Property Name="PageId" Type="int" />
-    <Property Name="StatusActive" Type="int" />
-    <Property Name="Degree" Type="int" />
+    <Property Name="Coordinate" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Witdh" Type="int" Nullable="false" />
+    <Property Name="Height" Type="int" Nullable="false" />
+    <Property Name="PageId" Type="int" Nullable="false" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+    <Property Name="Degree" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Translation">
     <Key>
       <PropertyRef Name="TransationId" />
     </Key>
     <Property Name="TransationId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="MangaId" Type="int" />
-    <Property Name="AccountId" Type="int" />
-    <Property Name="LanguageId" Type="int" />
-    <Property Name="StatusActive" Type="int" />
+    <Property Name="MangaId" Type="int" Nullable="false" />
+    <Property Name="AccountId" Type="int" Nullable="false" />
+    <Property Name="LanguageId" Type="int" Nullable="false" />
+    <Property Name="Active" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="Translation_Detail">
     <Key>
@@ -239,10 +240,9 @@ warning 6002: The table/view 'MyWebsite.dbo.Bookmark' does not have a primary ke
     </Key>
     <Property Name="ChapterId" Type="int" Nullable="false" />
     <Property Name="TranslationId" Type="int" Nullable="false" />
-    <Property Name="StatusActive" Type="int" />
-    <Property Name="UpdateAt" Type="datetime" />
-    <Property Name="MangaId" Type="int" />
-    <Property Name="CreateAt" Type="datetime" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+    <Property Name="UpdateAt" Type="datetime" Nullable="false" />
+    <Property Name="CreateAt" Type="datetime" Nullable="false" />
   </EntityType>
   <Association Name="FK_Account_Detail_Account">
     <End Role="Account" Type="Self.Account" Multiplicity="1" />
@@ -293,7 +293,7 @@ warning 6002: The table/view 'MyWebsite.dbo.Bookmark' does not have a primary ke
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Chapter_Manga">
-    <End Role="Manga" Type="Self.Manga" Multiplicity="0..1" />
+    <End Role="Manga" Type="Self.Manga" Multiplicity="1" />
     <End Role="Chapter" Type="Self.Chapter" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Manga">
@@ -365,7 +365,7 @@ warning 6002: The table/view 'MyWebsite.dbo.Bookmark' does not have a primary ke
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Manga_Status">
-    <End Role="Status" Type="Self.Status" Multiplicity="0..1" />
+    <End Role="Status" Type="Self.Status" Multiplicity="1" />
     <End Role="Manga" Type="Self.Manga" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Status">
@@ -377,7 +377,7 @@ warning 6002: The table/view 'MyWebsite.dbo.Bookmark' does not have a primary ke
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Notification_Account">
-    <End Role="Account" Type="Self.Account" Multiplicity="0..1" />
+    <End Role="Account" Type="Self.Account" Multiplicity="1" />
     <End Role="Notification" Type="Self.Notification" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Account">
@@ -389,7 +389,7 @@ warning 6002: The table/view 'MyWebsite.dbo.Bookmark' does not have a primary ke
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Notification_NotifyType">
-    <End Role="NotifyType" Type="Self.NotifyType" Multiplicity="0..1" />
+    <End Role="NotifyType" Type="Self.NotifyType" Multiplicity="1" />
     <End Role="Notification" Type="Self.Notification" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="NotifyType">
@@ -401,7 +401,7 @@ warning 6002: The table/view 'MyWebsite.dbo.Bookmark' does not have a primary ke
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Page_Account">
-    <End Role="Account" Type="Self.Account" Multiplicity="0..1" />
+    <End Role="Account" Type="Self.Account" Multiplicity="1" />
     <End Role="Page" Type="Self.Page" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Account">
@@ -413,7 +413,7 @@ warning 6002: The table/view 'MyWebsite.dbo.Bookmark' does not have a primary ke
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Page_Category">
-    <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+    <End Role="Category" Type="Self.Category" Multiplicity="1" />
     <End Role="Page" Type="Self.Page" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Category">
@@ -425,7 +425,7 @@ warning 6002: The table/view 'MyWebsite.dbo.Bookmark' does not have a primary ke
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Page_Chapter">
-    <End Role="Chapter" Type="Self.Chapter" Multiplicity="0..1" />
+    <End Role="Chapter" Type="Self.Chapter" Multiplicity="1" />
     <End Role="Page" Type="Self.Page" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Chapter">
@@ -437,7 +437,7 @@ warning 6002: The table/view 'MyWebsite.dbo.Bookmark' does not have a primary ke
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Text_Account">
-    <End Role="Account" Type="Self.Account" Multiplicity="0..1" />
+    <End Role="Account" Type="Self.Account" Multiplicity="1" />
     <End Role="Text" Type="Self.Text" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Account">
@@ -449,7 +449,7 @@ warning 6002: The table/view 'MyWebsite.dbo.Bookmark' does not have a primary ke
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Text_Font">
-    <End Role="Font" Type="Self.Font" Multiplicity="0..1" />
+    <End Role="Font" Type="Self.Font" Multiplicity="1" />
     <End Role="Text" Type="Self.Text" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Font">
@@ -461,7 +461,7 @@ warning 6002: The table/view 'MyWebsite.dbo.Bookmark' does not have a primary ke
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Text_TextBox1">
-    <End Role="TextBox" Type="Self.TextBox" Multiplicity="0..1" />
+    <End Role="TextBox" Type="Self.TextBox" Multiplicity="1" />
     <End Role="Text" Type="Self.Text" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="TextBox">
@@ -473,7 +473,7 @@ warning 6002: The table/view 'MyWebsite.dbo.Bookmark' does not have a primary ke
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Text_Translation">
-    <End Role="Translation" Type="Self.Translation" Multiplicity="0..1" />
+    <End Role="Translation" Type="Self.Translation" Multiplicity="1" />
     <End Role="Text" Type="Self.Text" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Translation">
@@ -485,7 +485,7 @@ warning 6002: The table/view 'MyWebsite.dbo.Bookmark' does not have a primary ke
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_TextBox_Page">
-    <End Role="Page" Type="Self.Page" Multiplicity="0..1" />
+    <End Role="Page" Type="Self.Page" Multiplicity="1" />
     <End Role="TextBox" Type="Self.TextBox" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Page">
@@ -497,7 +497,7 @@ warning 6002: The table/view 'MyWebsite.dbo.Bookmark' does not have a primary ke
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Translation_Account">
-    <End Role="Account" Type="Self.Account" Multiplicity="0..1" />
+    <End Role="Account" Type="Self.Account" Multiplicity="1" />
     <End Role="Translation" Type="Self.Translation" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Account">
@@ -520,18 +520,6 @@ warning 6002: The table/view 'MyWebsite.dbo.Bookmark' does not have a primary ke
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Translation_Detail_Manga">
-    <End Role="Manga" Type="Self.Manga" Multiplicity="0..1" />
-    <End Role="Translation_Detail" Type="Self.Translation_Detail" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Manga">
-        <PropertyRef Name="MangaId" />
-      </Principal>
-      <Dependent Role="Translation_Detail">
-        <PropertyRef Name="MangaId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_Translation_Detail_Translation">
     <End Role="Translation" Type="Self.Translation" Multiplicity="1" />
     <End Role="Translation_Detail" Type="Self.Translation_Detail" Multiplicity="*" />
@@ -545,7 +533,7 @@ warning 6002: The table/view 'MyWebsite.dbo.Bookmark' does not have a primary ke
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Translation_Language">
-    <End Role="Language" Type="Self.Language" Multiplicity="0..1" />
+    <End Role="Language" Type="Self.Language" Multiplicity="1" />
     <End Role="Translation" Type="Self.Translation" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Language">
@@ -557,7 +545,7 @@ warning 6002: The table/view 'MyWebsite.dbo.Bookmark' does not have a primary ke
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Translation_Manga">
-    <End Role="Manga" Type="Self.Manga" Multiplicity="0..1" />
+    <End Role="Manga" Type="Self.Manga" Multiplicity="1" />
     <End Role="Translation" Type="Self.Translation" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Manga">
@@ -685,10 +673,6 @@ warning 6002: The table/view 'MyWebsite.dbo.Bookmark' does not have a primary ke
     </AssociationSet>
     <AssociationSet Name="FK_Translation_Detail_Chapter" Association="Self.FK_Translation_Detail_Chapter">
       <End Role="Chapter" EntitySet="Chapter" />
-      <End Role="Translation_Detail" EntitySet="Translation_Detail" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Translation_Detail_Manga" Association="Self.FK_Translation_Detail_Manga">
-      <End Role="Manga" EntitySet="Manga" />
       <End Role="Translation_Detail" EntitySet="Translation_Detail" />
     </AssociationSet>
     <AssociationSet Name="FK_Translation_Detail_Translation" Association="Self.FK_Translation_Detail_Translation">

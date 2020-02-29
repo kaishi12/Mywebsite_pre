@@ -26,8 +26,8 @@ namespace MyWebsite.Controllers
         public ActionResult CreateManga()
         {
 
-            ViewBag.Genre = from row in data.Genres select row;
-            ViewBag.Status = from row in data.Status select row;
+            ViewBag.Genre = data.Genres.Where(m=>m.Active == true);
+            ViewBag.Status =data.Status.Where(m => m.Active == true);
             return View();
 
         }
@@ -35,11 +35,11 @@ namespace MyWebsite.Controllers
          public ActionResult CreateManga(MangaModel model, HttpPostedFileBase AnhBia)
         {
 
-            ViewBag.Genre = from row in data.Genres select row;
-            ViewBag.Status = from row in data.Status select row;
+            ViewBag.Genre = data.Genres.Where(m => m.Active == true);
+            ViewBag.Status =data.Status.Where(m => m.Active == true);
             if (AnhBia != null)
             {
-                var filename = Path.GetFileName(AnhBia.FileName);
+                var filename = model.FullName;
                 var path = Path.Combine(Server.MapPath("~/Cover"), filename);
                 AnhBia.SaveAs(path);
                 model.CoverLink = filename;
@@ -49,7 +49,7 @@ namespace MyWebsite.Controllers
                 model.MangaId = MangaService.AddnewManga(model);
                 AccountService accountService = new AccountService();
                 AccountModel accountModel = (AccountModel)Session["UserInfo"];
-                if (MangaDetailService.AddNewRole(model.MangaId, accountModel.AccountId, 1,null,null) && model.MangaId > -1)
+                if (MangaDetailService.AddNewRole(model.MangaId, accountModel.AccountId, (int)EnumRole.CM,(int)EnumTypeMember.Create, 0) && model.MangaId > -1)
                 {
                     return RedirectToAction("Result", new { MangaId = model.MangaId, Status = 0 });
                 }
@@ -122,12 +122,12 @@ namespace MyWebsite.Controllers
         public ActionResult ListManga()
         {
             AccountModel accountModel = (AccountModel)Session["UserInfo"];
-           var list = MangaService.GetListMangaByAccountId(accountModel.AccountId, "MC");
-            var chapter = data.Chapters.Where(m => m.StatusActive == 0).GroupBy(m => m.MangaId).Select(m =>new { id = m.Key, count = m.Count(), totalview = m.Where(l=>l.ViewNumber != null).Sum(l=>l.ViewNumber) }).ToList();
+           var list = MangaService.GetListMangaByAccountIdandRoleId(accountModel.AccountId, (int)EnumRole.CM);
+            var chapter = data.Chapters.Where(m => m.Active == true).GroupBy(m => m.MangaId).Select(m =>new { id = m.Key, count = m.Count(), totalview = m.Where(l=>l.ViewNumber != null).Sum(l=>l.ViewNumber) }).ToList();
             foreach(var item in list)
             {
                 item.ChapterCount = chapter.FirstOrDefault(m => m.id == item.MangaId) == null ? 0 : chapter.FirstOrDefault(m => m.id == item.MangaId).count;
-                item.TotalView = chapter.FirstOrDefault(m => m.id == item.MangaId) == null ? 0 : chapter.FirstOrDefault(m => m.id == item.MangaId).totalview.Value;
+                item.TotalView = chapter.FirstOrDefault(m => m.id == item.MangaId) == null ? 0 : chapter.FirstOrDefault(m => m.id == item.MangaId).totalview;
             }
             return View(list);
 
@@ -170,7 +170,7 @@ namespace MyWebsite.Controllers
             return Json(MangaService.Search(accountModel.AccountId, Name), JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
-        public JsonResult Join(int id, string role, string language, int type, int? AccountId)
+        public JsonResult Join(int id, string role, int language, int type, int? AccountId)
         {
 
 

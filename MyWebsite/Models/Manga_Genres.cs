@@ -16,7 +16,7 @@ namespace MyWebsite.Models
     {
         public int MangaId { get; set; }
         public int GenreId { get; set; }
-        public Nullable<int> StatusActive { get; set; }
+        public bool Active { get; set; }
     
         public virtual Genre Genre { get; set; }
         public virtual Manga Manga { get; set; }

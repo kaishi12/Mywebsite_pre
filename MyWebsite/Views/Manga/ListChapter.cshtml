@@ -88,14 +88,14 @@
                                 <td>
                                     @Html.DisplayFor(modelItem => item.ViewNumber)
                                 </td>
-                                @if (item.StatusActive == 0)
+                                @if (item.StatusActive == -1)
                                 {
                                     <td>
                                         Chỉnh sửa
                                     </td>
                                 }
                                 else
-                                   if (item.StatusActive == 1)
+                                   if (item.StatusActive == 0)
                                 {
                                     <td>
                                         Khóa

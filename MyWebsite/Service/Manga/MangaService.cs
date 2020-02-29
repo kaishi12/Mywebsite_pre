@@ -27,7 +27,7 @@ namespace MyWebsite.Service.Manga
                 param.Add("@CreateAt", DateTime.Now);
                 param.Add("@Description", model.Description);
                 param.Add("@StatusId", model.StatusId);
-                param.Add("@StatusActive",0);
+                param.Add("@StatusActive",1);
                 int MangaId = DALHelpers.QueryByStored<int>("Manga_AddnewManga", param).FirstOrDefault();
                for (int i = 0; i < model.ListGenre.Count(); i++)
                 {
@@ -57,15 +57,16 @@ namespace MyWebsite.Service.Manga
                 return null;
             }
         }
-        public IEnumerable<MangaModel> GetListMangaByAccountId(int AccountId, string roleid)
+        public IEnumerable<MangaModel> GetListMangaByAccountIdandRoleId(int AccountId, int roleid)
         {
             try
             {
+
                 var param = new DynamicParameters();
                 param.Add("@AccountId", AccountId);
                 param.Add("@RoleId", roleid);
                 return DALHelpers.QueryByStored<MangaModel>("Manga_GetListManga", param);
-             }
+            }
             catch (Exception ex)
             {
                 return null;
@@ -84,7 +85,7 @@ namespace MyWebsite.Service.Manga
                 param.Add("@CreateAt", DateTime.Now);
                 param.Add("@Description", model.Description);
                 param.Add("@StatusId", model.StatusId);
-                param.Add("@StatusActive", 0);
+                param.Add("@StatusActive", 1);
                 DALHelpers.ExecuteByStored("Manga_UpdateInfoManga", param);
                
                 var listgenre = MangaGenreService.GetListGenreId(model.MangaId);
@@ -116,26 +117,23 @@ namespace MyWebsite.Service.Manga
 
                 List<ViewModels.Manga.MangaJoin> model = new List<ViewModels.Manga.MangaJoin>();
                 List<int> MangaId = new List<int>();
-                List<Manga_Detail> list = data.Manga_Detail.Where(m => m.AccountId == AccountId && m.StatusActive == 0 && m.RoleId != 1).ToList();
+                List<Manga_Detail> list = data.Manga_Detail.Where(m => m.AccountId == AccountId && m.Active == true && m.RoleId != 1).ToList();
                 foreach (var item in list)
                 {
                     MangaJoin mangaJoin = new MangaJoin();
                     if (!MangaId.Contains(item.MangaId))
                     {
-
                         Models.Manga manga = data.Mangas.FirstOrDefault(m => m.MangaId == item.MangaId);
                         MangaId.Add(item.MangaId);
                         mangaJoin.MangaId = manga.MangaId;
                         mangaJoin.Alias = manga.Alias;
-                        mangaJoin.CreatAt = manga.CreateAt.Value;
+                        mangaJoin.CreatAt = manga.CreateAt;
                         mangaJoin.Author = manga.Author;
                         mangaJoin.CoverLink = manga.CoverLink;
                         mangaJoin.Description = manga.Description;
                         mangaJoin.StatusName = manga.Status.FullName;
-                        mangaJoin.StatusActive = manga.StatusActive.Value;
+                        mangaJoin.StatusActive = manga.Active;
                         mangaJoin.FullName = manga.FullName;
-                        mangaJoin.StatusActive = manga.StatusActive.Value;
-
                     }
                     else
                     {
@@ -180,7 +178,7 @@ namespace MyWebsite.Service.Manga
                 param.Add("@MangaId", MangaId);
                 return DALHelpers.QueryByStored<MangaModel>("Manga_Search", param).FirstOrDefault();
         }
-        public int Join(int AccountId, int MangaId, string Role, string language, int type)
+        public int Join(int AccountId, int MangaId, string Role, int language, int type)
         {
             try
             {

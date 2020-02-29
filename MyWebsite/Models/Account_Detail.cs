@@ -17,6 +17,7 @@ namespace MyWebsite.Models
         public int AccountId { get; set; }
         public int PointId { get; set; }
         public Nullable<double> Total { get; set; }
+        public bool Active { get; set; }
     
         public virtual Account Account { get; set; }
         public virtual Point Point { get; set; }

@@ -27,7 +27,7 @@ namespace MyWebsite.Controllers
         {
 
             AccountModel accountModel = (AccountModel)Session["UserInfo"];
-            var list = MangaService.GetListMangaByAccountId(accountModel.AccountId, "Ed");
+            var list = MangaService.GetListMangaByAccountIdandRoleId(accountModel.AccountId, (int)EnumRole.UC);
             foreach(var item in list)
             {
                 item.FirstChapter = ChapterService.GetFirstChapter(item.MangaId);
@@ -41,13 +41,13 @@ namespace MyWebsite.Controllers
             Chapter chapter = new Chapter();
             if (ChapterId == null)
             {
-                chapter = data.Chapters.FirstOrDefault(m => m.StatusActive == 0);
+                chapter = data.Chapters.FirstOrDefault(m => m.Active == true);
             }
             else
             {
                 chapter = data.Chapters.FirstOrDefault(m => m.ChapterId == ChapterId);
             }
-            var chapterlist = data.Chapters.Where(m => m.MangaId == chapter.MangaId && m.StatusActive == 0);
+            var chapterlist = data.Chapters.Where(m => m.MangaId == chapter.MangaId && m.Active == true);
             if (CategoryId == null)
             {
                 ViewBag.CategoryId = 1;
@@ -64,7 +64,7 @@ namespace MyWebsite.Controllers
         {
 
             AccountModel accountModel = (AccountModel)Session["UserInfo"];
-            var list = MangaService.GetListMangaByAccountId(accountModel.AccountId, "Tr");
+            var list = MangaService.GetListMangaByAccountIdandRoleId(accountModel.AccountId, (int)EnumRole.TR);
             foreach (var item in list)
             {
                 item.FirstPage = ChapterService.GetFirstPage(item.MangaId);
@@ -85,8 +85,8 @@ namespace MyWebsite.Controllers
             }
             if (ChapterId == null)
             {
-                chapterlist = data.Chapters.Where(m => m.MangaId == Firstpage.Chapter.MangaId && m.StatusActive == 0).ToList();
-                var list = data.Pages.Where(m => m.ChapterId == Firstpage.ChapterId && m.CategoryId == 1 && m.StatusActive == 0);
+                chapterlist = data.Chapters.Where(m => m.MangaId == Firstpage.Chapter.MangaId && m.Active == true).ToList();
+                var list = data.Pages.Where(m => m.ChapterId == Firstpage.ChapterId && m.CategoryId == 1 && m.Active == true);
                 foreach (var item in list)
                 {
                     dict.Add(item.PageId, item.FullName);
@@ -95,8 +95,8 @@ namespace MyWebsite.Controllers
             else
             {
                 ViewBag.ChapterId = ChapterId;
-                chapterlist = data.Chapters.Where(m => m.MangaId == data.Chapters.FirstOrDefault(n => n.ChapterId == ChapterId).MangaId && m.StatusActive == 0).ToList();
-                var list = data.Pages.Where(m => m.ChapterId == ChapterId && m.CategoryId == 1 && m.StatusActive == 0).ToList();
+                chapterlist = data.Chapters.Where(m => m.MangaId == data.Chapters.FirstOrDefault(n => n.ChapterId == ChapterId).MangaId && m.Active == true).ToList();
+                var list = data.Pages.Where(m => m.ChapterId == ChapterId && m.CategoryId == 1 && m.Active == true).ToList();
                 foreach (var item in list)
                 {
                     dict.Add(item.PageId, item.FullName);
@@ -112,14 +112,14 @@ namespace MyWebsite.Controllers
                 Firstpage = data.Pages.SingleOrDefault(p => p.PageId == pagene);
                 PageId = Firstpage.PageId;
             }
-            int mangaid = chapterlist[0].MangaId.Value;
+            int mangaid = chapterlist[0].MangaId;
             var Language = data.Translations.Where(m => m.MangaId == mangaid);
-            if (data.Translations.SingleOrDefault(m => m.TransationId == TranslationId).StatusActive == 1)
+            if (data.Translations.SingleOrDefault(m => m.TransationId == TranslationId).Active == false)
             {
                 ViewBag.Block = 1;
             }
-            var fonts = data.Fonts.Where(m => m.StatusActive == 0);
-            var textbox = Firstpage.TextBoxes.Where(m => m.StatusActive == 0).ToList();
+            var fonts = data.Fonts.Where(m => m.Active == true);
+            var textbox = Firstpage.TextBoxes.Where(m => m.Active == true).ToList();
             List<TextBox> textBoxes = new List<TextBox>();
             foreach (var text in textbox)
             {
@@ -141,7 +141,7 @@ namespace MyWebsite.Controllers
             ViewBag.Text = listtext;
             ViewBag.listpage = dict;
             ViewBag.FirstFontType = fonts.First().Type.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
-            ViewBag.PageClear = data.Pages.SingleOrDefault(p => p.PageId_Fa == PageId && p.StatusActive == 0);
+            ViewBag.PageClear = data.Pages.SingleOrDefault(p => p.PageId_Fa == PageId && p.Active == true);
             ViewBag.chapterlist = chapterlist;
             return View(Firstpage);
         }
@@ -170,12 +170,12 @@ namespace MyWebsite.Controllers
                     }
                     else
                     {
-                        if (item.StatusActive == 1)
+                        if (item.Active)
                         {
                             item.FontId = data.Fonts.FirstOrDefault().FontId;
                             item.ColorText = "red";
-                            item.Bold = 400;
-                            item.Italic = "0";
+                            item.Bold = true;
+                            item.Italic = true;
                             item.FontSize = 24;
                         }
                         item.AccountId = accountModel.AccountId;
@@ -195,25 +195,25 @@ namespace MyWebsite.Controllers
         [HttpPost]
         public JsonResult GetTextByTrans(int TranslationId, int PageId)
         {
-            var Textbox = data.TextBoxes.Where(m => m.PageId == PageId && m.StatusActive == 0);
+            var Textbox = data.TextBoxes.Where(m => m.PageId == PageId && m.Active == true);
             List<ViewModels.Text.Text> Data = new List<ViewModels.Text.Text>();
             ViewModels.Text.Text newtext = new ViewModels.Text.Text();
             foreach (var item in Textbox)
             {
-                var text = data.Texts.SingleOrDefault(m => m.TranslationId == TranslationId && m.StatusActive == 0 && m.TextBoxId == item.TextBoxId);
+                var text = data.Texts.SingleOrDefault(m => m.TranslationId == TranslationId && m.Active == true && m.TextBoxId == item.TextBoxId);
                 if (text != null)
                 {
                     var cor = item.Coordinate.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
                     newtext.text = text.TextContent;
                     newtext.CorX = int.Parse(cor[0]);
                      newtext.CorY = int.Parse(cor[1]);
-                    newtext.Height = item.Height.Value;
-                    newtext.Witdh = item.Witdh.Value;
-                    newtext.Italic = int.Parse(text.Italic);
-                    newtext.Bold = text.Bold.Value;
+                    newtext.Height = item.Height;
+                    newtext.Witdh = item.Witdh;
+                    newtext.Italic = text.Italic ;
+                    newtext.Bold = text.Bold;
                     newtext.Font = text.Font.FullName;
-                    newtext.Degrees = item.Degree.Value;
-                    newtext.Size = text.FontSize.Value;
+                    newtext.Degrees = item.Degree;
+                    newtext.Size = text.FontSize;
                     newtext.color = text.ColorText;
                     Data.Add(newtext);
                 }

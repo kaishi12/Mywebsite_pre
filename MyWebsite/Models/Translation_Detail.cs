@@ -16,13 +16,11 @@ namespace MyWebsite.Models
     {
         public int ChapterId { get; set; }
         public int TranslationId { get; set; }
-        public Nullable<int> StatusActive { get; set; }
-        public Nullable<System.DateTime> UpdateAt { get; set; }
-        public Nullable<int> MangaId { get; set; }
-        public Nullable<System.DateTime> CreateAt { get; set; }
+        public bool Active { get; set; }
+        public System.DateTime UpdateAt { get; set; }
+        public System.DateTime CreateAt { get; set; }
     
         public virtual Chapter Chapter { get; set; }
         public virtual Translation Translation { get; set; }
-        public virtual Manga Manga { get; set; }
     }
 }

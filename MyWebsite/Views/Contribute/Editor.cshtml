@@ -111,17 +111,18 @@
                                             <br />
                                             @if (item.StatusActive == 1)
                                             {
-                                                <span class="text-muted"> Chưa được duyệt</span>
+                                                <span class="text-muted">Đã được duyệt</span>
                                             }
                                             else
                                             {
-                                                <span class="text-muted">Đã được duyệt</span>
+                                                <span class="text-muted"> Chưa được duyệt</span>
+
                                             }
                                         </div>
 
 
                                         <div style="padding-bottom:0px" class="box-footer row">
-                                            @if (item.StatusActive == 1)
+                                            @if (item.StatusActive == 0)
                                             {
                                                 <button id="@item.PageId" type="button" class="UploadButton md-btn md-raised m-b-sm w-xs accent" style="display: block;margin-left: auto;margin-right: auto;">Chỉnh sửa</button>
                                             }

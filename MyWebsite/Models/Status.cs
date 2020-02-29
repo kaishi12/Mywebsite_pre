@@ -22,7 +22,7 @@ namespace MyWebsite.Models
     
         public int StatusId { get; set; }
         public string FullName { get; set; }
-        public string StatusActive { get; set; }
+        public bool Active { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Manga> Mangas { get; set; }

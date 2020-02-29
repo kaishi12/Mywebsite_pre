@@ -22,11 +22,11 @@ namespace MyWebsite.Models
     
         public int TextBoxId { get; set; }
         public string Coordinate { get; set; }
-        public Nullable<int> Witdh { get; set; }
-        public Nullable<int> Height { get; set; }
-        public Nullable<int> PageId { get; set; }
-        public Nullable<int> StatusActive { get; set; }
-        public Nullable<int> Degree { get; set; }
+        public int Witdh { get; set; }
+        public int Height { get; set; }
+        public int PageId { get; set; }
+        public bool Active { get; set; }
+        public int Degree { get; set; }
     
         public virtual Page Page { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

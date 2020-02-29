@@ -22,16 +22,16 @@ namespace MyWebsite.Models
         }
     
         public int TransationId { get; set; }
-        public Nullable<int> MangaId { get; set; }
-        public Nullable<int> AccountId { get; set; }
-        public Nullable<int> LanguageId { get; set; }
-        public Nullable<int> StatusActive { get; set; }
+        public int MangaId { get; set; }
+        public int AccountId { get; set; }
+        public int LanguageId { get; set; }
+        public bool Active { get; set; }
     
+        public virtual Account Account { get; set; }
         public virtual Language Language { get; set; }
         public virtual Manga Manga { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Text> Texts { get; set; }
-        public virtual Account Account { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Translation_Detail> Translation_Detail { get; set; }
     }

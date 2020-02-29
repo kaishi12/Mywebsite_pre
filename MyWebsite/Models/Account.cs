@@ -19,10 +19,10 @@ namespace MyWebsite.Models
         {
             this.Account_Detail = new HashSet<Account_Detail>();
             this.Manga_Detail = new HashSet<Manga_Detail>();
+            this.Notifications = new HashSet<Notification>();
             this.Pages = new HashSet<Page>();
             this.Texts = new HashSet<Text>();
             this.Translations = new HashSet<Translation>();
-            this.Notifications = new HashSet<Notification>();
             this.Mangas = new HashSet<Manga>();
         }
     
@@ -31,7 +31,7 @@ namespace MyWebsite.Models
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
         public string AvatarLink { get; set; }
-        public Nullable<int> StatusActive { get; set; }
+        public bool Active { get; set; }
         public string UserName { get; set; }
         public string PassWord { get; set; }
         public string ResetPasswordCode { get; set; }
@@ -46,13 +46,13 @@ namespace MyWebsite.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Manga_Detail> Manga_Detail { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Notification> Notifications { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Page> Pages { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Text> Texts { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Translation> Translations { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Notification> Notifications { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Manga> Mangas { get; set; }
     }

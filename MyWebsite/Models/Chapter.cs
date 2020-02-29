@@ -23,11 +23,11 @@ namespace MyWebsite.Models
     
         public int ChapterId { get; set; }
         public string FullName { get; set; }
-        public Nullable<int> OrderNumber { get; set; }
-        public Nullable<int> ViewNumber { get; set; }
-        public Nullable<System.DateTime> CreateAt { get; set; }
-        public Nullable<int> StatusActive { get; set; }
-        public Nullable<int> MangaId { get; set; }
+        public int OrderNumber { get; set; }
+        public int ViewNumber { get; set; }
+        public System.DateTime CreateAt { get; set; }
+        public bool Active { get; set; }
+        public int MangaId { get; set; }
         public string Alias { get; set; }
     
         public virtual Manga Manga { get; set; }

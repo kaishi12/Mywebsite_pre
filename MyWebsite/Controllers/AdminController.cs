@@ -18,7 +18,7 @@ namespace MyWebsite.Controllers
         }
         public ActionResult ListFont()
         {
-            var listfont = data.Fonts.SqlQuery("Select * from dbo.Font");
+            var listfont = data.Fonts;
             return View(listfont);
         }
         [HttpPost]
@@ -31,7 +31,7 @@ namespace MyWebsite.Controllers
             Font font = new Font();
             font.FontLink =   "/" + fontname + "/font.css";
             font.FullName = fontname;
-            font.StatusActive = 0;
+            font.Active = true;
             string Type = "";
             foreach (var item in fontupload)
             {

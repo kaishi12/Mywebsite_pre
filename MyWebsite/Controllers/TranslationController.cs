@@ -25,7 +25,7 @@ namespace MyWebsite.Controllers
         {
 
             AccountModel accountModel = (AccountModel)Session["UserInfo"];
-            var list = data.Translations.Where(m => m.AccountId == accountModel.AccountId && m.StatusActive == 0);
+            var list = data.Translations.Where(m => m.AccountId == accountModel.AccountId && m.Active == true);
             return View(list);
 
         }
@@ -44,8 +44,8 @@ namespace MyWebsite.Controllers
             }
             if (ChapterId == null)
             {
-                chapterlist = data.Chapters.Where(m => m.MangaId == Firstpage.Chapter.MangaId && m.StatusActive == 0).ToList();
-                var list = data.Pages.Where(m => m.ChapterId == Firstpage.ChapterId && m.CategoryId == 1 && m.StatusActive == 0).ToList();
+                chapterlist = data.Chapters.Where(m => m.MangaId == Firstpage.Chapter.MangaId && m.Active == true).ToList();
+                var list = data.Pages.Where(m => m.ChapterId == Firstpage.ChapterId && m.CategoryId == 1 && m.Active == true).ToList();
                 foreach (var item in list)
                 {
                     dict.Add(item.PageId, item.FullName);
@@ -54,8 +54,8 @@ namespace MyWebsite.Controllers
             else
             {
                 ViewBag.ChapterId = ChapterId;
-                chapterlist = data.Chapters.Where(m => m.MangaId == data.Chapters.FirstOrDefault(n => n.ChapterId == ChapterId).MangaId && m.StatusActive == 0).ToList();
-                var list = data.Pages.Where(m => m.ChapterId == ChapterId && m.CategoryId == 1 && m.StatusActive == 0).ToList();
+                chapterlist = data.Chapters.Where(m => m.MangaId == data.Chapters.FirstOrDefault(n => n.ChapterId == ChapterId).MangaId && m.Active == true).ToList();
+                var list = data.Pages.Where(m => m.ChapterId == ChapterId && m.CategoryId == 1 && m.Active == true).ToList();
                 foreach (var item in list)
                 {
                     dict.Add(item.PageId, item.FullName);
@@ -71,21 +71,21 @@ namespace MyWebsite.Controllers
             ViewBag.MangaFullName = chapterlist.FirstOrDefault().Manga.FullName;
             ViewBag.Traslation = data.Translations.SingleOrDefault(m => m.TransationId == TranslationId);
             ViewBag.listpage = dict;
-            ViewBag.PageClear = data.Pages.SingleOrDefault(p => p.PageId_Fa == PageId && p.StatusActive == 0);
+            ViewBag.PageClear = data.Pages.SingleOrDefault(p => p.PageId_Fa == PageId && p.Active == true);
             ViewBag.chapterlist = chapterlist;
             return View(Firstpage);
         }
         public JsonResult AllowText(int Id, int TextBoxId)
         {
             var Text = data.Texts.SingleOrDefault(m => m.TextId == Id);
-            var Trans = data.Texts.SingleOrDefault(m => m.TextBoxId == TextBoxId && m.TranslationId == Text.TranslationId && m.StatusAllow == 0);
+            var Trans = data.Texts.SingleOrDefault(m => m.TextBoxId == TextBoxId && m.TranslationId == Text.TranslationId && m.Allow == true);
             if (Trans != null)
             {
-                Trans.StatusAllow = 1;
+                Trans.Allow = true;
             }
-            Text.StatusAllow = 0;
+            Text.Allow = true;
             NotificationService notificationService = new NotificationService();
-            var res = notificationService.AddnewNoticeSenpai("Trans", Text.TextBox.Page.Chapter.OrderNumber.Value, Text.TextBox.Page.OrderNumber.Value, Text.Translation.Manga.FullName, Text.AccountId.Value, Text.Translation.Language.FullName);
+            var res = notificationService.AddnewNoticeSenpai("Trans", Text.TextBox.Page.Chapter.OrderNumber, Text.TextBox.Page.OrderNumber, Text.Translation.Manga.FullName, Text.AccountId, Text.Translation.Language.FullName);
             data.SaveChanges();
             return Json(true);
         }
@@ -94,17 +94,17 @@ namespace MyWebsite.Controllers
         {
             var res = data.Translations.SingleOrDefault(m => m.TransationId == TranslationId);
             ViewBag.TranslationId = TranslationId;
-            var listchapter = res.Manga.Chapters.Where(m => m.StatusActive == 0);
+            var listchapter = res.Manga.Chapters.Where(m => m.Active == true);
             return View(listchapter);
         }
-        public JsonResult AllowChapter(int TranslationId, int ChapterId, int Status)
+        public JsonResult AllowChapter(int TranslationId, int ChapterId, bool Status)
         {
             try
             {
                 var res = data.Translation_Detail.SingleOrDefault(m => m.TranslationId == TranslationId && m.ChapterId == ChapterId);
                 if (res != null)
                 {
-                    res.StatusActive = 0;
+                    res.Active = true;
                     data.SaveChanges();
                 }
                 else
@@ -112,7 +112,7 @@ namespace MyWebsite.Controllers
                     Translation_Detail translation_Detail = new Translation_Detail();
                     translation_Detail.ChapterId = ChapterId;
                     translation_Detail.TranslationId = TranslationId;
-                    translation_Detail.StatusActive = Status;
+                    translation_Detail.Active = Status;
                     data.Translation_Detail.Add(translation_Detail);
                     data.SaveChanges();
                 }
