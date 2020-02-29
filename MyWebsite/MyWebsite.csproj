@@ -209,6 +209,8 @@
     <Content Include="LayoutUser\Chapter\Create.js" />
     <Content Include="LayoutUser\Common\Layout.js" />
     <Content Include="LayoutUser\Contribute\Editor.js" />
+    <Content Include="LayoutUser\GuideToolTipIntro\intro.js" />
+    <Content Include="LayoutUser\GuideToolTipIntro\introjs.css" />
     <Content Include="LayoutUser\libs\jquery\bootstrap\dist\js\bootstrap.js" />
     <Content Include="LayoutUser\libs\jquery\bower-jvectormap\jquery-jvectormap-1.2.2.min.js" />
     <Content Include="LayoutUser\libs\jquery\bower-jvectormap\jquery-jvectormap-us-aea-en.js" />
@@ -459,6 +461,10 @@
       <DependentUpon>Model.edmx</DependentUpon>
       <LastGenOutput>Model.cs</LastGenOutput>
     </Content>
+    <Content Include="Areas\FrontPage\Views\web.config" />
+    <Content Include="Areas\AdminPage\Views\web.config" />
+    <Content Include="Areas\FrontPage\Views\Home\Index.cshtml" />
+    <Content Include="Areas\FrontPage\Views\Shared\_LayOutFrontPage.cshtml" />
     <None Include="Scripts\jquery-1.6.4-vsdoc.js" />
     <Content Include="RootPicture\Oshino Shinobu.jpg" />
     <Content Include="RootPicture\tenor.gif" />
@@ -470,6 +476,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Areas\AdminPage\AdminPageAreaRegistration.cs" />
+    <Compile Include="Areas\FrontPage\Controllers\HomeController.cs" />
+    <Compile Include="Areas\FrontPage\FrontPageAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\ChapterController.cs" />
@@ -855,6 +864,10 @@
     <Content Include="Views\Translation\ListAllowChapter.cshtml" />
     <Content Include="Views\Error\PageError.cshtml" />
     <Content Include="Views\Account\ProfileUser.cshtml" />
+    <Content Include="Views\Account\ListRequestByPeople.cshtml" />
+    <Content Include="Views\Account\ListRequestToYou.cshtml" />
+    <Content Include="Views\Account\ListRequestToPeople.cshtml" />
+    <Content Include="Views\Account\ListRequestByYou.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -864,6 +877,10 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\AdminPage\Controllers\" />
+    <Folder Include="Areas\AdminPage\Models\" />
+    <Folder Include="Areas\AdminPage\Views\Shared\" />
+    <Folder Include="Areas\FrontPage\Models\" />
     <Folder Include="Avatar\" />
     <Folder Include="Cover\" />
     <Folder Include="PageLink\" />

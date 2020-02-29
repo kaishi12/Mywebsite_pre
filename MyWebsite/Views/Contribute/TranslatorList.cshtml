@@ -61,9 +61,16 @@
                                     @Html.DisplayFor(modelItem => item.CreatAt)
                                 </td>
                                 <td style="text-align:center">
-                                   
-                                        <a class="btn primary" href="/Contribute/Translator?PageId=@item.FirstPage">Dịch truyện</a>
-                                   
+                                    @if (item.RoleStatusActive == 0)
+                                    {
+                                    <a class="btn primary" href="/Contribute/Translator?PageId=@item.FirstPage">Dịch truyện</a>
+                                    }
+                                    else
+                                    {
+                                <a class="btn primary disabled" href="/Contribute/Translator?PageId=@item.FirstPage">Dịch truyện</a>
+                                    }
+                                    
+
                                 </td>
                             </tr>
                         }

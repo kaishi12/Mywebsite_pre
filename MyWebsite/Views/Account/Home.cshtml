@@ -92,7 +92,7 @@
                     @* Danh sách truyện bạn đang quản lí  *@
                     <div class="box black">
                         <div class="box-header primary">
-                            <h3 style="display:inline">Danh sách truyện đang quản lí</h3>
+                            <h3 style="display:inline">Danh sách truyện đang quản lí <i class="fa fa-question-circle"></i></h3>
                             <a style="display:inline;float:right"><h3>Xem tất cả <i class="fa fa-caret-right"></i></h3></a>
 
                         </div>
@@ -213,10 +213,10 @@
                                         <div class="box-footer grey-900 Info-BoxFooter">
                                             <text class="text-ellipsis">@item.FullName</text>
                                             <button class="btn btn-xs btn-md success ">
-                                                Chương
+                                                Duyệt trang
                                             </button>
                                             <button class="btn btn-xs btn-md danger">
-                                                Cập nhật
+                                                Duyệt chương
 
                                             </button>
                                         </div>
@@ -331,12 +331,14 @@
                     <!-- Yêu cầu xin gia nhập truyện -->
                     <div class="box black">
                         <div class="box-header">
-                            <h3>
+                            <h3 style="display:inline">
                                 <strong class="text text-primary">
                                     Yêu cầu xin gia nhập truyện
                                 </strong>
 
+
                             </h3>
+                            <a class="text-primary" style="display:inline;float:right"><h3>Xem tất cả <i class="fa fa-caret-right"></i></h3></a>
                         </div>
                         <ul class="list inset">
                             @{
@@ -353,10 +355,11 @@
                                                 <button class="ChangeStatus btn btn-lg btn-xs btn-outline b-primary text-primary" data-toggle="tooltip" data-placement="top" title="Cập nhật" data-language="@item.Language" data-roleid="@item.RoleId" data-username="@item.Account.UserName" data-status="0" data-mangaid="@item.MangaId"><i class="fa fa-pencil"></i></button>
                                             </div>
                                             <div>
-                                                <a href="">@item.Manga.FullName</a>
+                                                <a href="" class="text-primary">@item.Manga.FullName</a>
                                             </div>
                                             <div class="text-sm">
-                                                <span class="text-muted"><strong>Tên:</strong> @item.Account.FullName, <strong>Vị trí:</strong> @item.Role.FullName</span> <span class="label"></span>
+                                                <span class="text-muted"><strong>Tên:</strong> @item.Account.FullName <br />
+                                                <strong>Vị trí:</strong> @item.Role.FullName</span> <span class="label"></span>
                                             </div>
                                         </div>
                                     </li>
@@ -364,7 +367,7 @@
                                 if (ListRequestByPeopleCount == 0)
                                 {
                                     <li class="list-item">
-                                        <span>Không có yêu cầu nào</span>
+                                        <span>Không có yêu cầu mới nào</span>
                                     </li>
                                 }
                             }
@@ -372,13 +375,14 @@
                     </div>
                     <!-- Yêu cầu mời gia nhập truyện -->
                     <div class="box black">
-                        <div class="box-header">
-                            <h3>
+                        <div class="box-header"  >
+                            <h3 style="display:inline">
                                 <strong class="text text-primary">
                                     Lời mời gia nhập truyện
                                 </strong>
 
                             </h3>
+                            <a class="text-primary" style="display:inline;float:right"><h3>Xem tất cả <i class="fa fa-caret-right"></i></h3></a>
                         </div>
                         <ul class="list inset">
                             @{
@@ -406,7 +410,7 @@
                                 if (ListRequestToYouCount == 0)
                                 {
                                     <li class="list-item">
-                                        <span>Không có yêu cầu nào</span>
+                                        <span>Không có yêu mới cầu nào</span>
                                     </li>
                                 }
                             }
@@ -417,18 +421,19 @@
                     <!-- Yêu cầu mời gia nhập đã gửi -->
                     <div class="box black">
                         <div class="box-header">
-                            <h3>
+                            <h3 style="display:inline">
                                 <strong class="text text-primary">
                                     Yêu cầu mời gia nhập đã gửi
                                 </strong>
 
                             </h3>
+                            <a class="text-primary" style="display:inline;float:right"><h3>Xem tất cả <i class="fa fa-caret-right"></i></h3></a>
                         </div>
                         <ul class="list inset">
                             @if (ViewBag.ListRequestToPeople.Count <= 0)
                             {
                                 <li class="list-item">
-                                    <span>Không có yêu cầu nào</span>
+                                    <span>Không có yêu cầu mới nào</span>
                                 </li>
                             }
                             else
@@ -445,10 +450,10 @@
                                                 
                                             </div>
                                             <div>
-                                                <a href="">@item.Manga.FullName</a>
+                                                <a class="text-primary" href="">@item.Manga.FullName</a>
                                             </div>
                                             <div class="text-sm">
-                                                <span class="text-muted"><strong>Tên:</strong> @item.Account.FullName, <strong>Vị trí:</strong> @item.Role.FullName</span> <span class="label"></span>
+                                                <span class="text-muted"><strong>Tên:</strong> @item.Account.FullName <br /> <strong>Vị trí:</strong> @item.Role.FullName</span> <span class="label"></span>
                                             </div>
                                         </div>
                                     </li>
@@ -458,20 +463,21 @@
                     </div>
                     <!-- Yêu cầu xin gia nhập đã gửi -->
                     <div class="box black">
-                        <div class="box-header">
-                            <h3>
+                        <div class="box-header" >
+                            <h3 style="display:inline">
                                 <strong class="text text-primary">
                                     Yêu cầu xin gia nhập đã gửi
                                 </strong>
 
                             </h3>
+                            <a class="text-primary" style="display:inline;float:right"><h3>Xem tất cả <i class="fa fa-caret-right"></i></h3></a>
                         </div>
                         <ul class="list inset">
 
                             @if (ViewBag.ListRequestByYou.Count <= 0)
                             {
                                 <li class="list-item">
-                                    <span>Không có yêu cầu nào</span>
+                                    <span>Không có yêu cầu mới nào</span>
                                 </li>
                             }
                             else

@@ -8,7 +8,7 @@
   
 </style>
 <div class="padding">
-    <div class="m-b black">
+    <div class="m-b primary">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="/Account/Home">Trang chủ</a></li>
             <li class="breadcrumb-item active">Danh sách truyện đã tạo</li>
@@ -27,7 +27,7 @@
                                 <th>Tổng chương</th>
                                 <th>Tổng lượt xem</th>
                                 <th>Tổng bản dịch</th>
-                                <th>Trạng thái</th>
+                               
                                 <th></th>
                             </tr>
                         </thead>
@@ -73,6 +73,7 @@
                                 <td class="center">
                                     @Html.DisplayFor(modelItem => item.CreatAt)
                                 </td>
+                               
                                 <td>
                                     <a href="~/UpdateManga/@item.MangaId">
                                         <i class="fa fa-edit fa-lg" style="margin-right:10px;color:cornflowerblue" title="Cập nhật truyện"></i>
@@ -81,17 +82,14 @@
                                     <a href="/ListChapter/@item.MangaId">
                                         <i class="fa  fa-list-ol fa-lg" title="Danh sách chương" style="margin-right:10px;color:red"></i>
                                     </a>
-
-                                </td>
-                                <td>
-                                    <a href="~/UpdateManga/@item.MangaId">
-                                        <i class="fa fa-edit fa-lg" style="margin-right:10px;color:cornflowerblue" title="Cập nhật truyện"></i>
-
-                                    </a>
-                                    <a href="/ListChapter/@item.MangaId">
-                                        <i class="fa  fa-list-ol fa-lg" title="Danh sách chương" style="margin-right:10px;color:red"></i>
-                                    </a>
-
+                                    @if (@item.StatusActive == 0)
+                                    {
+                                        <i class="fa fa-unlock fa-lg text-primary" title="Cập nhật truyện"></i>
+                                    }
+                                    else
+                                    {
+                                        <i class="fa fa-lock fa-lg text-lock" title="Cập nhật truyện"></i>
+                                    }
                                 </td>
                             </tr>
                             }

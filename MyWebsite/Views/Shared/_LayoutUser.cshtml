@@ -30,7 +30,8 @@
     <link rel="stylesheet" href="/LayoutUser/assets/styles/font.css" type="text/css" />
     <script src="~/LayoutUser/libs/jquery/jquery/dist/jquery.js"></script>
     <!-- Bootstrap -->
-    
+
+    <link href="~/LayoutUser/GuideToolTipIntro/introjs.css" rel="stylesheet" />
     <style>
         .breadcrumb-item {
             color: black
@@ -71,108 +72,140 @@
                 <a href="/Home" class="navbar-brand">
                     <div class="navbar navbar-md no-radius" style="background-image:url('/RootPicture/Oshino Shinobu.jpg');background-size:cover;">
                         <!-- brand -->
-                      
                         <!-- / brand -->
                     </div>
-                   </a>
-                    <div flex="" class="hide-scroll">
-                        <nav class="scroll nav-active-primary">
+                </a>
+                <div flex="" class="hide-scroll">
+                    <nav class="scroll nav-active-primary">
 
-                            <ul class="nav" ui-nav="">
-                                <li class="nav-header hidden-folded">
-                                    <small class="text-muted">Main</small>
-                                </li>
+                        <ul class="nav" ui-nav="">
+                            <li class="nav-header hidden-folded">
+                                <small class="text-muted">Main</small>
+                            </li>
 
-                                <li>
-                                    <a href="/Home">
-                                        <span class="nav-icon">
-                                            <i class="material-icons md-24">&#xe88a;</i>
-                                        </span>
+                            <li>
+                                <a href="/Home">
+                                    <span class="nav-icon">
+                                        <i class="material-icons md-24">&#xe88a;</i>
+                                    </span>
 
-                                        <span class="nav-text">Home</span>
-                                    </a>
-                                </li>
-                               
-                                <li>
-                                    <a>
-                                        <span class="nav-caret">
-                                            <i class="fa fa-caret-down"></i>
-                                        </span>
+                                    <span class="nav-text">Home</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a>
+                                    <span class="nav-caret">
+                                        <i class="fa fa-caret-down"></i>
+                                    </span>
 
-                                        <span class="nav-icon">
-                                            <i class="material-icons md-24">&#xe02f;</i>
-                                        </span>
-                                        <span class="nav-text">Truyện</span>
-                                    </a>
-                                    <ul class="nav-sub">
-                                        <li>
-                                            <a href="/CreateManga">
-                                                <span class="nav-text">Tạo mới</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="/ListManga">
-                                                <span class="nav-text">Danh sách</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="/ListMangaJoin">
-                                                <span class="nav-text">Đã tham gia</span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
+                                    <span class="nav-icon">
+                                        <i class="material-icons md-24">&#xe02f;</i>
+                                    </span>
+                                    <span class="nav-text">Danh sách Yêu cầu</span>
+                                </a>
+                                <ul class="nav-sub">
+                                    <li>
+                                        <a href="/ListRequestByPeople">
+                                            <span class="nav-text">Xin gia nhập</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/ListRequestToPeople">
+                                            <span class="nav-text">Mời gia nhập</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/ListRequestToYou">
+                                            <span class="nav-text">Mời bạn gia nhập </span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/ListRequestByYou">
+                                            <span class="nav-text">Xin gia nhập</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a>
+                                    <span class="nav-caret">
+                                        <i class="fa fa-caret-down"></i>
+                                    </span>
 
-                                <li>
-                                    <a>
-                                        <span class="nav-caret">
-                                            <i class="fa fa-caret-down"></i>
-                                        </span>
-                                        <span class="nav-icon">
-                                            <i class="material-icons md-24">&#xe7ef;</i>
-                                        </span>
-                                        <span class="nav-text">Đóng góp</span>
-                                    </a>
-                                    <ul class="nav-sub">
-                                        <li>
-                                            <a href="/TranslatorList">
-                                                <span class="nav-text">Dịch truyện</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="/EditorList">
-                                                <span class="nav-text">Tải lên clear-text</span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
+                                    <span class="nav-icon">
+                                        <i class="material-icons md-24">&#xe02f;</i>
+                                    </span>
+                                    <span class="nav-text">Truyện</span>
+                                </a>
+                                <ul class="nav-sub">
+                                    <li>
+                                        <a href="/CreateManga">
+                                            <span class="nav-text">Tạo mới</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/ListManga">
+                                            <span class="nav-text">Danh sách</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/ListMangaJoin">
+                                            <span class="nav-text">Đã tham gia</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
 
-                                <li>
-                                    <a href="/TranslationList">
-                                       
-                                        <span class="nav-icon">
-                                            <i class="material-icons md-24">&#xe8e2;</i>
-                                        </span>
-                                        <span class="nav-text">Kiểm Duyệt</span>
-                                    </a>
+                            <li>
+                                <a>
+                                    <span class="nav-caret">
+                                        <i class="fa fa-caret-down"></i>
+                                    </span>
+                                    <span class="nav-icon">
+                                        <i class="material-icons md-24">&#xe7ef;</i>
+                                    </span>
+                                    <span class="nav-text">Đóng góp</span>
+                                </a>
+                                <ul class="nav-sub">
+                                    <li>
+                                        <a href="/TranslatorList">
+                                            <span class="nav-text">Dịch truyện</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/EditorList">
+                                            <span class="nav-text">Tải lên clear-text</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
 
-                                </li>
-                                <li class="nav-header hidden-folded">
-                                    <small class="text-muted">Help</small>
-                                </li>
+                            <li>
+                                <a href="/TranslationList">
 
-                                <li class="hidden-folded">
-                                    <a href="docs.html">
-                                        <span class="nav-text">Documents</span>
-                                    </a>
-                                </li>
+                                    <span class="nav-icon">
+                                        <i class="material-icons md-24">&#xe8e2;</i>
+                                    </span>
+                                    <span class="nav-text">Kiểm Duyệt</span>
+                                </a>
 
-                            </ul>
-                        </nav>
-                    </div>
-                    <div flex-no-shrink="">
-                        <div ui-include="'../views/blocks/aside.bottom.0.html'"></div>
-                    </div>
+                            </li>
+                            <li class="nav-header hidden-folded">
+                                <small class="text-muted">Help</small>
+                            </li>
+
+                            <li class="hidden-folded">
+                                <a href="docs.html">
+                                    <span class="nav-text">Documents</span>
+                                </a>
+                            </li>
+
+                        </ul>
+                    </nav>
+                </div>
+                <div flex-no-shrink="">
+                    <div ui-include="'../views/blocks/aside.bottom.0.html'"></div>
+                </div>
             </div>
         </div>
         <!-- / -->
@@ -194,7 +227,7 @@
                             <i class="green"></i>
                             <span class="hidden-folded">Folded Aside</span>
                         </label>
-                         </p>
+                    </p>
                     <p>Themes:</p>
                     <div data-target="bg" class="row no-gutter text-u-c text-center _600 clearfix">
                         <label class="p-a col-sm-6 light pointer m-0">
@@ -217,13 +250,13 @@
                 </div>
             </div>
 
-            
+
         </div>
         <div id="content" class="app-content  " role="main">
             <div class="app-header black  box-shadow-z4 navbar-md">
-                 <div class="navbar navbar-toggleable-sm flex-row align-items-center">
-                    <form class="form-inline my-2 my-lg-0">
-                       
+                <div class="navbar navbar-toggleable-sm flex-row align-items-center"  >
+                    <form class="form-inline my-2 my-lg-0" data-step="1" data-intro="abc" style="z-index:9999999!important;">
+
                         <div class="input-group-btn primary">
                             <button type="button" class="form-control btn primary my-2 my-sm-0 dropdown-toggle  " data-toggle="dropdown" aria-expanded="false">
                                 Tìm kiếm theo <span class="caret"></span>
@@ -231,9 +264,10 @@
                             <ul class="dropdown-menu black">
                                 <li><a href="#">Người dùng</a></li>
                                 <li><a href="#">Truyện</a></li>
-                             </ul>
+                                <li><a href="#">vai trò</a></li>
+                            </ul>
                         </div>
-                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                        <input class="form-control mr-sm-2" type="search" placeholder="Tìm kiếm" aria-label="Search">
                         <button class="btn my-2 my-sm-0 primary" type="submit">Search</button>
                     </form>
                     <!-- Open side - Naviation on mobile -->
@@ -278,7 +312,7 @@
                                     <span class="label primary m-l-xs">3/9</span>
                                 </a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" ui-sref="app.docs" href="#/app/docs">Trợ giúp?</a>
+                                <a class="dropdown-item" href="javascript:void(0);" onclick="javascript:introJs().start();">Trợ giúp?</a>
                                 <a class="dropdown-item" ui-sref="access.signin" href="/Account/Logout">Đăng Xuất</a>
                             </div>
                         </li>
@@ -297,7 +331,7 @@
                         &copy; Copyright <strong>Ngô Trung Hiếu</strong> <span class="hidden-xs-down">- Built with Love v0.0.1</span>
                         <a ui-scroll-to="content"><i class="fa fa-long-arrow-up p-x-sm"></i></a>
                     </div>
-                 
+
                 </div>
             </div>
             <div ui-view class="app-body" id="view">
@@ -312,89 +346,89 @@
         @*<div id="switcher">
 
 
-            <div class="switcher box-color dark-white text-color" id="sw-theme">
-                <a href ui-toggle-class="active" target="#sw-theme" class="box-color dark-white text-color sw-btn">
-                    <i class="fa fa-gear"></i>
-                </a>
-                <div class="box-header">
+                <div class="switcher box-color dark-white text-color" id="sw-theme">
+                    <a href ui-toggle-class="active" target="#sw-theme" class="box-color dark-white text-color sw-btn">
+                        <i class="fa fa-gear"></i>
+                    </a>
+                    <div class="box-header">
 
-                    <h2>Giao diện</h2>
-                </div>
-                <div class="box-divider"></div>
-                <div class="box-body">
-                    <p class="hidden-md-down">
-                        <label class="md-check m-y-xs" data-target="folded">
-                            <input type="checkbox">
-                            <i class="green"></i>
-                            <span class="hidden-folded">Folded Aside</span>
-                        </label>
-                        <label class="md-check m-y-xs" data-target="boxed">
-                            <input type="checkbox">
-                            <i class="green"></i>
-                            <span class="hidden-folded">Boxed Layout</span>
-                        </label>
-                        <label class="m-y-xs pointer" ui-fullscreen>
-                            <span class="fa fa-expand fa-fw m-r-xs"></span>
-                            <span>Fullscreen Mode</span>
-                        </label>
-                    </p>
-                    <p>Màu:</p>
-                    <p data-target="themeID">
-                        <label class="radio radio-inline m-0 ui-check ui-check-color ui-check-md" data-value="{primary:'primary', accent:'accent', warn:'warn'}">
-                            <input type="radio" name="color" value="1">
-                            <i class="primary"></i>
-                        </label>
-                        <label class="radio radio-inline m-0 ui-check ui-check-color ui-check-md" data-value="{primary:'accent', accent:'cyan', warn:'warn'}">
-                            <input type="radio" name="color" value="2">
-                            <i class="accent"></i>
-                        </label>
-                        <label class="radio radio-inline m-0 ui-check ui-check-color ui-check-md" data-value="{primary:'warn', accent:'light-blue', warn:'warning'}">
-                            <input type="radio" name="color" value="3">
-                            <i class="warn"></i>
-                        </label>
-                        <label class="radio radio-inline m-0 ui-check ui-check-color ui-check-md" data-value="{primary:'success', accent:'teal', warn:'lime'}">
-                            <input type="radio" name="color" value="4">
-                            <i class="success"></i>
-                        </label>
-                        <label class="radio radio-inline m-0 ui-check ui-check-color ui-check-md" data-value="{primary:'info', accent:'light-blue', warn:'success'}">
-                            <input type="radio" name="color" value="5">
-                            <i class="info"></i>
-                        </label>
-                        <label class="radio radio-inline m-0 ui-check ui-check-color ui-check-md" data-value="{primary:'blue', accent:'indigo', warn:'primary'}">
-                            <input type="radio" name="color" value="6">
-                            <i class="blue"></i>
-                        </label>
-                        <label class="radio radio-inline m-0 ui-check ui-check-color ui-check-md" data-value="{primary:'warning', accent:'grey-100', warn:'success'}">
-                            <input type="radio" name="color" value="7">
-                            <i class="warning"></i>
-                        </label>
-                        <label class="radio radio-inline m-0 ui-check ui-check-color ui-check-md" data-value="{primary:'danger', accent:'grey-100', warn:'grey-300'}">
-                            <input type="radio" name="color" value="8">
-                            <i class="danger"></i>
-                        </label>
-                    </p>
-                    <p>Themes:</p>
-                    <div data-target="bg" class="row no-gutter text-u-c text-center _600 clearfix">
-                        <label class="p-a col-sm-6 light pointer m-0">
-                            <input type="radio" name="theme" value="" hidden>
-                            Light
-                        </label>
-                        <label class="p-a col-sm-6 grey pointer m-0">
-                            <input type="radio" name="theme" value="grey" hidden>
-                            Grey
-                        </label>
-                        <label class="p-a col-sm-6 dark pointer m-0">
-                            <input type="radio" name="theme" value="dark" hidden>
-                            Dark
-                        </label>
-                        <label class="p-a col-sm-6 black pointer m-0">
-                            <input type="radio" name="theme" value="black" hidden>
-                            Black
-                        </label>
+                        <h2>Giao diện</h2>
+                    </div>
+                    <div class="box-divider"></div>
+                    <div class="box-body">
+                        <p class="hidden-md-down">
+                            <label class="md-check m-y-xs" data-target="folded">
+                                <input type="checkbox">
+                                <i class="green"></i>
+                                <span class="hidden-folded">Folded Aside</span>
+                            </label>
+                            <label class="md-check m-y-xs" data-target="boxed">
+                                <input type="checkbox">
+                                <i class="green"></i>
+                                <span class="hidden-folded">Boxed Layout</span>
+                            </label>
+                            <label class="m-y-xs pointer" ui-fullscreen>
+                                <span class="fa fa-expand fa-fw m-r-xs"></span>
+                                <span>Fullscreen Mode</span>
+                            </label>
+                        </p>
+                        <p>Màu:</p>
+                        <p data-target="themeID">
+                            <label class="radio radio-inline m-0 ui-check ui-check-color ui-check-md" data-value="{primary:'primary', accent:'accent', warn:'warn'}">
+                                <input type="radio" name="color" value="1">
+                                <i class="primary"></i>
+                            </label>
+                            <label class="radio radio-inline m-0 ui-check ui-check-color ui-check-md" data-value="{primary:'accent', accent:'cyan', warn:'warn'}">
+                                <input type="radio" name="color" value="2">
+                                <i class="accent"></i>
+                            </label>
+                            <label class="radio radio-inline m-0 ui-check ui-check-color ui-check-md" data-value="{primary:'warn', accent:'light-blue', warn:'warning'}">
+                                <input type="radio" name="color" value="3">
+                                <i class="warn"></i>
+                            </label>
+                            <label class="radio radio-inline m-0 ui-check ui-check-color ui-check-md" data-value="{primary:'success', accent:'teal', warn:'lime'}">
+                                <input type="radio" name="color" value="4">
+                                <i class="success"></i>
+                            </label>
+                            <label class="radio radio-inline m-0 ui-check ui-check-color ui-check-md" data-value="{primary:'info', accent:'light-blue', warn:'success'}">
+                                <input type="radio" name="color" value="5">
+                                <i class="info"></i>
+                            </label>
+                            <label class="radio radio-inline m-0 ui-check ui-check-color ui-check-md" data-value="{primary:'blue', accent:'indigo', warn:'primary'}">
+                                <input type="radio" name="color" value="6">
+                                <i class="blue"></i>
+                            </label>
+                            <label class="radio radio-inline m-0 ui-check ui-check-color ui-check-md" data-value="{primary:'warning', accent:'grey-100', warn:'success'}">
+                                <input type="radio" name="color" value="7">
+                                <i class="warning"></i>
+                            </label>
+                            <label class="radio radio-inline m-0 ui-check ui-check-color ui-check-md" data-value="{primary:'danger', accent:'grey-100', warn:'grey-300'}">
+                                <input type="radio" name="color" value="8">
+                                <i class="danger"></i>
+                            </label>
+                        </p>
+                        <p>Themes:</p>
+                        <div data-target="bg" class="row no-gutter text-u-c text-center _600 clearfix">
+                            <label class="p-a col-sm-6 light pointer m-0">
+                                <input type="radio" name="theme" value="" hidden>
+                                Light
+                            </label>
+                            <label class="p-a col-sm-6 grey pointer m-0">
+                                <input type="radio" name="theme" value="grey" hidden>
+                                Grey
+                            </label>
+                            <label class="p-a col-sm-6 dark pointer m-0">
+                                <input type="radio" name="theme" value="dark" hidden>
+                                Dark
+                            </label>
+                            <label class="p-a col-sm-6 black pointer m-0">
+                                <input type="radio" name="theme" value="black" hidden>
+                                Black
+                            </label>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>*@
+            </div>*@
         <!-- / -->
         <!-- ############ LAYOUT END-->
     </div>
@@ -403,6 +437,7 @@
     <!-- endbuild -->
     <script src="~/LayoutUser/libs/jquery/tether/dist/js/tether.min.js"></script>
     <script src="~/LayoutUser/libs/jquery/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="~/LayoutUser/GuideToolTipIntro/intro.js"></script>
     <!-- core -->
     <script src="~/LayoutUser/libs/jquery/underscore/underscore-min.js"></script>
     <script src="~/LayoutUser/libs/jquery/jQuery-Storage-API/jquery.storageapi.min.js"></script>

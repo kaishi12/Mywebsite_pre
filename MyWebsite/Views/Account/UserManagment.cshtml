@@ -116,7 +116,7 @@
         </div>
     </div>
 </div>
-<div class="item">
+<div class="item" data-step="2" data-intro="XYZ">
     <div class="item-bg">
         <img src="~/Avatar/@accountModel.AvatarLink" class="blur opacity-3" />
 
@@ -159,6 +159,7 @@
                     </div>
                     <a href="" data-toggle="modal" data-target="#Info" class="btn btn-sm primary btn-rounded m-b">Cập nhật thông tin</a>
                     <a href="" data-toggle="modal" data-target="#Pass" class="btn btn-sm primary btn-rounded m-b">Cập nhật mật khẩu</a>
+                    <a class="btn btn-sm primary btn-rounded m-b" href="javascript:void(0);" onclick="javascript:introJs().start();">Show me how</a>
                 </div>
             </div>
 
@@ -194,7 +195,7 @@
                             <div class="_500">Dịch truyện</div>
                         </div>
                     </div>
-                    <div>
+                    <div data-step="1" data-intro="ABC">
                         <small class="text-muted">Ghi chú</small>
                         <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi id neque quam. Aliquam sollicitudin venenatis ipsum ac feugiat. Vestibulum ullamcorper sodales nisi nec condimentum. Mauris convallis mauris at pellentesque volutpat. Phasellus at ultricies neque, quis malesuada augue.</div>
                     </div>
@@ -202,7 +203,7 @@
             
         </div>
         @*Truyện đã tham gia*@
-        <div class="col-sm-4 col-lg-3">
+        <div class="col-sm-4 col-lg-3" data-step="3" data-intro="1">
             <div>
                 <div class="box black">
                     <div class="box-header">

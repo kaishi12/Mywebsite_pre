@@ -28,6 +28,7 @@ namespace MyWebsite.ViewModels.Manga
         public int? FirstPage { get; set; }
         public int FirstChapter { get; set; }
         public string GenreList { get; set; }
+        public int RoleStatusActive { get; set; }
     }
     public class MangaJoin
     {

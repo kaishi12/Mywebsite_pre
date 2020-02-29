@@ -46,9 +46,13 @@ namespace MyWebsite
             //Chapter
             routes.MapRoute("UpdateChapter","UpdateChapter/{MangaId}",new { controller = "Chapter", action = "UpdateChapter" });
             routes.MapRoute("ChapterDetail","ChapterDetail/{ChapterId}",new { controller = "Chapter", action = "ChapterDetail" });
-           
-            
-          
+
+            //ListDetailMangaRole
+            routes.MapRoute("ListRequestByPeople", "ListRequestByPeople", new { controller = "Account", action = "ListRequestByPeople" });
+            routes.MapRoute("ListRequestToPeople", "ListRequestToPeople", new { controller = "Account", action = "ListRequestToPeople" });
+            routes.MapRoute("ListRequestToYou", "ListRequestToYou", new { controller = "Account", action = "ListRequestToYou" });
+            routes.MapRoute("ListRequestByYou", "ListRequestByYou", new { controller = "Account", action = "ListRequestByYou" });
+
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",

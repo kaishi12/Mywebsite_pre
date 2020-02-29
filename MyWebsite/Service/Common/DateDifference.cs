@@ -56,6 +56,11 @@ namespace MyWebsite.Service.Common
             // tmp gán bằng số ngày của tháng trước tháng kết thúc
             if (this.fromDate.Day > this.toDate.Day)
             {
+                if(this.toDate.Month - 2 < 0)
+                {
+                    tmp = this.monthDay[this.toDate.Month + 2];
+                }
+                else
                 tmp = this.monthDay[this.toDate.Month - 2];
 
             }
@@ -118,14 +123,14 @@ namespace MyWebsite.Service.Common
         {
             //return base.ToString();
             if (this.month > 0)
-                return Months + " Tháng trước ";
+                return Months + "tháng trước ";
             else if (this.year > 0)
-                return Years + " Năm trước";
+                return Years + " năm trước";
             else if (Weeks > 0)
-                return Weeks + " Weeks trước";
+                return Weeks + " tuần trước";
             else if (Days > 0)
                 return Days + " Ngày trước";
-            return hour + " Giờ trước";  
+            return hour + " giờ trước";  
             //return this.year + " Year(s), " + this.month + " month(s), " + week + "week(s) " + this.day + " day(s)";
         }
 

@@ -36,7 +36,7 @@
             </ul>
         </div>
 
-        <div class="box-body">
+        <div class="box-body black">
             <div class="row m-b">
 
 
@@ -116,7 +116,7 @@
                                     <a href="/PageDetail/@item.Pages.FirstOrDefault(m=>m.ChapterId == item.ChapterId && m.StatusActive == 0).PageId">
                                         <i class="fa fa-image fa-lg" style="margin-right:10px;color:red" title="Tạo khung truyện"></i>
                                     </a>
-                                    <i class="UpdateChapterIcon fa fa-edit fa-lg" style="margin-right:10px;color:red" title="Chỉnh sửa chương" data-toggle="modal" data-target="#m-a-f" data-ordernumber="@item.OrderNumber" data-fullname="@item.FullName" data-chapterid="@item.ChapterId" data-status="@item.StatusActive"></i>
+                                    <i class="UpdateChapterIcon fa fa-edit fa-lg text-primary" title="Chỉnh sửa chương" data-toggle="modal" data-target="#m-a-f" data-ordernumber="@item.OrderNumber" data-fullname="@item.FullName" data-chapterid="@item.ChapterId" data-status="@item.StatusActive"></i>
                                 </td>
                             </tr>
                         }
