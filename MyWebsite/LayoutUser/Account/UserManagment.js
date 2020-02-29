@@ -1,6 +1,6 @@
 ﻿var file;
 function readURL(input) {
-    console.log(input.files[0]);
+    
     if (input.files && input.files[0]) {
 
         var reader = new FileReader();
@@ -21,7 +21,7 @@ $("#UploadImageButton").on("click", function () {
     var formData = new FormData();
     formData.append('file', file);
     formData.append('AccountId', $("#AccountId").val());
-    console.log(file);
+   
     $.ajax({
         type: 'post',
         url: '/Account/UpdateAva',
@@ -66,7 +66,7 @@ $('#UpdatePassword').on("click", function () {
     return false;
 });
 $("#formUpdateInfo").submit(function (e) {
-    console.log($("#formUpdateInfo").serialize());
+ 
     e.preventDefault();
     $.ajax({
         url: "/Account/UpdateInfo",

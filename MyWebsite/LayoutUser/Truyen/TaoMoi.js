@@ -14,15 +14,35 @@
                 $("#AnhBia").click();
             });
 $("#SaveManga").click(function () {
-    if ($('#AnhBia').val()) {
-        $("#form1").submit();
+    
+    if ($('#AnhBia').val() == "") {
+        alert("Vui lòng thêm ảnh bìa");
     }
-    else {
-        alert("xyz");
-    }         
+    if ($('#FullName').val() == "") {
+        alert("Vui lòng nhập tên truyện");
+        return;
+    }
+    if ($('#Alias').val() == "") {
+        alert("Vui lòng nhập alias");
+        return;
+    }
+    if ($('#Description').val() == "") {
+        alert("Vui lòng nhập mô tả truyện");
+        return;
+    }
+    if ($('#ListGenre').val() == null) {
+        alert("Vui lòng chọn thể loại truyện");
+        return;
+    }
+    
+    $("#form1").submit();
 })
 $("#CheckNameManga").click(function () {
     let FullName = $("#FullName").val();
+    if (FullName == "") {
+        alert("Vui lòng nhập tên truyện");
+        return;
+    }
     $.ajax({
         type: "POST",
         url: "/Manga/CheckNameManga",

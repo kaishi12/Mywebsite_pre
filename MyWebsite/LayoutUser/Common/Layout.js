@@ -35,8 +35,7 @@ $(function () {
     var notificationHub = $.connection.notificationHub;
 
     $.connection.hub.start().done(function () {
-        console.log("hub started");
-        console.log($.connection.hub.id);
+      
         notificationHub.server.join($("#AccountModel").val());
         notificationHub.server.joinLogin();
         $("#Notifcation").on("click", function () {
@@ -56,7 +55,7 @@ $(function () {
                 url: "/Notification/GetNotifications",
                 dataType: "json",
                 success: function (result) {
-                    console.log(result);
+                  
                     for (let i = 0; i < result.length; i++) {
                         let content = "";
                         count++;
@@ -105,7 +104,7 @@ if (count == 0) {
         url: "/Notification/GetNotification",
         dataType: "json",
         success: function (result) {
-            console.log(result);
+          
             let FlagSeen = 0;
             for (let i = 0; i < result.length; i++) {
                 count++;

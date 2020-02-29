@@ -24,11 +24,11 @@
                     {
                         if (item.ChapterId == Model.ChapterId)
                         {
-                            <option value="@item.ChapterId" selected>@item.FullName</option>
+                            <option style="color:black" value="@item.ChapterId" selected>@item.FullName</option>
                         }
                         else
                         { 
-                        <option value="@item.ChapterId">@item.FullName</option>
+                        <option style="color:black" value="@item.ChapterId">@item.FullName</option>
                         }
                     }
                 </select>
@@ -38,13 +38,13 @@
                 <select class="form-control c-select" id="CategoryId" name="CategoryId">
                     @if (ViewBag.CategoryId == 1)
                     {
-                        <option value="1" selected>Trang Raw</option>
-                        <option value="2">Trang Clear-text đã tải lên</option>
+                        <option style="color:black" value="1" selected>Trang Raw</option>
+                        <option  style="color:black" value="2">Trang Clear-text đã tải lên</option>
                     }
                     else
                     {
-                        <option value="1">Trang Raw</option>
-                        <option value="2" selected>Trang Clear-text đã tải lên</option>
+                        <option style="color:black" value="1">Trang Raw</option>
+                        <option style="color:black" value="2" selected>Trang Clear-text đã tải lên</option>
                     }
 
                 </select>
@@ -70,7 +70,7 @@
 
                                     <input type="hidden" name="PageId" id="PageId" value="@item.PageId" />
 
-                                    <a href="~/PageLink/@item.PageLink"><img style=" height:300px; " data-target="#myModal" id=@item.PageId src="~/PageLink/@item.PageLink" alt="" class="img-responsive"></a>
+                                    <a href="~/PageLink/@item.PageLink"><img style="min-height:500px; " data-target="#myModal" id=@item.PageId src="~/PageLink/@item.PageLink" alt="" class="img-responsive"></a>
                                     <div class="p-a-sm">
                                         <div class=" text-ellipsis">
                                             <span>trang @item.OrderNumber</span>
@@ -103,7 +103,7 @@
 
                                     <input type="hidden" name="PageId" id="PageId" value="@item.PageId" />
 
-                                    <a href="~/PageLink/@item.PageLink"><img style=" height:300px" id=@item.PageId src="~/PageLink/@item.PageLink" alt="" class="img-responsive"></a>
+                                    <a href="~/PageLink/@item.PageLink"><img style=" min-height:500px" id=@item.PageId src="~/PageLink/@item.PageLink" alt="" class="img-responsive"></a>
                                     <div class="p-a-sm">
                                         <div class="text-ellipsis">
                                             trang @item.OrderNumber

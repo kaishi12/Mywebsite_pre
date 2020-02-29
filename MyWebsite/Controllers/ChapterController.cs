@@ -88,7 +88,7 @@ namespace MyWebsite.Controllers
             }
             else
             {
-                return Json("fail");
+                return Json(false);
             }
         }
         [HttpPost]
