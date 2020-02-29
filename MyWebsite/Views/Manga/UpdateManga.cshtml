@@ -43,7 +43,7 @@
                     <div class="form-group row">
                         <label class="col-sm-2 form-control-label">
                             <span>Tên Truyện</span>
-                            <span>(*)</span>
+                            <span style="color:red">(*)</span>
                         </label>
                         <div class="col-sm-8">
                             <input value="@Model.FullName" id="FullName" name="FullName" ui-jp="parsley" class="form-control" type="text" placeholder="Tên Truyện" data-parsley-required-message="Không được để trống" required />
@@ -55,7 +55,7 @@
                     <div class="form-group row">
                         <label class="col-sm-2 form-control-label">
                             <span>Link đường dẫn</span>
-                            <span>(*)</span>
+                            <span style="color:red">(*)</span>
                         </label>
                         <div class="col-sm-10">
                             <input value="@Model.Alias" id="Alias" name="Alias" ui-jp="parsley" class="form-control" type="text" disabled />
@@ -72,6 +72,7 @@
                     <div class="form-group row">
                         <label class="col-sm-2 form-control-label">
                             <span>Trạng thái</span>
+                            <span style="color:red">(*)</span>
                         </label>
                         <div class="col-sm-10">
                             <select class="form-control c-select" id="StatusId" name="StatusId">
@@ -79,11 +80,11 @@
                                 {
                                     if (item.StatusId == Model.StatusId)
                                     {
-                                        <option value="@item.StatusId" selected>@item.FullName</option>
+                                        <option style="color:black" value="@item.StatusId" selected>@item.FullName</option>
                                     }
                                     else
                                     {
-                                        <option value="@item.StatusId">@item.FullName</option>
+                                        <option  style="color:black" value="@item.StatusId">@item.FullName</option>
                                     }
                                 }
                             </select>
@@ -92,7 +93,7 @@
                     <div class="form-group row">
                         <label class="col-sm-2 form-control-label">
                             <span>Mô tả</span>
-                            <span>(*)</span>
+                            <span style="color:red">(*)</span>
                         </label>
                         <div class="col-sm-10">
                             <textarea class="form-control" placeholder="Mô tả" id="Description" name="Description">@Model.Description</textarea>
@@ -102,7 +103,7 @@
                     <div class="form-group row">
                         <label class="col-sm-2 form-control-label">
                             <span>Thể loại</span>
-                            <span>(*)</span>
+                            <span style="color:red">(*)</span>
                         </label>
                         <div class="input-group select2-bootstrap-append col-sm-10">
                             <select name="ListGenre" id="ListGenre" class="form-control select2" multiple multiple ui-jp="select2" ui-options="{theme: 'bootstrap'}" required>

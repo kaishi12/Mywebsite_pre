@@ -9,7 +9,7 @@
     }
 </style>
 <div class="padding">
-    <div class="m-b black rounded">
+    <div class="m-b primary">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="/Account/Home">Trang chủ</a></li>
             <li class="breadcrumb-item"><a href="/ListManga">Danh sách truyện đã tạo</a></li>
@@ -32,7 +32,7 @@
                 <select class="form-control c-select" id="ChapterList" name="ChapterList" onchange="window.location.href=this.value;">
                     @foreach(var item in ViewBag.ListPage)
                     {
-                    <option value="/PageSelect/@item.PageId ">@item.FullName</option>
+                    <option style="color:black" value="/PageSelect/@item.PageId ">@item.FullName</option>
                     }
                 </select>
             </div>
@@ -54,7 +54,7 @@
 
                                     <input type="hidden" name="PageId" id="PageId" value="@item.PageId" />
 
-                                    <a href="~/PageLink/@item.PageLink"><img style="max-height:300px" id=@item.PageId src="~/PageLink/@item.PageLink" alt="" class="img-responsive"></a>
+                                    <a href="~/PageLink/@item.PageLink"><img style="min-height:500px" id=@item.PageId src="~/PageLink/@item.PageLink" alt="" class="img-responsive"></a>
                                     <div id="@("footer"+item.PageId)" style="padding-top:5px">
                                         <button style="display: block;margin-left: auto;margin-right: auto;" onclick="ChangeStatusPage(this,0)" type="button" id=@("Save" + @item.PageId) class="md-btn md-raised m-b-sm w-xs danger ">Chọn</button>
                                     </div>
@@ -122,15 +122,15 @@
                         let footer = $("#footer" + PageId);
                         let btn = "";
                         if (status == 1) {
-                            alert(1);
+                            alert("Lưu thành công");
                                btn = ' <button style="display: block;margin-left: auto;margin-right: auto" onclick="ChangeStatusPage(this,0)" type="button" id="Save' + PageId + '" class="md-btn md-raised m-b-sm w-xs danger">Chọn</button>';
                             $(str).removeClass("primary");
                             $(str).addClass("accent");
                             header.text("Chưa chọn");
-                            console.log(header.text());
+                           
                            }
                         else {
-                            alert(2);
+                            alert("Lưu thành công");
                            btn = ' <button style="display: block;margin-left: auto;margin-right: auto" onclick="ChangeStatusPage(this,1)" type="button" id="UnSave' + PageId + '" class="md-btn md-raised m-b-sm w-xs danger UnSave">Hủy Chọn</button>';
                             $(str).removeClass("accent");
                             $(str).addClass("primary");

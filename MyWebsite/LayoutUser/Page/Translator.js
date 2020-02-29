@@ -62,7 +62,7 @@ function LoadText(result) {
     ctx1.drawImage(img, 0, 0, img.width, img.height, 0, 0, canvas.width, canvas.height);
     for (let i = 0; i < result.length ; i++)
     {
-        console.log(result);
+       
         count++;
         let CorX = result[i].CorX / scale;
         let CorY = result[i].CorY / scale;
@@ -413,7 +413,7 @@ function Save() {
         model.push(Text);
         }
     });
-    console.log(model);
+   
     $.ajax({
             type: "POST",
             url: "/Contribute/AddNewTexts",

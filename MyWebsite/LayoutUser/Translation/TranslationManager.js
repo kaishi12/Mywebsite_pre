@@ -154,13 +154,13 @@ function LoadTable() {
         size = parseInt($(".AttText", b).find(':selected').data("size"));
         font = $(".AttText", b).find(':selected').data("font");
         color = $(".AttText", b).find(':selected').data("color");
-        alert($(".AttBtn", b).attr("data-xzs"));
+        
         $(".AttBtn", b).attr("data-id", $(".AttText", b).find(":selected").val());
         italic = parseInt($(".AttText", b).find(':selected').data("italic"));
         let cx = CorX + 0.5 * CorW;   // x of shape center
         let cy = CorY + 0.5 * CorH;
         text = $(".AttText", b).find(':selected').text();
-        console.log(bold,size,font,color,text);
+      
   RotateRec(ctx, CorX, CorY, CorW, CorH, De, cx, cy, text, font, outline, color, italic, bold, size, color);
     });
 }
@@ -222,7 +222,7 @@ function Save() {
             model.push(Text);
         }
     });
-    console.log(model);
+   
     $.ajax({
         type: "POST",
         url: "/Contribute/AddNewTexts",

@@ -281,7 +281,7 @@ function Remove(e) {
 }
 var table = $("#tblEntAttributes tbody tr").clone();
 function Reload() {
-    console.log(table);
+   
     count = 0;
     $("#tblEntAttributes tbody tr").each(function () {
         this.remove();

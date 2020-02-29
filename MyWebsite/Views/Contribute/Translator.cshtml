@@ -74,7 +74,7 @@
     }
 </style>
 <div class="padding">
-    <div class="m-b primary rounded">
+    <div class="m-b primary ">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="/Account/Home">Trang chủ</a></li>
             <li class="breadcrumb-item"><a href="/TranslatorList">Danh sách truyện dịch</a></li>
@@ -122,11 +122,11 @@
                                 {
                                     if (item.Key == Model.PageId)
                                     {
-                                        <option selected value="@item.Key">@item.Value</option>
+                                        <option style="color:black" selected value="@item.Key">@item.Value</option>
                                     }
                                     else
                                     {
-                                        <option value="@item.Key">@item.Value</option>
+                                        <option style="color:black" value="@item.Key">@item.Value</option>
                                     }
                                 }
                             </select>
@@ -146,11 +146,11 @@
                                 {
                                     if (ViewBag.TranslationId != null && ViewBag.TranslationId == item.TransationId)
                                     {
-                                        <option selected value="@item.TransationId">@item.Language.FullName</option>
+                                        <option style="color:black" selected value="@item.TransationId">@item.Language.FullName</option>
                                     }
                                     else
                                     {
-                                        <option value="@item.TransationId">@item.Language.FullName</option>
+                                        <option style="color:black" value="@item.TransationId">@item.Language.FullName</option>
                                     }
 
 
@@ -274,14 +274,14 @@
                                                         <td class="Att Default" data-TextId="@Text.TextId" data-attDe="@item.Degree" data-attX="@Cor[0]" data-attY="@Cor[1]" data-attW="@item.Witdh" data-attH="@item.Height"><span class="form-control">@count</span> </td>
                                                         @if (ViewBag.Block != null || Text.StatusAllow == 0)
                                                         {
-                                                            <td><input disabled value="@Text.TextContent" class="attText Default form-control" style="width:250px" /></td>
+                                                            <td><input disabled value="@Text.TextContent" class="attText Default form-control"  /></td>
                                                             <td>
                                                                 <button disabled data-bold="@Text.Bold" data-size="@Text.FontSize" data-font="@Text.Font.FullName" data-fontid="@Text.FontId" data-Italic="@Text.Italic" data-color="@Text.ColorText" value="@item.TextBoxId" id="@item.TextBoxId" class="clickbutton Default btn btn-fw danger"><i class="fas fa-cog"></i></button>
                                                             </td>
                                                         }
                                                         else
                                                         {
-                                                            <td><input value="@Text.TextContent" class="attText Default form-control" style="width:250px" /></td>
+                                                            <td><input value="@Text.TextContent" class="attText Default form-control" /></td>
                                                             <td>
                                                                 <button data-bold="@Text.Bold" data-size="@Text.FontSize" data-font="@Text.Font.FullName" data-fontid="@Text.FontId" data-Italic="@Text.Italic" data-color="@Text.ColorText" value="@item.TextBoxId" id="@item.TextBoxId" class="clickbutton Default btn btn-fw danger" data-toggle="modal" data-target="#m-a-f"><i class="fas fa-cog fa-spin"></i></button>
                                                             </td>

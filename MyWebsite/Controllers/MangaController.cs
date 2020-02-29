@@ -32,8 +32,7 @@ namespace MyWebsite.Controllers
 
         }
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult CreateManga(MangaModel model, HttpPostedFileBase AnhBia)
+         public ActionResult CreateManga(MangaModel model, HttpPostedFileBase AnhBia)
         {
 
             ViewBag.Genre = from row in data.Genres select row;
@@ -124,6 +123,12 @@ namespace MyWebsite.Controllers
         {
             AccountModel accountModel = (AccountModel)Session["UserInfo"];
            var list = MangaService.GetListMangaByAccountId(accountModel.AccountId, "MC");
+            var chapter = data.Chapters.Where(m => m.StatusActive == 0).GroupBy(m => m.MangaId).Select(m =>new { id = m.Key, count = m.Count(), totalview = m.Where(l=>l.ViewNumber != null).Sum(l=>l.ViewNumber) }).ToList();
+            foreach(var item in list)
+            {
+                item.ChapterCount = chapter.FirstOrDefault(m => m.id == item.MangaId) == null ? 0 : chapter.FirstOrDefault(m => m.id == item.MangaId).count;
+                item.TotalView = chapter.FirstOrDefault(m => m.id == item.MangaId) == null ? 0 : chapter.FirstOrDefault(m => m.id == item.MangaId).totalview.Value;
+            }
             return View(list);
 
         }

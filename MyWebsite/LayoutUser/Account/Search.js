@@ -59,7 +59,7 @@
             });
         }
         else {
-            console.log($("#SearchInput").val());
+            
             $.ajax({
                 url: "/Manga/Search",
                 type: "post",
@@ -69,14 +69,14 @@
                     Name: $("#SearchInput").val()
                 },
                 success: function (data) {
-                    console.log(data);
+                   
                     $("#class1").empty();
                     $(".result").empty();
                     result1 += '<p class="m-b-md"><strong>' + data.length + '</strong> Kết quả cho: <strong>' + $("#SearchInput").val() + '</strong></p>';
 
                     $(".result").append(result1);
                     if (data.length > 0) {
-                        console.log(data);
+                      
                         $("#class1").css("text-align", "left");
                         for (let i = 0; i < data.length; i++) {
 
@@ -120,7 +120,7 @@
     })
     $(document).on("click", "#MoiGiaNhap", function () {
         let str = $(this).attr("name");
-        console.log(str);
+        
         let res = str.split(";");
         $("#AccountId").val(res[0]);
         $("#UserName").val(res[1]);
@@ -168,7 +168,7 @@
         });
     })
     $("#Invite").click(function () {
-        console.log($("#LanguageM").val());
+       
         $.ajax({
             url: "/Manga/Join",
             type: "post",

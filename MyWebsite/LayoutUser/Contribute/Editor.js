@@ -8,7 +8,7 @@ function Upload(input) {
 
     let value = "img" + "#" + input.id.replace("file", "");
     let valuebuttonSave = "#Save" + input.id.replace("file", "");
-    console.log(input.id.replace("file", ""));
+   
     if (input.files && input.files[0]) {
 
         var reader = new FileReader();
@@ -46,7 +46,7 @@ function UpdatePage(input) {
     let PageId = input.id.replace("Save", "");
     let value = "#UpdatePage" + PageId;
     let formdata = new FormData($(value).get(0));
-    console.log(value);
+  
     alert(formdata);
     $.ajax({
         url: "/Chapter/UpdateLinkPage",

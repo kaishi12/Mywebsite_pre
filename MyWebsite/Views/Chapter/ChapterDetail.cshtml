@@ -5,8 +5,8 @@
 }
 
 <div class="padding">
-    <div class="m-b black rounded">
-        <ol class="breadcrumb">
+    <div class="m-b primary">
+        <ol class="breadcrumb ">
             <li class="breadcrumb-item"><a href="/Account/Home">Trang chủ</a></li>
             <li class="breadcrumb-item"><a href="/ListManga">Danh sách truyện đã tạo</a></li>
             <li class="breadcrumb-item"><a href="/ListChapter/@Model.MangaId">Danh sách chương </a></li>
@@ -25,7 +25,7 @@
                         <ul class="list-unstyled m-t-n-sm">
 
                             <li class="nav-item">
-                                <a class="nav-link block" href data-toggle="tab" data-target="#tab-1">Thêm Trang</a>
+                                <a class="nav-link block active" active aria-expanded="" href data-toggle="tab" data-target="#tab-1">Thêm Trang</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link block" href data-toggle="tab" data-target="#tab-2">Chỉnh sửa trang</a>
@@ -41,7 +41,7 @@
         <div class="col-sm-10">
             <div class="tab-content pos-rlt">
 
-                <div class="tab-pane" id="tab-1">
+                <div class="tab-pane active" aria-expanded="true" id="tab-1">
 
                     <div style="margin:30px">
                         @using (Html.BeginForm("AddNewPage", "Chapter", FormMethod.Post, new { @enctype = "multipart/form-data" }))
@@ -54,7 +54,8 @@
                                 <label> Thứ tự trang mới nhất</label>
                                 <div class="row m-b">
                                     <div class="col-md-3" style="margin-right:20px;margin-left:8px">
-                                        <input type="number" id="TotalNumber" class="form-control" value="@Model.Pages.LastOrDefault(m=>m.StatusActive == 0).OrderNumber" disabled>
+                                       
+                                        <input type="number" id="TotalNumber" class="form-control" value="@Model.Pages.Where(m=>m.StatusActive == 0  && m.CategoryId == 1).Count()" disabled>
                                     </div>
 
 
@@ -75,21 +76,40 @@
 
                             </div>
                             <div class="row" id="UploadRaw">
-                                @foreach (var item in Model.Pages.Where(m => m.StatusActive == 0 && m.CategoryId == 1).OrderBy(m => m.OrderNumber))
+                                @foreach (var item in Model.Pages.Where(m => m.CategoryId == 1).OrderBy(m => m.OrderNumber))
                                 {
-                                    <div class="col-xs-6 col-sm-4 col-md-3" style="padding-left:12px;padding-right:12px">
-                                        <div class="box p-a-xs">
+                                    if (item.StatusActive == 0)
+                                    {
+                                        <div  id=@("CurPage" + item.PageId)  class="col-xs-6 col-sm-4 col-md-3" style="padding-left:12px;padding-right:12px">
+                                            <div class="box p-a-xs">
 
-                                            <img id="img1" style="max-height:500px" src="~/PageLink/@item.PageLink" alt="" class="img-responsive">
-                                            <div class="p-a-sm">
-                                                <div class="text-ellipsis">
+                                                <img id="img1" style="min-height:500px" src="~/PageLink/@item.PageLink" alt="" class="img-responsive">
+                                                <div class="p-a-sm">
+                                                    <div class="text-ellipsis">
 
-                                                    <span>@item.FullName</span>
+                                                        <span>@item.FullName</span>
+                                                    </div>
+
                                                 </div>
-
                                             </div>
                                         </div>
-                                    </div>
+                                    }
+                                    else
+                                    {
+                                        <div  id=@("CurPage" + item.PageId) hidden class="col-xs-6 col-sm-4 col-md-3" style="padding-left:12px;padding-right:12px">
+                                            <div class="box p-a-xs">
+
+                                                <img id="img1" style="min-height:500px" src="~/PageLink/@item.PageLink" alt="" class="img-responsive">
+                                                <div class="p-a-sm">
+                                                    <div class="text-ellipsis">
+
+                                                        <span>@item.FullName</span>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
                                 }
                             </div>
                             <button disabled type="submit" class="SaveNewPage md-btn md-raised m-b-sm w-xs blue">Lưu</button>
@@ -114,7 +134,7 @@
 
                                             <input type="hidden" name="PageId" id="PageId" value="@item.PageId" />
 
-                                            <a href="~/PageLink/@item.PageLink"><img style="max-height:300px" id=@item.PageId src="~/PageLink/@item.PageLink" alt="" class="img-responsive"></a>
+                                            <a href="~/PageLink/@item.PageLink"><img style="min-height:500px" id=" @("img"+item.PageId)" src="~/PageLink/@item.PageLink" alt="" class="img-responsive"></a>
                                             <div class="p-a-sm">
                                                 <div class="text-ellipsis">
                                                     <span>trang @item.OrderNumber</span>
@@ -147,7 +167,7 @@
 
                                             <input type="hidden" name="PageId" id="PageId" value="@item.PageId" />
 
-                                            <a href="~/PageLink/@item.PageLink"><img style="max-height:500px" id=@item.PageId src="~/PageLink/@item.PageLink" alt="" class="img-responsive"></a>
+                                            <a href="~/PageLink/@item.PageLink"><img style="min-height:500px" id="@("img"+item.PageId)" src="~/PageLink/@item.PageLink" alt="" class="img-responsive"></a>
                                             <div class="p-a-sm">
                                                 <div class="text-ellipsis">
                                                     trang @item.OrderNumber
@@ -187,7 +207,7 @@
 
                                             <input type="hidden" name="PageId" id="PageId" value="@item.PageId" />
 
-                                            <a href="~/PageLink/@item.PageLink"><img style="max-height:500px" id=@item.PageId src="~/PageLink/@item.PageLink" alt="" class="img-responsive"></a>
+                                            <a href="~/PageLink/@item.PageLink"><img style="min-height:500px" id=@item.PageId src="~/PageLink/@item.PageLink" alt="" class="img-responsive"></a>
                                             <div class="p-a-sm">
                                                 <div class="text-ellipsis">
                                                     trang @item.OrderNumber
