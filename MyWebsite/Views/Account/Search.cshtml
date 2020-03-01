@@ -5,7 +5,7 @@
 
 <div class="padding">
     <div class="m-b">
-        <ol class="breadcrumb black">
+        <ol class="breadcrumb primary">
             <li class="breadcrumb-item"><a href="/Account/Home">Trang chủ</a></li>
             <li class="breadcrumb-item active">Tìm kiếm</li>
         </ol>
@@ -72,7 +72,7 @@
                                     <select id="SelectRole" class="form-control select2-bootstrap-append">
                                         @foreach (var item in ViewBag.ListRole)
                                         {
-                                            <option value="@item.Id">@item.FullName</option>
+                                            <option value="@item.RoleId">@item.FullName</option>
                                         }
                                     </select>
                                 </div>
@@ -87,7 +87,7 @@
                                     <select id="Language" class="form-control select2-bootstrap-append">
                                         @foreach (var item in ViewBag.ListLanguage)
                                         {
-                                            <option value="@item.Id">@item.FullName</option>
+                                            <option value="@item.LanguageId">@item.FullName</option>
                                         }
                                     </select>
 
@@ -150,7 +150,7 @@
                                     <select id="SelectRoleM" class="form-control select2-bootstrap-append">
                                         @foreach (var item in ViewBag.ListRole)
                                         {
-                                            <option value="@item.Id">@item.FullName</option>
+                                            <option value="@item.RoleId">@item.FullName</option>
                                         }
                                     </select>
                                 </div>
@@ -165,7 +165,7 @@
                                     <select id="LanguageM" class="form-control select2-bootstrap-append">
                                         @foreach (var item in ViewBag.ListLanguage)
                                         {
-                                            <option value="@item.Id">@item.FullName</option>
+                                            <option value="@item.LanguageId">@item.FullName</option>
                                         }
                                     </select>
 
@@ -179,7 +179,7 @@
                         <button type="button" class="btn dark-white p-x-md" data-dismiss="modal">Hủy</button>
                         <button id="Invite" type="button" class="btn danger p-x-md" data-dismiss="modal">Mời gia nhập</button>
                     </div>
-                </div><!-- /.modal-content -->
+                </div> /.modal-content 
             </div>
         </div>
     </div>

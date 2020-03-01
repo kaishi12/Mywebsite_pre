@@ -35,13 +35,30 @@ namespace MyWebsite.Service.Common
     public enum EnumRole
     {
         [Display(Name = "Quản lý truyện-chương")]
-        CM = 0,
+        CM = 1,
         [Display(Name = "Tải lên bản clear-text")]
-        UC = 1,
+        UC = 2,
         [Display(Name = "Dịch truyện")]
-        TR = 2,
+        TR = 3,
         [Display(Name = "Quản lý bảm dịch toàn truyện theo ngôn ngữ")]
-        TM = 3,
-
+        TM = 4, 
+    }
+    public enum StatusMember
+    {
+        [Display(Name = "Không được duyệt")]
+        Cancel = 0,
+        [Display(Name = "Đang chờ duyệt")]
+        Wait = 1,
+        [Display(Name = "Đã được duyệt")]
+        Accept = 2
+    }
+    public enum StatusPage
+    {
+        [Display(Name = "Không được duyệt")]
+        Cancel = 0,
+        [Display(Name = "Đang chờ duyệt")]
+        Wait = 1,
+        [Display(Name = "Đã được duyệt")]
+        Accept = 2
     }
 }

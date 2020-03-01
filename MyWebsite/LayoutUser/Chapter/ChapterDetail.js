@@ -10,7 +10,7 @@ $("#addbtn").on("click", function () {
 
     let pageorder = "trang " + countPageAdd;
     let pagename = pageorder + " " + chapterName;
-    let content = '<div class="Page col-xs-6 col-sm-4 col-md-3" style="padding-left:12px;padding-right:12px"><div class="box p-a-xs"><img id="imgcur' + countPageAdd + '" style="max-height:500px" src="/RootPicture/tenor.gif" alt="" class="img-responsive"> <div class="p-a-sm"><div class="text-ellipsis"> <span>' + pagename + '</span><input id="AnhTrang' + countPageAdd + '" hidden style="margin-left:10px" type="file" name="file" onchange="UploadCur(this)" /></div><div style="padding-left:0px;padding-right:0px;padding-bottom:0px;" class="box-footer row"><button id="' + countPageAdd + '" type="button" class="UploadButton md-btn md-raised m-b-sm w-xs primary" style="display: block;margin-left: auto;margin-right: auto;">Tải lên</button></div> </div></div></div>';
+    let content = '<div class="Page col-xs-6 col-sm-4 col-md-3" style="padding-left:12px;padding-right:12px"><div class="box p-a-xs"><img id="imgcur' + countPageAdd + '" style="max-height:500px" src="/RootPicture/tenor.gif" alt="" class="img-responsive"> <div class="p-a-sm"><div class="text-ellipsis"> <span>' + pagename + '</span><input id="AnhTrang" data-count="' + countPageAdd + '" hidden style="margin-left:10px" type="file" name="AnhTrang" onchange="UploadCur(this)" /></div><div style="padding-left:0px;padding-right:0px;padding-bottom:0px;" class="box-footer row"><button id="' + countPageAdd + '" type="button" class="UploadButtonCur md-btn md-raised m-b-sm w-xs primary" style="display: block;margin-left: auto;margin-right: auto;">Tải lên</button></div> </div></div></div>';
     $("#UploadRaw").append(content);
     $(".SaveNewPage").prop('disabled', false);
 })
@@ -45,7 +45,7 @@ function Upload(input) {
 
 }
 function UploadCur(input) {
-    let value = "#imgcur" + input.id.replace("AnhTrang", "");
+    let value = "#imgcur" + $(input).data("count");
     //let valuebuttonSave = "#Save" + input.id.replace("file", "");
 
     if (input.files && input.files[0]) {
@@ -62,14 +62,15 @@ function UploadCur(input) {
 
 }
 $(document).on("click", ".UploadButtonCur", function () {
-    
-    let str = "#file" + this.id;
-    $(str).click();
+
+    let str = "#AnhTrang" + this.id;
+    $(this).parent().parent().find('#AnhTrang').click();
+   
 })
 $(document).on("click", ".UploadButton", function () {
 
     let str = "#AnhTrang" + this.id;
-    $(str).click();
+    $(this).parent().parent().find('#file' + this.id).click();
 })
 function SavePage(input) {
 
@@ -98,12 +99,15 @@ function SavePage(input) {
 }
 function ChangeStatusPage(input, status) {
     let PageId = input.id.replace("Save", "");
-    let div,div1;
-    if (status == 0) {
-
+    let div, div1;
+    let active = true;
+    console.log(PageId);
+    if (status == 1) {
+       
         div = "#Restore" + PageId;
     }
     else {
+        active = false;
         div = "#Remove" + PageId;
     }
     let value = "#UpdatePage" + PageId;
@@ -114,11 +118,11 @@ function ChangeStatusPage(input, status) {
 
         data: {
             PageId: +PageId,
-            StatusActive: status
+            StatusActive: active
         },
         success: function (result) {
             if (result == "Success") {
-                if (status == 0) {
+                if (status == 1) {
                     alert("Khôi phục thành công");
                     $(div).fadeOut();
                     div = "#Remove" + PageId;

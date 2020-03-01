@@ -1,5 +1,5 @@
 ﻿@model IEnumerable<MyWebsite.Models.Page>
-
+@using MyWebsite.Service.Common;
 @{
     Layout = "~/Views/Shared/_LayoutUser.cshtml";
 }
@@ -44,7 +44,7 @@
             <div class="row">
                 @foreach (var item in Model)
                 {
-                    if (item.StatusActive == 0)
+                    if (item.Status == (int)StatusPage.Wait)
                     {
                         <div  class="col-xs-6 col-sm-4 col-md-3" style="padding-left:12px;padding-right:12px">
 
@@ -56,7 +56,7 @@
 
                                     <a href="~/PageLink/@item.PageLink"><img style="min-height:500px" id=@item.PageId src="~/PageLink/@item.PageLink" alt="" class="img-responsive"></a>
                                     <div id="@("footer"+item.PageId)" style="padding-top:5px">
-                                        <button style="display: block;margin-left: auto;margin-right: auto;" onclick="ChangeStatusPage(this,0)" type="button" id=@("Save" + @item.PageId) class="md-btn md-raised m-b-sm w-xs danger ">Chọn</button>
+                                        <button style="display: block;margin-left: auto;margin-right: auto;" onclick="ChangeStatusPage(this,2)" type="button" id=@("Save" + @item.PageId) class="md-btn md-raised m-b-sm w-xs danger ">Chọn</button>
                                     </div>
                                 </form>
                             </div>
@@ -108,12 +108,12 @@
                  PageId = input.id.replace("Save", "");
             }
             $.ajax({
-                url: "/Chapter/UpdateStatusPage",
+                url: "/Page/UpdateStatusPage",
                 type: "post",
 
                 data: {
                     PageId: +PageId,
-                    StatusActive: status
+                    Status: status
                 },
                 success: function (result) {
                     if (result == "Success") {
@@ -123,7 +123,7 @@
                         let btn = "";
                         if (status == 1) {
                             alert("Lưu thành công");
-                               btn = ' <button style="display: block;margin-left: auto;margin-right: auto" onclick="ChangeStatusPage(this,0)" type="button" id="Save' + PageId + '" class="md-btn md-raised m-b-sm w-xs danger">Chọn</button>';
+                               btn = ' <button style="display: block;margin-left: auto;margin-right: auto" onclick="ChangeStatusPage(this,2)" type="button" id="Save' + PageId + '" class="md-btn md-raised m-b-sm w-xs danger">Chọn</button>';
                             $(str).removeClass("primary");
                             $(str).addClass("accent");
                             header.text("Chưa chọn");
@@ -143,7 +143,7 @@
                     }
 
                     else {
-                        alert("Thất bại");
+                        alert("Vui lòng thử lại sau hoặc liên hệ admin để được hỗ trợ xử lý");
 
                     }
 

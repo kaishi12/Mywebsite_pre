@@ -26,44 +26,61 @@ namespace MyWebsite.Controllers
         public ActionResult CreateManga()
         {
 
-            ViewBag.Genre = data.Genres.Where(m=>m.Active == true);
-            ViewBag.Status =data.Status.Where(m => m.Active == true);
+            ViewBag.Genre = data.Genres.Where(m=>m.Active == true).ToList();
+            ViewBag.Status =data.Status.Where(m => m.Active == true).ToList();
             return View();
 
         }
         [HttpPost]
          public ActionResult CreateManga(MangaModel model, HttpPostedFileBase AnhBia)
         {
-
-            ViewBag.Genre = data.Genres.Where(m => m.Active == true);
-            ViewBag.Status =data.Status.Where(m => m.Active == true);
-            if (AnhBia != null)
+            try
             {
-                var filename = model.FullName;
-                var path = Path.Combine(Server.MapPath("~/Cover"), filename);
-                AnhBia.SaveAs(path);
-                model.CoverLink = filename;
-            }
-            if (ModelState.IsValid)
-            {
-                model.MangaId = MangaService.AddnewManga(model);
-                AccountService accountService = new AccountService();
-                AccountModel accountModel = (AccountModel)Session["UserInfo"];
-                if (MangaDetailService.AddNewRole(model.MangaId, accountModel.AccountId, (int)EnumRole.CM,(int)EnumTypeMember.Create, 0) && model.MangaId > -1)
+                  ViewBag.Genre = data.Genres.Where(m => m.Active == true);
+                ViewBag.Status = data.Status.Where(m => m.Active == true);
+                if (AnhBia != null)
                 {
+                    var filename = model.Alias + ".png";
+                    var path = Path.Combine(Server.MapPath("~/Cover"), filename);
+                    AnhBia.SaveAs(path);
+                    model.CoverLink = filename;
+                }
+                if (ModelState.IsValid)
+                {
+                    model.MangaId = MangaService.AddnewManga(model);
+                    if (model.MangaId == -1)
+                    {
+                        return RedirectToAction("Result", new { MangaId = model.MangaId, Status = 0 });
+                    }
+                    if (!MangaGenreService.AddNewManga_Genres(model.MangaId, model.ListGenre.ToList()))
+                        return RedirectToAction("Result", new { MangaId = model.MangaId, Status = 0 });
+
+
+                    AccountModel accountModel = (AccountModel)Session["UserInfo"];
+                    data.Manga_Detail.Add(new Manga_Detail
+                    {
+                        MangaId = model.MangaId,
+                        AccountId = accountModel.AccountId,
+                        RoleId = (int)EnumRole.CM,
+                        Type = (int)EnumTypeMember.Create,
+                        Active = true,
+                        CreateAt = DateTime.Now,
+                        Language = -1,
+                        Status = (int)StatusMember.Accept
+                    });
+                    data.SaveChanges();
                     return RedirectToAction("Result", new { MangaId = model.MangaId, Status = 0 });
                 }
                 else
                 {
-                    return RedirectToAction("Result", new { MangaId = model.MangaId, Status = 1 });
+                    return View(model);
                 }
             }
-            else
+            catch (Exception ex)
             {
-                return View(model);
+                return RedirectToAction("Result", new { MangaId = model.MangaId, Status = 1 });
             }
-
-        }
+         }
         public ActionResult Result(int MangaId, int Status)
         {
             if (Status == 0)
@@ -81,7 +98,8 @@ namespace MyWebsite.Controllers
        public ActionResult UpdateManga(int MangaId)
         {
 
-            string list = "";
+            
+        string list = "";
             ViewBag.Genre = from row in data.Genres select row;
             ViewBag.Status = from row in data.Status select row;
             MangaModel manga = MangaService.GetMangaModel(MangaId);
@@ -153,30 +171,29 @@ namespace MyWebsite.Controllers
         public ActionResult ListChapter(int MangaId)
         {
 
-            var list = data.Chapters.Where(m => m.MangaId == MangaId);
-            foreach (var item in list)
-            {
-                var fullname = item.Manga.FullName;
-            }
+            var list = data.Chapters.Where(m => m.MangaId == MangaId).OrderBy(m=>m.OrderNumber).ToList();
+            
+            
             //ViewBag.RawCount =  list.Where(m => m.CategoryId == 1 && m.StatusActive == 0).Count()
             ViewBag.MangaId = MangaId;
+            ViewBag.FullName = data.Mangas.FirstOrDefault(m => m.MangaId == MangaId).FullName;
             return View(list);
 
         }
         [HttpPost]
         public JsonResult Search(string Name)
         {
-            AccountModel accountModel = (AccountModel)Session["UserInfo"];
+             AccountModel accountModel = (AccountModel)Session["UserInfo"];
             return Json(MangaService.Search(accountModel.AccountId, Name), JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
-        public JsonResult Join(int id, string role, int language, int type, int? AccountId)
+        public JsonResult Join(int id, int role, int language, int type, int? AccountId)
         {
 
 
             AccountModel accountModel = (AccountModel)Session["UserInfo"];
             int accid = accountModel.AccountId;
-            if(AccountId!= null)
+            if(AccountId != null)
             {
                 accid = AccountId.Value;
             }

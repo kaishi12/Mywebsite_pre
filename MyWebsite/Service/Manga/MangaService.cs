@@ -19,21 +19,20 @@ namespace MyWebsite.Service.Manga
         {
             try
             {
-                var param = new DynamicParameters();
-                param.Add("@FullName", model.FullName);
-                param.Add("@CoverLink", model.CoverLink);
-                param.Add("@Alias", model.Alias);
-                param.Add("@Author", model.Author);
-                param.Add("@CreateAt", DateTime.Now);
-                param.Add("@Description", model.Description);
-                param.Add("@StatusId", model.StatusId);
-                param.Add("@StatusActive",1);
-                int MangaId = DALHelpers.QueryByStored<int>("Manga_AddnewManga", param).FirstOrDefault();
-               for (int i = 0; i < model.ListGenre.Count(); i++)
-                {
-                    MangaGenreService.AddNewManga_Genres(MangaId, model.ListGenre.ToList()[i]);
-                }
-                return (int)MangaId;
+                var manga = new Models.Manga { 
+                    FullName = model.FullName,
+                    CoverLink = model.CoverLink,
+                    Alias = model.Alias,
+                    Author = model.Author,
+                    CreateAt = DateTime.Now,
+                    Description = model.Description,
+                    UpdateAt = DateTime.Now,
+                    Active = true,
+                    StatusId = model.StatusId
+                };
+                data.Mangas.Add(manga);
+                data.SaveChanges();
+                return manga.MangaId;
             }
             catch (Exception ex)
             {
@@ -94,16 +93,18 @@ namespace MyWebsite.Service.Manga
                 {
                     if (model.ListGenre.Contains(item))
                     {
-                        MangaGenreService.ChangeStatus(model.MangaId, item, 1);
                         modellist.Remove(item);
                     }
+                    else
+                    {
+                        MangaGenreService.ChangeStatus(model.MangaId, item, false);
+                    }
                 }
-                foreach (var item in modellist)
-                {
-                    MangaGenreService.AddNewManga_Genres(model.MangaId, item);
-                }
-
-                return true;
+                if (MangaGenreService.AddNewManga_Genres(model.MangaId, modellist))
+                    return true;
+                else
+                    return false;
+               
             }
             catch (Exception ex)
             {
@@ -178,22 +179,22 @@ namespace MyWebsite.Service.Manga
                 param.Add("@MangaId", MangaId);
                 return DALHelpers.QueryByStored<MangaModel>("Manga_Search", param).FirstOrDefault();
         }
-        public int Join(int AccountId, int MangaId, string Role, int language, int type)
+        public int Join(int AccountId, int MangaId, int Role, int language, int type)
         {
             try
             {
                 NotificationService notificationService = new NotificationService();
                 bool result = false;
                 int AccountIdCreateManga = MangaDetailService.GetAccountIdCreateManga(MangaId);
-                var RoleId = RoleService.GetRoleId(Role);
-                MangaDetailService.AddNewRole(MangaId, AccountId, RoleId, type, language);
-                if (type == 1)
+                
+                MangaDetailService.AddNewRole(MangaId, AccountId, Role, type, language,(int)StatusMember.Wait);
+                if (type == 0)
                 {
-                    result = notificationService.AddnewRequestNotification("Request", AccountId, AccountIdCreateManga, RoleId, MangaId);
+                    result = notificationService.AddnewRequestNotification("Request", AccountId, AccountIdCreateManga, Role, MangaId);
                 }
                 else
                 {
-                    result = notificationService.AddnewRequestNotification("Invite", AccountIdCreateManga, AccountId,RoleId, MangaId);
+                    result = notificationService.AddnewRequestNotification("Invite", AccountIdCreateManga, AccountId, Role, MangaId);
                 }
                 return 1;
             }

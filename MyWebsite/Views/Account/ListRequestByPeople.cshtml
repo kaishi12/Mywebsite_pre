@@ -3,6 +3,7 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_LayoutUser.cshtml";
 }
+@using MyWebsite.Service.Common;
 <style>
 </style>
 <div class="padding">
@@ -13,79 +14,77 @@
         </ol>
     </div>
     <div class="box black">
-            <div class="box-body">
-                <div class="table-responsive">
-                    <table ui-jp="dataTable" id="datatable" class="table table-striped b-t b-b black">
-                        <thead>
+        <div class="box-body">
+            <div class="table-responsive">
+                <table ui-jp="dataTable" id="datatable" class="table table-striped b-t b-b black">
+                    <thead>
+                        <tr>
+                            <th>Ảnh Bìa</th>
+                            <th>Thông tin truyện</th>
+                            <th style="text-align:center">Tên cá nhân</th>
+                            <th style="text-align:center">Vị trí</th>
+                            <th style="text-align:center">Thời gian</th>
+                            <th style="text-align:center"> Trạng thái</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
                             <tr>
-                                <th>Ảnh Bìa</th>
-                                <th>Thông tin truyện</th>
-                                <th>Tên cá nhân</th>
-                                <th>Vị trí</th>
-                                <th>Thời gian</th>
-                                <th></th>
+                                <td>
+
+                                    <span>
+                                        <img class="img-thumbnail" src="~/Cover/@item.Manga.CoverLink" style="max-width:120px;max-height:80px" />
+                                    </span>
+
+
+                                </td>
+                                <td class="center">
+                                    <span>
+                                        <span class="text-primary">Tên truyện:</span>  @Html.DisplayFor(modelItem => item.Manga.FullName)
+                                    </span>
+                                    <br />
+                                    <span class="pull-left">
+                                        <span class="text-primary">Tác giả:</span> <text class="text-muted">@Html.DisplayFor(modelItem => item.Manga.Author)</text>
+                                    </span>
+
+                                    <span class="pull-right">
+                                        <span class="text-primary">Trạng thái:</span>   @Html.DisplayFor(modelItem => item.Manga.Status.FullName)
+                                    </span>
+                                    <br />
+                                    <span>
+                                        <span class="text-primary">Cập nhật lần cuối:</span>     @Html.DisplayFor(modelItem => item.Manga.CreateAt)
+                                    </span>
+                                    <br />
+
+                                </td>
+                                <td style="text-align:center">
+                                    @Html.DisplayFor(modelItem => item.Account.UserName)
+                                </td>
+                                <td  style="text-align:center">
+                                    @Html.DisplayFor(modelItem => item.Role.FullName)
+                                </td>
+                                <td style="text-align:center">
+                                    @Html.DisplayFor(modelItem => item.CreateAt)
+                                </td>
+
+                                <td style="text-align:center">
+                                    @if (item.Status == (int)StatusMember.Accept)
+                                    {
+                                        <i class="fa fa-check fa-lg text-primary" title="Đã duyệt"></i>
+                                    }
+                                    else
+                                    {
+                                        <i class="fa fa-lock fa-lg text-danger" title="Chưa duyệt"></i>
+                                    }
+                                </td>
                             </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var item in Model)
-                            {
-                                <tr>
-                                    <td>
-
-                                        <span>
-                                            <img class="img-thumbnail" src="~/Cover/@item.Manga.CoverLink" style="max-width:120px;max-height:80px" />
-                                        </span>
-
-
-                                    </td>
-                                    <td class="center">
-                                        <span>
-                                            <span class="text-primary">Tên truyện:</span>  @Html.DisplayFor(modelItem => item.Manga.FullName)
-                                        </span>
-                                        <br />
-                                        <span class="pull-left">
-                                            <span class="text-primary">Tác giả:</span> <text class="text-muted">@Html.DisplayFor(modelItem => item.Manga.Author)</text>
-                                        </span>
-
-                                        <span class="pull-right">
-                                            <span class="text-primary">Trạng thái:</span>   @Html.DisplayFor(modelItem => item.Manga.Status.FullName)
-                                        </span>
-                                        <br />
-                                        <span>
-                                            <span class="text-primary">Cập nhật lần cuối:</span>     @Html.DisplayFor(modelItem => item.Manga.CreateAt)
-                                        </span>
-                                        <br />
-                                        <span>
-                                            <span class="text-primary">Mô tả:</span>     @Html.DisplayFor(modelItem => item.Manga.Description)
-                                        </span>
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Account.UserName)
-                                    </td>
-                                    <td class="center">
-                                        @Html.DisplayFor(modelItem => item.Role.FullName)
-                                    </td>
-                                    <td class="center">
-                                        @Html.DisplayFor(modelItem => item.CreateAt)
-                                    </td>
-
-                                    <td>
-                                        @if (item.StatusActive == 1)
-                                        {
-                                            <i class="fa fa-check fa-lg text-primary" title="Đã duyệt"></i>
-                                        }
-                                        else
-                                        {
-                                            <i class="fa fa-lock fa-lg text-danger" title="Chưa duyệt"></i>
-                                        }
-                                    </td>
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
-                </div>
+                        }
+                    </tbody>
+                </table>
             </div>
-       
+        </div>
+
     </div>
 
 </div>

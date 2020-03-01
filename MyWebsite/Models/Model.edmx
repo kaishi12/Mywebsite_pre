@@ -125,6 +125,7 @@ warning 6002: The table/view 'MyWebsite.dbo.Bookmark' does not have a primary ke
           <Property Name="Type" Type="int" Nullable="false" />
           <Property Name="Language" Type="int" />
           <Property Name="CreateAt" Type="datetime" Nullable="false" />
+          <Property Name="Status" Type="int" />
         </EntityType>
         <EntityType Name="Manga_Genres">
           <Key>
@@ -170,6 +171,7 @@ warning 6002: The table/view 'MyWebsite.dbo.Bookmark' does not have a primary ke
           <Property Name="CreateAt" Type="datetime" Nullable="false" />
           <Property Name="AccountId" Type="int" Nullable="false" />
           <Property Name="PageId_Fa" Type="int" Nullable="false" />
+          <Property Name="Status" Type="int" />
         </EntityType>
         <EntityType Name="Point">
           <Key>
@@ -237,6 +239,7 @@ warning 6002: The table/view 'MyWebsite.dbo.Bookmark' does not have a primary ke
           <Property Name="AccountId" Type="int" Nullable="false" />
           <Property Name="LanguageId" Type="int" Nullable="false" />
           <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="Status" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Translation_Detail">
           <Key>
@@ -954,6 +957,7 @@ warning 6002: The table/view 'MyWebsite.dbo.Bookmark' does not have a primary ke
           <NavigationProperty Name="Account" Relationship="MyWebsiteModel.FK_Manga_Detail_Account" FromRole="Manga_Detail" ToRole="Account" />
           <NavigationProperty Name="Manga" Relationship="MyWebsiteModel.FK_Manga_Detail_Manga1" FromRole="Manga_Detail" ToRole="Manga" />
           <NavigationProperty Name="Role" Relationship="MyWebsiteModel.FK_Manga_Detail_Role" FromRole="Manga_Detail" ToRole="Role" />
+          <Property Name="Status" Type="Int32" />
         </EntityType>
         <EntityType Name="Manga_Genres">
           <Key>
@@ -1008,6 +1012,7 @@ warning 6002: The table/view 'MyWebsite.dbo.Bookmark' does not have a primary ke
           <NavigationProperty Name="Category" Relationship="MyWebsiteModel.FK_Page_Category" FromRole="Page" ToRole="Category" />
           <NavigationProperty Name="Chapter" Relationship="MyWebsiteModel.FK_Page_Chapter" FromRole="Page" ToRole="Chapter" />
           <NavigationProperty Name="TextBoxes" Relationship="MyWebsiteModel.FK_TextBox_Page" FromRole="Page" ToRole="TextBox" />
+          <Property Name="Status" Type="Int32" />
         </EntityType>
         <EntityType Name="Point">
           <Key>
@@ -1089,6 +1094,7 @@ warning 6002: The table/view 'MyWebsite.dbo.Bookmark' does not have a primary ke
           <NavigationProperty Name="Manga" Relationship="MyWebsiteModel.FK_Translation_Manga" FromRole="Translation" ToRole="Manga" />
           <NavigationProperty Name="Texts" Relationship="MyWebsiteModel.FK_Text_Translation" FromRole="Translation" ToRole="Text" />
           <NavigationProperty Name="Translation_Detail" Relationship="MyWebsiteModel.FK_Translation_Detail_Translation" FromRole="Translation" ToRole="Translation_Detail" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="Translation_Detail">
           <Key>
@@ -1508,6 +1514,7 @@ warning 6002: The table/view 'MyWebsite.dbo.Bookmark' does not have a primary ke
           <EntitySetMapping Name="Manga_Detail">
             <EntityTypeMapping TypeName="MyWebsiteModel.Manga_Detail">
               <MappingFragment StoreEntitySet="Manga_Detail">
+                <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="CreateAt" ColumnName="CreateAt" />
                 <ScalarProperty Name="Language" ColumnName="Language" />
                 <ScalarProperty Name="Type" ColumnName="Type" />
@@ -1553,6 +1560,7 @@ warning 6002: The table/view 'MyWebsite.dbo.Bookmark' does not have a primary ke
           <EntitySetMapping Name="Pages">
             <EntityTypeMapping TypeName="MyWebsiteModel.Page">
               <MappingFragment StoreEntitySet="Page">
+                <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="PageId_Fa" ColumnName="PageId_Fa" />
                 <ScalarProperty Name="AccountId" ColumnName="AccountId" />
                 <ScalarProperty Name="CreateAt" ColumnName="CreateAt" />
@@ -1631,6 +1639,7 @@ warning 6002: The table/view 'MyWebsite.dbo.Bookmark' does not have a primary ke
           <EntitySetMapping Name="Translations">
             <EntityTypeMapping TypeName="MyWebsiteModel.Translation">
               <MappingFragment StoreEntitySet="Translation">
+                <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="Active" ColumnName="Active" />
                 <ScalarProperty Name="LanguageId" ColumnName="LanguageId" />
                 <ScalarProperty Name="AccountId" ColumnName="AccountId" />

@@ -24,27 +24,20 @@ namespace MyWebsite.Controllers
         public ActionResult PageDetail(int PageId)
         {
             var page = data.Pages.SingleOrDefault(p => p.PageId == PageId);
-            var listPage = data.Pages.Where(m => m.ChapterId == page.ChapterId && m.CategoryId == 1 && m.Active == true).ToList();
+            var listPage = data.Pages.Where(m => m.ChapterId == page.ChapterId && m.Active == true).ToList();
            
-            foreach(var item in listPage)
-
-            {
+           
                 List<TextBox> list = new List<TextBox>();
-                foreach (var textbox in item.TextBoxes)
+                foreach (var textbox in page.TextBoxes.Where(m=>m.Active == true).ToList())
                 {
                     if(textbox.Active == true)
                     {
                         list.Add(textbox);
                     }
                 }
-                if(list.Count> 0)
-                {
-                    foreach(var textboxs in list)
-                    {
-                        item.TextBoxes.Remove(textboxs); 
-                    }
-                }
-            }
+               
+            
+            ViewBag.list = list;
             ViewBag.listpage = listPage;
             return View(page);
         }
@@ -60,7 +53,7 @@ namespace MyWebsite.Controllers
                 return Json(false);
             }
         }
-        [Object]
+       
         public ActionResult PageSelect(int Pageid)
         {
             var pagefa = data.Pages.SingleOrDefault(m => m.PageId == Pageid);
@@ -70,6 +63,20 @@ namespace MyWebsite.Controllers
             ViewBag.ListPage = data.Pages.Where(m => m.ChapterId == pagefa.ChapterId && m.Active == true && m.CategoryId == 1);
             var listpage = data.Pages.Where(m => m.PageId_Fa == Pageid);
             return View(listpage);
+        }
+        public ActionResult UpdateStatusPage(int PageId,int Status)
+        {
+            try
+            {
+                var res = data.Pages.FirstOrDefault(m => m.PageId == PageId);
+                res.Status = Status;
+                data.SaveChanges();
+                return Json("Success", JsonRequestBehavior.AllowGet);
+            }
+          catch(Exception e)
+          {
+                return Json("Failed", JsonRequestBehavior.AllowGet);
+            }
         }
     }
 }

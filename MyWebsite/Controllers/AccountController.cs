@@ -31,7 +31,7 @@ namespace MyWebsite.Controllers
             {
                 AccountModel model = (AccountModel)Session["UserInfo"];
                 //Danh sách truyện đã đăng kí theo vai trò
-                ViewBag.ListMangaCreated = MangaService.GetListMangaByAccountIdandRoleId(model.AccountId,(int)EnumRole.CM).Take(3);
+                ViewBag.ListMangaCreated = MangaService.GetListMangaByAccountIdandRoleId(model.AccountId, (int)EnumRole.CM).Take(3);
                 ViewBag.ListMangaWithTranslateRole = MangaService.GetListMangaByAccountIdandRoleId(model.AccountId, (int)EnumRole.TR).Take(3);
                 ViewBag.ListMangaWithEditorRole = MangaService.GetListMangaByAccountIdandRoleId(model.AccountId, (int)EnumRole.UC).Take(3);
                 ViewBag.ListMangaWithTranslationManagerRole = MangaService.GetListMangaByAccountIdandRoleId(model.AccountId, (int)EnumRole.TM).Take(3);
@@ -49,33 +49,29 @@ namespace MyWebsite.Controllers
                 List<Manga_Detail> ListRequestByPeople = new List<Manga_Detail>();
                 List<Manga_Detail> ListRequestToPeople = new List<Manga_Detail>();
                 List<Manga_Detail> ListRequestByYou = new List<Manga_Detail>();
-                foreach (var item in listMangaOwned)
-                {
-                    if (ListRequestByPeople.Count() <= 5)
-                        ListRequestByPeople
-                        .AddRange(
-                        data.Manga_Detail
-                                        .Where(m =>  m.Type == 0 && m.MangaId == item && m.Active == false)
-                                        .OrderBy(m => m.CreateAt)
-                                        .Take(5)
-                                );
-                    if (ListRequestToPeople.Count() <= 5)
-                        ListRequestToPeople
-                        .AddRange(
-                        data.Manga_Detail
-                                        .Where(m => m.AccountId != model.AccountId && m.MangaId == item && m.Type == 1 )
-                                        .OrderBy(m => m.CreateAt)
-                                        .Take(5)
-                                );
-                    if (ListRequestByYou.Count() <= 5)
-                        ListRequestByYou.AddRange(data.Manga_Detail.Where(m => m.AccountId == model.AccountId && m.Type == 1 && !listMangaOwned.Any(ma => m.MangaId != ma)).OrderBy(m => m.CreateAt).Take(3));
-                    if (ListRequestByYou.Count() >= 5 && ListRequestByYou.Count() >= 5 && ListRequestByPeople.Count() >= 5)
-                        break;
-                }
+
+                if (ListRequestByPeople.Count() <= 5)
+                    ListRequestByPeople
+                    .AddRange(
+                    data.Manga_Detail
+                                    .Where(m => m.Type == 0 && listMangaOwned.Any(l => l == m.MangaId) && m.Active == true && m.Status == (int)StatusMember.Wait)
+                                    .OrderBy(m => m.CreateAt)
+                                    .Take(5)
+                            );
+                if (ListRequestToPeople.Count() <= 5)
+                    ListRequestToPeople
+                    .AddRange(
+                    data.Manga_Detail
+                                    .Where(m => m.AccountId != model.AccountId && listMangaOwned.Any(l => l == m.MangaId) && m.Type == 1 && m.Status == (int)StatusMember.Wait && m.Active == true)
+                                    .OrderBy(m => m.CreateAt)
+                                    .Take(5)
+                            );
+                if (ListRequestByYou.Count() <= 5)
+                    ListRequestByYou.AddRange(data.Manga_Detail.Where(m => m.AccountId == model.AccountId && m.Type == (int)EnumTypeMember.Join && !listMangaOwned.Any(ma => m.MangaId != ma) && m.Active == true).OrderBy(m => m.CreateAt).Take(3));
                 ViewBag.ListRequestToPeople = ListRequestToPeople;
                 ViewBag.ListRequestByYou = ListRequestByYou;
                 ViewBag.ListRequestByPeople = ListRequestByPeople;
-                ViewBag.ListRequestToYou = data.Manga_Detail.Where(m => m.Type == 1 && m.RoleId != 1 && m.AccountId == model.AccountId && m.Active == false).OrderBy(m => m.CreateAt).Take(3);
+                ViewBag.ListRequestToYou = data.Manga_Detail.Where(m => m.Type == (int)EnumTypeMember.Invite && m.RoleId != 1 && m.AccountId == model.AccountId && m.Active == true).OrderBy(m => m.CreateAt).Take(3).ToList();
                 ///
                 var listmanga = data.Manga_Detail.Where(m => m.AccountId == model.AccountId);
                 List<Manga_Detail> listjoin = new List<Manga_Detail>();
@@ -95,7 +91,7 @@ namespace MyWebsite.Controllers
                 var listlanguageid = listtranslation.Where(m => m.Language != null).Select(m => m.Language);
                 var language = data.Languages.Where(m => listlanguageid.Any(l => l == m.LanguageId)).Select(m => m.FullName).ToList();
                 ViewBag.Language = language;
-                
+
                 return View();
             }
             catch (Exception ex)
@@ -196,7 +192,7 @@ namespace MyWebsite.Controllers
             {
                 if (AccountService.UpdateAccount(model))
                 {
-                    return Json(true,JsonRequestBehavior.AllowGet);
+                    return Json(true, JsonRequestBehavior.AllowGet);
                 }
                 else
                 {
@@ -212,9 +208,9 @@ namespace MyWebsite.Controllers
         public ActionResult Search()
         {
             AccountModel model = (AccountModel)Session["UserInfo"];
-            ViewBag.ListRole = data.Roles.Where(m => m.RoleId != 1);
-            ViewBag.ListLanguage = data.Languages;
-            ViewBag.ListManga = data.Manga_Detail.Where(m => m.Active == true && m.AccountId == model.AccountId && m.RoleId == 1);
+            ViewBag.ListRole = data.Roles.Where(m => m.RoleId != 1).ToList();
+            ViewBag.ListLanguage = data.Languages.ToList();
+            ViewBag.ListManga = data.Manga_Detail.Where(m => m.Active == true && m.AccountId == model.AccountId && m.RoleId == 1).ToList();
             return View();
         }
         [AccountStatus]
@@ -225,12 +221,12 @@ namespace MyWebsite.Controllers
         }
         [AccountStatus]
         [HttpPost]
-        public JsonResult ChangeStatusMangaDetail(string UserName, int MangaId, int RoleId, int Status, string language)
+        public JsonResult ChangeStatusMangaDetail(string UserName, int MangaId, int RoleId, int Status, int language)
         {
             try
             {
                 var res = AccountService.ChangeStatusMangaDetail(UserName, MangaId, RoleId, Status, language);
-                return Json(res,JsonRequestBehavior.AllowGet);
+                return Json(res, JsonRequestBehavior.AllowGet);
             }
             catch
             {
@@ -321,10 +317,9 @@ namespace MyWebsite.Controllers
             var listMangaOwned = data.Manga_Detail.Where(m => m.AccountId == model.AccountId && m.RoleId == 1).Select(m => m.MangaId);
             List<Manga_Detail> ListRequestByPeople = new List<Manga_Detail>();
 
-            foreach (var item in listMangaOwned)
-            {
-                ListRequestByPeople.AddRange(data.Manga_Detail.Where(m => m.Type == 0  && m.MangaId == item).OrderBy(m => m.CreateAt));
-            }
+           
+                ListRequestByPeople.AddRange(data.Manga_Detail.Where(m => m.Type == 0 && listMangaOwned.Any(l=>l==m.MangaId)).OrderBy(m => m.CreateAt));
+            
             return View(ListRequestByPeople);
         }
         /// <summary>

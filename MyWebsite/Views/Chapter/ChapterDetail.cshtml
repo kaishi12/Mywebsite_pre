@@ -44,9 +44,9 @@
                 <div class="tab-pane active" aria-expanded="true" id="tab-1">
 
                     <div style="margin:30px">
-                        @using (Html.BeginForm("AddNewPage", "Chapter", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+                        @using (Html.BeginForm("AddNewPage", "Chapter", FormMethod.Post, new { enctype = "multipart/form-data" }))
                         {
-                            @Html.AntiForgeryToken()
+                            
                             <div class="m-b text-sm">
                                 @Html.ValidationSummary(false, "", new { @class = "text-danger" })
                             </div>
@@ -55,7 +55,7 @@
                                 <div class="row m-b">
                                     <div class="col-md-3" style="margin-right:20px;margin-left:8px">
                                        
-                                        <input type="number" id="TotalNumber" class="form-control" value="@Model.Pages.Where(m=>m.StatusActive == 0  && m.CategoryId == 1).Count()" disabled>
+                                        <input type="number" id="TotalNumber" class="form-control" value="@Model.Pages.Where(m=>m.Active == true  && m.CategoryId == 1).Count()" disabled>
                                     </div>
 
 
@@ -63,7 +63,7 @@
                                     <input type="hidden" id="FullName" name="FullName" value="@Model.FullName" />
                                     <input type="hidden" id="MangaId" name="MangaId" value="@Model.MangaId" />
                                     <input hidden id="PageFullName" name="PageFullName" />
-                                    <input hidden id="CurrentPage" name="CurrentPage" value="@Model.Pages.LastOrDefault(m=>m.StatusActive == 0).OrderNumber" />
+                                    <input hidden id="CurrentPage" name="CurrentPage" value="@Model.Pages.LastOrDefault(m=>m.Active == true).OrderNumber" />
                                     <input hidden id="PageOrderNumber" name="PageOrderNumber" />
 
                                     <button id="addbtn" class="btn black" type="button" style="margin-right:20px;"><i class="material-icons md-18">&#xe145;</i></button>
@@ -76,10 +76,9 @@
 
                             </div>
                             <div class="row" id="UploadRaw">
-                                @foreach (var item in Model.Pages.Where(m => m.CategoryId == 1).OrderBy(m => m.OrderNumber))
+                                @foreach (var item in Model.Pages.Where(m => m.CategoryId == 1 && m.Active == true).OrderBy(m => m.OrderNumber))
                                 {
-                                    if (item.StatusActive == 0)
-                                    {
+                                   
                                         <div  id=@("CurPage" + item.PageId)  class="col-xs-6 col-sm-4 col-md-3" style="padding-left:12px;padding-right:12px">
                                             <div class="box p-a-xs">
 
@@ -93,23 +92,8 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    }
-                                    else
-                                    {
-                                        <div  id=@("CurPage" + item.PageId) hidden class="col-xs-6 col-sm-4 col-md-3" style="padding-left:12px;padding-right:12px">
-                                            <div class="box p-a-xs">
-
-                                                <img id="img1" style="min-height:500px" src="~/PageLink/@item.PageLink" alt="" class="img-responsive">
-                                                <div class="p-a-sm">
-                                                    <div class="text-ellipsis">
-
-                                                        <span>@item.FullName</span>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                    }
+                                    
+                                   
                                 }
                             </div>
                             <button disabled type="submit" class="SaveNewPage md-btn md-raised m-b-sm w-xs blue">Lưu</button>
@@ -124,11 +108,9 @@
 
                     @*@Html.Action("CongCu", new { matruyen = ViewBag.MaTruyen, machuong = ViewBag.MaChuong })*@
                     <div class="row">
-                        @foreach (var item in Model.Pages.Where(m => m.CategoryId == 1))
+                        @foreach (var item in Model.Pages.Where(m => m.CategoryId == 1 && m.Active == true).ToList())
                         {
-                            if (item.StatusActive == 0)
-                            {
-                                <div id=@("Remove" + item.PageId) class="col-xs-6 col-sm-4 col-md-3" style="padding-left:12px;padding-right:12px">
+                             <div id=@("Remove" + item.PageId) class="col-xs-6 col-sm-4 col-md-3" style="padding-left:12px;padding-right:12px">
                                     <div class="box p-a-xs">
                                         <form id=@("UpdatePage" + item.PageId) enctype="multipart/form-data">
 
@@ -146,10 +128,10 @@
 
                                                 <div style="padding-left:0px;padding-right:0px;padding-bottom:0px;" class="box-footer row">
 
-                                                    <button id="@item.PageId" type="button" class="UploadButton md-btn md-raised m-b-sm w-xs primary" style="display: block;margin-left: auto;margin-right: auto;">Tải lên</button>
+                                                    <button id="@item.PageId" type="button" class="UploadButton md-btn md-raised m-b-sm w-xs primary" style="display: block;margin-left: auto;margin-right: auto;">Sửa</button>
                                                     <button type="button" class="md-btn md-raised m-b-sm w-xs info" style="display: block;margin-left: auto;margin-right: auto;"><a href="/PageSelect/@item.PageId"> Duyệt</a></button>
                                                     <button onclick="SavePage(this)" type="button" disabled id=@("Save" + @item.PageId) class="md-btn md-raised m-b-sm w-xs success" style="display: block;margin-left: auto;margin-right: auto;">Lưu</button>
-                                                    <button onclick="ChangeStatusPage(this,1)" type="button" id=@("Save" + @item.PageId) class="md-btn md-raised m-b-sm w-xs danger" style="display: block;margin-left: auto;margin-right: auto;">Xóa</button>
+                                                    <button onclick="ChangeStatusPage(this,0)" type="button" id=@("Save" + @item.PageId) class="md-btn md-raised m-b-sm w-xs danger" style="display: block;margin-left: auto;margin-right: auto;">Xóa</button>
                                                 </div>
 
 
@@ -158,101 +140,14 @@
                                         </form>
                                     </div>
                                 </div>
-                            }
-                            else
-                            {
-                                <div id=@("Remove" + item.PageId) class="col-xs-6 col-sm-4 col-md-3" style="padding-left:12px;padding-right:12px;display:none">
-                                    <div class="box p-a-xs">
-                                        <form id=@("UpdatePage" + item.PageId) enctype="multipart/form-data">
-
-                                            <input type="hidden" name="PageId" id="PageId" value="@item.PageId" />
-
-                                            <a href="~/PageLink/@item.PageLink"><img style="min-height:500px" id="@("img"+item.PageId)" src="~/PageLink/@item.PageLink" alt="" class="img-responsive"></a>
-                                            <div class="p-a-sm">
-                                                <div class="text-ellipsis">
-                                                    trang @item.OrderNumber
-                                                    <input hidden style="margin-left:10px" type="file" id="@("file"+item.PageId)" name="fileupload" onchange="Upload(this)" />
-                                                </div>
-
-
-                                                <div style="padding-left:0px;padding-right:0px;padding-bottom:0px;" class="box-footer row">
-
-                                                    <button id="@item.PageId" type="button" class="UploadButton md-btn md-raised m-b-sm w-xs primary" style="display: block;margin-left: auto;margin-right: auto;">Upload</button>
-                                                    <button type="button" class="md-btn md-raised m-b-sm w-xs info" style="display: block;margin-left: auto;margin-right: auto;"><a href="PageSelect/@item.PageId">Duyệt </a></button>
-                                                    <button onclick="SavePage(this)" type="button" disabled id=@("Save" + @item.PageId) class="md-btn md-raised m-b-sm w-xs success" style="display: block;margin-left: auto;margin-right: auto;">Lưu</button>
-                                                    <button onclick="ChangeStatusPage(this,1)" type="button" id=@("Save" + @item.PageId) class="md-btn md-raised m-b-sm w-xs danger" style="display: block;margin-left: auto;margin-right: auto;">Xóa</button>
-                                                </div>
-
-                                            </div>
-
-                                        </form>
-                                    </div>
-                                </div>
-                            }
+                            
 
                         }
 
 
                     </div>
                 </div>
-                <div class="tab-pane" id="tab-3">
-                    <div class="row">
-                        @foreach (var item in Model.Pages.Where(m => m.CategoryId == 1))
-                        {
-                            if (item.StatusActive == 1)
-                            {
-                                <div id=@("Restore"+item.PageId) class="col-xs-6 col-sm-4 col-md-3" style="padding-left:12px;padding-right:12px">
-                                    <div class="box p-a-xs">
-                                        <form id=@("UpdatePage" + item.PageId) enctype="multipart/form-data">
-
-                                            <input type="hidden" name="PageId" id="PageId" value="@item.PageId" />
-
-                                            <a href="~/PageLink/@item.PageLink"><img style="min-height:500px" id=@item.PageId src="~/PageLink/@item.PageLink" alt="" class="img-responsive"></a>
-                                            <div class="p-a-sm">
-                                                <div class="text-ellipsis">
-                                                    trang @item.OrderNumber
-
-                                                </div>
-                                                <div>
-                                                    <button onclick="ChangeStatusPage(this,0)" type="button" id=@("Save" + @item.PageId) class="md-btn md-raised m-b-sm w-xs primary" style="margin-top:10px;margin-bottom:2px">Khôi phục</button>
-                                                </div>
-
-                                            </div>
-
-                                        </form>
-                                    </div>
-                                </div>
-                            }
-                            else
-                            {
-                                <div id=@("Restore"+item.PageId) class="col-xs-6 col-sm-4 col-md-3" style="padding-left:12px;padding-right:12px;display:none">
-                                    <div class="box p-a-xs">
-                                        <form id=@("UpdatePage" + item.PageId) enctype="multipart/form-data">
-
-                                            <input type="hidden" name="PageId" id="PageId" value="@item.PageId" />
-
-                                            <a href="~/PageLink/@item.PageLink"><img style="max-height:300px" id=@item.PageId src="~/PageLink/@item.PageLink" alt="" class="img-responsive"></a>
-                                            <div class="p-a-sm">
-                                                <div class="text-ellipsis">
-                                                    trang @item.OrderNumber
-
-                                                </div>
-                                                <div>
-                                                    <button onclick="ChangeStatusPage(this,0)" type="button" id=@("Save" + @item.PageId) class="md-btn md-raised m-b-sm w-xs primary" style="margin-top:10px;margin-bottom:2px">Khôi phục</button>
-                                                </div>
-
-                                            </div>
-
-                                        </form>
-                                    </div>
-                                </div>
-                            }
-
-                        }
-
-
-                    </div>
-                </div>
+                
 
             </div>
         </div>

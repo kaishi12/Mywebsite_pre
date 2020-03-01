@@ -10,7 +10,7 @@ namespace MyWebsite.Service.Role
 {
     public static class RoleService
     {
-        public static int GetRoleId(string role)
+        public static int GetRoleId(int role)
         {
             var param = new DynamicParameters();
             param.Add("@Role",role );

@@ -156,7 +156,7 @@ function SetRectangle() {
     ctx1.font = "24px Arial";
     ctx1.fillStyle = "red";
     ctx1.fillText("#" + count, rect.startX, rect.startY);
-    let newRowContent = '<tr><td class="Att" data-attX="' + rect.startX * scale + '" data-attY="' + rect.startY * scale + '" data-attW="' + rect.w * scale + '" data-attH="' + rect.h * scale + '"><span class="form-control">' + count + ' </span> </td> <td><input  style="width:60px" value=90 class = "attDe form-control" type=number id=' + count + ' /> <td><button class="btn btn-fw danger" onclick="Remove(this)">Xóa</button> </td> </tr>';
+    let newRowContent = '<tr><td class="Att" data-attX="' + rect.startX * scale + '" data-attY="' + rect.startY * scale + '" data-attW="' + rect.w * scale + '" data-attH="' + rect.h * scale + '"><span class="form-control">' + count + ' </span> </td> <td><input   value=90 class = "attDe form-control" type=number id=' + count + ' /> <td><button class="btn btn-fw danger" onclick="Remove(this)">Xóa</button> </td> </tr>';
     NewTextBox(rect.startX * scale, rect.startY * scale, rect.w * scale, rect.h * scale, 0);
 
     $(newRowContent).appendTo($("#tblEntAttributes"));

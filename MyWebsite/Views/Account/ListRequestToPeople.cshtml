@@ -3,6 +3,7 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_LayoutUser.cshtml";
 }
+@using MyWebsite.Service.Common;
 <style>
 </style>
 <div class="padding">
@@ -70,7 +71,7 @@
                                 </td>
 
                                 <td>
-                                    @if (item.StatusActive == 0)
+                                    @if (item.Status == (int)StatusMember.Accept)
                                     {
                                         <i class="fa fa-check fa-lg text-primary" title="Đã duyệt"></i>
                                     }

@@ -30,6 +30,7 @@ namespace MyWebsite.Models
         public System.DateTime CreateAt { get; set; }
         public int AccountId { get; set; }
         public int PageId_Fa { get; set; }
+        public Nullable<int> Status { get; set; }
     
         public virtual Account Account { get; set; }
         public virtual Category Category { get; set; }

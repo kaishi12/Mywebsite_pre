@@ -108,6 +108,7 @@
     <EntitySetMapping Name="Manga_Detail">
       <EntityTypeMapping TypeName="MyWebsiteModel.Manga_Detail">
         <MappingFragment StoreEntitySet="Manga_Detail">
+          <ScalarProperty Name="Status" ColumnName="Status" />
           <ScalarProperty Name="CreateAt" ColumnName="CreateAt" />
           <ScalarProperty Name="Language" ColumnName="Language" />
           <ScalarProperty Name="Type" ColumnName="Type" />
@@ -153,6 +154,7 @@
     <EntitySetMapping Name="Pages">
       <EntityTypeMapping TypeName="MyWebsiteModel.Page">
         <MappingFragment StoreEntitySet="Page">
+          <ScalarProperty Name="Status" ColumnName="Status" />
           <ScalarProperty Name="PageId_Fa" ColumnName="PageId_Fa" />
           <ScalarProperty Name="AccountId" ColumnName="AccountId" />
           <ScalarProperty Name="CreateAt" ColumnName="CreateAt" />
@@ -231,6 +233,7 @@
     <EntitySetMapping Name="Translations">
       <EntityTypeMapping TypeName="MyWebsiteModel.Translation">
         <MappingFragment StoreEntitySet="Translation">
+          <ScalarProperty Name="Status" ColumnName="Status" />
           <ScalarProperty Name="Active" ColumnName="Active" />
           <ScalarProperty Name="LanguageId" ColumnName="LanguageId" />
           <ScalarProperty Name="AccountId" ColumnName="AccountId" />

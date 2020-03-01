@@ -15,6 +15,7 @@ namespace MyWebsite.ViewModels.Chapter
         public bool StatusActive { get; set; }
         public int MangaId { get; set; }
         public List<PageModel> pageModels { get; set; }
+        public string Alias { get; set; }
     }
     public class PageModel
     {

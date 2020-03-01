@@ -77,7 +77,7 @@
                                 <tr>
                                     <th>#</th>
                                   
-                                    <th  >
+                                    <th>
                                         Độ Xoay
                                     </th>
                                     <th>
@@ -88,26 +88,26 @@
 
 
                             <tbody>
-                                @if (Model.TextBoxes != null)
-                                {
+                               
+                               @{ 
 
-                                    int count = 1;
+                                   int count = 1;
 
-                                    foreach (var item in Model.TextBoxes.Where(m => m.StatusActive == 0))
-                                    {
-
-                                        var Cor = item.Coordinate.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+                                   foreach (var item in ViewBag.list)
+                                   {
+                                    
+                                       var Cor = item.Coordinate.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
                                         <tr>
                                             <td class="Att" data-attX="@Cor[0]" data-attY="@Cor[1]" data-attW="@item.Witdh" data-attH="@item.Height"><span class="form-control">@count</span> </td>
-                                            <td><input   class="form-control attDe" type="number" id="1" value="@(item.Degree + 90)" />  </td>
+                                            <td><input class="form-control attDe" type="number" id="1" value="@(item.Degree + 90)" />  </td>
                                             <td>
                                                 <button  class="btn btn-fw danger" onclick="Remove(this)">Xóa</button>
                                             </td>
                                             <td hidden>@item.TextBoxId </td>
                                         </tr>
-                                        count++;
-                                    }
-                                }
+                                           count++;
+                                       }
+                                   }
                             </tbody>
                         </table>
 

@@ -25,6 +25,7 @@ namespace MyWebsite.Service.Chapter
                 param.Add("@CreateAt", DateTime.Now);
                 param.Add("@ViewNumber", model.ViewNumber);
                 param.Add("@StatusActive", 1);
+                param.Add("@Alias", model.Alias);
                 int ChapterId = DALHelpers.QueryByStored<int>("Chapter_AddNewChapter", param).FirstOrDefault();
                 AddNewRawPages(model.pageModels, ChapterId);
                 return true;
@@ -49,6 +50,7 @@ namespace MyWebsite.Service.Chapter
                     page.Active = true;
                     page.CategoryId = 1;
                     page.ChapterId = ChapterId;
+                    page.Status = (int)StatusPage.Accept;
                     data.Pages.Add(page);
                     data.SaveChanges();
                 }
@@ -66,10 +68,10 @@ namespace MyWebsite.Service.Chapter
                 Page page = data.Pages.SingleOrDefault(m => m.PageId == PageId);
                 if (PageLink != "")
                     page.PageLink = PageLink;
-                if (StatusActive)
+                
                     page.Active = StatusActive;
                 data.SaveChanges();
-                if (StatusActive && page.CategoryId == 2)
+                if ( page.CategoryId == 2)
                 {
                     NotificationService notificationService = new NotificationService();
                     var res = notificationService.AddnewNoticeSenpai("Upload", page.OrderNumber,page.Chapter.OrderNumber, page.Chapter.Manga.FullName, page.AccountId,"");
@@ -101,6 +103,7 @@ namespace MyWebsite.Service.Chapter
                         page.FullName = pageFA.FullName + "-Clear-text-";
                         page.PageLink = PageLink;
                         page.Active = true;
+                        page.Status = (int)StatusPage.Wait;
                         data.Pages.Add(page);
                     }
                     else

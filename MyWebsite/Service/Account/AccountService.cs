@@ -90,25 +90,18 @@ namespace MyWebsite.Service.Account
             param.Add("@AccountId", id);
             return DALHelpers.QueryByStored<AccountModel>("Account_GetAccountInfobyId", param).FirstOrDefault();
         }
-        public int ChangeStatusMangaDetail(string UserName, int MangaId, int RoleId, int Status, string language)
+        public int ChangeStatusMangaDetail(string UserName, int MangaId, int RoleId, int Status, int language)
         {
             try
             {
                 var AccountId = GetAccountIdbyUserName(UserName);
                 string UserNameCreateManga = GetAccountInfo(MangaDetailService.GetAccountIdCreateManga(MangaId)).UserName;
-                var Manga = MangaService.GetInfo(MangaId);
+                var Manga = data.Mangas.FirstOrDefault(m => m.MangaId == MangaId && m.Active == true).FullName;
                 var Role = RoleService.GetRoleInfo(RoleId);
                 ViewModels.Manga.MangaDetail res0 = new ViewModels.Manga.MangaDetail();
-                if (!string.IsNullOrWhiteSpace(language))
-                {
-                    MangaDetailService.ChangStatusMangadetail(MangaId, RoleId, AccountId, 1, language);
+                   var res = MangaDetailService.ChangStatusMangadetail(MangaId, RoleId, AccountId, Status, language);
                      res0 = MangaDetailService.GetInfo(MangaId, RoleId, AccountId, 1, language);
-                }
-                else
-                {
-                    MangaDetailService.ChangStatusMangadetail(MangaId, RoleId, AccountId, 1, null);
-                    res0 = MangaDetailService.GetInfo(MangaId, RoleId, AccountId, 1, language);
-                }
+               
                  if (RoleId == 4)
                 {
                     var translation = TranslationService.CheckTranslationExist(MangaId, language);
@@ -121,19 +114,18 @@ namespace MyWebsite.Service.Account
                         TranslationService.UpdateInfo(translation, AccountId, Status);
                     }
                 }
-                if (res0.StatusActive == 0)
-                {
+               
                     NotificationService notificationService = new NotificationService();
                     bool result = false;
                     if (res0.Type == 1)
                     {
-                        result = notificationService.AddnewResponeNotification("RequestRespone", null, UserName, Role.FullName, Manga.FullName);
+                        result = notificationService.AddnewResponeNotification("RequestRespone", null, UserName, Role.FullName, Manga);
                     }
                     else
                     {
-                        result = notificationService.AddnewResponeNotification("InviteReply", UserName, UserNameCreateManga, Role.FullName, Manga.FullName);
+                        result = notificationService.AddnewResponeNotification("InviteReply", UserName, UserNameCreateManga, Role.FullName, Manga);
                     }
-                }
+                
                 return 1;
             }
             catch (Exception ex)

@@ -120,6 +120,7 @@ warning 6002: The table/view 'MyWebsite.dbo.Bookmark' does not have a primary ke
     <Property Name="Type" Type="int" Nullable="false" />
     <Property Name="Language" Type="int" />
     <Property Name="CreateAt" Type="datetime" Nullable="false" />
+    <Property Name="Status" Type="int" />
   </EntityType>
   <EntityType Name="Manga_Genres">
     <Key>
@@ -165,6 +166,7 @@ warning 6002: The table/view 'MyWebsite.dbo.Bookmark' does not have a primary ke
     <Property Name="CreateAt" Type="datetime" Nullable="false" />
     <Property Name="AccountId" Type="int" Nullable="false" />
     <Property Name="PageId_Fa" Type="int" Nullable="false" />
+    <Property Name="Status" Type="int" />
   </EntityType>
   <EntityType Name="Point">
     <Key>
@@ -232,6 +234,7 @@ warning 6002: The table/view 'MyWebsite.dbo.Bookmark' does not have a primary ke
     <Property Name="AccountId" Type="int" Nullable="false" />
     <Property Name="LanguageId" Type="int" Nullable="false" />
     <Property Name="Active" Type="bit" Nullable="false" />
+    <Property Name="Status" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Translation_Detail">
     <Key>

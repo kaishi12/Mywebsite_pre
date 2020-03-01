@@ -17,6 +17,7 @@ $("#SaveManga").click(function () {
     
     if ($('#AnhBia').val() == "") {
         alert("Vui lòng thêm ảnh bìa");
+        return;
     }
     if ($('#FullName').val() == "") {
         alert("Vui lòng nhập tên truyện");
@@ -32,6 +33,7 @@ $("#SaveManga").click(function () {
     }
     if ($('#ListGenre').val() == null) {
         alert("Vui lòng chọn thể loại truyện");
+      
         return;
     }
     

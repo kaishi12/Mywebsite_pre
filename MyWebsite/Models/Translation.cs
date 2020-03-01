@@ -26,6 +26,7 @@ namespace MyWebsite.Models
         public int AccountId { get; set; }
         public int LanguageId { get; set; }
         public bool Active { get; set; }
+        public int Status { get; set; }
     
         public virtual Account Account { get; set; }
         public virtual Language Language { get; set; }

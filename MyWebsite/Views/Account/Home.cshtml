@@ -94,7 +94,7 @@
                         <div class="box-header primary">
 
                             <h3 style="display:inline">Truyện đang quản lí</h3>
-                            <a style="display:inline;float:right"><h3>Xem tất cả <i class="fa fa-caret-right"></i></h3></a>
+                            <a href="@Url.Action("ListManga","Manga")" style="display:inline;float:right"><h3>Xem tất cả <i class="fa fa-caret-right"></i></h3></a>
 
                         </div>
                         <div class="box-divider black"></div>
@@ -113,13 +113,13 @@
 
                                         <div class="box-footer grey-900 Info-BoxFooter">
                                             <text class="text-ellipsis">@item.FullName</text>
-                                            <button class="btn btn-xs btn-md success ">
+                                            <a class="btn btn-xs btn-md success " href="@Url.Action("ListChapter","Manga",new { MangaId = item.MangaId })">
                                                 Chương
-                                            </button>
-                                            <button class="btn btn-xs btn-md danger">
+                                            </a>
+                                            <a class="btn btn-xs btn-md danger" href="@Url.Action("UpdateManga","Manga",new { MangaId = item.MangaId })" >
                                                 Cập nhật
 
-                                            </button>
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
@@ -180,9 +180,9 @@
 
                                         <div class="box-footer grey-900 Info-BoxFooter">
                                             <text class="text-ellipsis">@item.FullName</text>
-                                            <button class="btn btn-xs btn-md success ">
+                                            <a class="btn btn-xs btn-md success " href="/EditorList">
                                                 Tải lên clear-text
-                                            </button>
+                                            </a>
 
                                         </div>
                                     </div>
@@ -295,9 +295,9 @@
 
                                                     <select id="SelectRole" class="form-control select2-bootstrap-append">
 
-                                                        <option value="Tr">Dịch truyện</option>
-                                                        <option value="Ed">Tải lên clear-text</option>
-                                                        <option value="TM">Quản lí bản dịch</option>
+                                                        <option value="3">Dịch truyện</option>
+                                                        <option value="2">Tải lên clear-text</option>
+                                                        <option value="4">Quản lí bản dịch</option>
                                                     </select>
                                                 </div>
 
@@ -354,7 +354,7 @@
                                             <div class="m-y-sm pull-right">
                                                 <button class="btn btn-xs  Status Deny danger">Chưa duyệt</button>
                                                 <button class="btn btn-xs Status Accept primary" style="display:none">Đã duyệt</button>
-                                                <button class="ChangeStatus btn btn-lg btn-xs btn-outline b-primary text-primary" data-placement="top" title="Cập nhật" data-language="@item.Language" data-roleid="@item.RoleId" data-username="@item.Account.UserName" data-status="0" data-mangaid="@item.MangaId"><i class="fa fa-pencil"></i></button>
+                                                <button class="ChangeStatus btn btn-lg btn-xs btn-outline b-primary text-primary" data-placement="top" title="Cập nhật" data-language="@item.Language" data-roleid="@item.RoleId" data-username="@item.Account.UserName" data-status="2" data-mangaid="@item.MangaId"><i class="fa fa-pencil"></i></button>
                                             </div>
                                             <div>
                                                 <a href="" class="text-primary">@item.Manga.FullName</a>
@@ -490,10 +490,24 @@
                                     <li class="list-item">
                                         <span class="list-left w-128"><img src="~/Cover/@item.Manga.CoverLink" class="img-thumbnail" /></span>
                                         <div class="list-body">
-
-                                            <div class="m-y-sm pull-right">
-                                                <label class="btn btn-xs  danger">Chưa duyệt</label>
-                                            </div>
+                                            @if (item.Status == 1)
+                                            {
+                                                <div class="m-y-sm pull-right">
+                                                    <label class="btn btn-xs  danger">Chưa được duyệt</label>
+                                                </div>
+                                            }
+                                            else if (item.Status == 0)
+                                            {
+                                                <div class="m-y-sm pull-right">
+                                                    <label class="btn btn-xs  danger">Đã bị loại</label>
+                                                </div>
+                                            }
+                                            else
+                                            {
+                                                <div class="m-y-sm pull-right">
+                                                    <label class="btn btn-xs  primary">Đã duyệt</label>
+                                                </div>
+                                            }
                                             <div>
                                                 <a href="">@item.Manga.FullName</a>
                                             </div>

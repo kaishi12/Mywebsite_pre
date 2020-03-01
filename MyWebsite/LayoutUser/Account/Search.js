@@ -4,7 +4,8 @@
         $("#Type").html(this.textContent);
     })
 })
-    $("#SearchButton").click(function () {
+$("#SearchButton").click(function () {
+    alert(1);
         let content = "";
         let result1 = "";
         if ($("#Type").val() == "Người dùng") {
@@ -59,7 +60,7 @@
             });
         }
         else {
-            
+            alert(1);
             $.ajax({
                 url: "/Manga/Search",
                 type: "post",
@@ -139,18 +140,21 @@
             $("#SelectLanguageM").fadeOut();
 
     })
-    $("#Join").click(function () {
-
+$("#Join").click(function () {
+    let language = -1;
+    if ($("#Language").val() != null) {
+        language = $("#Language").val();
+    }
+    console.log(language);
         $.ajax({
             url: "/Manga/Join",
             type: "post",
-            dataType: "json",
+           
             data: {
                 id: +$("#MangaId").val(),
-                role: $("#SelectRole").val(),
-                language: $("#Language").val(),
-                type: 1
-
+                role: +$("#SelectRole").val(),
+                language: +language,
+                type: 0
             },
             success: function (data) {
                 if (data == 1) {
@@ -167,20 +171,16 @@
             }
         });
     })
-    $("#Invite").click(function () {
-       
+$("#Invite").click(function () {
         $.ajax({
             url: "/Manga/Join",
             type: "post",
-            dataType: "json",
             data: {
-
                 id: +$("#SelectManga").val(),
                 role: $("#SelectRoleM").val(),
                 language: $("#LanguageM").val(),
                 AccountId: +$("#AccountId").val(),
-                type: 0
-
+                type: 1
             },
             success: function (data) {
                 if (data == 1) {

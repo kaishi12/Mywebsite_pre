@@ -257,6 +257,7 @@
     <NavigationProperty Name="Account" Relationship="MyWebsiteModel.FK_Manga_Detail_Account" FromRole="Manga_Detail" ToRole="Account" />
     <NavigationProperty Name="Manga" Relationship="MyWebsiteModel.FK_Manga_Detail_Manga1" FromRole="Manga_Detail" ToRole="Manga" />
     <NavigationProperty Name="Role" Relationship="MyWebsiteModel.FK_Manga_Detail_Role" FromRole="Manga_Detail" ToRole="Role" />
+    <Property Name="Status" Type="Int32" />
   </EntityType>
   <EntityType Name="Manga_Genres">
     <Key>
@@ -311,6 +312,7 @@
     <NavigationProperty Name="Category" Relationship="MyWebsiteModel.FK_Page_Category" FromRole="Page" ToRole="Category" />
     <NavigationProperty Name="Chapter" Relationship="MyWebsiteModel.FK_Page_Chapter" FromRole="Page" ToRole="Chapter" />
     <NavigationProperty Name="TextBoxes" Relationship="MyWebsiteModel.FK_TextBox_Page" FromRole="Page" ToRole="TextBox" />
+    <Property Name="Status" Type="Int32" />
   </EntityType>
   <EntityType Name="Point">
     <Key>
@@ -392,6 +394,7 @@
     <NavigationProperty Name="Manga" Relationship="MyWebsiteModel.FK_Translation_Manga" FromRole="Translation" ToRole="Manga" />
     <NavigationProperty Name="Texts" Relationship="MyWebsiteModel.FK_Text_Translation" FromRole="Translation" ToRole="Text" />
     <NavigationProperty Name="Translation_Detail" Relationship="MyWebsiteModel.FK_Translation_Detail_Translation" FromRole="Translation" ToRole="Translation_Detail" />
+    <Property Name="Status" Type="Int32" Nullable="false" />
   </EntityType>
   <EntityType Name="Translation_Detail">
     <Key>

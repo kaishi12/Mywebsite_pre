@@ -66,7 +66,7 @@ namespace MyWebsite.ViewModels.Manga
         public string MangaFullName { get; set; }
         public int RoleId { get; set; }
         public string RoleFullName { get; set; }
-        public int StatusActive { get; set; }
+        public int Active { get; set; }
         public string Language { get; set; }
         public string UserName { get; set; }
         public string LanguageFullname { get; set; }
