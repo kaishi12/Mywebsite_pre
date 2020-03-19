@@ -24,12 +24,12 @@
                 <table ui-jp="dataTable" id="datatable" class="table table-striped b-t b-b black">
                     <thead>
                         <tr>
-                            <th>Ảnh Bìa</th>
-                            <th>Tên Truyện</th>
-                            <th>Tác Giả</th>
-                            <th>Trạng Thái</th>
-                            <th>Ngày Tạo</th>
-                            <th></th>
+                            <th style="text-align:center">Ảnh Bìa</th>
+                            <th style="text-align:center">Tên Truyện</th>
+                            <th style="text-align:center">Tác Giả</th>
+                            <th style="text-align:center">Trạng Thái</th>
+                            <th style="text-align:center">Ngày Tạo</th>
+                            <th style="text-align:center"></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -45,11 +45,11 @@
 
                                 </td>
                                 <td class="center">
-                                    <a href="/Truyen/QuanLyChuong/@item.MangaId">
+                                    
                                         <span>
                                             @Html.DisplayFor(modelItem => item.FullName)
                                         </span>
-                                    </a>
+                                    
                                 </td>
                                 <td class="center">
                                     @Html.DisplayFor(modelItem => item.Author)
@@ -58,20 +58,15 @@
                                     @Html.DisplayFor(modelItem => item.status)
                                 </td>
                                 <td class="center">
-                                    @Html.DisplayFor(modelItem => item.CreatAt)
+                                  @{
+                                    var text = item.CreatAt.ToString("dd/MM/yyyy");
+                                    @Html.DisplayFor(modelItem => text)
+                                  }
                                 </td>
                                 <td style="text-align:center">
-                                    @if (item.RoleStatusActive == 0)
-                                    {
+                                   
                                     <a class="btn primary" href="/Contribute/Translator?PageId=@item.FirstPage">Dịch truyện</a>
-                                    }
-                                    else
-                                    {
-                                <a class="btn primary disabled" href="/Contribute/Translator?PageId=@item.FirstPage">Dịch truyện</a>
-                                    }
-                                    
-
-                                </td>
+                                    </td>
                             </tr>
                         }
 

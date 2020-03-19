@@ -1,4 +1,4 @@
-﻿$(document).ready(function () {
+$(document).ready(function () {
     $(".TypeSelection").on("click", function () {
         $("#Type").attr("value", this.textContent);
         $("#Type").html(this.textContent);
@@ -127,7 +127,7 @@ $("#SearchButton").click(function () {
         $("#UserName").val(res[1]);
     })
     $("#SelectRole").on("change", function () {
-        if ($(this).val().trim() == "TM"  )
+        if ($(this).val() == 4  )
             $("#SelectLanguage").show("slow");
         else
             $("#SelectLanguage").fadeOut();

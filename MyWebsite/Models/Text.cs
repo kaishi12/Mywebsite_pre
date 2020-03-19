@@ -20,7 +20,7 @@ namespace MyWebsite.Models
         public string ColorOutline { get; set; }
         public bool Bold { get; set; }
         public bool Active { get; set; }
-        public bool Allow { get; set; }
+        public Nullable<bool> Allow { get; set; }
         public int TranslationId { get; set; }
         public int AccountId { get; set; }
         public int TextBoxId { get; set; }

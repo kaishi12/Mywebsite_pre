@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -111,7 +111,7 @@ namespace MyWebsite.Controllers
             var res = data.Chapters.SingleOrDefault(m => m.ChapterId == model.ChapterId);
             res.OrderNumber = model.OrderNumber;
             res.FullName = model.FullName;
-            res.Active = model.StatusActive;
+            
             data.SaveChanges();
             return Json("Lưu thành công");
         }

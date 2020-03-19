@@ -29,12 +29,19 @@
                
             </label>
             <div class="col-sm-4">
-                <select class="form-control c-select" id="ChapterList" name="ChapterList" onchange="window.location.href=this.value;">
-                    @foreach(var item in ViewBag.ListPage)
-                    {
+              <select class="form-control c-select" id="ChapterList" name="ChapterList" onchange="window.location.href=this.value;">
+                @foreach (var item in ViewBag.ListPage)
+                {
+                  if (item.PageId == ViewBag.PageId)
+                  {
+                    <option selected style="color:black" value="/PageSelect/@item.PageId ">@item.FullName</option>
+                  }
+                  else
+                  {
                     <option style="color:black" value="/PageSelect/@item.PageId ">@item.FullName</option>
-                    }
-                </select>
+                  }
+                }
+              </select>
             </div>
 
         </div>
@@ -72,7 +79,7 @@
 
                                     <input type="hidden" name="PageId" id="PageId" value="@item.PageId" />
 
-                                    <a href="~/PageLink/@item.PageLink"><img style="max-height:300px" id=@item.PageId src="~/PageLink/@item.PageLink" alt="" class="img-responsive"></a>
+                                    <a href="~/PageLink/@item.PageLink"><img style="min-height:500px" id=@item.PageId src="~/PageLink/@item.PageLink" alt="" class="img-responsive"></a>
 
 
                                     <div id="@("footer"+item.PageId)" style="padding-top:5px">

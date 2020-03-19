@@ -1,4 +1,4 @@
-﻿var canvas = document.getElementById('canvas'),
+var canvas = document.getElementById('canvas'),
     ctx = canvas.getContext('2d'),
     rect = {},
     drag = false;
@@ -383,6 +383,7 @@ $("#SelectColor").on("change", function () {
 
 })
 function Save() {
+  alert(1);
     let model = new Array();
     $("#tblEntAttributes tbody tr.New").each(function () {
         let row = $(this);
@@ -399,13 +400,10 @@ function Save() {
         Text.FontId = row.find("td").eq(2).find("button").eq(0).data("fontid");
         Text.FontSize = row.find("td").eq(2).find("button").eq(0).data("size");
             Text.Italic = row.find("td").eq(2).find("button").eq(0).data("italic");
-            if (Text.FontId == undefined) {
-                Text.StatusActive = 1;
-            }
-            else {
-                Text.StatusActive = 0;
-            }
-            Text.StatusAllow = 1;
+           
+              Text.Active = true;
+            
+          Text.Allow = false;
             Text.TextId = row.find("td").eq(0).attr("data-TextId");
             if (Text.TextId == undefined) {
                 row.find("td").eq(3).html = "Chưa được chọn";
@@ -413,13 +411,14 @@ function Save() {
         model.push(Text);
         }
     });
-   
-    $.ajax({
-            type: "POST",
-            url: "/Contribute/AddNewTexts",
-            data: JSON.stringify(model),
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
+  console.log(model);
+  $.ajax({
+    type: "POST",
+    url: "/Contribute/AddNewTexts",
+    data: {
+      model: model
+    },
+            
             success: function (result) {
                 if (result == true) {
                     table = $("#tblEntAttributes tbody tr").clone();

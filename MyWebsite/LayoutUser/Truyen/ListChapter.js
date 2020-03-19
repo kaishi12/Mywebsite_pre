@@ -1,4 +1,4 @@
-﻿$(".UpdateChapterIcon").on("click", function () {
+$(".UpdateChapterIcon").on("click", function () {
      $('#ChapterId').val($(this).attr("data-chapterid"));
     $('#OrderNumber').val($(this).attr("data-ordernumber"));
     $('#FullName').val($(this).attr("data-fullname"));

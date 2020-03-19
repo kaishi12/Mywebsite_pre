@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -60,7 +60,8 @@ namespace MyWebsite.Controllers
             ViewBag.MangaId = pagefa.Chapter.Manga.MangaId;
             ViewBag.ChapterId = pagefa.ChapterId;
             ViewBag.PageRawName = pagefa.FullName;
-            ViewBag.ListPage = data.Pages.Where(m => m.ChapterId == pagefa.ChapterId && m.Active == true && m.CategoryId == 1);
+            ViewBag.PageId = pagefa.PageId;
+            ViewBag.ListPage = data.Pages.Where(m => m.ChapterId == pagefa.ChapterId && m.Active == true && m.CategoryId == 1).ToList();
             var listpage = data.Pages.Where(m => m.PageId_Fa == Pageid);
             return View(listpage);
         }

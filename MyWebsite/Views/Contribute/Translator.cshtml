@@ -272,7 +272,7 @@
 
                                                     <tr class="Default">
                                                         <td class="Att Default" data-TextId="@Text.TextId" data-attDe="@item.Degree" data-attX="@Cor[0]" data-attY="@Cor[1]" data-attW="@item.Witdh" data-attH="@item.Height"><span class="form-control">@count</span> </td>
-                                                        @if (ViewBag.Block != null || Text.StatusAllow == 0)
+                                                        @if (ViewBag.Block != null || Text.Active == false)
                                                         {
                                                             <td><input disabled value="@Text.TextContent" class="attText Default form-control"  /></td>
                                                             <td>
@@ -286,7 +286,7 @@
                                                                 <button data-bold="@Text.Bold" data-size="@Text.FontSize" data-font="@Text.Font.FullName" data-fontid="@Text.FontId" data-Italic="@Text.Italic" data-color="@Text.ColorText" value="@item.TextBoxId" id="@item.TextBoxId" class="clickbutton Default btn btn-fw danger" data-toggle="modal" data-target="#m-a-f"><i class="fas fa-cog fa-spin"></i></button>
                                                             </td>
                                                         }
-                                                        @if (Text.StatusAllow == 1)
+                                                        @if (Text.Allow == false)
                                                         {
                                                             <td  class="AttAllow"><span class="form-control"><i class="fa fa-close fa-lg"style="color:red"></i></span></td>
                                                         }
@@ -307,14 +307,14 @@
                                                     <td class="Att New" data-attDe="@item.Degree" data-attX="@Cor[0]" data-attY="@Cor[1]" data-attW="@item.Witdh" data-attH="@item.Height"><span class="form-control">@count</span> </td>
                                                     @if (ViewBag.Block != null)
                                                     {
-                                                        <td><input disabled class="attText New form-control" style="width:250px" /></td>
+                                                        <td><input disabled class="attText New form-control"  /></td>
                                                         <td>
                                                             <button disabled value="@item.TextBoxId" id="@item.TextBoxId" class="clickbutton btn btn-fw danger" data-toggle="modal" data-target="#m-a-f"><i class="fas fa-cog fa-spin"></i></button>
                                                         </td>
                                                     }
                                                     else
                                                     {
-                                                        <td><input class="attText New form-control" style="width:250px" /></td>
+                                                        <td><input class="attText New form-control"  /></td>
                                                         <td>
                                                             <button value="@item.TextBoxId" id="@item.TextBoxId" class="clickbutton btn btn-fw danger" data-toggle="modal" data-target="#m-a-f"><i class="fas fa-cog fa-spin"></i></button>
                                                         </td>
@@ -354,10 +354,10 @@
                                 </label>
 
                                 <select id="Font" class="form-control select2-bootstrap-append">
-                                    @foreach (var item in ViewBag.Font)
+                                    @*@foreach (var item in ViewBag.Font)
                                     {
                                         <option value="@(item.FontId+ ";" + item.Type)">@item.FullName</option>
-                                    }
+                                    }*@
                                     <option value="123">Roboto</option>
                                 </select>
 
@@ -370,13 +370,13 @@
                                 </label>
 
                                 <select id="SelectBold" class="form-control select2-bootstrap-append">
-                                    @{
+                                    @*@{
 
                                         foreach (var item in ViewBag.FirstFontType)
                                         {
                                             <option>@item</option>
                                         }
-                                    }
+                                    }*@
 
                                 </select>
 

@@ -1,4 +1,4 @@
-﻿@model MyWebsite.Models.Page
+@model MyWebsite.Models.Page
 @{
     ViewBag.Title = "PageDetail";
     Layout = "~/Views/Shared/_LayoutUser.cshtml";
@@ -129,7 +129,7 @@
 
                                         int count = 1;
 
-                                        foreach (var item in Model.TextBoxes.Where(m => m.StatusActive == 0))
+                                        foreach (var item in Model.TextBoxes.Where(m => m.Active == true))
                                         {
 
                                             var Cor = item.Coordinate.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
@@ -139,7 +139,7 @@
                                                     <select class="AttText form-control c-select">
                                                         @foreach (var text in item.Texts.Where(m => m.TranslationId == ViewBag.Traslation.TransationId))
                                                         {
-                                                            if (text.StatusAllow == 0)
+                                                            if (text.Allow == true)
                                                             {
                                                                 <option style="color:black" selected data-fontid="@text.FontId" data-Italic="@text.Italic" data-color="@text.ColorText" data-font="@text.Font.FullName" data-size="@text.FontSize" data-bold="@text.Bold" value="@text.TextId">@text.TextContent</option>
                                                             }

@@ -75,23 +75,23 @@
                                 </td>
 
                                 <td class="center">
-                                    @{int parameterValue1 = item.Pages.Where(m => m.CategoryId == 2 && m.StatusActive == 0).Count();
+                                    @{int parameterValue1 = item.Pages.Where(m => m.CategoryId == 2 && m.Active == true).Count();
                                         @Html.DisplayFor(modelItem => parameterValue1)
-                                    }/@{int parameterValue = item.Pages.Where(m => m.CategoryId == 1 && m.StatusActive == 0).Count();
+                                    }/@{int parameterValue = item.Pages.Where(m => m.CategoryId == 1 && m.Active == true).Count();
                                         @Html.DisplayFor(modelItem => parameterValue)
                                     }
 
                                 </td>
                                 <td class="center">
                                     @{
-                                        var listpages = item.Pages.Where(m => m.CategoryId == 1 && m.StatusActive == 0);
+                                        var listpages = item.Pages.Where(m => m.CategoryId == 1 && m.Active == true);
                                         var Text = 0;
                                         foreach (var item1 in listpages)
                                         {
-                                            foreach (var item2 in item1.TextBoxes.Where(m => m.StatusActive == 0))
+                                            foreach (var item2 in item1.TextBoxes.Where(m => m.Active == true))
                                             {
 
-                                                Text += item2.Texts.Where(m => m.StatusActive == 0).Count();
+                                                Text += item2.Texts.Where(m => m.Active == true).Count();
                                             }
                                         }
                                         @Html.DisplayFor(modelItem => Text)
@@ -102,7 +102,7 @@
 
                                         foreach (var item1 in listpages)
                                         {
-                                            Textboxs += item1.TextBoxes.Where(m => m.StatusActive == 0).Count();
+                                            Textboxs += item1.TextBoxes.Where(m => m.Active == true).Count();
                                         }
                                         @Html.DisplayFor(modelItem => Textboxs)
                                     }
@@ -148,7 +148,7 @@
                                     else
                                     if (Text / Textboxs == 1 && parameterValue1 / parameterValue == 1)
                                     {
-                                        if (res != null && res.StatusActive == 0)
+                                        if (res != null && res.Active == true)
                                         {
                                             <button  data-status="1"  data-chapterId="@item.ChapterId" class="AllowButton btn dark">Đã duyệt</button>
                                         }
