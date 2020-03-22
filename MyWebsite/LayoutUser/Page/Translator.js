@@ -1,4 +1,4 @@
-var canvas = document.getElementById('canvas'),
+﻿var canvas = document.getElementById('canvas'),
     ctx = canvas.getContext('2d'),
     rect = {},
     drag = false;
@@ -127,7 +127,7 @@ function RotateRec(status, cete, X, Y, W, H, degrees, cx, cy, text, font, outlin
         fontTextBox += "Italic ";
     }
     let size1 = 24 / scale;
-    fontTextBox += bold + " " + size / scale + "px " + font;
+    fontTextBox += "300" + " " + size / scale + "px " + font;
  cete.save();
     cete.translate(cx, cy);              //translate to center of shape
     cete.rotate(degrees);  //rotate 25 degrees.
@@ -240,7 +240,8 @@ function LoadTable(status) {
         let CorH = parseInt($(".Att", b).attr("data-attH")) / scale;
         let De = parseInt($(".Att", b).attr("data-attDe")) * (Math.PI / 180);
         bold = parseInt($(".clickbutton", b).data("bold"));
-        size = parseInt($(".clickbutton", b).data("size"));
+      size = parseInt($(".clickbutton", b).data("size"));
+      
         font = $(".clickbutton", b).data("font");
         color = $(".clickbutton", b).data("color");
 
@@ -322,10 +323,13 @@ $("#Font").on("change", function () {
     }
 })
 $(".clickbutton").on("click", function () {
+  $("#Size").val($(this).data("size"));
     $('#Join').attr("data-Id", $(this).attr("id"));
 
 })
 $("#Join").on("click", function () {
+  //loadjscssfile();
+  console.log(document.getElementById("SelectColor").value);
     flagChange = true;
     CheckChange();
     let text = $("#Font").val().trim().split(";")[0];
@@ -411,7 +415,7 @@ function Save() {
         model.push(Text);
         }
     });
-  console.log(model);
+  
   $.ajax({
     type: "POST",
     url: "/Contribute/AddNewTexts",

@@ -140,7 +140,7 @@ namespace MyWebsite.Controllers
             ViewBag.TextBox = textBoxes;
             ViewBag.Text = listtext;
             ViewBag.listpage = dict;
-            //ViewBag.FirstFontType = fonts.First().Type.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+            ViewBag.FirstFontType = fonts.First().Type.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
             ViewBag.PageClear = data.Pages.SingleOrDefault(p => p.PageId_Fa == PageId && p.Active == true);
             ViewBag.chapterlist = chapterlist;
             return View(Firstpage);

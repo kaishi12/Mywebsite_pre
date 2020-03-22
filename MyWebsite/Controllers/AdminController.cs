@@ -1,4 +1,4 @@
-﻿using MyWebsite.Models;
+using MyWebsite.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -32,6 +32,7 @@ namespace MyWebsite.Controllers
             font.FontLink =   "/" + fontname + "/font.css";
             font.FullName = fontname;
             font.Active = true;
+            font.Description = "nothing";
             string Type = "";
             foreach (var item in fontupload)
             {

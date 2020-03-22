@@ -354,11 +354,11 @@
                                 </label>
 
                                 <select id="Font" class="form-control select2-bootstrap-append">
-                                    @*@foreach (var item in ViewBag.Font)
+                                    @foreach (var item in ViewBag.Font)
                                     {
                                         <option value="@(item.FontId+ ";" + item.Type)">@item.FullName</option>
-                                    }*@
-                                    <option value="123">Roboto</option>
+                                    }
+                                    
                                 </select>
 
                             </div>
@@ -370,13 +370,13 @@
                                 </label>
 
                                 <select id="SelectBold" class="form-control select2-bootstrap-append">
-                                    @*@{
+                                    @{
 
                                         foreach (var item in ViewBag.FirstFontType)
                                         {
                                             <option>@item</option>
                                         }
-                                    }*@
+                                    }
 
                                 </select>
 
