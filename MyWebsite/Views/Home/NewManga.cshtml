@@ -1,0 +1,11 @@
+﻿<div class="xem-nhieu">
+    <h3 class="title all-title">Truyện vừa tạo</h3>
+    <div class="all">
+        @foreach (var truyen in Model)
+        {
+            <div class="xem-nhieu-item">
+                <h3><a href="/manga/@truyen.Alias-@truyen.MangaId" title="Truyện @truyen.FullName vừa được tạo, cần người gia nhập">Truyện @truyen.FullName vừa được tạo, cần người gia nhập</a></h3>
+            </div>
+        }
+    </div>
+</div>

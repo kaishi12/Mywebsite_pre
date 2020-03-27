@@ -12,7 +12,15 @@ namespace MyWebsite
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
-            
+
+            //Home
+            routes.MapRoute("MangaGenre","genre/{alias}",new { controller = "Home", action = "MangaByGenre" }, new[] { "MyWebsite.Controllers" });
+            routes.MapRoute("Author","author/{author}",new { controller = "Home", action = "MangaByAuthor" }, new[] { "MyWebsite.Controllers" });
+            routes.MapRoute("ReadChapter","read/{alias}/{idManga}-{idChapter}/{language}",new { controller = "Home", action = "ReadChapter" }, new[] { "MyWebsite.Controllers" });
+
+            routes.MapRoute("MangaDetails-Language","manga/{alias}-{idManga}/{language}",new { controller = "Home", action = "MangaDetail" },new { idManga = @"\d+" }, new[] { "MyWebsite.Controllers" });
+            routes.MapRoute("MangaDetails","manga/{alias}-{idManga}",new { controller = "Home", action = "MangaDetail" },new { idManga = @"\d+" }, new[] { "MyWebsite.Controllers" });
+
             //Account
             routes.MapRoute("Login","Login",new { controller = "Account", action = "Login" });
             routes.MapRoute("Register", "Register", new { controller = "Account", action = "Register" });
@@ -56,7 +64,8 @@ namespace MyWebsite
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Account", action = "Login", id = UrlParameter.Optional }
+                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional },
+                new[] { "MyWebsite.Controllers" }
             );
            
         }

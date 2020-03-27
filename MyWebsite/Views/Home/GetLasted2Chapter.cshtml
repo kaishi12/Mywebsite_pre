@@ -1,0 +1,8 @@
+﻿@foreach (var truyen in Model)
+{
+    <em class="story_chapter">
+        <a href="/read/@truyen.Alias/@truyen.MangaId-@truyen.ChapterId/@truyen.LangId" title="@truyen.FullName">
+            (@truyen.LangId)@truyen.FullName
+        </a>
+    </em>
+}

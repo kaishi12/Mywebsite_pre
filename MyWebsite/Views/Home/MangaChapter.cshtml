@@ -1,0 +1,21 @@
+﻿<div id="chapter" class="chapter">
+    <div class="manga-info-chapter">
+        <div class="row title-list-chapter">
+            <span>Chapter name</span>
+            <span>View</span>
+            <span>Time uploaded</span>
+        </div>
+        <div class="chapter-list">
+            @foreach (var truyen in Model)
+            {
+                <div class="row">
+                    <span><a href="/read/@truyen.Alias/@truyen.MangaId-@truyen.ChapterId/@ViewBag.CurLang" title="@truyen.FullName">@truyen.FullName</a></span>
+                    <span>@truyen.ViewNumber</span>
+                    <span>@truyen.CreateAt</span>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+

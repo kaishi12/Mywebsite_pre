@@ -75,6 +75,12 @@
     <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
       <HintPath>packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
     </Reference>
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
@@ -120,7 +126,111 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\PagedList.css" />
     <Content Include="Global.asax" />
+    <Content Include="LayoutHome\css\animate.css" />
+    <Content Include="LayoutHome\css\bootstrap-grid.css" />
+    <Content Include="LayoutHome\css\bootstrap-grid.min.css" />
+    <Content Include="LayoutHome\css\bootstrap-reboot.css" />
+    <Content Include="LayoutHome\css\bootstrap-reboot.min.css" />
+    <Content Include="LayoutHome\css\bootstrap.css" />
+    <Content Include="LayoutHome\css\bootstrap.min.css" />
+    <Content Include="LayoutHome\css\contain.css" />
+    <Content Include="LayoutHome\css\docs.theme.min.css" />
+    <Content Include="LayoutHome\css\font-awesome.min.css" />
+    <Content Include="LayoutHome\css\headroom.css" />
+    <Content Include="LayoutHome\css\ionicons.min.css" />
+    <Content Include="LayoutHome\css\jquery-ui.css" />
+    <Content Include="LayoutHome\css\main.css" />
+    <Content Include="LayoutHome\css\mycss.css" />
+    <Content Include="LayoutHome\css\owl.carousel.css" />
+    <Content Include="LayoutHome\css\owl.theme.default.css" />
+    <Content Include="LayoutHome\css\responsive.css" />
+    <Content Include="LayoutHome\css\style.css" />
+    <Content Include="LayoutHome\css\stylemanga.css" />
+    <Content Include="LayoutHome\css\swiper.min.css" />
+    <Content Include="LayoutHome\fonts\et-line.svg" />
+    <Content Include="LayoutHome\fonts\fontawesome-webfont.svg" />
+    <Content Include="LayoutHome\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="LayoutHome\fonts\ionicons.svg" />
+    <Content Include="LayoutHome\fonts\Linearicons-Free.svg" />
+    <Content Include="LayoutHome\fonts\Simple-Line-Icons.dev.svg" />
+    <Content Include="LayoutHome\fonts\Simple-Line-Icons.svg" />
+    <Content Include="LayoutHome\font\flaticon.css" />
+    <Content Include="LayoutHome\font\flaticon.html" />
+    <Content Include="LayoutHome\font\Flaticon.svg" />
+    <Content Include="LayoutHome\img\cd-circle.svg" />
+    <Content Include="LayoutHome\js\bootstrap.bundle.js" />
+    <Content Include="LayoutHome\js\bootstrap.bundle.min.js" />
+    <Content Include="LayoutHome\js\bootstrap.js" />
+    <Content Include="LayoutHome\js\bootstrap.min.js" />
+    <Content Include="LayoutHome\js\headroom.min.js" />
+    <Content Include="LayoutHome\js\jquery-1.11.3.min.js" />
+    <Content Include="LayoutHome\js\jquery-1.12.4.min.js" />
+    <Content Include="LayoutHome\js\jquery-ui.js" />
+    <Content Include="LayoutHome\js\jquery.fatNav.min.js" />
+    <Content Include="LayoutHome\js\jquery.lighter.js" />
+    <Content Include="LayoutHome\js\jquery.magnific-popup.min.js" />
+    <Content Include="LayoutHome\js\lazysizes.min.js" />
+    <Content Include="LayoutHome\js\main.js" />
+    <Content Include="LayoutHome\js\modernizr.js" />
+    <Content Include="LayoutHome\js\myjs.js" />
+    <Content Include="LayoutHome\js\owl.carousel.js" />
+    <Content Include="LayoutHome\js\own-menu.js" />
+    <Content Include="LayoutHome\js\popper.min.js" />
+    <Content Include="LayoutHome\js\smooth-scroll.js" />
+    <Content Include="LayoutHome\js\swiper.min.js" />
+    <Content Include="LayoutHome\php\submit.php" />
+    <Content Include="LayoutHome\ReadChapter\ReadChapter.js" />
+    <Content Include="LayoutHome\rs-plugin\assets\arrowleft.png" />
+    <Content Include="LayoutHome\rs-plugin\assets\arrowright.png" />
+    <Content Include="LayoutHome\rs-plugin\assets\arrow_large_left.png" />
+    <Content Include="LayoutHome\rs-plugin\assets\arrow_large_right.png" />
+    <Content Include="LayoutHome\rs-plugin\assets\arrow_left.png" />
+    <Content Include="LayoutHome\rs-plugin\assets\arrow_left2.png" />
+    <Content Include="LayoutHome\rs-plugin\assets\arrow_right.png" />
+    <Content Include="LayoutHome\rs-plugin\assets\arrow_right2.png" />
+    <Content Include="LayoutHome\rs-plugin\assets\black50.png" />
+    <Content Include="LayoutHome\rs-plugin\assets\boxed_bgtile.png" />
+    <Content Include="LayoutHome\rs-plugin\assets\bullet.png" />
+    <Content Include="LayoutHome\rs-plugin\assets\bullets.png" />
+    <Content Include="LayoutHome\rs-plugin\assets\bullets2.png" />
+    <Content Include="LayoutHome\rs-plugin\assets\bullet_boxed.png" />
+    <Content Include="LayoutHome\rs-plugin\assets\coloredbg.png" />
+    <Content Include="LayoutHome\rs-plugin\assets\grain.png" />
+    <Content Include="LayoutHome\rs-plugin\assets\gridtile.png" />
+    <Content Include="LayoutHome\rs-plugin\assets\gridtile_3x3.png" />
+    <Content Include="LayoutHome\rs-plugin\assets\gridtile_3x3_white.png" />
+    <Content Include="LayoutHome\rs-plugin\assets\gridtile_white.png" />
+    <Content Include="LayoutHome\rs-plugin\assets\large_left.png" />
+    <Content Include="LayoutHome\rs-plugin\assets\large_right.png" />
+    <Content Include="LayoutHome\rs-plugin\assets\loader.gif" />
+    <Content Include="LayoutHome\rs-plugin\assets\loader2.gif" />
+    <Content Include="LayoutHome\rs-plugin\assets\navigdots.png" />
+    <Content Include="LayoutHome\rs-plugin\assets\navigdots_bgtile.png" />
+    <Content Include="LayoutHome\rs-plugin\assets\shadow1.png" />
+    <Content Include="LayoutHome\rs-plugin\assets\shadow2.png" />
+    <Content Include="LayoutHome\rs-plugin\assets\shadow3.png" />
+    <Content Include="LayoutHome\rs-plugin\assets\small_left.png" />
+    <Content Include="LayoutHome\rs-plugin\assets\small_left_boxed.png" />
+    <Content Include="LayoutHome\rs-plugin\assets\small_right.png" />
+    <Content Include="LayoutHome\rs-plugin\assets\small_right_boxed.png" />
+    <Content Include="LayoutHome\rs-plugin\assets\timer.png" />
+    <Content Include="LayoutHome\rs-plugin\assets\timerdot.png" />
+    <Content Include="LayoutHome\rs-plugin\assets\transparent.jpg" />
+    <Content Include="LayoutHome\rs-plugin\assets\white50.png" />
+    <Content Include="LayoutHome\rs-plugin\css\settings-ie8.css" />
+    <Content Include="LayoutHome\rs-plugin\css\settings.css" />
+    <Content Include="LayoutHome\rs-plugin\font\revicons.svg" />
+    <Content Include="LayoutHome\rs-plugin\images\decor_inside.png" />
+    <Content Include="LayoutHome\rs-plugin\images\decor_inside_white.png" />
+    <Content Include="LayoutHome\rs-plugin\images\decor_testimonial.png" />
+    <Content Include="LayoutHome\rs-plugin\images\gradient\g30.png" />
+    <Content Include="LayoutHome\rs-plugin\images\gradient\g40.png" />
+    <Content Include="LayoutHome\rs-plugin\js\jquery.themepunch.enablelog.js" />
+    <Content Include="LayoutHome\rs-plugin\js\jquery.themepunch.revolution.js" />
+    <Content Include="LayoutHome\rs-plugin\js\jquery.tp.min.js" />
+    <Content Include="LayoutHome\rs-plugin\js\jquery.tp.t.min.js" />
     <Content Include="LayoutUser\Account\Search.js" />
     <Content Include="LayoutUser\Account\UserManagment.js" />
     <Content Include="LayoutUser\assets\angular-motion\dist\angular-motion.css" />
@@ -451,21 +561,78 @@
     <Content Include="LayoutUser\Translation\TranslationManager.js" />
     <Content Include="LayoutUser\Truyen\ListChapter.js" />
     <Content Include="LayoutUser\Truyen\TaoMoi.js" />
+    <Content Include="Areas\FrontPage\Views\web.config" />
+    <Content Include="Areas\AdminPage\Views\web.config" />
+    <Content Include="Areas\FrontPage\Views\Home\Index.cshtml" />
+    <Content Include="Areas\FrontPage\Views\Shared\_LayOutFrontPage.cshtml" />
+    <Content Include="LayoutHome\css\bootstrap-grid.css.map" />
+    <Content Include="LayoutHome\css\bootstrap-grid.min.css.map" />
+    <Content Include="LayoutHome\css\bootstrap-reboot.css.map" />
+    <Content Include="LayoutHome\css\bootstrap-reboot.min.css.map" />
+    <Content Include="LayoutHome\css\bootstrap.css.map" />
+    <Content Include="LayoutHome\css\bootstrap.min.css.map" />
+    <Content Include="LayoutHome\fonts\et-line.eot" />
+    <Content Include="LayoutHome\fonts\et-line.ttf" />
+    <Content Include="LayoutHome\fonts\et-line.woff" />
+    <Content Include="LayoutHome\fonts\fontawesome-webfont.eot" />
+    <Content Include="LayoutHome\fonts\fontawesome-webfont.ttf" />
+    <Content Include="LayoutHome\fonts\fontawesome-webfont.woff" />
+    <Content Include="LayoutHome\fonts\fontawesome-webfont.woff2" />
+    <Content Include="LayoutHome\fonts\FontAwesome.otf" />
+    <Content Include="LayoutHome\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="LayoutHome\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="LayoutHome\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="LayoutHome\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="LayoutHome\fonts\IcoMoon-Free.ttf" />
+    <Content Include="LayoutHome\fonts\ionicons.eot" />
+    <Content Include="LayoutHome\fonts\ionicons.ttf" />
+    <Content Include="LayoutHome\fonts\ionicons.woff" />
+    <Content Include="LayoutHome\fonts\Linearicons-Free.eot" />
+    <Content Include="LayoutHome\fonts\Linearicons-Free.ttf" />
+    <Content Include="LayoutHome\fonts\Linearicons-Free.woff" />
+    <Content Include="LayoutHome\fonts\Linearicons-Free.woff2" />
+    <Content Include="LayoutHome\fonts\Simple-Line-Icons.eot" />
+    <Content Include="LayoutHome\fonts\Simple-Line-Icons.ttf" />
+    <Content Include="LayoutHome\fonts\Simple-Line-Icons.woff" />
+    <Content Include="LayoutHome\font\Flaticon.eot" />
+    <Content Include="LayoutHome\font\Flaticon.ttf" />
+    <Content Include="LayoutHome\font\Flaticon.woff" />
+    <Content Include="LayoutHome\font\_flaticon.scss" />
+    <Content Include="LayoutHome\js\bootstrap.bundle.js.map" />
+    <Content Include="LayoutHome\js\bootstrap.bundle.min.js.map" />
+    <Content Include="LayoutHome\js\bootstrap.js.map" />
+    <Content Include="LayoutHome\js\bootstrap.min.js.map" />
+    <Content Include="LayoutHome\rs-plugin\assets\arrows.psd" />
+    <Content Include="LayoutHome\rs-plugin\assets\bullets.psd" />
+    <Content Include="LayoutHome\rs-plugin\assets\small_arrows.psd" />
+    <Content Include="LayoutHome\rs-plugin\font\revicons.eot" />
+    <Content Include="LayoutHome\rs-plugin\font\revicons.ttf" />
+    <Content Include="LayoutHome\rs-plugin\font\revicons.woff" />
+    <EntityDeploy Include="Models\Model.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Model.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Model.edmx.diagram">
+      <DependentUpon>Model.edmx</DependentUpon>
+    </Content>
+    <None Include="Scripts\jquery-1.6.4-vsdoc.js" />
     <Content Include="Models\Model.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Model.Context.cs</LastGenOutput>
       <DependentUpon>Model.edmx</DependentUpon>
+      <LastGenOutput>Model.Context.cs</LastGenOutput>
     </Content>
     <Content Include="Models\Model.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model.edmx</DependentUpon>
       <LastGenOutput>Model.cs</LastGenOutput>
     </Content>
-    <Content Include="Areas\FrontPage\Views\web.config" />
-    <Content Include="Areas\AdminPage\Views\web.config" />
-    <Content Include="Areas\FrontPage\Views\Home\Index.cshtml" />
-    <Content Include="Areas\FrontPage\Views\Shared\_LayOutFrontPage.cshtml" />
-    <None Include="Scripts\jquery-1.6.4-vsdoc.js" />
+    <Content Include="RootPicture\error-404.jpg" />
+    <Content Include="RootPicture\Icons\manga-author.png" />
+    <Content Include="RootPicture\Icons\manga-genre.png" />
+    <Content Include="RootPicture\Icons\manga-name.png" />
+    <Content Include="RootPicture\Icons\manga-status.png" />
+    <Content Include="RootPicture\Icons\manga-timeupdate.png" />
+    <Content Include="RootPicture\Icons\manga-views.png" />
     <Content Include="RootPicture\Oshino Shinobu.jpg" />
     <Content Include="RootPicture\tenor.gif" />
     <Content Include="Scripts\jquery-1.6.4.js" />
@@ -484,10 +651,12 @@
     <Compile Include="Controllers\ChapterController.cs" />
     <Compile Include="Controllers\ContributeController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MangaController.cs" />
     <Compile Include="Controllers\NotificationController.cs" />
     <Compile Include="Controllers\PageController.cs" />
     <Compile Include="Controllers\TranslationController.cs" />
+    <Compile Include="DAO\DAOChapter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -554,6 +723,9 @@
     <Compile Include="Models\Status.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\sysdiagram.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Text.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -589,6 +761,14 @@
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\Account\AccountModel.cs" />
     <Compile Include="ViewModels\Chapter\ChapterModel.cs" />
+    <Compile Include="ViewModels\Home\Author\MangaByAuthor.cs" />
+    <Compile Include="ViewModels\Home\Chapter\Get1Chapter.cs" />
+    <Compile Include="ViewModels\Home\Chapter\Get2Chapter.cs" />
+    <Compile Include="ViewModels\Home\Chapter\GetLastedChapter.cs" />
+    <Compile Include="ViewModels\Home\Genre\MangaByGenre.cs" />
+    <Compile Include="ViewModels\Home\Index\LastUpdatedManga.cs" />
+    <Compile Include="ViewModels\Home\MangaDetail\ListChapter.cs" />
+    <Compile Include="ViewModels\Home\Slides\Slides.cs" />
     <Compile Include="ViewModels\Language\LanguageModel.cs" />
     <Compile Include="ViewModels\Manga\MangaModel.cs" />
     <Compile Include="ViewModels\Notification\NotificationModel.cs" />
@@ -820,19 +1000,11 @@
     <Content Include="LayoutUser\libs\jquery\waves\dist\waves.min.js.map" />
     <Content Include="LayoutUser\scripts\data.json" />
     <Content Include="LayoutUser\scripts\datatable" />
-    <EntityDeploy Include="Models\Model.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Model.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\Model.edmx.diagram">
-      <DependentUpon>Model.edmx</DependentUpon>
-    </Content>
     <None Include="packages.config" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\ResAndLogLayout.cshtml" />
     <Content Include="Views\Shared\View.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Shared\_LayoutUser.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
@@ -868,6 +1040,24 @@
     <Content Include="Views\Account\ListRequestToYou.cshtml" />
     <Content Include="Views\Account\ListRequestToPeople.cshtml" />
     <Content Include="Views\Account\ListRequestByYou.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Shared\_Layout2.cshtml" />
+    <Content Include="Views\Shared\_Layout3.cshtml" />
+    <Content Include="Views\Home\Slide.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\MangaDetail.cshtml" />
+    <Content Include="Views\Home\MangaGenres.cshtml" />
+    <Content Include="Views\Home\ViewNumber.cshtml" />
+    <Content Include="Views\Home\MangaChapter.cshtml" />
+    <Content Include="Views\Home\ReadChapter.cshtml" />
+    <Content Include="Views\Home\SelectChapter.cshtml" />
+    <Content Include="Views\Home\MangaByAuthor.cshtml" />
+    <Content Include="Views\Home\GetLasted2Chapter.cshtml" />
+    <Content Include="Views\Home\Genre.cshtml" />
+    <Content Include="Views\Home\MangaByGenre.cshtml" />
+    <Content Include="Views\Home\GetLasted1Chapter.cshtml" />
+    <Content Include="Views\Home\NewManga.cshtml" />
+    <Content Include="Views\Home\KetQuaTimKiem.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -883,6 +1073,7 @@
     <Folder Include="Areas\FrontPage\Models\" />
     <Folder Include="Avatar\" />
     <Folder Include="Cover\" />
+    <Folder Include="LayoutHome\images\" />
     <Folder Include="PageLink\" />
     <Folder Include="Views\Notification\" />
   </ItemGroup>
