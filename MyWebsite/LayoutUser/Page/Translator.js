@@ -1,4 +1,4 @@
-﻿var canvas = document.getElementById('canvas'),
+var canvas = document.getElementById('canvas'),
     ctx = canvas.getContext('2d'),
     rect = {},
     drag = false;
@@ -244,7 +244,7 @@ function LoadTable(status) {
       
         font = $(".clickbutton", b).data("font");
         color = $(".clickbutton", b).data("color");
-
+      console.log(font);
         italic = parseInt($(".clickbutton", b).data("italic"));
         let cx = CorX + 0.5 * CorW;   // x of shape center
         let cy = CorY + 0.5 * CorH;
@@ -328,7 +328,7 @@ $(".clickbutton").on("click", function () {
 
 })
 $("#Join").on("click", function () {
-  //loadjscssfile();
+  loadjscssfile("/LayoutUser/assets/fonts/Playfair_Display/font.css","css");
   console.log(document.getElementById("SelectColor").value);
     flagChange = true;
     CheckChange();
