@@ -54,6 +54,18 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Documents">
+      <EntityTypeMapping TypeName="MyWebsiteModel.Document">
+        <MappingFragment StoreEntitySet="Document">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Order" ColumnName="Order" />
+          <ScalarProperty Name="Text" ColumnName="Text" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Fonts">
       <EntityTypeMapping TypeName="MyWebsiteModel.Font">
         <MappingFragment StoreEntitySet="Font">
@@ -62,7 +74,6 @@
           <ScalarProperty Name="FontLink" ColumnName="FontLink" />
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="Active" ColumnName="Active" />
-          <ScalarProperty Name="Type" ColumnName="Type" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -261,17 +272,5 @@
         <ScalarProperty Name="MangaId" ColumnName="MangaId" />
       </EndProperty>
     </AssociationSetMapping>
-    <EntitySetMapping Name="Documents">
-      <EntityTypeMapping TypeName="MyWebsiteModel.Document">
-        <MappingFragment StoreEntitySet="Document">
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="Active" ColumnName="Active" />
-          <ScalarProperty Name="Image" ColumnName="Image" />
-          <ScalarProperty Name="Text" ColumnName="Text" />
-          <ScalarProperty Name="Order" ColumnName="Order" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

@@ -608,21 +608,10 @@
     <Content Include="LayoutHome\rs-plugin\font\revicons.eot" />
     <Content Include="LayoutHome\rs-plugin\font\revicons.ttf" />
     <Content Include="LayoutHome\rs-plugin\font\revicons.woff" />
-    <EntityDeploy Include="Models\Model.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Model.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\Model.edmx.diagram">
-      <DependentUpon>Model.edmx</DependentUpon>
-    </Content>
     <EntityDeploy Include="Models\Model1Test.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Model1Test.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\Model1Test.edmx.diagram">
-      <DependentUpon>Model1Test.edmx</DependentUpon>
-    </Content>
-    <None Include="Scripts\jquery-1.6.4-vsdoc.js" />
     <Content Include="Models\Model.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model.edmx</DependentUpon>
@@ -633,6 +622,17 @@
       <DependentUpon>Model.edmx</DependentUpon>
       <LastGenOutput>Model.cs</LastGenOutput>
     </Content>
+    <Content Include="Models\Model1Test.edmx.diagram">
+      <DependentUpon>Model1Test.edmx</DependentUpon>
+    </Content>
+    <EntityDeploy Include="Models\Model.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Model.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Model.edmx.diagram">
+      <DependentUpon>Model.edmx</DependentUpon>
+    </Content>
+    <None Include="Scripts\jquery-1.6.4-vsdoc.js" />
     <Content Include="Models\Model1Test.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1Test.edmx</DependentUpon>

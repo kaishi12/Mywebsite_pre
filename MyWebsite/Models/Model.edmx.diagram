@@ -4,14 +4,15 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="df2f1755bb144e508caf25df207d33cd" Name="Diagram1">
+      <Diagram DiagramId="0e28168e87154c06adbcae0b0b1bc739" Name="Diagram1">
         <EntityTypeShape EntityType="MyWebsiteModel.Account" Width="1.5" PointX="0.75" PointY="12.125" IsExpanded="true" />
         <EntityTypeShape EntityType="MyWebsiteModel.Account_Detail" Width="1.5" PointX="3" PointY="13.5" IsExpanded="true" />
         <EntityTypeShape EntityType="MyWebsiteModel.Category" Width="1.5" PointX="0.75" PointY="21.75" IsExpanded="true" />
         <EntityTypeShape EntityType="MyWebsiteModel.Chapter" Width="1.5" PointX="8.25" PointY="17" IsExpanded="true" />
-        <EntityTypeShape EntityType="MyWebsiteModel.Font" Width="1.5" PointX="14.25" PointY="11.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="MyWebsiteModel.Genre" Width="1.5" PointX="6" PointY="5.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="MyWebsiteModel.Language" Width="1.5" PointX="9" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyWebsiteModel.Document" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyWebsiteModel.Font" Width="1.5" PointX="14.25" PointY="12.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyWebsiteModel.Genre" Width="1.5" PointX="6" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyWebsiteModel.Language" Width="1.5" PointX="9" PointY="6.25" IsExpanded="true" />
         <EntityTypeShape EntityType="MyWebsiteModel.Manga" Width="1.5" PointX="6" PointY="12.625" IsExpanded="true" />
         <EntityTypeShape EntityType="MyWebsiteModel.Manga_Detail" Width="1.5" PointX="8.25" PointY="13" IsExpanded="true" />
         <EntityTypeShape EntityType="MyWebsiteModel.Manga_Genres" Width="1.5" PointX="8.25" PointY="9.625" IsExpanded="true" />
@@ -19,7 +20,7 @@
         <EntityTypeShape EntityType="MyWebsiteModel.NotifyType" Width="1.5" PointX="0.75" PointY="8.625" IsExpanded="true" />
         <EntityTypeShape EntityType="MyWebsiteModel.Page" Width="1.5" PointX="3" PointY="16.625" IsExpanded="true" />
         <EntityTypeShape EntityType="MyWebsiteModel.Point" Width="1.5" PointX="0.75" PointY="18.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="MyWebsiteModel.Role" Width="1.5" PointX="6" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyWebsiteModel.Role" Width="1.5" PointX="6" PointY="6.625" IsExpanded="true" />
         <EntityTypeShape EntityType="MyWebsiteModel.Status" Width="1.5" PointX="3.75" PointY="5.75" IsExpanded="true" />
         <EntityTypeShape EntityType="MyWebsiteModel.Text" Width="1.5" PointX="16.5" PointY="14.375" IsExpanded="true" />
         <EntityTypeShape EntityType="MyWebsiteModel.TextBox" Width="1.5" PointX="5.25" PointY="18.25" IsExpanded="true" />
@@ -50,7 +51,6 @@
         <AssociationConnector Association="MyWebsiteModel.FK_Text_Translation" ManuallyRouted="false" />
         <AssociationConnector Association="MyWebsiteModel.FK_Translation_Detail_Translation" ManuallyRouted="false" />
         <AssociationConnector Association="MyWebsiteModel.Bookmark" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="MyWebsiteModel.Document" Width="1.5" PointX="3.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -29,6 +29,7 @@ namespace MyWebsite.Models
         public virtual DbSet<Account_Detail> Account_Detail { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<Chapter> Chapters { get; set; }
+        public virtual DbSet<Document> Documents { get; set; }
         public virtual DbSet<Font> Fonts { get; set; }
         public virtual DbSet<Genre> Genres { get; set; }
         public virtual DbSet<Language> Languages { get; set; }
@@ -45,6 +46,5 @@ namespace MyWebsite.Models
         public virtual DbSet<TextBox> TextBoxes { get; set; }
         public virtual DbSet<Translation> Translations { get; set; }
         public virtual DbSet<Translation_Detail> Translation_Detail { get; set; }
-        public virtual DbSet<Document> Documents { get; set; }
     }
 }

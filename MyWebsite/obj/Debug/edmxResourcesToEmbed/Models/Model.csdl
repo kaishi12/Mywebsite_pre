@@ -63,6 +63,17 @@
     <NavigationProperty Name="Pages" Relationship="Self.FK_Page_Chapter" FromRole="Chapter" ToRole="Page" />
     <NavigationProperty Name="Translation_Detail" Relationship="Self.FK_Translation_Detail_Chapter" FromRole="Chapter" ToRole="Translation_Detail" />
   </EntityType>
+  <EntityType Name="Document">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Order" Type="Int32" />
+    <Property Name="Text" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Active" Type="Boolean" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
   <EntityType Name="Font">
     <Key>
       <PropertyRef Name="FontId" />
@@ -72,8 +83,7 @@
     <Property Name="FontLink" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="Active" Type="Boolean" Nullable="false" />
-
-    <NavigationProperty Name="Texts" Relationship="MyWebsiteModel.FK_Text_Font" FromRole="Font" ToRole="Text" />
+    <NavigationProperty Name="Texts" Relationship="Self.FK_Text_Font" FromRole="Font" ToRole="Text" />
   </EntityType>
   <EntityType Name="Genre">
     <Key>
@@ -584,6 +594,7 @@
     <EntitySet Name="Account_Detail" EntityType="Self.Account_Detail" />
     <EntitySet Name="Categories" EntityType="Self.Category" />
     <EntitySet Name="Chapters" EntityType="Self.Chapter" />
+    <EntitySet Name="Documents" EntityType="Self.Document" />
     <EntitySet Name="Fonts" EntityType="Self.Font" />
     <EntitySet Name="Genres" EntityType="Self.Genre" />
     <EntitySet Name="Languages" EntityType="Self.Language" />
@@ -700,17 +711,5 @@
       <End Role="Account" EntitySet="Accounts" />
       <End Role="Manga" EntitySet="Mangas" />
     </AssociationSet>
-    <EntitySet Name="Documents" EntityType="MyWebsiteModel.Document" />
   </EntityContainer>
-  <EntityType Name="Document">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Order" Type="Int32" />
-    <Property Name="Text" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="Active" Type="Boolean" />
-    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-  </EntityType>
 </Schema>

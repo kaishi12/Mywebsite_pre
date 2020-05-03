@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="MyWebsiteModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="MyWebsiteModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Account">
           <Key>
             <PropertyRef Name="AccountId" />
@@ -707,7 +707,8 @@ warning 6002: The table/view 'MyWebsite.dbo.Bookmark' does not have a primary ke
             <End Role="Translation" EntitySet="Translation" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="MyWebsiteModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -774,6 +775,17 @@ warning 6002: The table/view 'MyWebsite.dbo.Bookmark' does not have a primary ke
           <NavigationProperty Name="Pages" Relationship="Self.FK_Page_Chapter" FromRole="Chapter" ToRole="Page" />
           <NavigationProperty Name="Translation_Detail" Relationship="Self.FK_Translation_Detail_Chapter" FromRole="Chapter" ToRole="Translation_Detail" />
         </EntityType>
+        <EntityType Name="Document">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Order" Type="Int32" />
+          <Property Name="Text" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Active" Type="Boolean" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
         <EntityType Name="Font">
           <Key>
             <PropertyRef Name="FontId" />
@@ -783,9 +795,7 @@ warning 6002: The table/view 'MyWebsite.dbo.Bookmark' does not have a primary ke
           <Property Name="FontLink" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Active" Type="Boolean" Nullable="false" />
-
-          <NavigationProperty Name="Texts" Relationship="MyWebsiteModel.FK_Text_Font" FromRole="Font" ToRole="Text" />
-
+          <NavigationProperty Name="Texts" Relationship="Self.FK_Text_Font" FromRole="Font" ToRole="Text" />
         </EntityType>
         <EntityType Name="Genre">
           <Key>
@@ -1296,6 +1306,7 @@ warning 6002: The table/view 'MyWebsite.dbo.Bookmark' does not have a primary ke
           <EntitySet Name="Account_Detail" EntityType="Self.Account_Detail" />
           <EntitySet Name="Categories" EntityType="Self.Category" />
           <EntitySet Name="Chapters" EntityType="Self.Chapter" />
+          <EntitySet Name="Documents" EntityType="Self.Document" />
           <EntitySet Name="Fonts" EntityType="Self.Font" />
           <EntitySet Name="Genres" EntityType="Self.Genre" />
           <EntitySet Name="Languages" EntityType="Self.Language" />
@@ -1412,19 +1423,7 @@ warning 6002: The table/view 'MyWebsite.dbo.Bookmark' does not have a primary ke
             <End Role="Account" EntitySet="Accounts" />
             <End Role="Manga" EntitySet="Mangas" />
           </AssociationSet>
-          <EntitySet Name="Documents" EntityType="MyWebsiteModel.Document" />
         </EntityContainer>
-        <EntityType Name="Document">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Order" Type="Int32" />
-          <Property Name="Text" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Active" Type="Boolean" />
-          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1484,16 +1483,26 @@ warning 6002: The table/view 'MyWebsite.dbo.Bookmark' does not have a primary ke
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Documents">
+            <EntityTypeMapping TypeName="MyWebsiteModel.Document">
+              <MappingFragment StoreEntitySet="Document">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Order" ColumnName="Order" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Fonts">
             <EntityTypeMapping TypeName="MyWebsiteModel.Font">
               <MappingFragment StoreEntitySet="Font">
-
                 <ScalarProperty Name="FontId" ColumnName="FontId" />
                 <ScalarProperty Name="FullName" ColumnName="FullName" />
                 <ScalarProperty Name="FontLink" ColumnName="FontLink" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Active" ColumnName="Active" />
-                <ScalarProperty Name="Type" ColumnName="Type" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1692,18 +1701,6 @@ warning 6002: The table/view 'MyWebsite.dbo.Bookmark' does not have a primary ke
               <ScalarProperty Name="MangaId" ColumnName="MangaId" />
             </EndProperty>
           </AssociationSetMapping>
-          <EntitySetMapping Name="Documents">
-            <EntityTypeMapping TypeName="MyWebsiteModel.Document">
-              <MappingFragment StoreEntitySet="Document">
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Active" ColumnName="Active" />
-                <ScalarProperty Name="Image" ColumnName="Image" />
-                <ScalarProperty Name="Text" ColumnName="Text" />
-                <ScalarProperty Name="Order" ColumnName="Order" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
