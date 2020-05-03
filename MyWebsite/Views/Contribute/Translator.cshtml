@@ -5,7 +5,7 @@
 }
 
 <link rel='stylesheet' id='fontawesome-css' href='https://use.fontawesome.com/releases/v5.0.1/css/all.css?ver=4.9.1' type='text/css' media='all' />
-<link rel="stylesheet" href="~/LayoutUser/assets/fonts/font.css" type="text/css" />
+
 <style>
 
 
@@ -282,7 +282,7 @@ div {
 
                           <tr class="Default">
                             <td class="Att Default" data-TextId="@Text.TextId" data-attDe="@item.Degree" data-attX="@Cor[0]" data-attY="@Cor[1]" data-attW="@item.Witdh" data-attH="@item.Height"><span class="form-control">@count</span> </td>
-                            @if (ViewBag.Block != null || Text.Active == false)
+                            @if (ViewBag.Block != null || Text.Active == true)
                             {
                               <td><input disabled value="@Text.TextContent" class="attText Default form-control" /></td>
                               <td>

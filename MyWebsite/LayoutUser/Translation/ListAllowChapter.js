@@ -4,9 +4,9 @@
         type: "POST",
         url: "/Translation/AllowChapter",
         data: {
-            TranslationId: $("#Translation").val(),
-            ChapterId: thisbutton.attr("data-chapterid"),
-            Status: thisbutton.attr("data-status")
+            TranslationId: +$("#Translation").val(),
+            ChapterId: +thisbutton.attr("data-chapterid"),
+            Status: +thisbutton.attr("data-status") > 0
         },
 
 

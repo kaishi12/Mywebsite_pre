@@ -77,17 +77,26 @@ namespace MyWebsite.Controllers
         }
         public JsonResult AllowText(int Id, int TextBoxId)
         {
-            var Text = data.Texts.SingleOrDefault(m => m.TextId == Id);
-            var Trans = data.Texts.SingleOrDefault(m => m.TextBoxId == TextBoxId && m.TranslationId == Text.TranslationId && m.Allow == true);
-            if (Trans != null)
+            try
             {
-                Trans.Allow = true;
+                var Text = data.Texts.SingleOrDefault(m => m.TextId == Id);
+                var Translationid = Text.TranslationId;
+                var Trans = data.Texts.SingleOrDefault(m => m.TextBoxId == TextBoxId && m.TranslationId == Translationid && m.Allow == true);
+                if (Trans != null)
+                {
+                    Trans.Allow = false;
+                }
+                Text.Allow = true;
+                NotificationService notificationService = new NotificationService();
+                var res = notificationService.AddnewNoticeSenpai("Trans", Text.TextBox.Page.Chapter.OrderNumber, Text.TextBox.Page.OrderNumber, Text.Translation.Manga.FullName, Text.AccountId, Text.Translation.Language.FullName);
+                data.SaveChanges();
+                return Json(true);
             }
-            Text.Allow = true;
-            NotificationService notificationService = new NotificationService();
-            var res = notificationService.AddnewNoticeSenpai("Trans", Text.TextBox.Page.Chapter.OrderNumber, Text.TextBox.Page.OrderNumber, Text.Translation.Manga.FullName, Text.AccountId, Text.Translation.Language.FullName);
-            data.SaveChanges();
-            return Json(true);
+            
+            catch(Exception ex)
+            {
+                return Json(false);
+            }
         }
         [Object]
         public ActionResult ListAllowChapter(int TranslationId)
@@ -105,6 +114,7 @@ namespace MyWebsite.Controllers
                 if (res != null)
                 {
                     res.Active = true;
+                    res.UpdateAt = DateTime.Now;
                     data.SaveChanges();
                 }
                 else
@@ -113,6 +123,8 @@ namespace MyWebsite.Controllers
                     translation_Detail.ChapterId = ChapterId;
                     translation_Detail.TranslationId = TranslationId;
                     translation_Detail.Active = Status;
+                    translation_Detail.UpdateAt = DateTime.Now;
+                    translation_Detail.CreateAt = DateTime.Now;
                     data.Translation_Detail.Add(translation_Detail);
                     data.SaveChanges();
                 }

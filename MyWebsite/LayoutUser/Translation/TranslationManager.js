@@ -40,8 +40,11 @@ function RotateRec(cete, X, Y, W, H, degrees, cx, cy, text, font, outline, color
     if (italic == 1) {
         fontTextBox += "Italic ";
     }
+    if (bold == 1) {
+        fontTextBox += "bold ";
+    }
     let size1 = 24 / scale;
-    fontTextBox += bold + " " + size / scale + "px " + font;
+    fontTextBox += size / scale + "px " + font;
 
     cete.save();
     cete.translate(cx, cy);              //translate to center of shape
@@ -150,13 +153,12 @@ function LoadTable() {
         let CorW = parseInt($(".Att", b).attr("data-attW")) / scale;
         let CorH = parseInt($(".Att", b).attr("data-attH")) / scale;
         let De = parseInt($(".Att", b).attr("data-attDe")) * (Math.PI / 180);
-        bold = parseInt($(".AttText", b).find(':selected').data("bold"));
         size = parseInt($(".AttText", b).find(':selected').data("size"));
         font = $(".AttText", b).find(':selected').data("font");
         color = $(".AttText", b).find(':selected').data("color");
-        
+        italic = $(".AttText", b).find(':selected').data("italic") == "True" ? 1 : 0;
+        bold = $(".AttText", b).find(':selected').data("bold") == "True" ? 1 : 0;
         $(".AttBtn", b).attr("data-id", $(".AttText", b).find(":selected").val());
-        italic = parseInt($(".AttText", b).find(':selected').data("italic"));
         let cx = CorX + 0.5 * CorW;   // x of shape center
         let cy = CorY + 0.5 * CorH;
         text = $(".AttText", b).find(':selected').text();
@@ -175,69 +177,6 @@ $('.AttText').on("change",function () {
     $(this).parent().next().find("button").eq(0).attr("data-id", $(this).find(":selected").val());
     LoadTable();
 })
-function loadjscssfile(filename, filetype) {
-    if (filetype == "js") { //if filename is a external JavaScript file
-        var fileref = document.createElement('script')
-        fileref.setAttribute("type", "text/javascript")
-        fileref.setAttribute("src", filename)
-    }
-    else if (filetype == "css") { //if filename is an external CSS file
-        var fileref = document.createElement("link")
-        fileref.setAttribute("rel", "stylesheet")
-        fileref.setAttribute("type", "text/css")
-        fileref.setAttribute("href", filename)
-    }
-    if (typeof fileref != "undefined")
-        document.getElementsByTagName("head")[0].appendChild(fileref)
-}
-
-function Save() {
-    let model = new Array();
-    $("#tblEntAttributes tbody tr.New").each(function () {
-        let row = $(this);
-
-        let Text = {};
-        Text.TextContent = row.find("td").eq(1).find("input").eq(0).val();
-        if (Text.TextContent != "") {
-            $(this).removeClass("New");
-            $(this).addClass("Default");
-            Text.ColorText = row.find("td").eq(2).find("button").eq(0).data("color");
-            Text.Bold = +row.find("td").eq(2).find("button").eq(0).data("bold");
-            Text.TranslationId = $("#SelectLanguage").val();
-            Text.TextBoxId = row.find("td").eq(2).find("button").eq(0).val();
-            Text.FontId = row.find("td").eq(2).find("button").eq(0).data("fontid");
-            Text.FontSize = row.find("td").eq(2).find("button").eq(0).data("size");
-            Text.Italic = row.find("td").eq(2).find("button").eq(0).data("italic");
-            if (Text.FontId == undefined) {
-                Text.StatusActive = 1;
-            }
-            else {
-                Text.StatusActive = 0;
-            }
-            Text.StatusAllow = 1;
-            Text.TextId = row.find("td").eq(0).attr("data-TextId");
-            if (Text.TextId == undefined) {
-                row.find("td").eq(3).html = "Chưa được chọn";
-            }
-            model.push(Text);
-        }
-    });
-   
-    $.ajax({
-        type: "POST",
-        url: "/Contribute/AddNewTexts",
-        data: JSON.stringify(model),
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        success: function (result) {
-            if (result == true) {
-                table = $("#tblEntAttributes tbody tr").clone();
-                alert("Lưu Thành Công");
-            }
-        }
-    });
-
-}
 $(".AttBtn").on("click", function () {
     Text = {};
     Text.Id = +$(this).attr("data-id");

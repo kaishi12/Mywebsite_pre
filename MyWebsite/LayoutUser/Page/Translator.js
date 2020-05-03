@@ -249,7 +249,6 @@ function LoadTable(status) {
      
       italic = $(".clickbutton", b).data("italic") == "True" ? 1 : 0;
       bold = $(".clickbutton", b).data("bold") == "True" ? 1 : 0;
-      console.log(bold);
         let cx = CorX + 0.5 * CorW;   // x of shape center
         let cy = CorY + 0.5 * CorH;
 
@@ -311,21 +310,7 @@ $("#SelectLanguage").on("change", function () {
     alert(1);
     window.location.href = "/Contribute/Translator?ChapterId=" + $("#SelectChapter").val() + "&PageId=" + $("#SelectPage").val() + "&TranslationId="+ $(this).val();
 })
-$("#Font").on("change", function () {
 
-    if ($(this).val() != "123") {
-        let text = $(this).val().trim().split(";");
-        let context = "";
-        for (let i = 1; i < text.length; i++) {
-            context += '<option>' + text[i] + '</option>';
-        }
-        $('#SelectBold')
-            .find('option')
-            .remove()
-            .end();
-        $("#SelectBold").append(context);
-    }
-})
 $(".clickbutton").on("click", function () {
   $("#Size").val($(this).data("size"));
   $("#Font").val($(this).data("fontid")).change();

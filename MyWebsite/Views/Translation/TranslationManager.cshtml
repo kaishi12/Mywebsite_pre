@@ -1,4 +1,4 @@
-@model MyWebsite.Models.Page
+﻿@model MyWebsite.Models.Page
 @{
     ViewBag.Title = "PageDetail";
     Layout = "~/Views/Shared/_LayoutUser.cshtml";
@@ -97,12 +97,6 @@
 
                                     </li>
 
-                                    <li class="nav-item inline">
-                                        <a class="nav-link">
-                                            <i onclick="Save()" class="material-icons md-18">&#xe146;</i>
-                                        </a>
-
-                                    </li>
                                 </ul>
                             </div>
 
@@ -141,11 +135,11 @@
                                                         {
                                                             if (text.Allow == true)
                                                             {
-                                                                <option style="color:black" selected data-fontid="@text.FontId" data-Italic="@text.Italic" data-color="@text.ColorText" data-font="@text.Font.FullName" data-size="@text.FontSize" data-bold="@text.Bold" value="@text.TextId">@text.TextContent</option>
+                                                                <option style="color:black" selected data-bold="@text.Bold" data-size="@text.FontSize" data-font="@text.Font.FullName" data-fontid="@text.FontId" data-Italic="@text.Italic" data-color="@text.ColorText.Trim()" value="@text.TextId" id="@item.TextBoxId">@text.TextContent</option>
                                                             }
                                                             else
                                                             {
-                                                                <option style="color:black" data-fontid="@text.FontId" data-Italic="@text.Italic" data-color="@text.ColorText" data-font="@text.Font.FullName" data-size="@text.FontSize" data-bold="@text.Bold" value="@text.TextId">@text.TextContent</option>
+                                                                <option style="color:black" data-bold="@text.Bold" data-size="@text.FontSize" data-font="@text.Font.FullName" data-fontid="@text.FontId" data-Italic="@text.Italic" data-color="@text.ColorText.Trim()" value="@text.TextId" id="@item.TextBoxId">@text.TextContent</option>
 
                                                             }
                                                         }

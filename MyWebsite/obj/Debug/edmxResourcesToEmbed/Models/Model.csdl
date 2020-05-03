@@ -237,12 +237,12 @@
       <PropertyRef Name="TextId" />
     </Key>
     <Property Name="TextId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="TextContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="ColorText" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
-    <Property Name="ColorOutline" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="TextContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ColorText" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="ColorOutline" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
     <Property Name="Bold" Type="Boolean" Nullable="false" />
     <Property Name="Active" Type="Boolean" Nullable="false" />
-    <Property Name="Allow" Type="Boolean" Nullable="false" />
+    <Property Name="Allow" Type="Boolean" />
     <Property Name="TranslationId" Type="Int32" Nullable="false" />
     <Property Name="AccountId" Type="Int32" Nullable="false" />
     <Property Name="TextBoxId" Type="Int32" Nullable="false" />

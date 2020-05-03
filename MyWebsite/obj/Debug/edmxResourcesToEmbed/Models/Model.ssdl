@@ -210,12 +210,12 @@ warning 6002: The table/view 'MyWebsite.dbo.Bookmark' does not have a primary ke
       <PropertyRef Name="TextId" />
     </Key>
     <Property Name="TextId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="TextContent" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="ColorText" Type="nchar" MaxLength="10" Nullable="false" />
-    <Property Name="ColorOutline" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="TextContent" Type="nvarchar(max)" />
+    <Property Name="ColorText" Type="nchar" MaxLength="10" />
+    <Property Name="ColorOutline" Type="nchar" MaxLength="10" />
     <Property Name="Bold" Type="bit" Nullable="false" />
     <Property Name="Active" Type="bit" Nullable="false" />
-    <Property Name="Allow" Type="bit" Nullable="false" />
+    <Property Name="Allow" Type="bit" />
     <Property Name="TranslationId" Type="int" Nullable="false" />
     <Property Name="AccountId" Type="int" Nullable="false" />
     <Property Name="TextBoxId" Type="int" Nullable="false" />

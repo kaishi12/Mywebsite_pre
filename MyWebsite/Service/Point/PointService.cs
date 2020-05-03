@@ -12,13 +12,16 @@ namespace MyWebsite.Service.Point
         readonly MyWebsiteEntities data = new MyWebsiteEntities();
         public double CalculateTotalMainPoint(int Mangaid,int Pointid,int Accountid)
         {
-            var chapter = data.Chapters.Where(m => m.Active == true && m.MangaId == Mangaid).ToList();
+            
+            var chapter = data.Chapters.Where(m => m.Active == true && m.MangaId == Mangaid ).Select(m=>new { m.ChapterId ,m.ViewNumber}).ToList();
+            var tmp = chapter.Select(m => m.ChapterId);
+            var checks = data.Translation_Detail.Where(m => tmp.Any(temp => temp == m.ChapterId) && m.Active == true).Select(m=>m.ChapterId).ToList();
             var totalview = chapter.Sum(m => m.ViewNumber);
             var multiplepoint = data.Points.FirstOrDefault(m => m.PointId == Pointid).PointNumber;
             var point = totalview * multiplepoint;
             if(Pointid == (int)PointCode.DT)
             {
-                foreach(var chap in chapter)
+                foreach(var chap in checks)
                 {
                     point += CalculateTotalTranslatePoint(Accountid);
                 }
@@ -26,7 +29,7 @@ namespace MyWebsite.Service.Point
             else
             if (Pointid == (int)PointCode.UPClear)
             {
-                foreach (var chap in chapter)
+                foreach (var chap in checks)
                 {
                     point += CalculateTotalUploadPoint(Accountid);
                 }
@@ -37,6 +40,10 @@ namespace MyWebsite.Service.Point
         {
             var chapter = data.Chapters.SingleOrDefault(m => m.ChapterId == Chapterid);
             var totalview = chapter.ViewNumber;
+            if(data.Translation_Detail.SingleOrDefault(m=>m.ChapterId == Chapterid && m.Active == true) == null)
+            {
+                return 0;
+            }
             var multiplepoint = data.Points.FirstOrDefault(m => m.PointId == Pointid).PointNumber;
             var point = totalview * multiplepoint;
             if (Pointid == (int)PointCode.DT)
