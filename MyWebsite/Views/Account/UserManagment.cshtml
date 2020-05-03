@@ -159,7 +159,7 @@
                     </div>
                     <a href="" data-toggle="modal" data-target="#Info" class="btn btn-sm primary btn-rounded m-b">Cập nhật thông tin</a>
                     <a href="" data-toggle="modal" data-target="#Pass" class="btn btn-sm primary btn-rounded m-b">Cập nhật mật khẩu</a>
-                    <a class="btn btn-sm primary btn-rounded m-b" href="javascript:void(0);" onclick="javascript:introJs().start();">Show me how</a>
+                    
                 </div>
             </div>
 
@@ -169,41 +169,54 @@
 <div class="padding">
     <div class="row">
        
-        <div class="col-sm-8 col-lg-9">
+        <div class="col-sm-6 col-lg-6">
             
                 
 
 
               
+            <div class="row m-b">
+                <div class="col-xs-3">
+                    <small class="text-muted">Số điện thoại</small>
+                    <div class="_500">@accountModel.PhoneNumber</div>
+                </div>
+                <div class="col-xs-3">
+                    <small class="text-muted">Email</small>
+                    <div class="_500">@accountModel.Email</div>
+                </div>
+                <div class="col-xs-3">
+                    <small class="text-muted">Tổng điểm</small>
+                    <div id="TotalPoint" class="_500">0</div>
+                </div>
+                <div class="col-xs-3">
+                    <small class="text-muted">Vai trò chính</small>
+                    <div class="_500">Dịch truyện</div>
+                </div>
+            </div>
                     <div class="row m-b">
-                        <div class="col-xs-6">
-                            <small class="text-muted">Số điện thoại</small>
-                            <div class="_500">@accountModel.PhoneNumber</div>
+                        <div class="col-xs-3">
+                            <small class="text-muted">Quản lý truyện</small>
+                            <div class="_500" id="Qlt">0</div>
                         </div>
-                        <div class="col-xs-6">
-                            <small class="text-muted">Email</small>
-                            <div class="_500">@accountModel.Email</div>
+                        <div class="col-xs-3">
+                            <small class="text-muted">Dịch truyện</small>
+                            <div class="_500" id="Dt">0</div>
                         </div>
-                    </div>
-                    <div class="row m-b">
-                        <div class="col-xs-6">
-                            <small class="text-muted">Điểm</small>
-                            <div class="_500">1000</div>
+                        <div class="col-xs-3">
+                            <small class="text-muted">Tải trang clear-text</small>
+                            <div class="_500"  id="Upclear">0</div>
                         </div>
-                        <div class="col-xs-6">
-                            <small class="text-muted">Vai trò chính</small>
-                            <div class="_500">Dịch truyện</div>
+                        <div class="col-xs-3">
+                            <small class="text-muted">Quản lý bản dịch</small>
+                            <div class="_500"  id="Qlbd">0</div>
                         </div>
-                    </div>
-                    <div data-step="1" data-intro="ABC">
-                        <small class="text-muted">Ghi chú</small>
-                        <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi id neque quam. Aliquam sollicitudin venenatis ipsum ac feugiat. Vestibulum ullamcorper sodales nisi nec condimentum. Mauris convallis mauris at pellentesque volutpat. Phasellus at ultricies neque, quis malesuada augue.</div>
+
                     </div>
                
             
         </div>
         @*Truyện đã tham gia*@
-        <div class="col-sm-4 col-lg-3" data-step="3" data-intro="1">
+        <div class="col-sm-6 col-lg-6" >
             <div>
                 <div class="box black">
                     <div class="box-header">
@@ -274,7 +287,31 @@
 </div>
 
 
-<script src="~/LayoutUser/Account/UserManagment.js">
+<script src="~/LayoutUser/Account/UserManagment.js"></script>
+<script>
+     $(document).ready(function () {
+         GetPoint();
+           
 
+        });
+    function GetPoint() {
+            $.ajax({
+                type: 'GET',
+                url: '@Url.Action("GetPoint", "Point")',
+                success: function (result) {
+                    console.log(result);
+                    let total = result.dt + result.qlt + result.qlbd + result.upclear;
+                    $("#Qlt").text(result.qlt);
+                    $("#Dt").text(result.dt);
+                    $("#Qlbd").text(result.qlbd);
+                    $("#Upclear").text(result.upclear);
+                    $("#TotalPoint").text(total);
+
+                },
+                error: function (error) {
+                    alert("Có lỗi xảy ra, vui lòng thử lại", 1);
+                }
+            });
+        }
 </script>
 

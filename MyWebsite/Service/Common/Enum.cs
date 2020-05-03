@@ -13,7 +13,8 @@ namespace MyWebsite.Service.Common
     public static class Const
     {
         public const string HEAR_BEAT_MSG = "I'm still alive, DO NOT KILL ME!";
-        public const string conStr = "Data Source=LAPTOP-UFP2PSK0;Initial Catalog=MyWebsite;Integrated Security=True";
+        public const string conStr = "Data Source=DESKTOP-QU77M0A;Initial Catalog=MyWebsite;Integrated Security=True";
+        //public const string conStr = "Data Source=LAPTOP-UFP2PSK0;Initial Catalog=MyWebsite;Integrated Security=True";
         public const string sqlCommand = @"SELECT [NotificationId] from [dbo].[Notification] where [CreateAt] > @CreateAt";
     }
     //Cho table Manga_Detail
@@ -60,5 +61,28 @@ namespace MyWebsite.Service.Common
         Wait = 1,
         [Display(Name = "Đã được duyệt")]
         Accept = 2
+    }
+    public enum PointCode
+    {
+        [Display(Name = "Điểm dịch truyện")]
+        DT = 1,
+        [Display(Name = "Điểm quản lý bản dịch")]
+        QLBD = 2,
+        [Display(Name = "Điểm quản lý truyện")]
+        QLT = 3,
+        [Display(Name = "Điểm upload bản Clear-text")]
+        UPClear = 4,
+        [Display(Name = "Điểm quản lý truyện")]
+        ADT = 5,
+        [Display(Name = "Điểm upload bản Raw")]
+        AUPRAW = 6
+    }
+    public enum CategoriesPage
+    {
+        [Display(Name = "Trang raw")]
+        Raw = 1,
+        [Display(Name = "Trang cleartext")]
+        Clear = 2,
+      
     }
 }

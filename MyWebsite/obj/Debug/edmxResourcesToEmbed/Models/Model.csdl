@@ -222,16 +222,6 @@
     <Property Name="Active" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="Mangas" Relationship="Self.FK_Manga_Status" FromRole="Status" ToRole="Manga" />
   </EntityType>
-  <EntityType Name="sysdiagram">
-    <Key>
-      <PropertyRef Name="diagram_id" />
-    </Key>
-    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="principal_id" Type="Int32" Nullable="false" />
-    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="version" Type="Int32" />
-    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
-  </EntityType>
   <EntityType Name="Text">
     <Key>
       <PropertyRef Name="TextId" />
@@ -606,7 +596,6 @@
     <EntitySet Name="Points" EntityType="Self.Point" />
     <EntitySet Name="Roles" EntityType="Self.Role" />
     <EntitySet Name="Status" EntityType="Self.Status" />
-    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
     <EntitySet Name="Texts" EntityType="Self.Text" />
     <EntitySet Name="TextBoxes" EntityType="Self.TextBox" />
     <EntitySet Name="Translations" EntityType="Self.Translation" />
@@ -711,5 +700,17 @@
       <End Role="Account" EntitySet="Accounts" />
       <End Role="Manga" EntitySet="Mangas" />
     </AssociationSet>
+    <EntitySet Name="Documents" EntityType="MyWebsiteModel.Document" />
   </EntityContainer>
+  <EntityType Name="Document">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Order" Type="Int32" />
+    <Property Name="Text" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Active" Type="Boolean" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
 </Schema>

@@ -4,7 +4,13 @@
 }
 <!-- Bootstrap -->
 
-
+<style>
+    img{
+        max-width: 100%;
+        max-height: 100%;
+        display: block; /* remove extra space below image */
+    }
+</style>
 <div class="padding">
 
     <div class="m-b">
@@ -22,7 +28,7 @@
                 <div class="col-sm-3">
                     <div class=" form-file col-sm-10">
                         <div id="formupload" style="padding-bottom:10px;">
-                            <img id="Imganhbia" src="~/RootPicture/tenor.gif" style=" width:300px; height:400px;" />
+                            <img id="Imganhbia" src="~/RootPicture/tenor.gif"  />
                         </div>
                         <input hidden="hidden" type="file" id="AnhBia" name="AnhBia" class="form-control" onchange="readURL(this);" required>
                         <button type="button" class="btn btn-fw primary" id="uploadbutton">Chọn Ảnh Bìa</button>

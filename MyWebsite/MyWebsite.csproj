@@ -615,6 +615,13 @@
     <Content Include="Models\Model.edmx.diagram">
       <DependentUpon>Model.edmx</DependentUpon>
     </Content>
+    <EntityDeploy Include="Models\Model1Test.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Model1Test.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Model1Test.edmx.diagram">
+      <DependentUpon>Model1Test.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-1.6.4-vsdoc.js" />
     <Content Include="Models\Model.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -625,6 +632,16 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model.edmx</DependentUpon>
       <LastGenOutput>Model.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\Model1Test.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model1Test.edmx</DependentUpon>
+      <LastGenOutput>Model1Test.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\Model1Test.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model1Test.edmx</DependentUpon>
+      <LastGenOutput>Model1Test.cs</LastGenOutput>
     </Content>
     <Content Include="RootPicture\error-404.jpg" />
     <Content Include="RootPicture\Icons\manga-author.png" />
@@ -650,11 +667,13 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\ChapterController.cs" />
     <Compile Include="Controllers\ContributeController.cs" />
+    <Compile Include="Controllers\DocumentController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MangaController.cs" />
     <Compile Include="Controllers\NotificationController.cs" />
     <Compile Include="Controllers\PageController.cs" />
+    <Compile Include="Controllers\PointController.cs" />
     <Compile Include="Controllers\TranslationController.cs" />
     <Compile Include="DAO\DAOChapter.cs" />
     <Compile Include="Global.asax.cs">
@@ -670,6 +689,9 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Chapter.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Document.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Font.cs">
@@ -705,6 +727,21 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\Model1Test.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1Test.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Model1Test.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1Test.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Model1Test.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1Test.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Models\Notification.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -721,9 +758,6 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Status.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sysdiagram.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Text.cs">
@@ -755,6 +789,7 @@
     <Compile Include="Service\Manga\MangaGenreService.cs" />
     <Compile Include="Service\Manga\MangaService.cs" />
     <Compile Include="Service\Notification\NotificationService.cs" />
+    <Compile Include="Service\Point\PointService.cs" />
     <Compile Include="Service\Role\RoleService.cs" />
     <Compile Include="Service\TextBox\TextBoxService.cs" />
     <Compile Include="Service\Translation\TranslationService.cs" />
@@ -772,6 +807,7 @@
     <Compile Include="ViewModels\Language\LanguageModel.cs" />
     <Compile Include="ViewModels\Manga\MangaModel.cs" />
     <Compile Include="ViewModels\Notification\NotificationModel.cs" />
+    <Compile Include="ViewModels\Point\TotalPointModel.cs" />
     <Compile Include="ViewModels\TextBox\TextBoxModel.cs" />
     <Compile Include="ViewModels\Text\Text.cs" />
     <Compile Include="ViewModels\Translation\TranslationModel.cs" />
@@ -1058,6 +1094,8 @@
     <Content Include="Views\Home\GetLasted1Chapter.cshtml" />
     <Content Include="Views\Home\NewManga.cshtml" />
     <Content Include="Views\Home\KetQuaTimKiem.cshtml" />
+    <Content Include="Views\Point\Index.cshtml" />
+    <Content Include="Views\Document\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

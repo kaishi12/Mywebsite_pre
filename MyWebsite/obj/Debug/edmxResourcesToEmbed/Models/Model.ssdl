@@ -60,6 +60,17 @@ warning 6002: The table/view 'MyWebsite.dbo.Bookmark' does not have a primary ke
     <Property Name="MangaId" Type="int" Nullable="false" />
     <Property Name="Alias" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
+  <EntityType Name="Document">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Order" Type="int" />
+    <Property Name="Text" Type="nvarchar(max)" />
+    <Property Name="Image" Type="nvarchar(max)" />
+    <Property Name="Active" Type="bit" />
+    <Property Name="Name" Type="nvarchar(max)" />
+  </EntityType>
   <EntityType Name="Font">
     <Key>
       <PropertyRef Name="FontId" />
@@ -194,16 +205,6 @@ warning 6002: The table/view 'MyWebsite.dbo.Bookmark' does not have a primary ke
     <Property Name="StatusId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="FullName" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="Active" Type="bit" Nullable="false" />
-  </EntityType>
-  <EntityType Name="sysdiagrams">
-    <Key>
-      <PropertyRef Name="diagram_id" />
-    </Key>
-    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-    <Property Name="principal_id" Type="int" Nullable="false" />
-    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="version" Type="int" />
-    <Property Name="definition" Type="varbinary(max)" />
   </EntityType>
   <EntityType Name="Text">
     <Key>
@@ -574,6 +575,7 @@ warning 6002: The table/view 'MyWebsite.dbo.Bookmark' does not have a primary ke
     <EntitySet Name="Account_Detail" EntityType="Self.Account_Detail" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Chapter" EntityType="Self.Chapter" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Document" EntityType="Self.Document" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Font" EntityType="Self.Font" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Genre" EntityType="Self.Genre" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Language" EntityType="Self.Language" Schema="dbo" store:Type="Tables" />
@@ -586,7 +588,6 @@ warning 6002: The table/view 'MyWebsite.dbo.Bookmark' does not have a primary ke
     <EntitySet Name="Point" EntityType="Self.Point" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Status" EntityType="Self.Status" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Text" EntityType="Self.Text" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TextBox" EntityType="Self.TextBox" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Translation" EntityType="Self.Translation" Schema="dbo" store:Type="Tables" />
