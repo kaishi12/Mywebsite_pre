@@ -41,7 +41,7 @@
                             <th>Đường link</th>
                             <th>Mô tả</th>
                             <th>Trạng thái</th>
-                            <th>Type</th>
+                            
                         </tr>
                     </thead>
                     <tbody>
@@ -66,10 +66,7 @@
                                 <td class="center">
                                     @Html.DisplayFor(modelItem => item.Active)
                                 </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Type)
-
-                                </td>
+                                
                             </tr>
                         }
                     </tbody>
@@ -106,7 +103,7 @@
                             </label>
                             <div class="col-sm-8">
 
-                                <input name="fontupload" type="file" webkitdirectory mozdirectory class="form-control" />
+                                <input name="fontupload" type="file"  class="form-control" />
                             </div>
 
                         </div>

@@ -69,7 +69,6 @@ warning 6002: The table/view 'MyWebsite.dbo.Bookmark' does not have a primary ke
     <Property Name="FontLink" Type="nvarchar" MaxLength="200" Nullable="false" />
     <Property Name="Description" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="Active" Type="bit" Nullable="false" />
-    <Property Name="Type" Type="nvarchar" MaxLength="100" Nullable="false" />
   </EntityType>
   <EntityType Name="Genre">
     <Key>

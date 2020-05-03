@@ -57,7 +57,6 @@
     <EntitySetMapping Name="Fonts">
       <EntityTypeMapping TypeName="MyWebsiteModel.Font">
         <MappingFragment StoreEntitySet="Font">
-          <ScalarProperty Name="Type" ColumnName="Type" />
           <ScalarProperty Name="Active" ColumnName="Active" />
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="FontLink" ColumnName="FontLink" />

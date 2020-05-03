@@ -83,7 +83,6 @@ D:\Mywebsite_pre\MyWebsite\bin\System.Web.Webpages.Razor.xml
 D:\Mywebsite_pre\MyWebsite\bin\System.Web.Helpers.xml
 D:\Mywebsite_pre\MyWebsite\bin\System.Web.Mvc.xml
 D:\Mywebsite_pre\MyWebsite\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-D:\Mywebsite_pre\MyWebsite\obj\Debug\MyWebsite.csprojAssemblyReference.cache
 D:\Mywebsite_pre\MyWebsite\obj\Debug\MyWebsite.csproj.CopyComplete
 D:\Mywebsite_pre\MyWebsite\obj\Debug\MyWebsite.dll
 D:\Mywebsite_pre\MyWebsite\obj\Debug\MyWebsite.pdb

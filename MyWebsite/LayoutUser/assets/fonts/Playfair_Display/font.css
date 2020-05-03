@@ -1,38 +1,5 @@
 @font-face {
-  font-family: 'PlayfairDisplay';
-  font-style: normal;
-  font-weight: 400;
-   src: local('PlayfairDisplay'), local('PlayfairDisplay-Regular'), url(PlayfairDisplay-Regular.ttf) format('truetype');
-}
-@font-face {
-  font-family: 'PlayfairDisplay';
-  font-style: normal;
-  font-weight: 700;
-src: local('PlayfairDisplay Bold'), local('PlayfairDisplay-Bold'), url(PlayfairDisplay-Bold.ttf) format('truetype');
-}
-@font-face {
-  font-family: 'PlayfairDisplay';
-  font-style: italic;
-  font-weight: 400;
-   src: local('PlayfairDisplay Italic'), local('PlayfairDisplay-Regular'), url(PlayfairDisplay-Italic.ttf) format('truetype');
-}
-@font-face {
-  font-family: 'PlayfairDisplay';
-  font-style: italic;
-  font-weight: 700;
-src: local('PlayfairDisplay Bold Italic'), local('PlayfairDisplay-BoldItalic'), url(PlayfairDisplay-BoldItalic.ttf) format('truetype');
-}
-@font-face {
-  font-family: 'PlayfairDisplay';
-  font-style: normal;
-  font-weight: 900;
-   src: local('PlayfairDisplay Black'), local('PlayfairDisplay-Black'), url(PlayfairDisplay-Black.ttf) format('truetype');
-}
-@font-face {
-  font-family: 'PlayfairDisplay';
-  font-style: italic;
-  font-weight: 900;
-src: local('PlayfairDisplay Black Italic'), local('PlayfairDisplay-BlackItalic'), url(PlayfairDisplay-BlackItalic.ttf) format('truetype');
-}
+  font-family: 'MTO_Astro_City';
+   src:  url(300.woff) format('woff');
 
 

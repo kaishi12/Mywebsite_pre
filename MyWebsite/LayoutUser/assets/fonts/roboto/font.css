@@ -1,19 +1,10 @@
-@font-face {
-  font-family: 'Roboto';
-  font-style: normal;
-  font-weight: 700;
-  src: local('Roboto Bold'), local('Roboto-Bold'), url(700.woff) format('woff');
+@font-face{
+  font-family: MTO Astro City;
+  src: url(/LayoutUser/assets/fonts/roboto/MTO_Astro_City.ttf);
 }
-	@font-face {
-  font-family: 'Roboto';
-  font-style: normal;
-  font-weight: 300;
-  src: local('Roboto Light'), local('Roboto-Light'), url(300.woff) format('woff');
+@font-face{
+  font-family: AvegaeanceiCiel;
+  src: url(/LayoutUser/assets/fonts/roboto/000AvegaeanceiCiel-Regular.ttf);
 }
-@font-face {
-  font-family: 'Roboto';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Roboto'), local('Roboto-Regular'), url(400.woff) format('woff');
-}
+
 
