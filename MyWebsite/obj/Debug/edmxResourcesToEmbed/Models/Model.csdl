@@ -72,8 +72,8 @@
     <Property Name="FontLink" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="Active" Type="Boolean" Nullable="false" />
-    <Property Name="Type" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-    <NavigationProperty Name="Texts" Relationship="Self.FK_Text_Font" FromRole="Font" ToRole="Text" />
+
+    <NavigationProperty Name="Texts" Relationship="MyWebsiteModel.FK_Text_Font" FromRole="Font" ToRole="Text" />
   </EntityType>
   <EntityType Name="Genre">
     <Key>

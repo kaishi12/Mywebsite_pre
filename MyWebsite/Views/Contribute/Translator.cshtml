@@ -1,427 +1,421 @@
-﻿@model MyWebsite.Models.Page
+@model MyWebsite.Models.Page
 @{
-    ViewBag.Title = "PageDetail";
-    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+  ViewBag.Title = "PageDetail";
+  Layout = "~/Views/Shared/_LayoutUser.cshtml";
 }
 
 <link rel='stylesheet' id='fontawesome-css' href='https://use.fontawesome.com/releases/v5.0.1/css/all.css?ver=4.9.1' type='text/css' media='all' />
+<link rel="stylesheet" href="~/LayoutUser/assets/fonts/font.css" type="text/css" />
 <style>
-    #Fifteen {
-        display: inline-block;
-        background-color: rgba(255, 255, 255, .9);
-        border: 2px solid rgba(139, 139, 139, .3);
-        color: #adadad;
-        border-radius: 25px;
-        white-space: nowrap;
-        margin: 3px 0px;
-        -webkit-touch-callout: none;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-        -webkit-tap-highlight-color: transparent;
-        transition: all .2s;
+
+
+
+div {
+  font-family: 000AvegaeanceiCiel-Regular;
+}
+</style>
+<style>
+
+  #Fifteen {
+    display: inline-block;
+    background-color: rgba(255, 255, 255, .9);
+    border: 2px solid rgba(139, 139, 139, .3);
+    color: #adadad;
+    border-radius: 25px;
+    white-space: nowrap;
+    margin: 3px 0px;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    transition: all .2s;
+  }
+
+  #Fifteen {
+    padding: 8px 12px;
+    cursor: pointer;
+  }
+
+    #Fifteen::before {
+      display: inline-block;
+      font-style: normal;
+      font-variant: normal;
+      text-rendering: auto;
+      -webkit-font-smoothing: antialiased;
+      font-family: "Font Awesome 5 Free";
+      font-weight: 900;
+      font-size: 12px;
+      padding: 2px 6px 2px 2px;
+      content: "\f067";
+      transition: transform .3s ease-in-out;
     }
 
-    #Fifteen {
-        padding: 8px 12px;
-        cursor: pointer;
-    }
+  input[type="checkbox"]:checked + #Fifteen::before {
+    content: "\f00c";
+    transform: rotate(-360deg);
+    transition: transform .3s ease-in-out;
+  }
 
-        #Fifteen::before {
-            display: inline-block;
-            font-style: normal;
-            font-variant: normal;
-            text-rendering: auto;
-            -webkit-font-smoothing: antialiased;
-            font-family: "Font Awesome 5 Free";
-            font-weight: 900;
-            font-size: 12px;
-            padding: 2px 6px 2px 2px;
-            content: "\f067";
-            transition: transform .3s ease-in-out;
-        }
+  input[type="checkbox"]:checked + #Fifteen {
+    border: 2px solid #1bdbf8;
+    background-color: #12bbd4;
+    color: #fff;
+    transition: all .2s;
+  }
 
-    input[type="checkbox"]:checked + #Fifteen::before {
-        content: "\f00c";
-        transform: rotate(-360deg);
-        transition: transform .3s ease-in-out;
-    }
+  input[type="checkbox"] {
+    display: absolute;
+  }
 
-    input[type="checkbox"]:checked + #Fifteen {
-        border: 2px solid #1bdbf8;
-        background-color: #12bbd4;
-        color: #fff;
-        transition: all .2s;
-    }
+  input[type="color"] {
+    display: absolute;
+  }
 
-    input[type="checkbox"] {
-        display: absolute;
-    }
+  input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+  }
 
-    input[type="color"] {
-        display: absolute;
-    }
-
-    input[type="checkbox"] {
-        position: absolute;
-        opacity: 0;
-    }
-
-    input[type="color"] {
-        position: absolute;
-        opacity: 0;
-    }
+  input[type="color"] {
+    position: absolute;
+    opacity: 0;
+  }
 </style>
 <div class="padding">
-    <div class="m-b primary ">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="/Account/Home">Trang chủ</a></li>
-            <li class="breadcrumb-item"><a href="/TranslatorList">Danh sách truyện dịch</a></li>
-            <li class="breadcrumb-item active">Dịch truyện</li>
-        </ol>
+  <div class="m-b primary ">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="/Account/Home">Trang chủ</a></li>
+      <li class="breadcrumb-item"><a href="/TranslatorList">Danh sách truyện dịch</a></li>
+      <li class="breadcrumb-item active">Dịch truyện</li>
+    </ol>
+  </div>
+  <div class="box black">
+    <div class="box-header primary">
+      <h2 style="font-family: myFirstFont">@ViewBag.MangaFullName</h2>
     </div>
-    <div class="box black" >
-        <div class="box-header primary">
-            <h2>@ViewBag.MangaFullName</h2>
-        </div>
-        <div class="box-body m-b">
-            <div class="row">
-                <div class="col-sm-4" style="padding-bottom:10px;padding-left:0px">
-                    <div class="form-group row">
-                        <label class="col-sm-2 form-control-label">
-                            <span>Chương:</span>
-                        </label>
-                        <div class="col-sm-8">
-                            <select class="form-control c-select" id="SelectChapter" name="SelectChapter">
-                                @foreach (var item in ViewBag.chapterlist)
-                                {
-                                    if (ViewBag.ChapterId != null && ViewBag.ChapterId == item.ChapterId)
-                                    {
-                                        <option selected value="@item.ChapterId">@item.FullName</option>
-                                    }
-                                    else
-                                    {
-                                        <option value="@item.ChapterId">@item.FullName</option>
-                                    }
-                                }
-                            </select>
-                        </div>
-
-                    </div>
-
-                </div>
-                <div class="col-sm-4" style="padding-bottom:10px;padding-left:0px">
-                    <div class="form-group row">
-                        <label class="col-sm-2 form-control-label">
-                            <span>Trang:</span>
-                        </label>
-                        <div class="col-sm-8">
-                            <select class="form-control c-select" id="SelectPage" name="SelectPage">
-                                @foreach (var item in ViewBag.listpage)
-                                {
-                                    if (item.Key == Model.PageId)
-                                    {
-                                        <option style="color:black" selected value="@item.Key">@item.Value</option>
-                                    }
-                                    else
-                                    {
-                                        <option style="color:black" value="@item.Key">@item.Value</option>
-                                    }
-                                }
-                            </select>
-                        </div>
-
-                    </div>
-
-                </div>
-                <div class="col-sm-4" style="padding-bottom:10px;padding-left:0px">
-                    <div class="form-group row">
-                        <label class="col-sm-3 form-control-label">
-                            <span>Ngôn ngữ:</span>
-                        </label>
-                        <div class="col-sm-8">
-                            <select class="form-control c-select" id="SelectLanguage" name="SelectLanguage">
-                                @foreach (var item in ViewBag.Language)
-                                {
-                                    if (ViewBag.TranslationId != null && ViewBag.TranslationId == item.TransationId)
-                                    {
-                                        <option style="color:black" selected value="@item.TransationId">@item.Language.FullName</option>
-                                    }
-                                    else
-                                    {
-                                        <option style="color:black" value="@item.TransationId">@item.Language.FullName</option>
-                                    }
-
-
-                                }
-                            </select>
-                        </div>
-
-                    </div>
-
-                </div>
+    <div class="box-body m-b">
+      <div class="row">
+        <div class="col-sm-4" style="padding-bottom:10px;padding-left:0px">
+          <div class="form-group row">
+            <label class="col-sm-2 form-control-label">
+              <span>Chương:</span>
+            </label>
+            <div class="col-sm-8">
+              <select class="form-control c-select" id="SelectChapter" name="SelectChapter">
+                @foreach (var item in ViewBag.chapterlist)
+                {
+                  if (ViewBag.ChapterId != null && ViewBag.ChapterId == item.ChapterId)
+                  {
+                    <option selected value="@item.ChapterId">@item.FullName</option>
+                  }
+                  else
+                  {
+                    <option value="@item.ChapterId">@item.FullName</option>
+                  }
+                }
+              </select>
             </div>
 
-            <div class="row">
-                <div class="col-sm-6">
-                    <div class="box primary">
-                        <div class="box-header primary"style="text-align:center">
-                            <div style="display:inline-block">
-                                <span class="col-sm-2"><button class="btn btn-danger " id="buttonRaw">RAW</button></span>
+          </div>
 
-                                <span class="col-sm-2"><button class="btn btn-danger " id="buttonClearText">Clear-Text</button></span>
-                                <span class="col-sm-2"><button class="btn btn-danger dropdown-toggle" id="buttonLanguage">Ngôn ngữ</button></span>
-                            </div>
-                            
-                        </div>
-                        <div class="box-divider"></div>
-                        <div class="box-body primary" style="text-align:center;margin:0px" id="DivCanvas">
-                            <div style="display:none" id="bybtnLanguage" class="row">
-                                @foreach (var item in ViewBag.Language)
-                                {
-                                    if (ViewBag.TranslationId != null && ViewBag.TranslationId == item.TransationId)
-                                    {
-                                        <label data-translationId="@item.TransationId" class="labellanguage form-control col-sm-4 primary">@item.Language.FullName </label>
-                                    }
-                                    else
-                                    {
-                                        <label data-translationId="@item.TransationId" class="labellanguage form-control col-sm-4">@item.Language.FullName</label>
-                                    }
+        </div>
+        <div class="col-sm-4" style="padding-bottom:10px;padding-left:0px">
+          <div class="form-group row">
+            <label class="col-sm-2 form-control-label">
+              <span>Trang:</span>
+            </label>
+            <div class="col-sm-8">
+              <select class="form-control c-select" id="SelectPage" name="SelectPage">
+                @foreach (var item in ViewBag.listpage)
+                {
+                  if (item.Key == Model.PageId)
+                  {
+                    <option style="color:black" selected value="@item.Key">@item.Value</option>
+                  }
+                  else
+                  {
+                    <option style="color:black" value="@item.Key">@item.Value</option>
+                  }
+                }
+              </select>
+            </div>
+
+          </div>
+
+        </div>
+        <div class="col-sm-4" style="padding-bottom:10px;padding-left:0px">
+          <div class="form-group row">
+            <label class="col-sm-3 form-control-label">
+              <span>Ngôn ngữ:</span>
+            </label>
+            <div class="col-sm-8">
+              <select class="form-control c-select" id="SelectLanguage" name="SelectLanguage">
+                @foreach (var item in ViewBag.Language)
+                {
+                  if (ViewBag.TranslationId != null && ViewBag.TranslationId == item.TransationId)
+                  {
+                    <option style="color:black" selected value="@item.TransationId">@item.Language.FullName</option>
+                  }
+                  else
+                  {
+                    <option style="color:black" value="@item.TransationId">@item.Language.FullName</option>
+                  }
 
 
-                                }
+                }
+              </select>
+            </div>
 
-                            </div>
-                            <img id="PageRaw" hidden src="~/PageLink/@Model.PageLink" />
-                            @if (ViewBag.PageClear != null)
+          </div>
+
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="box primary">
+            <div class="box-header primary" style="text-align: center ">
+              <div style="display:inline-block">
+                <span class="col-sm-2"><button class="btn btn-danger " id="buttonRaw">RAW</button></span>
+
+                <span class="col-sm-2"><button class="btn btn-danger " id="buttonClearText">Clear-Text</button></span>
+                <span class="col-sm-2"><button class="btn btn-danger dropdown-toggle" id="buttonLanguage">Ngôn ngữ</button></span>
+              </div>
+
+            </div>
+            <div class="box-divider"></div>
+            <div class="box-body primary" style="text-align:center;margin:0px" id="DivCanvas">
+              <div style="display:none" id="bybtnLanguage" class="row">
+                @foreach (var item in ViewBag.Language)
+                {
+                  if (ViewBag.TranslationId != null && ViewBag.TranslationId == item.TransationId)
+                  {
+                    <label data-translationId="@item.TransationId" class="labellanguage form-control col-sm-4 primary">@item.Language.FullName </label>
+                  }
+                  else
+                  {
+                    <label data-translationId="@item.TransationId" class="labellanguage form-control col-sm-4">@item.Language.FullName</label>
+                  }
+
+
+                }
+
+              </div>
+              <img id="PageRaw" hidden src="~/PageLink/@Model.PageLink" />
+              @if (ViewBag.PageClear != null)
+              {
+                <img id="girl" hidden src="~/PageLink/@ViewBag.PageClear.PageLink" />
+              }
+              else
+              {
+                <img id="girl" hidden src="~/PageLink/@Model.PageLink" />
+              }
+              <canvas id="canvas">
+
+                Your browser does not support the HTML5 canvas tag.
+              </canvas>
+              <input hidden value="@Model.PageId" id="PageId" />
+              <input hidden value="@ViewBag.TranslationId" id="TranslationId" />
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-6">
+          <div class="box ">
+            <div class="box-header primary">
+              <h3>Danh sách khung</h3>
+              <div class="box-tool">
+                <ul class="nav">
+                  <li class="nav-item inline">
+                    <a class="nav-link">
+                      <i onclick="LoadTable(0)" class="material-icons md-24"></i>
+                    </a>
+
+                  </li>
+
+                  <li class="nav-item inline">
+
+                    <a class="nav-link">
+                      <i id="AddText" style="display:none" onclick="Save()" class="material-icons md-24">&#xe161;</i>
+                    </a>
+
+                  </li>
+                </ul>
+              </div>
+
+            </div>
+            <div class="table-responsive">
+              <table class="table table-bordered m-0 black" id="tblEntAttributes">
+
+                <thead>
+                  <tr>
+                    <th>#</th>
+
+                    <th>
+                      Lời thoại
+                    </th>
+                    <th>
+
+                    </th>
+
+                  </tr>
+                </thead>
+
+
+                <tbody>
+
+                  @if (ViewBag.TextBox != null)
+                  {
+
+                    int count = 1;
+
+                    foreach (var item in ViewBag.TextBox)
+                    {
+
+                      var Cor = item.Coordinate.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+                      if (item.Texts.Count > 0)
+                      {
+                        foreach (var Text in item.Texts)
+                        {
+
+                          <tr class="Default">
+                            <td class="Att Default" data-TextId="@Text.TextId" data-attDe="@item.Degree" data-attX="@Cor[0]" data-attY="@Cor[1]" data-attW="@item.Witdh" data-attH="@item.Height"><span class="form-control">@count</span> </td>
+                            @if (ViewBag.Block != null || Text.Active == false)
                             {
-                                <img id="girl" hidden src="~/PageLink/@ViewBag.PageClear.PageLink" />
+                              <td><input disabled value="@Text.TextContent" class="attText Default form-control" /></td>
+                              <td>
+                                <button disabled data-bold="@Text.Bold" data-size="@Text.FontSize" data-font="@Text.Font.FullName" data-fontid="@Text.FontId" data-Italic="@Text.Italic" data-color="@Text.ColorText" value="@item.TextBoxId" id="@item.TextBoxId" class="clickbutton Default btn btn-fw danger"><i class="fas fa-cog"></i></button>
+                              </td>
                             }
                             else
                             {
-                                <img id="girl" hidden src="~/PageLink/@Model.PageLink" />
+                              <td><input value="@Text.TextContent" class="attText Default form-control" /></td>
+                              <td>
+                                <button data-bold="@Text.Bold" data-size="@Text.FontSize" data-font="@Text.Font.FullName" data-fontid="@Text.FontId" data-Italic="@Text.Italic" data-color="@Text.ColorText" value="@item.TextBoxId" id="@item.TextBoxId" class="clickbutton Default btn btn-fw danger" data-toggle="modal" data-target="#m-a-f"><i class="fas fa-cog fa-spin"></i></button>
+                              </td>
                             }
-                            <canvas id="canvas">
+                            @if (Text.Allow == false)
+                            {
+                              <td class="AttAllow"><span class="form-control"><i class="fa fa-close fa-lg" style="color:red"></i></span></td>
+                            }
+                            else
+                            {
+                              <td class="AttAllow"><span class="form-control"><i class="fa fa-check-square fa-lg" style="color:teal"></i></span></td>
 
-                                Your browser does not support the HTML5 canvas tag.
-                            </canvas>
-                            <input hidden value="@Model.PageId" id="PageId" />
-                            <input hidden value="@ViewBag.TranslationId" id="TranslationId" />
-                        </div>
-                    </div>
-                </div>
+                            }
+                          </tr>
 
-                <div class="col-sm-6">
-                    <div class="box ">
-                        <div class="box-header primary">
-                            <h3>Danh sách khung</h3>
-                            <div class="box-tool">
-                                <ul class="nav">
-                                    <li class="nav-item inline">
-                                        <a class="nav-link">
-                                            <i onclick="LoadTable(0)" class="material-icons md-24"></i>
-                                        </a>
+                        }
 
-                                    </li>
+                      }
+                      else
 
-                                    <li class="nav-item inline">
+                      {
+                        <tr class="New">
+                          <td class="Att New" data-attDe="@item.Degree" data-attX="@Cor[0]" data-attY="@Cor[1]" data-attW="@item.Witdh" data-attH="@item.Height"><span class="form-control">@count</span> </td>
+                          @if (ViewBag.Block != null)
+                          {
+                            <td><input disabled class="attText New form-control" /></td>
+                            <td>
+                              <button disabled value="@item.TextBoxId" id="@item.TextBoxId" class="clickbutton btn btn-fw danger" data-toggle="modal" data-target="#m-a-f"><i class="fas fa-cog fa-spin"></i></button>
+                            </td>
+                          }
+                          else
+                          {
+                            <td><input class="attText New form-control" /></td>
+                            <td>
+                              <button value="@item.TextBoxId" id="@item.TextBoxId" class="clickbutton btn btn-fw danger" data-toggle="modal" data-target="#m-a-f"><i class="fas fa-cog fa-spin"></i></button>
+                            </td>
+                          }
+                          <td style="width:50px" class="AttAllow">Chưa dịch</td>
+                        </tr>
+                      }
 
-                                        <a class="nav-link">
-                                            <i id="AddText" style="display:none" onclick="Save()" class="material-icons md-24">&#xe161;</i>
-                                        </a>
-
-                                    </li>
-                                </ul>
-                            </div>
-
-                        </div>
-                        <div class="table-responsive">
-                            <table class="table table-bordered m-0 black" id="tblEntAttributes">
-
-                                <thead>
-                                    <tr>
-                                        <th>#</th>
-
-                                        <th>
-                                            Lời thoại
-                                        </th>
-                                        <th>
-
-                                        </th>
-
-                                    </tr>
-                                </thead>
-
-
-                                <tbody>
-
-                                    @if (ViewBag.TextBox != null)
-                                    {
-
-                                        int count = 1;
-
-                                        foreach (var item in ViewBag.TextBox)
-                                        {
-
-                                            var Cor = item.Coordinate.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
-                                            if (item.Texts.Count > 0)
-                                            {
-                                                foreach (var Text in item.Texts)
-                                                {
-
-                                                    <tr class="Default">
-                                                        <td class="Att Default" data-TextId="@Text.TextId" data-attDe="@item.Degree" data-attX="@Cor[0]" data-attY="@Cor[1]" data-attW="@item.Witdh" data-attH="@item.Height"><span class="form-control">@count</span> </td>
-                                                        @if (ViewBag.Block != null || Text.Active == false)
-                                                        {
-                                                            <td><input disabled value="@Text.TextContent" class="attText Default form-control"  /></td>
-                                                            <td>
-                                                                <button disabled data-bold="@Text.Bold" data-size="@Text.FontSize" data-font="@Text.Font.FullName" data-fontid="@Text.FontId" data-Italic="@Text.Italic" data-color="@Text.ColorText" value="@item.TextBoxId" id="@item.TextBoxId" class="clickbutton Default btn btn-fw danger"><i class="fas fa-cog"></i></button>
-                                                            </td>
-                                                        }
-                                                        else
-                                                        {
-                                                            <td><input value="@Text.TextContent" class="attText Default form-control" /></td>
-                                                            <td>
-                                                                <button data-bold="@Text.Bold" data-size="@Text.FontSize" data-font="@Text.Font.FullName" data-fontid="@Text.FontId" data-Italic="@Text.Italic" data-color="@Text.ColorText" value="@item.TextBoxId" id="@item.TextBoxId" class="clickbutton Default btn btn-fw danger" data-toggle="modal" data-target="#m-a-f"><i class="fas fa-cog fa-spin"></i></button>
-                                                            </td>
-                                                        }
-                                                        @if (Text.Allow == false)
-                                                        {
-                                                            <td  class="AttAllow"><span class="form-control"><i class="fa fa-close fa-lg"style="color:red"></i></span></td>
-                                                        }
-                                                        else
-                                                        {
-                                                            <td  class="AttAllow"><span class="form-control"><i class="fa fa-check-square fa-lg"style="color:teal"></i></span></td>
-
-                                                        }
-                                                    </tr>
-
-                                                }
-
-                                            }
-                                            else
-
-                                            {
-                                                <tr class="New">
-                                                    <td class="Att New" data-attDe="@item.Degree" data-attX="@Cor[0]" data-attY="@Cor[1]" data-attW="@item.Witdh" data-attH="@item.Height"><span class="form-control">@count</span> </td>
-                                                    @if (ViewBag.Block != null)
-                                                    {
-                                                        <td><input disabled class="attText New form-control"  /></td>
-                                                        <td>
-                                                            <button disabled value="@item.TextBoxId" id="@item.TextBoxId" class="clickbutton btn btn-fw danger" data-toggle="modal" data-target="#m-a-f"><i class="fas fa-cog fa-spin"></i></button>
-                                                        </td>
-                                                    }
-                                                    else
-                                                    {
-                                                        <td><input class="attText New form-control"  /></td>
-                                                        <td>
-                                                            <button value="@item.TextBoxId" id="@item.TextBoxId" class="clickbutton btn btn-fw danger" data-toggle="modal" data-target="#m-a-f"><i class="fas fa-cog fa-spin"></i></button>
-                                                        </td>
-                                                    }
-                                                    <td style="width:50px" class="AttAllow">Chưa dịch</td>
-                                                </tr>
-                                            }
-
-                                            count++;
-                                        }
-                                    }
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-
-                </div>
+                      count++;
+                    }
+                  }
+                </tbody>
+              </table>
             </div>
+          </div>
+
         </div>
+      </div>
     </div>
-    <div id="m-a-f" class="modal fade" data-backdrop="true" style="display: none;" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Tùy chỉnh thoại</h5>
-                </div>
-                <div class="modal-body">
-                    <form>
-
-
-                        <div class="form-group row">
-                            <div class="col-sm-5">
-
-                                <label class=" form-control-label">
-                                    <span>Font</span>
-                                    <span style="color:red">(*)</span>
-                                </label>
-
-                                <select id="Font" class="form-control select2-bootstrap-append">
-                                    @*@foreach (var item in ViewBag.Font)
-                                    {
-                                        <option value="@(item.FontId+ ";" + item.Type)">@item.FullName</option>
-                                    }*@
-                                    <option value="123">Roboto</option>
-                                </select>
-
-                            </div>
-                            <div class="col-sm-4">
-
-                                <label class=" form-control-label">
-                                    <span>Độ đậm</span>
-                                    <span style="color:red">(*)</span>
-                                </label>
-
-                                <select id="SelectBold" class="form-control select2-bootstrap-append">
-                                    @*@{
-
-                                        foreach (var item in ViewBag.FirstFontType)
-                                        {
-                                            <option>@item</option>
-                                        }
-                                    }*@
-
-                                </select>
-
-                            </div>
-                            <div class="col-sm-3">
-
-                                <label class=" form-control-label">
-                                    <span>Cỡ chữ</span>
-                                    <span style="color:red">(*)</span>
-                                </label>
-
-                                <input value="24" id="Size" type="number" class="form-control" />
-
-                            </div>
-
-                        </div>
-
-                        <div class="form-group row">
-                            <div class="col-sm-3">
-                                <input type="checkbox" id="SelectItalic"><label class="star" id="Fifteen" for="SelectItalic">Độ Nghiên</label>
-                            </div>
-                            <div class="col-sm-3">
-                                <input type="checkbox" id="SelectOutLine"><label id="Fifteen" for="SelectOutLine">Viền ngoài</label>
-                            </div>
-                            <div class="col-sm-3">
-                                <input type="color" id="SelectColor"><label id="Fifteen" for="SelectColor">Màu chữ</label>
-                            </div>
-                        </div>
-                    </form>
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn dark-white p-x-md" data-dismiss="modal">Hủy</button>
-                    <button data-Id="1" id="Join" type="button" class="btn danger p-x-md" data-dismiss="modal">Áp dụng</button>
-                </div>
-            </div><!-- /.modal-content -->
+  </div>
+  <div id="m-a-f" class="modal fade" data-backdrop="true" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Tùy chỉnh thoại</h5>
         </div>
+        <div class="modal-body">
+          <form>
+
+
+            <div class="form-group row">
+              <div class="col-sm-5">
+
+                <label class=" form-control-label">
+                  <span>Font</span>
+                  <span style="color:red">(*)</span>
+                </label>
+
+                <select id="Font" class="form-control select2-bootstrap-append">
+                  @foreach (var item in ViewBag.Font)
+                  {
+                    <option value="@item.FontId">@item.FullName</option>
+                  }
+
+                </select>
+
+              </div>
+             
+              <div class="col-sm-3">
+
+                <label class=" form-control-label">
+                  <span>Cỡ chữ</span>
+                  <span style="color:red">(*)</span>
+                </label>
+
+                <input value="24" id="Size" type="number" class="form-control" />
+
+              </div>
+
+            </div>
+
+            <div class="form-group row">
+              <div class="col-sm-3">
+                <input type="color" id="SelectColor"><label id="Fifteen" for="SelectColor">Màu chữ</label>
+              </div>
+              <div class="col-sm-2">
+                <input type="checkbox" id="SelectBold"><label class="star" id="Fifteen" for="SelectBold">Đậm</label>
+              </div>
+              <div class="col-sm-2">
+                <input type="checkbox" id="SelectItalic"><label class="star" id="Fifteen" for="SelectItalic">Nghiên</label>
+              </div>
+
+
+            </div>
+          </form>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn dark-white p-x-md" data-dismiss="modal">Hủy</button>
+          <button data-Id="1" id="Join" type="button" class="btn danger p-x-md" data-dismiss="modal">Áp dụng</button>
+        </div>
+      </div><!-- /.modal-content -->
     </div>
+  </div>
 </div>
 <!--<canvas hidden id="canvas1" width="1000" height="1000" style="border:1px solid #000000;">
     Your browser does not support the HTML5 canvas tag.
 </canvas>-->
 
 
-    <script src="~/LayoutUser/Page/Translator.js"></script>
+<script src="~/LayoutUser/Page/Translator.js"></script>
 
 
 

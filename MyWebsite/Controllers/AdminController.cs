@@ -1,4 +1,4 @@
-﻿using MyWebsite.Models;
+using MyWebsite.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -22,35 +22,31 @@ namespace MyWebsite.Controllers
             return View(listfont);
         }
         [HttpPost]
-        public ActionResult Addfont(string fontname,HttpPostedFileBase[] fontupload)
+        public ActionResult Addfont(string fontname, HttpPostedFileBase fontupload)
         {
-           
-            var foldername = @"~/LayoutUser/assets/fonts/" + fontname;
-            var pathfolder = Path.Combine(Server.MapPath("~/LayoutUser/assets/fonts"), fontname);
-            System.IO.Directory.CreateDirectory(pathfolder);
+
+
+            using (System.IO.StreamWriter file = new System.IO.StreamWriter(Server.MapPath("~/LayoutUser/assets/fonts/font.css"), true))
+            {
+                file.WriteLine("@font-face{font-family: " + fontname + ";src:url(/LayoutUser/assets/fonts/" + Path.GetFileName(fontupload.FileName.Replace(" ","-")) + ");}");
+            }
+
+
+
+
             Font font = new Font();
-            font.FontLink =   "/" + fontname + "/font.css";
+            font.FontLink = "/" + fontname + "/font.css";
             font.FullName = fontname;
             font.Active = true;
-            string Type = "";
-            foreach (var item in fontupload)
-            {
-                var filename = Path.GetFileName(item.FileName);
-               var path = Path.Combine(Server.MapPath(foldername), filename);
-                item.SaveAs(path);
-               
-                if(!filename.Contains("Italic") && !filename.Contains("font"))
-                {
-                    Type += filename.Replace(".ttf", "") + ";";
-                }
-            }
-            
-            font.Type = Type.Remove(Type.Length - 1);
+            font.Description = "nothing";
+            var filename = Path.GetFileName(fontupload.FileName.Replace(" ", "-"));
+            var path = Path.Combine(Server.MapPath("~/LayoutUser/assets/fonts"), filename);
+            fontupload.SaveAs(path);
             data.Fonts.Add(font);
             data.SaveChanges();
             return RedirectToAction("ListFont");
-            
-            
+
+
         }
     }
 }

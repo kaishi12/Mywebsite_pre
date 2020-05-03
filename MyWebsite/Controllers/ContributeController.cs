@@ -140,7 +140,7 @@ namespace MyWebsite.Controllers
             ViewBag.TextBox = textBoxes;
             ViewBag.Text = listtext;
             ViewBag.listpage = dict;
-            //ViewBag.FirstFontType = fonts.First().Type.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+           
             ViewBag.PageClear = data.Pages.SingleOrDefault(p => p.PageId_Fa == PageId && p.Active == true);
             ViewBag.chapterlist = chapterlist;
             return View(Firstpage);
@@ -173,10 +173,10 @@ namespace MyWebsite.Controllers
                         if (item.Active)
                         {
                             item.FontId = data.Fonts.FirstOrDefault().FontId;
-                            item.ColorText = "red";
-                            item.Bold = true;
-                            item.Italic = true;
-                            item.FontSize = 24;
+                            item.ColorText = item.ColorText;
+                            item.Bold = item.Bold;
+                            item.Italic = item.Italic;
+                            item.FontSize = item.FontSize;
                         }
                         item.AccountId = accountModel.AccountId;
                         data.Texts.Add(item);

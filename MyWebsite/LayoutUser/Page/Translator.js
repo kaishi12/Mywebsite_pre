@@ -62,7 +62,7 @@ function LoadText(result) {
     ctx1.drawImage(img, 0, 0, img.width, img.height, 0, 0, canvas.width, canvas.height);
     for (let i = 0; i < result.length ; i++)
     {
-       
+      console.log("loadtext");
         count++;
         let CorX = result[i].CorX / scale;
         let CorY = result[i].CorY / scale;
@@ -81,7 +81,7 @@ function LoadText(result) {
     }
 
 }
-window.onload = function () {
+$(document).ready(function ()  {
 
     img = document.getElementById("girl");
     img1 = document.getElementById("PageRaw");
@@ -111,7 +111,7 @@ window.onload = function () {
         LoadTable(1);
     }
     //LoadTable();
-}
+})
 function DrawImg() {
     count = 0;
     ctx.drawImage(img, 0, 0, img.width, img.height, 0, 0, canvas.width, canvas.height);
@@ -126,8 +126,11 @@ function RotateRec(status, cete, X, Y, W, H, degrees, cx, cy, text, font, outlin
     if (italic == 1) {
         fontTextBox += "Italic ";
     }
+  if (bold == 1) {
+    fontTextBox += "bold ";
+  }
     let size1 = 24 / scale;
-    fontTextBox += bold + " " + size / scale + "px " + font;
+  fontTextBox +=  size / scale + "px " + font;
  cete.save();
     cete.translate(cx, cy);              //translate to center of shape
     cete.rotate(degrees);  //rotate 25 degrees.
@@ -135,8 +138,8 @@ function RotateRec(status, cete, X, Y, W, H, degrees, cx, cy, text, font, outlin
     //translate center back to 0,0
     cete.setLineDash([3]);
     cete.strokeRect(X, Y, W, H);
-    cete.font = size1 + "px PlayfairDisplay";
-    cete.fillStyle = "red";
+    cete.font =  "20px MTO Astro City";
+    cete.fillStyle = "black";
     cete.fillText("#" + count, X, Y);
     if (status == 1) {
         paint_centered_wrap(cete, X, Y, W, H, text, fontTextBox, 12, 2, color);
@@ -239,12 +242,14 @@ function LoadTable(status) {
         let CorW = parseInt($(".Att", b).attr("data-attW")) / scale;
         let CorH = parseInt($(".Att", b).attr("data-attH")) / scale;
         let De = parseInt($(".Att", b).attr("data-attDe")) * (Math.PI / 180);
-        bold = parseInt($(".clickbutton", b).data("bold"));
-        size = parseInt($(".clickbutton", b).data("size"));
+       size = parseInt($(".clickbutton", b).data("size"));
+      
         font = $(".clickbutton", b).data("font");
         color = $(".clickbutton", b).data("color");
-
-        italic = parseInt($(".clickbutton", b).data("italic"));
+     
+      italic = $(".clickbutton", b).data("italic") == "True" ? 1 : 0;
+      bold = $(".clickbutton", b).data("bold") == "True" ? 1 : 0;
+      console.log(bold);
         let cx = CorX + 0.5 * CorW;   // x of shape center
         let cy = CorY + 0.5 * CorH;
 
@@ -322,13 +327,19 @@ $("#Font").on("change", function () {
     }
 })
 $(".clickbutton").on("click", function () {
-    $('#Join').attr("data-Id", $(this).attr("id"));
-
+  $("#Size").val($(this).data("size"));
+  $("#Font").val($(this).data("fontid")).change();
+  $('#Join').attr("data-Id", $(this).attr("id"));
+  $(this).data("italic") == "True" ? document.getElementById("SelectItalic").checked = true : document.getElementById("SelectItalic").checked = false;
+  $(this).data("bold") == "True" ? document.getElementById("SelectBold").checked = true : document.getElementById("SelectBold").checked = false;
+  $("#SelectColor").next().css("background-color", $(this).data("color").trim());
 })
 $("#Join").on("click", function () {
+  
+  console.log(document.getElementById("SelectColor").value);
     flagChange = true;
     CheckChange();
-    let text = $("#Font").val().trim().split(";")[0];
+    let text = $("#Font").val().trim();
 
     let id = "#" + $(this).attr("data-id");
     if ($(id).hasClass("Default")) {
@@ -342,40 +353,31 @@ $("#Join").on("click", function () {
     }
     $(id).data("fontid", text);
     $(id).data("font", $("#Font :selected").text());
-    $(id).data("bold", $("#SelectBold :selected").text());
+    
     $(id).data("size", $("#Size").val());
     $(id).data("color", $("#SelectColor").val());
     if ($("#SelectItalic").is(":checked") == true) {
-        $(id).data("italic", 1);
+        $(id).data("italic", "True");
     }
     else {
-        $(id).data("italic", 0);
+        $(id).data("italic", "False");
     }
+  if ($("#SelectBold").is(":checked") == true) {
+    $(id).data("bold", "True");
+  }
+  else {
+    $(id).data("bold", "False");
+  }
     if ($("#SelectOutLine").attr("checked") == true) {
-        $(id).data("outline", 1);
+        $(id).data("outline", "True");
     }
     else {
-        $(id).data("outline", 0);
+        $(id).data("outline", "False");
     }
 
 
     LoadTable(1);
 })
-function loadjscssfile(filename, filetype) {
-    if (filetype == "js") { //if filename is a external JavaScript file
-        var fileref = document.createElement('script')
-        fileref.setAttribute("type", "text/javascript")
-        fileref.setAttribute("src", filename)
-    }
-    else if (filetype == "css") { //if filename is an external CSS file
-        var fileref = document.createElement("link")
-        fileref.setAttribute("rel", "stylesheet")
-        fileref.setAttribute("type", "text/css")
-        fileref.setAttribute("href", filename)
-    }
-    if (typeof fileref != "undefined")
-        document.getElementsByTagName("head")[0].appendChild(fileref)
-}
 $("#SelectColor").on("change", function () {
     $(this).next().css("border", "2px solid #1bdbf8")
         .css("background-color", $(this).val())
@@ -394,15 +396,15 @@ function Save() {
             $(this).removeClass("New");
             $(this).addClass("Default");
         Text.ColorText = row.find("td").eq(2).find("button").eq(0).data("color");
-        Text.Bold = +row.find("td").eq(2).find("button").eq(0).data("bold");
+        Text.Bold = row.find("td").eq(2).find("button").eq(0).data("bold") == "True";
         Text.TranslationId = $("#SelectLanguage").val();
         Text.TextBoxId = row.find("td").eq(2).find("button").eq(0).val();
         Text.FontId = row.find("td").eq(2).find("button").eq(0).data("fontid");
         Text.FontSize = row.find("td").eq(2).find("button").eq(0).data("size");
-            Text.Italic = row.find("td").eq(2).find("button").eq(0).data("italic");
+        Text.Italic =  row.find("td").eq(2).find("button").eq(0).data("italic") == "True";
            
               Text.Active = true;
-            
+          console.log(Text.Italic);
           Text.Allow = false;
             Text.TextId = row.find("td").eq(0).attr("data-TextId");
             if (Text.TextId == undefined) {
@@ -411,7 +413,7 @@ function Save() {
         model.push(Text);
         }
     });
-  console.log(model);
+  
   $.ajax({
     type: "POST",
     url: "/Contribute/AddNewTexts",

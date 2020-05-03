@@ -85,7 +85,6 @@ warning 6002: The table/view 'MyWebsite.dbo.Bookmark' does not have a primary ke
           <Property Name="FontLink" Type="nvarchar" MaxLength="200" Nullable="false" />
           <Property Name="Description" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Active" Type="bit" Nullable="false" />
-          <Property Name="Type" Type="nvarchar" MaxLength="100" Nullable="false" />
         </EntityType>
         <EntityType Name="Genre">
           <Key>
@@ -784,8 +783,9 @@ warning 6002: The table/view 'MyWebsite.dbo.Bookmark' does not have a primary ke
           <Property Name="FontLink" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Active" Type="Boolean" Nullable="false" />
-          <Property Name="Type" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Texts" Relationship="Self.FK_Text_Font" FromRole="Font" ToRole="Text" />
+
+          <NavigationProperty Name="Texts" Relationship="MyWebsiteModel.FK_Text_Font" FromRole="Font" ToRole="Text" />
+
         </EntityType>
         <EntityType Name="Genre">
           <Key>
@@ -1487,6 +1487,7 @@ warning 6002: The table/view 'MyWebsite.dbo.Bookmark' does not have a primary ke
           <EntitySetMapping Name="Fonts">
             <EntityTypeMapping TypeName="MyWebsiteModel.Font">
               <MappingFragment StoreEntitySet="Font">
+
                 <ScalarProperty Name="FontId" ColumnName="FontId" />
                 <ScalarProperty Name="FullName" ColumnName="FullName" />
                 <ScalarProperty Name="FontLink" ColumnName="FontLink" />
