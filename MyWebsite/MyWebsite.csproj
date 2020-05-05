@@ -669,11 +669,13 @@
     <Compile Include="Controllers\ContributeController.cs" />
     <Compile Include="Controllers\DocumentController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
+    <Compile Include="Controllers\GenresController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MangaController.cs" />
     <Compile Include="Controllers\NotificationController.cs" />
     <Compile Include="Controllers\PageController.cs" />
     <Compile Include="Controllers\PointController.cs" />
+    <Compile Include="Controllers\StatusMangaController.cs" />
     <Compile Include="Controllers\TranslationController.cs" />
     <Compile Include="DAO\DAOChapter.cs" />
     <Compile Include="Global.asax.cs">
@@ -796,6 +798,7 @@
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\Account\AccountModel.cs" />
     <Compile Include="ViewModels\Chapter\ChapterModel.cs" />
+    <Compile Include="ViewModels\Genre\EditGenreModel.cs" />
     <Compile Include="ViewModels\Home\Author\MangaByAuthor.cs" />
     <Compile Include="ViewModels\Home\Chapter\Get1Chapter.cs" />
     <Compile Include="ViewModels\Home\Chapter\Get2Chapter.cs" />
@@ -1096,6 +1099,10 @@
     <Content Include="Views\Home\KetQuaTimKiem.cshtml" />
     <Content Include="Views\Point\Index.cshtml" />
     <Content Include="Views\Document\Index.cshtml" />
+    <Content Include="Views\Genres\Index.cshtml" />
+    <Content Include="Views\StatusManga\Index.cshtml" />
+    <Content Include="Views\Document\ListDocument.cshtml" />
+    <Content Include="Views\Point\ListPoint.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

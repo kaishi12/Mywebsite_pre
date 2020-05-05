@@ -1,0 +1,263 @@
+﻿@model IEnumerable<MyWebsite.ViewModels.Manga.MangaModel>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+<style>
+</style>
+<div class="padding">
+    <div class="m-b primary">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/Account/Home">Trang chủ</a></li>
+            <li class="breadcrumb-item active">Danh sách truyện đã tạo</li>
+        </ol>
+    </div>
+
+    <div style="top:6px">
+        <button class="btn btn-default col-md-2 offset-md-10" data-toggle="modal" data-target="#AddModal">Thêm thể loại</button>
+    </div>
+    <br />
+    <div class="box black">
+
+        <div class="box-body">
+            <div class="table-responsive">
+                <table ui-jp="dataTable" id="datatable" class="table table-striped b-t b-b black">
+                    <thead>
+                        <tr>
+                            <th style="text-align:center">STT</th>
+                            <th style="text-align:center">Tên</th>
+                            <th style="text-align:center"></th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div id="EditModal" class="modal" data-backdrop="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 id="StatusName" class="modal-title">Modal</h5>
+                <input type="hidden" id="StatusId" />
+            </div>
+            <div class="modal-body text-center p-lg">
+                <div class="form-group row">
+                    <label class="col-sm-4 form-control-label">
+                        <span>Tên thể loại</span>
+                    </label>
+                    <div class="col-sm-8">
+
+                        <input id="nameEdit" class="form-control" />
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn dark-white p-x-md" data-dismiss="modal">Thoát</button>
+                <button type="button" class="btn danger p-x-md" id="SaveEdit">Chỉnh sửa</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div>
+</div>
+<div id="AddModal" class="modal" data-backdrop="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Thêm thể loại</h5>
+            </div>
+            <div class="modal-body text-center p-lg">
+                <div class="form-group row">
+                    <label class="col-sm-4 form-control-label">
+                        <span>Tên thể loại</span>
+                    </label>
+                    <div class="col-sm-8">
+
+                        <input id="name" class="form-control" />
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn dark-white p-x-md" data-dismiss="modal">Thoát</button>
+                <button type="button" class="btn danger p-x-md" id="SaveAdd">Thêm</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div>
+</div>
+<script>
+     $(document).ready(function () {
+            loadEmpGroup();
+     });
+     function loadEmpGroup() {
+
+            $.ajax({
+                type: 'POST',
+                url: '/StatusManga/GetAllListStatus',
+
+                success: function (result) {
+                    initTimeFrameDatatable(result);
+                }
+            });
+        }
+    function initTimeFrameDatatable(data) {
+            $("#datatable").dataTable().fnDestroy();
+            $("#datatable").dataTable({
+                stateSave: true,
+                "bFilter": true,
+                "bSort": false,
+                "data": data,
+                "bRetrieve": true,
+                "bScrollCollapse": true,
+                "bProcessing": true,
+                "oLanguage": {
+                    "sSearch": "Tìm kiếm:",
+                    "sSearchPlaceholder": "Nhân viên",
+                    "sZeroRecords": "Không có dữ liệu phù hợp",
+                    "sInfo": "Hiển thị từ _START_ đến _END_ trên tổng số _TOTAL_ dòng",
+                    "sEmptyTable": "Không có dữ liệu",
+                    "sInfoFiltered": " - lọc ra từ _MAX_ dòng",
+                    "sLengthMenu": "Hiển thị _MENU_ dòng",
+                    "sProcessing": "Đang xử lý...",
+                    "oPaginate": {
+                        "sNext": "<i class='fa fa-chevron-right'></i>",
+                        "sPrevious": "<i class='fa fa-chevron-left'></i>"
+                    }
+                },
+                "aoColumnDefs": [
+                    {
+                        "aTargets": [0, 1],
+                        "sClass": "text-center",
+                        "bSortable": false
+                    },
+                     {
+                        "aTargets": [2],
+                        "mRender": function (data, type, row) {
+                            var edit =
+                                "<a title='Chi tiết' class='btn btn-sm btn-primary' onclick='showEditModal(" +
+                                data +
+                                ")'>Chi tiết</a>";
+                            var del =
+                                "<a title='Xóa' class='btn btn-sm btn-primary' onclick='Delete(" +
+                                data +
+                                ")'>Xóa</a>";
+                            return edit + " " + del ;
+                        },
+                    }
+                ],
+                "bAutoWidth": false,
+            });
+
+    }
+    function showEditModal(id) {
+         $.ajax({
+                type: 'POST',
+                url: '@Url.Action("PrepareEdit", "StatusManga")',
+             data: {
+                 Id: id
+             },
+             success: function (result) {
+                 console.log(result);
+                 $("#StatusName").text(result.name);
+                 $("#StatusId").val(result.id);
+                 $("#nameEdit").val(result.name);
+                 
+                }
+            });
+         $('#EditModal').modal('show');
+
+    }
+    function ResetEditModal() {
+         $("#StatusName").text("Trạng thái truyện");
+         $("#StatusId").val("");
+         $("#nameEdit").val("");
+       
+    }
+    function ResetAddModal() {
+         $("#name").val("");
+       
+    }
+    $("#SaveEdit").on("click", function () {
+         if ($('#nameEdit').val() == "") {
+            alert("Vui lòng nhập tên thể loại");
+                return;
+            }
+            
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("Edit", "StatusManga")',
+                data: {
+                    'id': +$("#StatusId").val(),
+                    'name': $("#nameEdit").val(),
+                },
+                success: function(result) {
+                    if (result.rs == true) {
+                        alert(result.mess);
+                        $('#EditModal').modal('hide');
+                        ResetEditModal();
+                    } else {
+                        alert(result.mess);
+                    }
+                },
+                error: function(error) {
+                    alert("Có lỗi xảy ra, vui lòng thử lại");
+                }
+            });
+    })
+      $("#SaveAdd").on("click", function () {
+         if ($('#name').val() == "") {
+            alert("Vui lòng nhập tên trạng thái");
+                return;
+            }
+           
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("Add", "StatusManga")',
+                data: {
+                    'name': $("#name").val(),
+                   
+                },
+                success: function(result) {
+                    if (result.rs == true) {
+                        alert(result.mess);
+                        loadEmpGroup();
+                        $('#AddModal').modal('hide');
+                        ResetAddModal();
+                    } else {
+                        alert(result.mess);
+                    }
+                },
+                error: function(error) {
+                    ShowAlert("Có lỗi xảy ra, vui lòng thử lại", 1);
+                }
+            });
+      })
+    function Delete(id) {
+
+        var r = confirm("Bạn có muốn xóa thể loại này?");
+            if (r == true) {
+                    $.ajax({
+                        type: 'POST',
+                        url: '@Url.Action("DeleteStatus", "StatusManga")',
+                        data: {
+                            'id': id,
+                        },
+                        success: function(data) {
+                            if (data.rs) {
+                                alert(data.mess);
+                                loadEmpGroup();
+                            } else {
+                                alert(data.mess);
+                            }
+                        },
+                        error: function (error) {
+                            alert(data.mess);
+                        }
+                    });
+}
+    }
+</script>

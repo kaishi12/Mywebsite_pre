@@ -20,6 +20,10 @@ namespace MyWebsite.Controllers
         {
             return View();
         }
+        public ActionResult ListPoint()
+        {
+            return View();
+        }
         public ActionResult GetPoint()
         {
             double dt = 0, qlbd = 0, qlt = 0, upclear = 0;
