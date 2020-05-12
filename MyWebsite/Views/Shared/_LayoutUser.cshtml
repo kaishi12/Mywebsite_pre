@@ -200,6 +200,42 @@
                                     <span class="nav-text">Documents</span>
                                 </a>
                             </li>
+                            @if (accountModel.Type == 2)
+                            {
+                                <li>
+                                    <a>
+                                        <span class="nav-caret">
+                                            <i class="fa fa-caret-down"></i>
+                                        </span>
+                                        <span class="nav-icon">
+                                            <i class="material-icons md-24">&#xe7ef;</i>
+                                        </span>
+                                        <span class="nav-text">Thiết lập</span>
+                                    </a>
+                                    <ul class="nav-sub">
+                                        <li>
+                                            <a href="/Account/ListAccount">
+                                                <span class="nav-text">Tài khoản</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="/Genres">
+                                                <span class="nav-text">Thể loại</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="/StatusManga">
+                                                <span class="nav-text">Trạng thái truyện</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="/Admin/ListFont">
+                                                <span class="nav-text">Font chữ</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            }
 
                         </ul>
                     </nav>
@@ -211,66 +247,12 @@
         </div>
         <!-- / -->
         <!-- content -->
-        <div id="switcher">
-            <div class="switcher box-color dark-white text-color" id="sw-theme" ui-class="active">
-                <a href="" ui-toggle-class="active" target="#sw-theme" class="box-color dark-white text-color sw-btn">
-                    <i class="fa fa-gear"></i>
-                </a>
-                <div class="box-header">
-                    <a href="https://themeforest.net/item/flatkit-app-ui-kit/13231484?ref=flatfull" class="btn btn-xs rounded danger pull-right">BUY</a>
-                    <h2>Theme Switcher</h2>
-                </div>
-                <div class="box-divider"></div>
-                <div class="box-body">
-                    <p class="hidden-md-down">
-                        <label class="md-check m-y-xs" data-target="folded">
-                            <input type="checkbox" class="has-value">
-                            <i class="green"></i>
-                            <span class="hidden-folded">Folded Aside</span>
-                        </label>
-                    </p>
-                    <p>Themes:</p>
-                    <div data-target="bg" class="row no-gutter text-u-c text-center _600 clearfix">
-                        <label class="p-a col-sm-6 light pointer m-0">
-                            <input type="radio" name="theme" value="" hidden="">
-                            Light
-                        </label>
-                        <label class="p-a col-sm-6 grey pointer m-0">
-                            <input type="radio" name="theme" value="grey" hidden="" class="has-value">
-                            Grey
-                        </label>
-                        <label class="p-a col-sm-6 dark pointer m-0">
-                            <input type="radio" name="theme" value="dark" hidden="" class="has-value">
-                            Dark
-                        </label>
-                        <label class="p-a col-sm-6 black pointer m-0">
-                            <input type="radio" name="theme" value="black" hidden="" class="has-value">
-                            Black
-                        </label>
-                    </div>
-                </div>
-            </div>
 
 
-        </div>
         <div id="content" class="app-content  " role="main">
             <div class="app-header black  box-shadow-z4 navbar-md">
                 <div class="navbar navbar-toggleable-sm flex-row align-items-center"  >
-                    <form class="form-inline my-2 my-lg-0" data-step="1" data-intro="abc" style="z-index:9999999!important;">
-
-                        <div class="input-group-btn primary">
-                            <button type="button" class="form-control btn primary my-2 my-sm-0 dropdown-toggle  " data-toggle="dropdown" aria-expanded="false">
-                                Tìm kiếm theo <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu black">
-                                <li><a href="#">Người dùng</a></li>
-                                <li><a href="#">Truyện</a></li>
-                                <li><a href="#">vai trò</a></li>
-                            </ul>
-                        </div>
-                        <input class="form-control mr-sm-2" type="search" placeholder="Tìm kiếm" aria-label="Search">
-                        <button class="btn my-2 my-sm-0 primary" type="submit">Search</button>
-                    </form>
+                   
                     <!-- Open side - Naviation on mobile -->
                     <a data-toggle="modal" data-target="#aside" class="hidden-lg-up mr-3">
                         <i class="material-icons">&#xe5d2;</i>

@@ -218,7 +218,7 @@ paint_centered_wrap = function (cete, x, y, w, h, text, fontTextBox, fh, spl, co
                 // We continue to centralize the lines
                 lx = x + w / 2 - cete.measureText(lines[j]).width / 2;
                 // DEBUG 
-
+                console.log(lx, ly);
                 cete.fillText(lines[j], lx, ly);
             }
         }

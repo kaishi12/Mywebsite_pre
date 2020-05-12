@@ -1,4 +1,5 @@
 ﻿using MyWebsite.Models;
+using MyWebsite.Service.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,6 +8,7 @@ using System.Web.Mvc;
 
 namespace MyWebsite.Controllers
 {
+    [AdminStatus]
     public class StatusMangaController : Controller
     {
         // GET: StatusManga

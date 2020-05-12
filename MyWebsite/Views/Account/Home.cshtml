@@ -360,8 +360,8 @@
                                                 <a href="" class="text-primary">@item.Manga.FullName</a>
                                             </div>
                                             <div class="text-sm">
-                                                <span class="text-muted"><strong>Tên:</strong> @item.Account.FullName <br />
-                                                <strong>Vị trí:</strong> @item.Role.FullName</span> <span class="label"></span>
+                                                <span class="text-muted"><strong>Tên:</strong> @item.Account.UserName <br />
+                                                <strong>Vị trí:</strong> @item.Role.FullName</span> 
                                             </div>
                                         </div>
                                     </li>
@@ -529,7 +529,6 @@
 <script src="~/LayoutUser/Account/Search.js"></script>
 <script>
     $(function () {
-        $('[data-toggle="tooltip"]').tooltip()
         $(".ChangeStatus").on("click", function () {
             var thisbutton = $(this);
             //console.log(thisbutton.data("language"));
@@ -547,9 +546,10 @@
                     success: function (result) {
                         if (result == "1") {
                             alert("Cập nhật thành công!");
-                            $(this).parent().find(".Status.Deny").fadeOut();
-                            $(this).parent().find(".Status.Accept").fadeIn();
-
+                            thisbutton.parent().find(".Deny").fadeOut(500, function () {
+                                thisbutton.parent().find(".Accept").fadeIn();
+                            });
+                            
                             thisbutton.fadeOut();
                         }
                         else

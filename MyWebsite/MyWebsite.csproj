@@ -780,6 +780,7 @@
     <Compile Include="Service\Account\AccountService.cs" />
     <Compile Include="Service\Chapter\ChapterService.cs" />
     <Compile Include="Service\Common\AccountStatusAttribute.cs" />
+    <Compile Include="Service\Common\AdminStatusAttribute.cs" />
     <Compile Include="Service\Common\DALHelper.cs" />
     <Compile Include="Service\Common\DateDifference.cs" />
     <Compile Include="Service\Common\Enum.cs" />
@@ -810,6 +811,7 @@
     <Compile Include="ViewModels\Language\LanguageModel.cs" />
     <Compile Include="ViewModels\Manga\MangaModel.cs" />
     <Compile Include="ViewModels\Notification\NotificationModel.cs" />
+    <Compile Include="ViewModels\Page\PageModel.cs" />
     <Compile Include="ViewModels\Point\TotalPointModel.cs" />
     <Compile Include="ViewModels\TextBox\TextBoxModel.cs" />
     <Compile Include="ViewModels\Text\Text.cs" />
@@ -1103,6 +1105,7 @@
     <Content Include="Views\StatusManga\Index.cshtml" />
     <Content Include="Views\Document\ListDocument.cshtml" />
     <Content Include="Views\Point\ListPoint.cshtml" />
+    <Content Include="Views\Account\ListAccount.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

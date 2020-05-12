@@ -1,4 +1,5 @@
-﻿using MyWebsite.Models;
+﻿using Dapper;
+using MyWebsite.Models;
 using MyWebsite.Service.Account;
 using MyWebsite.Service.Common;
 using MyWebsite.Service.Language;
@@ -40,9 +41,6 @@ namespace MyWebsite.Controllers
                 ViewBag.ListNewManga = MangaService.GetListNewManga().Take(5);
 
                 ViewBag.ListLanguage = LanguageService.GetListLanguage();
-
-
-
 
                 //Các thể loại Danh sách đơn gửi tới người dùng(bản rút gọn)
                 var listMangaOwned = data.Manga_Detail.Where(m => m.AccountId == model.AccountId && m.RoleId == 1).Select(m => m.MangaId);
@@ -300,6 +298,7 @@ namespace MyWebsite.Controllers
         /// </summary>
         /// <param name="username"></param>
         /// <returns></returns>
+        [AccountStatus]
         public ActionResult ProfileUser(string username)
         {
             var model = AccountService.GetProfile(username);
@@ -311,6 +310,7 @@ namespace MyWebsite.Controllers
         /// Yêu cầu gia nhập truyện của bạn tạo ra
         /// </summary>
         /// <returns></returns>
+        [AccountStatus]
         public ActionResult ListRequestByPeople()
         {
             AccountModel model = (AccountModel)Session["UserInfo"];
@@ -326,6 +326,7 @@ namespace MyWebsite.Controllers
         /// Yêu cầu gia nhập truyện của người ta gửi đến bạn
         /// </summary>
         /// <returns></returns>
+        [AccountStatus]
         public ActionResult ListRequestToYou()
         {
             AccountModel model = (AccountModel)Session["UserInfo"];
@@ -336,6 +337,8 @@ namespace MyWebsite.Controllers
         /// Yêu cầu gia nhập truyện của bạn do bạn gửi tới người ta
         /// </summary>
         /// <returns></returns>
+
+        [AccountStatus]
         public ActionResult ListRequestToPeople()
         {
             AccountModel model = (AccountModel)Session["UserInfo"];
@@ -352,6 +355,8 @@ namespace MyWebsite.Controllers
         /// Yêu cầu gia nhập truyện của người ta do bạn gửi
         /// </summary>
         /// <returns></returns>
+
+        [AccountStatus]
         public ActionResult ListRequestByYou()
         {
             AccountModel model = (AccountModel)Session["UserInfo"];
@@ -359,6 +364,75 @@ namespace MyWebsite.Controllers
             var ListRequestByYou = data.Manga_Detail.Where(m => m.AccountId == model.AccountId && m.Type == 1 && !listMangaOwned.Any(ma => m.MangaId != ma)).OrderBy(m => m.CreateAt);
             return View(ListRequestByYou);
         }
+        [AdminStatus]
+        public ActionResult ListAccount()
+        {
+            return View();
+        }
 
+        [AdminStatus]
+        public ActionResult GetAllAccount()
+        {
+            var count = 1;
+
+            var datatable = data.Accounts.ToList().Select(m => new IConvertible[]
+                {
+                count++,
+                m.UserName,
+                m.FullName == null ? "N/A" : m.FullName,
+                m.Email == null ? "N/A" : m.Email,
+                m.Type == (int)TypeAccount.Admin ? "Admin" : "Người dùng",
+                m.Active == true ? "Đang hoạt động" : "Ngừng hoạt động",
+                m.AccountId
+                });
+            return Json(datatable, JsonRequestBehavior.AllowGet);
+        }
+        [AdminStatus]
+        public ActionResult Add(string username,string pwd,string email,int type)
+        {
+            try
+            {
+                if (AccountService.CheckUserName(username))
+                {
+                    return Json(new { rs = false, mess = "Đã có tài khoản này" }, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    var model = new Account();
+                    model.UserName = username;
+                    model.Active = true;
+                    model.Email = email;
+                    model.Type = type;
+                    HashMD5 hash = new HashMD5();
+                    var Pass = hash.CreateMD5(pwd);
+                    model.PassWord = Pass;
+                    data.Accounts.Add(model);
+                    data.SaveChanges();
+                    return Json(new { rs = true, mess = "Thêm thành công" }, JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch (Exception e)
+            {
+                var message = "Có lỗi trong quá trình xử lý, vui lòng liên hệ admin";
+                return Json(new { rs = false, mess = message }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        [AdminStatus]
+        public ActionResult Delete(int id)
+        {
+            try
+            {
+                var model = data.Accounts.Find(id);
+                model.Active = false;
+                data.SaveChanges();
+                return Json(new { rs = true, mess = "Xóa thành công" }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception e)
+            {
+                var message = "Có lỗi trong quá trình xử lý, vui lòng liên hệ admin";
+                return Json(new { rs = false, mess = message }, JsonRequestBehavior.AllowGet);
+            }
+        }
     }
 }

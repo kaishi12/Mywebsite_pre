@@ -40,6 +40,7 @@ namespace MyWebsite.Models
         public string InstagramLink { get; set; }
         public string Status { get; set; }
         public string Note { get; set; }
+        public Nullable<int> Type { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Account_Detail> Account_Detail { get; set; }

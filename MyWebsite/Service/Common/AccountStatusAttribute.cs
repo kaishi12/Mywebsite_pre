@@ -31,11 +31,8 @@ namespace MyWebsite.Service.Common
                     return false;
                 }
                 HttpContext.Current.Session["UserInfo"] = accInfo;
-                if (accInfo.StatusActive == 0)
-                {
-                    return true;
-                }
-                return false;
+                return accInfo.Active;
+                
             }
             catch (Exception ex)
             {

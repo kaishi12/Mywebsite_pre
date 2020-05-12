@@ -1,4 +1,6 @@
 ﻿using MyWebsite.Models;
+using MyWebsite.ViewModels.Chapter;
+using MyWebsite.ViewModels.Page;
 using PagedList;
 using PagedList.Mvc;
 using System;
@@ -136,7 +138,7 @@ namespace MyWebsite.Controllers
         #region DocTruyen(DocChapter)
         public ActionResult ReadChapter(string alias, int idManga, int idChapter, string language)
         {
-            var chuongtr = db.Pages.Where(m => m.ChapterId == idChapter && m.CategoryId == 2 && m.Status == 0).OrderBy(m => m.OrderNumber).ToList();
+            var chuongtr = db.Pages.Where(m => m.ChapterId == idChapter && m.CategoryId == 2 && m.Status == 2).OrderBy(m => m.OrderNumber).ToList();
             ViewBag.MangaName = (from tr in db.Mangas where tr.MangaId == idManga select tr.FullName).FirstOrDefault().ToString();
             ViewBag.ChapterAlias = (from tr in db.Mangas where tr.MangaId == idManga select tr.Alias).FirstOrDefault().ToString();
             ViewBag.ChapterName = (from chtr in db.Chapters where chtr.ChapterId == idChapter select chtr.FullName).FirstOrDefault().ToString();
@@ -389,5 +391,44 @@ namespace MyWebsite.Controllers
             }, JsonRequestBehavior.AllowGet);
         }
         #endregion
+        public ActionResult GetTexts(int chapterid,int language)
+        {
+            var chuongtr = db.Pages.Where(m => m.ChapterId == chapterid && m.CategoryId == 2 && m.Status == 2).OrderBy(m => m.OrderNumber).ToList();
+            var listpage = new List<PageViewModel>();
+            foreach(var item in chuongtr)
+            {
+                var page = new PageViewModel();
+                page.Id = item.PageId;
+                page.orderNumber = item.OrderNumber;
+                page.link = item.PageLink;
+                var listtextbox = new List<TextBoxViewModel>();
+                foreach(var textbox in db.TextBoxes.Where(m=>m.PageId == item.PageId_Fa && m.Active == true))
+                {
+                    TextBoxViewModel textboxmodel = new TextBoxViewModel();
+                    textboxmodel.Id = textbox.TextBoxId;
+                    textboxmodel.Cor = textbox.Coordinate;
+                    textboxmodel.height = textbox.Height;
+                    textboxmodel.witdh = textbox.Witdh;
+                    textboxmodel.degree = textbox.Degree;
+                    var text = textbox.Texts.FirstOrDefault(m => m.Active && m.Allow == true && m.TextBoxId == textbox.TextBoxId);
+                    TextViewModel textmodel = new TextViewModel();
+                    textmodel.bold = text.Bold;
+                    textmodel.color = text.ColorText;
+                    textmodel.italic = text.Italic;
+                    textmodel.content = text.TextContent;
+                    textmodel.font = "MTO augie";
+                    textmodel.size = text.FontSize;
+                    textboxmodel.texts = textmodel;
+                    listtextbox.Add(textboxmodel);
+                }
+                page.textboxes = listtextbox;
+                listpage.Add(page);
+            }
+            return Json(new
+            {
+                data = listpage
+            }, JsonRequestBehavior.AllowGet);
+
+        }
     }
 }

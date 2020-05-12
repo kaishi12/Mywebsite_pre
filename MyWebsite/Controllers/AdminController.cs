@@ -1,4 +1,5 @@
 using MyWebsite.Models;
+using MyWebsite.Service.Common;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -8,6 +9,7 @@ using System.Web.Mvc;
 
 namespace MyWebsite.Controllers
 {
+    [AdminStatus]
     public class AdminController : Controller
     {
         // GET: Admin

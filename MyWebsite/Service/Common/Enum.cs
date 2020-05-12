@@ -83,6 +83,12 @@ namespace MyWebsite.Service.Common
         Raw = 1,
         [Display(Name = "Trang cleartext")]
         Clear = 2,
-      
+    }
+    public enum TypeAccount
+    {
+        [Display(Name = "Người dùng bình thường")]
+        User = 1,
+        [Display(Name = "Admin")]
+        Admin = 2,
     }
 }

@@ -25,6 +25,7 @@
     <NavigationProperty Name="Texts" Relationship="Self.FK_Text_Account" FromRole="Account" ToRole="Text" />
     <NavigationProperty Name="Translations" Relationship="Self.FK_Translation_Account" FromRole="Account" ToRole="Translation" />
     <NavigationProperty Name="Mangas" Relationship="Self.Bookmark" FromRole="Account" ToRole="Manga" />
+    <Property Name="Type" Type="Int32" />
   </EntityType>
   <EntityType Name="Account_Detail">
     <Key>

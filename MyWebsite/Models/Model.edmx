@@ -23,6 +23,7 @@
           <Property Name="InstagramLink" Type="nvarchar" MaxLength="50" />
           <Property Name="Status" Type="nvarchar(max)" />
           <Property Name="Note" Type="nvarchar(max)" />
+          <Property Name="Type" Type="int" />
         </EntityType>
         <EntityType Name="Account_Detail">
           <Key>
@@ -736,6 +737,7 @@ warning 6002: The table/view 'MyWebsite.dbo.Bookmark' does not have a primary ke
           <NavigationProperty Name="Texts" Relationship="Self.FK_Text_Account" FromRole="Account" ToRole="Text" />
           <NavigationProperty Name="Translations" Relationship="Self.FK_Translation_Account" FromRole="Account" ToRole="Translation" />
           <NavigationProperty Name="Mangas" Relationship="Self.Bookmark" FromRole="Account" ToRole="Manga" />
+          <Property Name="Type" Type="Int32" />
         </EntityType>
         <EntityType Name="Account_Detail">
           <Key>
@@ -1432,6 +1434,7 @@ warning 6002: The table/view 'MyWebsite.dbo.Bookmark' does not have a primary ke
           <EntitySetMapping Name="Accounts">
             <EntityTypeMapping TypeName="MyWebsiteModel.Account">
               <MappingFragment StoreEntitySet="Account">
+                <ScalarProperty Name="Type" ColumnName="Type" />
                 <ScalarProperty Name="AccountId" ColumnName="AccountId" />
                 <ScalarProperty Name="FullName" ColumnName="FullName" />
                 <ScalarProperty Name="Email" ColumnName="Email" />

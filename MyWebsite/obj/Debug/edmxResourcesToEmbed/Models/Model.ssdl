@@ -18,6 +18,7 @@
     <Property Name="InstagramLink" Type="nvarchar" MaxLength="50" />
     <Property Name="Status" Type="nvarchar(max)" />
     <Property Name="Note" Type="nvarchar(max)" />
+    <Property Name="Type" Type="int" />
   </EntityType>
   <EntityType Name="Account_Detail">
     <Key>
