@@ -41,7 +41,7 @@ function LoadImg() {
     });
 };
 
-function LoadText(cete, result) {
+async function LoadText(cete, result) {
 
     let text, size, font, italic, bold;
     for (let i = 0; i < result.length; i++) {
@@ -63,7 +63,9 @@ function LoadText(cete, result) {
             fontTextBox += "Italic ";
         }
         fontTextBox += italic + bold + " " + size + "px " + font;
-
+        const fontList = [];
+        fontList.push(fontTextBox);
+        await prepareFontLoad(fontList);
         cete.save();
         cete.translate(cx, cy);            
         cete.rotate(De);  
@@ -162,7 +164,7 @@ function LoadCom(obj) {
     });
 }
 var obj = [];
-function LoadAllText() {
+async function LoadAllText() {
     $.ajax({
         type: "POST",
         url: "/Home/GetTexts",
@@ -176,15 +178,27 @@ function LoadAllText() {
         }
     });
 }
-
+const prepareFontLoad = (fontList) => Promise.all(fontList.map(font => document.fonts.load(font)))
 $(document).ready(function () {
-    document.fonts.ready.then(function () {
-        alert('All fonts in use by visible text have loaded.');
-        alert('Roboto loaded? ' + document.fonts.check('1em Roboto'));  // true
-    });
-    LoadAllText();
-    LoadImg();
+    loadjscssfile("/LayoutUser/assets/fonts/font.css", "css");
+        LoadAllText();
+        LoadImg();
 });
+function loadjscssfile(filename, filetype) {
+    if (filetype == "js") { //if filename is a external JavaScript file
+        var fileref = document.createElement('script')
+        fileref.setAttribute("type", "text/javascript")
+        fileref.setAttribute("src", filename)
+    }
+    else if (filetype == "css") { //if filename is an external CSS file
+        var fileref = document.createElement("link")
+        fileref.setAttribute("rel", "stylesheet")
+        fileref.setAttribute("type", "text/css")
+        fileref.setAttribute("href", filename)
+    }
+    if (typeof fileref != "undefined")
+        document.getElementsByTagName("head")[0].appendChild(fileref)
+}
 
 
 

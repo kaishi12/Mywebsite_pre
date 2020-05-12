@@ -5,6 +5,7 @@ var canvas = document.getElementById('canvas'),
 
 var img = new Image();
 var ctx1, scale, canvas1;
+const prepareFontLoad = (fontList) => Promise.all(fontList.map(font => document.fonts.load(font)))
 $("#buttonRaw").on("click", function () {
     
     $("#PageRaw").attr("hidden", false);
@@ -84,6 +85,7 @@ function LoadText(result) {
 $(document).ready(function ()  {
 
     img = document.getElementById("girl");
+    var complete = img.complete;
     img1 = document.getElementById("PageRaw");
     if ($("#DivCanvas").width() > img.width) {
         scale = 1;
@@ -91,24 +93,11 @@ $(document).ready(function ()  {
     else {
         scale = img.width / $("#DivCanvas").width();
     }
-
-    ctx.canvas.height = img.height / scale;
-    ctx.canvas.width = img.width / scale;
-    canvas1 = document.createElement('canvas');
-    canvas1.height = canvas.height;
-    canvas1.width = canvas.width;
-    img1.height = canvas1.height;
-    img1.width = canvas.width;
-    ctx1 = canvas1.getContext('2d');
-    var count = 0;
-    ctx.strokeStyle = "#FF0000";
-    ctx1.strokeStyle = "#FF0000";
-    ctx.drawImage(img, 0, 0, img.width, img.height, 0, 0, canvas.width, canvas.height);
-    ctx1.drawImage(img, 0, 0, img.width, img.height, 0, 0, canvas.width, canvas.height);
-
-    if ($("#tblEntAttributes tbody tr").length != 0) {
-
-        LoadTable(1);
+    img.onload = function () {
+        Load();
+    }
+    if (complete) {
+        Load();
     }
     //LoadTable();
 })
@@ -130,8 +119,8 @@ function RotateRec(status, cete, X, Y, W, H, degrees, cx, cy, text, font, outlin
     fontTextBox += "bold ";
   }
     let size1 = 24 / scale;
-  fontTextBox +=  size / scale + "px " + font;
- cete.save();
+    fontTextBox +=  size / scale + "px " + font;
+    cete.save();
     cete.translate(cx, cy);              //translate to center of shape
     cete.rotate(degrees);  //rotate 25 degrees.
     cete.translate(-cx, -cy);
@@ -141,6 +130,9 @@ function RotateRec(status, cete, X, Y, W, H, degrees, cx, cy, text, font, outlin
     cete.font =  "20px MTO Astro City";
     cete.fillStyle = "black";
     cete.fillText("#" + count, X, Y);
+    const fontList = [];
+    fontList.push(fontTextBox);
+    await prepareFontLoad(fontList);
     if (status == 1) {
         paint_centered_wrap(cete, X, Y, W, H, text, fontTextBox, 12, 2, color);
     }
@@ -254,12 +246,7 @@ function LoadTable(status) {
 
 
         if (status == 1) {
-            //const junction_font = new FontFace($(".attY", b).val(), 'url(lokicola.ttf)');
-            //junction_font.load().then(function (loaded_face) {
-            //    document.fonts.add(loaded_face);
-            //    }).catch(function (error) {
-            //    // error occurred
-            //});
+          
             text = $(".attText", b).val();
 
         }
@@ -414,6 +401,27 @@ function Save() {
             }
         });
 
+}
+function Load() {
+    ctx.canvas.height = img.height / scale;
+    ctx.canvas.width = img.width / scale;
+    canvas1 = document.createElement('canvas');
+    canvas1.height = canvas.height;
+    canvas1.width = canvas.width;
+    img1.height = canvas1.height;
+    img1.width = canvas.width;
+    ctx1 = canvas1.getContext('2d');
+    var count = 0;
+    ctx.strokeStyle = "#FF0000";
+    ctx1.strokeStyle = "#FF0000";
+
+    ctx.drawImage(img, 0, 0, img.width, img.height, 0, 0, canvas.width, canvas.height);
+    ctx1.drawImage(img, 0, 0, img.width, img.height, 0, 0, canvas.width, canvas.height);
+
+    if ($("#tblEntAttributes tbody tr").length != 0) {
+
+        LoadTable(1);
+    }
 }
 
 
