@@ -91,4 +91,14 @@ namespace MyWebsite.Service.Common
         [Display(Name = "Admin")]
         Admin = 2,
     }
+    public enum MangaPerPage
+    {
+        number = 12
+    }
+    public enum SortManga
+    {
+        AZ = 0,
+        ZA = 1,
+        Update = 2,
+    }
 }

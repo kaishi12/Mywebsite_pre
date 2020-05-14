@@ -675,6 +675,7 @@
     <Compile Include="Controllers\NotificationController.cs" />
     <Compile Include="Controllers\PageController.cs" />
     <Compile Include="Controllers\PointController.cs" />
+    <Compile Include="Controllers\PointHistoryController.cs" />
     <Compile Include="Controllers\StatusMangaController.cs" />
     <Compile Include="Controllers\TranslationController.cs" />
     <Compile Include="DAO\DAOChapter.cs" />
@@ -756,10 +757,16 @@
     <Compile Include="Models\Point.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\PointHistory.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Role.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Status.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sysdiagram.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Text.cs">
@@ -1106,6 +1113,9 @@
     <Content Include="Views\Document\ListDocument.cshtml" />
     <Content Include="Views\Point\ListPoint.cshtml" />
     <Content Include="Views\Account\ListAccount.cshtml" />
+    <Content Include="Views\PointHistory\AllMemberHistory.cshtml" />
+    <Content Include="Views\PointHistory\MemberHistory.cshtml" />
+    <Content Include="Views\Manga\ListAllManga.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

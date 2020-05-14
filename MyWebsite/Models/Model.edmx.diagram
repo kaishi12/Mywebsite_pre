@@ -51,6 +51,9 @@
         <AssociationConnector Association="MyWebsiteModel.FK_Text_Translation" ManuallyRouted="false" />
         <AssociationConnector Association="MyWebsiteModel.FK_Translation_Detail_Translation" ManuallyRouted="false" />
         <AssociationConnector Association="MyWebsiteModel.Bookmark" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="MyWebsiteModel.PointHistory" Width="1.5" PointX="3" PointY="21.375" />
+        <AssociationConnector Association="MyWebsiteModel.FK_PointHistory_Account" />
+        <EntityTypeShape EntityType="MyWebsiteModel.sysdiagram" Width="1.5" PointX="3.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

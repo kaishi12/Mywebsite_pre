@@ -185,7 +185,7 @@
                     <div class="_500">@accountModel.Email</div>
                 </div>
                 <div class="col-xs-3">
-                    <small class="text-muted">Tổng điểm</small>
+                    <small class="text-muted">Tổng điểm đến ngày : <span id="Days"></span></small>
                     <div id="TotalPoint" class="_500">0</div>
                 </div>
                 <div class="col-xs-3">
@@ -306,7 +306,7 @@
                     $("#Qlbd").text(result.qlbd);
                     $("#Upclear").text(result.upclear);
                     $("#TotalPoint").text(total);
-
+                    $("#Days").text(result.date);
                 },
                 error: function (error) {
                     alert("Có lỗi xảy ra, vui lòng thử lại", 1);

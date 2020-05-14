@@ -189,6 +189,20 @@ warning 6002: The table/view 'MyWebsite.dbo.Bookmark' does not have a primary ke
     <Property Name="PointNumber" Type="float" Nullable="false" />
     <Property Name="Active" Type="bit" Nullable="false" />
   </EntityType>
+  <EntityType Name="PointHistory">
+    <Key>
+      <PropertyRef Name="HistoryId" />
+    </Key>
+    <Property Name="HistoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ToDay" Type="datetime" />
+    <Property Name="AccountId" Type="int" />
+    <Property Name="DTPoint" Type="float" />
+    <Property Name="QLBDPoint" Type="float" />
+    <Property Name="QLTPoint" Type="float" />
+    <Property Name="UPCLEARPoint" Type="float" />
+    <Property Name="Active" Type="bit" />
+    <Property Name="MangaId" Type="int" />
+  </EntityType>
   <EntityType Name="Role">
     <Key>
       <PropertyRef Name="RoleId" />
@@ -205,6 +219,17 @@ warning 6002: The table/view 'MyWebsite.dbo.Bookmark' does not have a primary ke
     <Property Name="StatusId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="FullName" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="Active" Type="bit" Nullable="false" />
+    <Property Name="Alias" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
   </EntityType>
   <EntityType Name="Text">
     <Key>
@@ -450,6 +475,18 @@ warning 6002: The table/view 'MyWebsite.dbo.Bookmark' does not have a primary ke
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_PointHistory_Account">
+    <End Role="Account" Type="Self.Account" Multiplicity="0..1" />
+    <End Role="PointHistory" Type="Self.PointHistory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Account">
+        <PropertyRef Name="AccountId" />
+      </Principal>
+      <Dependent Role="PointHistory">
+        <PropertyRef Name="AccountId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Text_Account">
     <End Role="Account" Type="Self.Account" Multiplicity="1" />
     <End Role="Text" Type="Self.Text" Multiplicity="*" />
@@ -586,8 +623,10 @@ warning 6002: The table/view 'MyWebsite.dbo.Bookmark' does not have a primary ke
     <EntitySet Name="NotifyType" EntityType="Self.NotifyType" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Page" EntityType="Self.Page" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Point" EntityType="Self.Point" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PointHistory" EntityType="Self.PointHistory" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Status" EntityType="Self.Status" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Text" EntityType="Self.Text" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TextBox" EntityType="Self.TextBox" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Translation" EntityType="Self.Translation" Schema="dbo" store:Type="Tables" />
@@ -661,6 +700,10 @@ warning 6002: The table/view 'MyWebsite.dbo.Bookmark' does not have a primary ke
     <AssociationSet Name="FK_Page_Chapter" Association="Self.FK_Page_Chapter">
       <End Role="Chapter" EntitySet="Chapter" />
       <End Role="Page" EntitySet="Page" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PointHistory_Account" Association="Self.FK_PointHistory_Account">
+      <End Role="Account" EntitySet="Account" />
+      <End Role="PointHistory" EntitySet="PointHistory" />
     </AssociationSet>
     <AssociationSet Name="FK_Text_Account" Association="Self.FK_Text_Account">
       <End Role="Account" EntitySet="Account" />

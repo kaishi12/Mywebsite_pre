@@ -26,6 +26,7 @@
     <NavigationProperty Name="Translations" Relationship="Self.FK_Translation_Account" FromRole="Account" ToRole="Translation" />
     <NavigationProperty Name="Mangas" Relationship="Self.Bookmark" FromRole="Account" ToRole="Manga" />
     <Property Name="Type" Type="Int32" />
+    <NavigationProperty Name="PointHistories" Relationship="MyWebsiteModel.FK_PointHistory_Account" FromRole="Account" ToRole="PointHistory" />
   </EntityType>
   <EntityType Name="Account_Detail">
     <Key>
@@ -232,6 +233,7 @@
     <Property Name="FullName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="Active" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="Mangas" Relationship="Self.FK_Manga_Status" FromRole="Status" ToRole="Manga" />
+    <Property Name="Alias" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="Text">
     <Key>
@@ -712,5 +714,48 @@
       <End Role="Account" EntitySet="Accounts" />
       <End Role="Manga" EntitySet="Mangas" />
     </AssociationSet>
+    <EntitySet Name="PointHistories" EntityType="MyWebsiteModel.PointHistory" />
+    <AssociationSet Name="FK_PointHistory_Account" Association="MyWebsiteModel.FK_PointHistory_Account">
+      <End Role="Account" EntitySet="Accounts" />
+      <End Role="PointHistory" EntitySet="PointHistories" />
+    </AssociationSet>
+    <EntitySet Name="sysdiagrams" EntityType="MyWebsiteModel.sysdiagram" />
   </EntityContainer>
+  <EntityType Name="PointHistory">
+    <Key>
+      <PropertyRef Name="HistoryId" />
+    </Key>
+    <Property Name="HistoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ToDay" Type="DateTime" Precision="3" />
+    <Property Name="AccountId" Type="Int32" />
+    <Property Name="DTPoint" Type="Double" />
+    <Property Name="QLBDPoint" Type="Double" />
+    <Property Name="QLTPoint" Type="Double" />
+    <Property Name="UPCLEARPoint" Type="Double" />
+    <Property Name="Active" Type="Boolean" />
+    <NavigationProperty Name="Account" Relationship="MyWebsiteModel.FK_PointHistory_Account" FromRole="PointHistory" ToRole="Account" />
+    <Property Name="MangaId" Type="Int32" />
+  </EntityType>
+  <Association Name="FK_PointHistory_Account">
+    <End Type="MyWebsiteModel.Account" Role="Account" Multiplicity="0..1" />
+    <End Type="MyWebsiteModel.PointHistory" Role="PointHistory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Account">
+        <PropertyRef Name="AccountId" />
+      </Principal>
+      <Dependent Role="PointHistory">
+        <PropertyRef Name="AccountId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
 </Schema>

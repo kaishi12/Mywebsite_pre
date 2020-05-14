@@ -8,7 +8,7 @@
     <div class="m-b primary">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="/Account/Home">Trang chủ</a></li>
-            <li class="breadcrumb-item active">Danh sách truyện đã tạo</li>
+            <li class="breadcrumb-item active">Lịch sử điểm</li>
         </ol>
     </div>
     <div class="box black">
@@ -25,7 +25,6 @@
                             <th style="text-align:center">Điểm dịch truyện</th>
                             <th style="text-align:center">Điểm Upload Clear-text</th>
                             <th style="text-align:center">Tổng số điểm</th>
-                            <th style="text-align:center">Chi tiết</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -35,39 +34,6 @@
         </div>
     </div>
 
-</div>
-<div id="m-md" class="modal" data-backdrop="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content  box-shadow-md black lt m-b">
-            <div class="modal-header">
-                <h5 class="modal-title" id="MangaName">Large modal</h5>
-            </div>
-            <div class="modal-body p-lg">
-                <div>
-                    <div class="table-responsive">
-                        <table ui-jp="dataTable" id="datatable12" class="table table-striped b-t b-b black">
-                            <thead>
-                                <tr>
-                                    <th style="text-align:center">STT</th>
-                                    <th style="text-align:center">Tên chương</th>
-                                    <th style="text-align:center">Điểm quản lý truyện</th>
-                                    <th style="text-align:center">Điểm quản lý bản dịch</th>
-                                    <th style="text-align:center">Điểm dịch truyện</th>
-                                    <th style="text-align:center">Điểm Upload Clear-text</th>
-                                    <th style="text-align:center">Tổng số điểm</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn danger p-x-md" data-dismiss="modal">Thoát</button>
-            </div>
-        </div><!-- /.modal-content -->
-    </div>
 </div>
 <script>
      $(document).ready(function () {
@@ -114,70 +80,12 @@
                         "sClass": "text-center",
                         "bSortable": false
                     },
-                     {
-                        "aTargets": [7],
-                        "mRender": function (data, type, row) {
-                            var edit =
-                                "<a title='Chi tiết' class='btn btn-sm btn-primary' onclick='showEditModal(" +
-                                data +
-                                ")'>Chi tiết</a>";
-
-                            return edit ;
-                        },
-                    }
+                     
+                    
                 ],
                 "bAutoWidth": false,
             });
        
     }
-    function initTimeFrameDatatable2(data) {
-
-         $("#datatable12").dataTable().fnDestroy();
-            $("#datatable12").dataTable({
-                stateSave: true,
-                "bFilter": true,
-                "bSort": false,
-                "data": data,
-                "bRetrieve": true,
-                "bScrollCollapse": true,
-                "bProcessing": true,
-                "oLanguage": {
-                    "sSearch": "Tìm kiếm:",
-                    "sSearchPlaceholder": "Nhân viên",
-                    "sZeroRecords": "Không có dữ liệu phù hợp",
-                    "sInfo": "Hiển thị từ _START_ đến _END_ trên tổng số _TOTAL_ dòng",
-                    "sEmptyTable": "Không có dữ liệu",
-                    "sInfoFiltered": " - lọc ra từ _MAX_ dòng",
-                    "sLengthMenu": "Hiển thị _MENU_ dòng",
-                    "sProcessing": "Đang xử lý...",
-                    "oPaginate": {
-                        "sNext": "<i class='fa fa-chevron-right'></i>",
-                        "sPrevious": "<i class='fa fa-chevron-left'></i>"
-                    }
-                },
-                "aoColumnDefs": [
-                    {
-                        "aTargets": [0, 1, 2,3,4,5,6],
-                        "sClass": "text-center",
-                        "bSortable": false
-                    }
-                ],
-                "bAutoWidth": false,
-            });
-    }
-    function showEditModal(id) {
-         $.ajax({
-                type: 'POST',
-                url: '@Url.Action("GetListChapterbyMangaId", "Point")',
-             data: {
-                 Id: id
-             },
-             success: function (result) {
-                 $("#MangaName").text(result.manganame);
-                    initTimeFrameDatatable2(result.datatable);
-                }
-            });
-         $('#m-md').modal('show');
-
-        }
+   
 </script>

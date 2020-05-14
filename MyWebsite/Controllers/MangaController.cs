@@ -219,5 +219,55 @@ namespace MyWebsite.Controllers
             else
                 return Json(true);
         }
+        public ActionResult ListAllManga(int page,int sort,string genre,string status)
+        {
+            var list = data.Mangas.Where(m => m.Active == true);
+            if (genre != null)
+            {
+                var idgenre = data.Genres.FirstOrDefault(m => m.Alias == genre).GenreId;
+                list = list.Where(m => m.Manga_Genres.Where(g => g.GenreId == idgenre) != null);
+            }
+            if (status != null && status != "all")
+            {
+                var idstat = data.Status.FirstOrDefault(m => m.Alias == status).StatusId;
+                list = list.Where(m => m.StatusId == idstat);
+            }
+            if (sort == (int)SortManga.AZ)
+            {
+                list = list.OrderBy(m => m.FullName);
+            }
+            else if(sort == (int)SortManga.ZA)
+            {
+                list = list.OrderByDescending(m => m.FullName);
+            }
+            else if(sort == (int)SortManga.Update)
+            {
+                list = list.OrderByDescending(m => m.UpdateAt);
+            }
+            
+            ViewBag.List = list.Skip((int)MangaPerPage.number * (page-1)).Take((int)MangaPerPage.number).ToList();
+            ViewBag.Page = Math.Ceiling((double)data.Mangas.Where(m => m.Active == true).Count() / (double)MangaPerPage.number);
+            ViewBag.Status = data.Status.Where(m => m.Active).Select(m => new StatusModelManga { StatusId = m.StatusId, FullName = m.FullName, Alias = m.Alias }).ToList();
+           var Genres = data.Genres.Where(m => m.Active).Select(m => new GenresModelManga { GenreId = m.GenreId, FullName = m.FullName, Description = m.Description,Alias = m.Alias }).ToList();
+            foreach(var item in Genres)
+            {
+                item.Alias = Url.Action("ListAllManga", "Manga", new { page = page, sort = sort, genre = item.Alias, status = status }).ToString();
+            }
+            ViewBag.Genres = Genres;
+            return View();
+        }
+        public class StatusModelManga
+        {
+            public int StatusId { get; set; }
+            public string FullName { get; set; }
+            public string Alias { get; set; }
+        }
+        public class GenresModelManga
+        {
+            public int GenreId { get; set; }
+            public string FullName { get; set; }
+            public string Description { get; set; }
+            public string Alias { get; set; }
+        }
     }
 }
