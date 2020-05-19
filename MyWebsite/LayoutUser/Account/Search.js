@@ -102,7 +102,6 @@ $("#SearchButton").click(function () {
                             content += '  </ul> </div></div></div></li > ';
                         }
                         $("#class1").append(content);
-
                     }
                     else {
                         $("#class1").css("text-align", "center");

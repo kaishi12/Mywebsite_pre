@@ -245,7 +245,7 @@ namespace MyWebsite.Controllers
                 list = list.OrderByDescending(m => m.UpdateAt);
             }
             
-            ViewBag.List = list.Skip((int)MangaPerPage.number * (page-1)).Take((int)MangaPerPage.number).ToList();
+            ViewBag.List = list.Select(m=> new ListAllMangaFistLoad { MangaId = m.MangaId,CoverLink = m.CoverLink,FullName = m.FullName }).Skip((int)MangaPerPage.number * (page-1)).Take((int)MangaPerPage.number).ToList();
             ViewBag.Page = Math.Ceiling((double)data.Mangas.Where(m => m.Active == true).Count() / (double)MangaPerPage.number);
             ViewBag.Status = data.Status.Where(m => m.Active).Select(m => new StatusModelManga { StatusId = m.StatusId, FullName = m.FullName, Alias = m.Alias }).ToList();
            var Genres = data.Genres.Where(m => m.Active).Select(m => new GenresModelManga { GenreId = m.GenreId, FullName = m.FullName, Description = m.Description,Alias = m.Alias }).ToList();
@@ -254,6 +254,66 @@ namespace MyWebsite.Controllers
                 item.Alias = Url.Action("ListAllManga", "Manga", new { page = page, sort = sort, genre = item.Alias, status = status }).ToString();
             }
             ViewBag.Genres = Genres;
+            return View();
+        }
+        public ActionResult GetInfoListManga(int page, int sort, string genre, string status)
+        {
+            var list = data.Mangas.Where(m => m.Active == true);
+            if (genre != "")
+            {
+                var idgenre = data.Genres.FirstOrDefault(m => m.Alias == genre).GenreId;
+                list = list.Where(m => m.Manga_Genres.Where(g => g.GenreId == idgenre) != null);
+            }
+            if (status != "" && status != "all")
+            {
+                var idstat = data.Status.FirstOrDefault(m => m.Alias == status).StatusId;
+                list = list.Where(m => m.StatusId == idstat);
+            }
+            if (sort == (int)SortManga.AZ)
+            {
+                list = list.OrderBy(m => m.FullName);
+            }
+            else if (sort == (int)SortManga.ZA)
+            {
+                list = list.OrderByDescending(m => m.FullName);
+            }
+            else if (sort == (int)SortManga.Update)
+            {
+                list = list.OrderByDescending(m => m.UpdateAt);
+            }
+
+            var info = list.Skip((int)MangaPerPage.number * (page - 1)).Take((int)MangaPerPage.number);
+            var listmanga = new List<ListMangaDetail>();
+
+            foreach(var item in info)
+            {
+                var manga = new ListMangaDetail();
+                manga.MangaId = item.MangaId;
+                manga.FullName = item.FullName;
+                manga.Description = item.Description;
+                manga.Author = item.Author;
+                var genres = item.Manga_Genres.Where(m => m.Active == true).Select(m => new GenresModelManga { GenreId = m.GenreId, FullName = m.Genre.FullName }).ToList();
+                manga.genres = genres;
+                manga.View = item.Chapters.Sum(m => m.ViewNumber);
+                listmanga.Add(manga);
+            }
+
+            return Json(listmanga, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult MangaProfile(int id)
+        {
+            ViewBag.ListRole = data.Roles.Where(m => m.RoleId != 1).ToList();
+            ViewBag.ListLanguage = data.Languages.ToList();
+            var manga = data.Mangas.Find(id);
+            var realmanga = new ListMangaDetail();
+            realmanga.MangaId = manga.MangaId;
+            realmanga.FullName = manga.FullName;
+            realmanga.Description = manga.Description;
+            realmanga.Author = manga.Author;
+            var genres = manga.Manga_Genres.Where(m => m.Active == true).Select(m => new GenresModelManga { GenreId = m.GenreId, FullName = m.Genre.FullName }).ToList();
+            ViewBag.Genre = genres;
+            realmanga.View = manga.Chapters.Sum(m => m.ViewNumber);
+            ViewBag.Manga = realmanga;
             return View();
         }
         public class StatusModelManga
@@ -269,5 +329,21 @@ namespace MyWebsite.Controllers
             public string Description { get; set; }
             public string Alias { get; set; }
         }
+        public class ListMangaDetail
+        {
+            public int MangaId { get; set; }
+            public string FullName { get; set; }
+            public string Description { get; set; }
+            public string Author { get; set; }
+            public int View { get; set; }
+            public List<GenresModelManga> genres { get; set; }
+        }
+        public class ListAllMangaFistLoad
+        {
+            public int MangaId { get; set; }
+            public string FullName { get; set; }
+            public string CoverLink { get; set; }
+        }
+        
     }
 }

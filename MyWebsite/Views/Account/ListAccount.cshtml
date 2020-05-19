@@ -1,7 +1,7 @@
 ﻿@using MyWebsite.Service.Common;
 @{
     ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
 }
 <style>
 </style>
@@ -107,6 +107,7 @@
                 type: 'POST',
                 url: '/Account/GetAllAccount',
                 success: function (result) {
+                    console.log(typeof(result));
                     initTimeFrameDatatable(result);
                 }
             });

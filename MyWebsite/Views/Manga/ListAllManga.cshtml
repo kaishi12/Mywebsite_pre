@@ -24,7 +24,7 @@
                     <ul class="list-unstyled m-t-n-sm">
                         <li class="checkbox">
                             <label class="ui-check">
-                                <input type="checkbox" class="has-value h4"><i></i> Tất cả
+                                <input name="StatusCheck" type="radio" value="all" class="has-value h4"><i></i> Tất cả
                             </label>
                         </li>
                         @foreach (var item in ViewBag.Status)
@@ -32,9 +32,9 @@
                             <li class="radio">
                                 <label class="ui-check">
                                     <input name="StatusCheck" type="radio" value="@item.Alias" class=" has-value h4"><i></i> @item.FullName
-</label>
+                                </label>
 
-</li>
+                            </li>
                         }
 
 
@@ -68,7 +68,6 @@
                 <span class="h5 col-sm-3" style="margin:auto">Danh sách truyện</span>
                 <div class="col-sm-3 offset-sm-6 ma" style="padding-top:10px">
                     <select id="SortManga" class="form-control select2 " ui-jp="select2" ui-options="{theme: 'bootstrap'}">
-                        <option value="AK">Alaska</option>
                     </select>
                 </div>
 
@@ -78,7 +77,7 @@
                 {
                     <div class="col-xs-6 col-sm-4 col-md-3">
                         <div class="box p-a-xs">
-                            <a href="#"><img style="height:200px;width:100%" class="lazy img-responsive" data-src="/Cover/@item.CoverLink" alt="" id="d"></a>
+                            <a href="#"><img style="height:200px;width:100%" class="lazy img-responsive" data-src="/Cover/@item.CoverLink" alt="" data-id="@item.MangaId"></a>
                             <div class="p-a-sm">
                                 <div class="text-ellipsis">@item.FullName</div>
                             </div>
@@ -98,7 +97,7 @@
     </div>
 </div>
 <div id="tooltip" class="black box col-sm-4">
-    <div class="box-body pull-right">
+    <div class="box-body">
         <div id="FullName" class="h4 text-primary"></div>
         <div>Author(s):	<span id="Author"></span></div>
         <div class="_400 ">Genres :	<span id="Genres"></span></div>
@@ -115,6 +114,7 @@
 </div>
 <script src="~/LayoutUser/jquery.lazy.js"></script>
 <script>
+
     $(document).ready(function () {
         const queryString = window.location.search;
         const urlParams = new URLSearchParams(queryString);
@@ -123,6 +123,7 @@
         Pagination(+curpage, +$("#Page").val(), 3, queryString, urlParams);
         LoadImg();
         LoadSort();
+        LoadInfo();
     });
     var mouseX;
     var mouseY;
@@ -132,22 +133,45 @@
         mouseY = e.pageY;
 
     });
-
+    var checkchange = true;
+    function ClearToolTip() {
+        $("#tooltip").find("#FullName").text("");
+        $("#tooltip").find("#Author").text("");
+        $("#tooltip").find("#View").text("");
+        $("#tooltip").find("#Genres").text("");
+        $("#tooltip").find("#Des").text("");
+    }
     // hover
     $(".lazy").mouseover(function () {
+        let img = $(this);
+        if (checkchange == true) {
+            checkchange = false;
+        console.log(img.data("id"));
         // populate tooltip string
+            const found = listmanga.find(element => element.MangaId == img.data("id"));
+            $("#tooltip").find("#FullName").text(found.FullName);
+            $("#tooltip").find("#Author").text(found.Author);
+            $("#tooltip").find("#View").text(found.View);
+            $("#tooltip").find("#Des").text(found.Description);
+             $.each(found.genres, function (arrayID, element) {
 
+                 $("#tooltip").find("#Genres").append('<span class="label primary">'+element.FullName+'</span>,');
+            });
+        }
 
         // show tooltip
         $('#tooltip').stop(false, true).fadeIn(1);
 
         // position tooltip relative to mouse coordinates
         $(this).mousemove(function () {
+            
             $('#tooltip').css({ 'top': mouseY - 10, 'left': mouseX + 10 });
         });
     }).mouseout(function () {
         // hide tooltip
+        checkchange = true;
         $('#tooltip').stop(false, true).fadeOut('slow');
+        ClearToolTip();
     });
     function LoadImg() {
 
@@ -315,19 +339,38 @@
         const urlParams = new URLSearchParams(queryString);
         let hreff = "/Manga/ListAllManga?" + queryString;
         urlParams.set('sort', 0);
-        $("#SortManga").append('<option value=' +"/Manga/ListAllManga?" + urlParams.toString() + '>Từ A đến Z</option>');
+        $("#SortManga").append('<option value=' + "/Manga/ListAllManga?" + urlParams.toString() + '>Từ A đến Z</option>');
         urlParams.set('sort', 1);
-        $("#SortManga").append('<option value='  +"/Manga/ListAllManga?" + urlParams.toString() + '>Từ Z đến A</option>');
+        $("#SortManga").append('<option value=' + "/Manga/ListAllManga?" + urlParams.toString() + '>Từ Z đến A</option>');
         urlParams.set('sort', 2);
-        $("#SortManga").append('<option value='  +"/Manga/ListAllManga?" + urlParams.toString() + '>Cập nhật gần nhất</option>');
+        $("#SortManga").append('<option value=' + "/Manga/ListAllManga?" + urlParams.toString() + '>Cập nhật gần nhất</option>');
     }
-    $('#SortManga').on('change', function(){
-   window.location = $(this).val();
-});
+    $('#SortManga').on('change', function () {
+        window.location = $(this).val();
+    });
     $("#StatusCheck").on("click", function () {
         const queryString = window.location.search;
         const urlParams = new URLSearchParams(queryString);
         urlParams.set('status', document.querySelector('input[name="StatusCheck"]:checked').value);
         window.location = "/Manga/ListAllManga?" + urlParams.toString();
     })
+    var listmanga = [];
+    function LoadInfo() {
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        $.ajax({
+                type: 'POST',
+                url: '@Url.Action("GetInfoListManga", "Manga")',
+            data: {
+                page: urlParams.get('page'),
+                sort: urlParams.get('sort'),
+                genre: urlParams.get('genre'),
+                status: urlParams.get('status'),
+            },
+            success: function (result) {
+                    listmanga = result;
+                    console.log(listmanga);
+                }
+            });
+    }
 </script>

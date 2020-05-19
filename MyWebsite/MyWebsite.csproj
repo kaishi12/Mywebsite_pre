@@ -1116,6 +1116,7 @@
     <Content Include="Views\PointHistory\AllMemberHistory.cshtml" />
     <Content Include="Views\PointHistory\MemberHistory.cshtml" />
     <Content Include="Views\Manga\ListAllManga.cshtml" />
+    <Content Include="Views\Manga\MangaProfile.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

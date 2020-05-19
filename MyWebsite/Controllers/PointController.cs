@@ -32,10 +32,10 @@ namespace MyWebsite.Controllers
             double dt = 0, qlbd = 0, qlt = 0, upclear = 0;
             var day = "";
             AccountModel model = (AccountModel)Session["UserInfo"];
-            var Point = data.PointHistories.Where(m => m.Active == true && m.AccountId == model.AccountId).GroupBy(m => m.ToDay).LastOrDefault();
-            if(Point !=null)
+            var Point = data.PointHistories.Where(m => m.Active == true && m.AccountId == model.AccountId).GroupBy(m => m.ToDay).ToList().LastOrDefault();
+            if (Point != null)
             {
-                foreach(var item in Point)
+                foreach (var item in Point)
                 {
                     dt += item.DTPoint.Value;
                     qlbd += item.QLBDPoint.Value;
