@@ -94,6 +94,8 @@ namespace MyWebsite.Controllers
         public ActionResult MangaDetail(string alias, string language)
         {
             var Manga = db.Mangas.SingleOrDefault(m => m.Alias == alias);
+            ViewBag.MangaAlias = alias;
+            ViewBag.MangaId =( from tr in db.Mangas where tr.Alias == alias select tr.MangaId).SingleOrDefault().ToString();
             ViewBag.CurLang = language;
             if (Manga != null)
             {
@@ -138,7 +140,8 @@ namespace MyWebsite.Controllers
         {
             var chuongtr = db.Pages.Where(m => m.ChapterId == idChapter && m.CategoryId == 2 && m.Status == 0).OrderBy(m => m.OrderNumber).ToList();
             ViewBag.MangaName = (from tr in db.Mangas where tr.MangaId == idManga select tr.FullName).FirstOrDefault().ToString();
-            ViewBag.ChapterAlias = (from tr in db.Mangas where tr.MangaId == idManga select tr.Alias).FirstOrDefault().ToString();
+            ViewBag.MangaAlias = (from tr in db.Mangas where tr.MangaId == idManga select tr.Alias).FirstOrDefault().ToString();
+            ViewBag.ChapterAlias = alias;
             ViewBag.ChapterName = (from chtr in db.Chapters where chtr.ChapterId == idChapter select chtr.FullName).FirstOrDefault().ToString();
             ViewBag.MangaId = idManga;
             ViewBag.ChapterId = idChapter;     
@@ -337,7 +340,7 @@ namespace MyWebsite.Controllers
         #region Search
         // GET: TimKiem
         [HttpGet]
-        public ActionResult KetQuaTimKiem(string keyword, int? page)
+        public ActionResult SearchManga(string keyword, int? page)
         {
             ViewBag.TuKhoa = keyword;
             List<Manga> lstKQTK = db.Mangas.Where(n => n.FullName.Contains(keyword)).ToList();
@@ -354,7 +357,7 @@ namespace MyWebsite.Controllers
         }
 
         [HttpPost]
-        public ActionResult KetQuaTimKiem(FormCollection f, int? page)
+        public ActionResult SearchManga(FormCollection f, int? page)
         {
             string keyword = f["txtKeyword"].ToString();
             ViewBag.TuKhoa = keyword;
@@ -387,6 +390,13 @@ namespace MyWebsite.Controllers
                 data = datab,
                 status = true
             }, JsonRequestBehavior.AllowGet);
+        }
+        #endregion
+
+        #region FBPage
+        public ActionResult Fbpage()
+        {
+            return PartialView();
         }
         #endregion
     }

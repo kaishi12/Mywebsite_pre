@@ -700,17 +700,5 @@
       <End Role="Account" EntitySet="Accounts" />
       <End Role="Manga" EntitySet="Mangas" />
     </AssociationSet>
-    <EntitySet Name="Documents" EntityType="MyWebsiteModel.Document" />
   </EntityContainer>
-  <EntityType Name="Document">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Order" Type="Int32" />
-    <Property Name="Text" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="Active" Type="Boolean" />
-    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-  </EntityType>
 </Schema>

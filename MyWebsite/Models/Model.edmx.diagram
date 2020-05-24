@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="df2f1755bb144e508caf25df207d33cd" Name="Diagram1">
+      <Diagram DiagramId="2a5a2da15da54d0b9ae064c60bde042c" Name="Diagram1">
         <EntityTypeShape EntityType="MyWebsiteModel.Account" Width="1.5" PointX="0.75" PointY="12.125" IsExpanded="true" />
         <EntityTypeShape EntityType="MyWebsiteModel.Account_Detail" Width="1.5" PointX="3" PointY="13.5" IsExpanded="true" />
         <EntityTypeShape EntityType="MyWebsiteModel.Category" Width="1.5" PointX="0.75" PointY="21.75" IsExpanded="true" />
@@ -50,7 +50,6 @@
         <AssociationConnector Association="MyWebsiteModel.FK_Text_Translation" ManuallyRouted="false" />
         <AssociationConnector Association="MyWebsiteModel.FK_Translation_Detail_Translation" ManuallyRouted="false" />
         <AssociationConnector Association="MyWebsiteModel.Bookmark" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="MyWebsiteModel.Document" Width="1.5" PointX="3.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

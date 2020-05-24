@@ -261,17 +261,5 @@
         <ScalarProperty Name="MangaId" ColumnName="MangaId" />
       </EndProperty>
     </AssociationSetMapping>
-    <EntitySetMapping Name="Documents">
-      <EntityTypeMapping TypeName="MyWebsiteModel.Document">
-        <MappingFragment StoreEntitySet="Document">
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="Active" ColumnName="Active" />
-          <ScalarProperty Name="Image" ColumnName="Image" />
-          <ScalarProperty Name="Text" ColumnName="Text" />
-          <ScalarProperty Name="Order" ColumnName="Order" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

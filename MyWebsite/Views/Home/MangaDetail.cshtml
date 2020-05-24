@@ -129,10 +129,9 @@
 
     @Html.Action("MangaChapter", "Home", new { id = @Model.MangaId, language = ViewBag.CurLang })
 
-    @*<div class="comment-info">
-            <div class="fb-comments" data-href="http://manganelo.com/manga/cd919002" data-width="100%" data-numposts="10" data-colorscheme="light">
-            </div>
-        </div>*@
+    <div class="comment-info">
+        <div class="fb-comments" data-href="https://tentrangweb.com/@ViewBag.MangaAlias-@ViewBag.MangaId" data-numposts="10" data-width="100%"></div>
+    </div>
     @*<script type="application/javascript">
         $votepointstar = '5';
         $defaultpointrating = '4.59';

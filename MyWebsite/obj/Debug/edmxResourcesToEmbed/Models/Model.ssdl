@@ -60,17 +60,6 @@ warning 6002: The table/view 'MyWebsite.dbo.Bookmark' does not have a primary ke
     <Property Name="MangaId" Type="int" Nullable="false" />
     <Property Name="Alias" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
-  <EntityType Name="Document">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Order" Type="int" />
-    <Property Name="Text" Type="nvarchar(max)" />
-    <Property Name="Image" Type="nvarchar(max)" />
-    <Property Name="Active" Type="bit" />
-    <Property Name="Name" Type="nvarchar(max)" />
-  </EntityType>
   <EntityType Name="Font">
     <Key>
       <PropertyRef Name="FontId" />
@@ -575,7 +564,6 @@ warning 6002: The table/view 'MyWebsite.dbo.Bookmark' does not have a primary ke
     <EntitySet Name="Account_Detail" EntityType="Self.Account_Detail" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Chapter" EntityType="Self.Chapter" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Document" EntityType="Self.Document" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Font" EntityType="Self.Font" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Genre" EntityType="Self.Genre" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Language" EntityType="Self.Language" Schema="dbo" store:Type="Tables" />

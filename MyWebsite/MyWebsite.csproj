@@ -615,13 +615,6 @@
     <Content Include="Models\Model.edmx.diagram">
       <DependentUpon>Model.edmx</DependentUpon>
     </Content>
-    <EntityDeploy Include="Models\Model1Test.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Model1Test.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\Model1Test.edmx.diagram">
-      <DependentUpon>Model1Test.edmx</DependentUpon>
-    </Content>
     <None Include="Scripts\jquery-1.6.4-vsdoc.js" />
     <Content Include="Models\Model.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -632,16 +625,6 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model.edmx</DependentUpon>
       <LastGenOutput>Model.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\Model1Test.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Model1Test.edmx</DependentUpon>
-      <LastGenOutput>Model1Test.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\Model1Test.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Model1Test.edmx</DependentUpon>
-      <LastGenOutput>Model1Test.cs</LastGenOutput>
     </Content>
     <Content Include="RootPicture\error-404.jpg" />
     <Content Include="RootPicture\Icons\manga-author.png" />
@@ -691,9 +674,6 @@
     <Compile Include="Models\Chapter.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Document.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Font.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -726,21 +706,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Model.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Model1Test.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model1Test.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Model1Test.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model1Test.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Model1Test.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model1Test.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\Notification.cs">
       <DependentUpon>Model.tt</DependentUpon>
@@ -1093,9 +1058,10 @@
     <Content Include="Views\Home\MangaByGenre.cshtml" />
     <Content Include="Views\Home\GetLasted1Chapter.cshtml" />
     <Content Include="Views\Home\NewManga.cshtml" />
-    <Content Include="Views\Home\KetQuaTimKiem.cshtml" />
+    <Content Include="Views\Home\SearchManga.cshtml" />
     <Content Include="Views\Point\Index.cshtml" />
     <Content Include="Views\Document\Index.cshtml" />
+    <Content Include="Views\Home\Fbpage.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

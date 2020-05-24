@@ -21,6 +21,8 @@ namespace MyWebsite
             routes.MapRoute("MangaDetails-Language","manga/{alias}-{idManga}/{language}",new { controller = "Home", action = "MangaDetail" },new { idManga = @"\d+" }, new[] { "MyWebsite.Controllers" });
             routes.MapRoute("MangaDetails","manga/{alias}-{idManga}",new { controller = "Home", action = "MangaDetail" },new { idManga = @"\d+" }, new[] { "MyWebsite.Controllers" });
 
+            routes.MapRoute("SearchManga", "SearchManga", new { controller = "Home", action = "SearchManga" }, new[] { "MyWebsite.Controllers" });
+
             //Account
             routes.MapRoute("Login","Login",new { controller = "Account", action = "Login" });
             routes.MapRoute("Register", "Register", new { controller = "Account", action = "Register" });

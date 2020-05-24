@@ -1071,9 +1071,10 @@ h3 {
 }
 
 .comment-info {
+    margin-top:5px;
     background: #fff;
     float: left;
-    width: 98%;
+    width: 100%;
     padding: 10px 1%
 }
 

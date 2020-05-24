@@ -15,10 +15,10 @@ namespace MyWebsite.Controllers
         {
             return View();
         }
-        public ActionResult LoadDocument()
-        {
-            var list = data.Documents.ToList();
-            return Json(list, JsonRequestBehavior.AllowGet);
-        }
+        //public ActionResult LoadDocument()
+        //{
+        //    var list = data.Documents.ToList();
+        //    return Json(list, JsonRequestBehavior.AllowGet);
+        //}
     }
 }

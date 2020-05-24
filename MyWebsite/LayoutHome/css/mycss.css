@@ -54,6 +54,11 @@
     position:absolute;
 }
 
+.owl-prev:focus, .owl-next:focus{
+    border:none;
+    outline:none;
+}
+
 .owl-nav i{
     color:white;
     font-weight:bold;
@@ -118,6 +123,12 @@ header{
 }
 
 /*Autocomplete UI*/
+.ui-menu{
+    min-height:10px;
+    max-height:500px;
+    overflow:scroll;
+}
+
 .ui-menu-item a{
     display:inline-flex;
     width:100%;

@@ -13,8 +13,8 @@ namespace MyWebsite.Service.Common
     public static class Const
     {
         public const string HEAR_BEAT_MSG = "I'm still alive, DO NOT KILL ME!";
-        public const string conStr = "Data Source=DESKTOP-QU77M0A;Initial Catalog=MyWebsite;Integrated Security=True";
-        //public const string conStr = "Data Source=LAPTOP-UFP2PSK0;Initial Catalog=MyWebsite;Integrated Security=True";
+        //public const string conStr = "Data Source=DESKTOP-QU77M0A;Initial Catalog=MyWebsite;Integrated Security=True";
+        public const string conStr = "Data Source=LAPTOP-UFP2PSK0;Initial Catalog=MyWebsite;Integrated Security=True";
         public const string sqlCommand = @"SELECT [NotificationId] from [dbo].[Notification] where [CreateAt] > @CreateAt";
     }
     //Cho table Manga_Detail
