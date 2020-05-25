@@ -688,6 +688,9 @@
     <Compile Include="Models\Account_Detail.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Bookmark.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Category.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>

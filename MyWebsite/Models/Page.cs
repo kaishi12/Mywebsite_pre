@@ -32,10 +32,10 @@ namespace MyWebsite.Models
         public int PageId_Fa { get; set; }
         public Nullable<int> Status { get; set; }
     
-        public virtual Account Account { get; set; }
         public virtual Category Category { get; set; }
         public virtual Chapter Chapter { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TextBox> TextBoxes { get; set; }
+        public virtual Account Account { get; set; }
     }
 }

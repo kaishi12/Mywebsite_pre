@@ -12,14 +12,8 @@ namespace MyWebsite.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Account_Detail
+    public partial class Bookmark
     {
-        public int AccountId { get; set; }
-        public int PointId { get; set; }
-        public Nullable<double> Total { get; set; }
-        public bool Active { get; set; }
-    
-        public virtual Point Point { get; set; }
-        public virtual Account Account { get; set; }
+        public int id { get; set; }
     }
 }

@@ -5,7 +5,6 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="0e28168e87154c06adbcae0b0b1bc739" Name="Diagram1">
-        <EntityTypeShape EntityType="MyWebsiteModel.Account" Width="1.5" PointX="0.75" PointY="12.125" IsExpanded="true" />
         <EntityTypeShape EntityType="MyWebsiteModel.Account_Detail" Width="1.5" PointX="3" PointY="13.5" IsExpanded="true" />
         <EntityTypeShape EntityType="MyWebsiteModel.Category" Width="1.5" PointX="0.75" PointY="21.75" IsExpanded="true" />
         <EntityTypeShape EntityType="MyWebsiteModel.Chapter" Width="1.5" PointX="8.25" PointY="17" IsExpanded="true" />
@@ -13,7 +12,6 @@
         <EntityTypeShape EntityType="MyWebsiteModel.Font" Width="1.5" PointX="14.25" PointY="12.5" IsExpanded="true" />
         <EntityTypeShape EntityType="MyWebsiteModel.Genre" Width="1.5" PointX="6" PointY="9.5" IsExpanded="true" />
         <EntityTypeShape EntityType="MyWebsiteModel.Language" Width="1.5" PointX="9" PointY="6.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="MyWebsiteModel.Manga" Width="1.5" PointX="6" PointY="12.625" IsExpanded="true" />
         <EntityTypeShape EntityType="MyWebsiteModel.Manga_Detail" Width="1.5" PointX="8.25" PointY="13" IsExpanded="true" />
         <EntityTypeShape EntityType="MyWebsiteModel.Manga_Genres" Width="1.5" PointX="8.25" PointY="9.625" IsExpanded="true" />
         <EntityTypeShape EntityType="MyWebsiteModel.Notification" Width="1.5" PointX="3" PointY="9.25" IsExpanded="true" />
@@ -26,34 +24,36 @@
         <EntityTypeShape EntityType="MyWebsiteModel.TextBox" Width="1.5" PointX="5.25" PointY="18.25" IsExpanded="true" />
         <EntityTypeShape EntityType="MyWebsiteModel.Translation" Width="1.5" PointX="11.25" PointY="13" IsExpanded="true" />
         <EntityTypeShape EntityType="MyWebsiteModel.Translation_Detail" Width="1.5" PointX="13.5" PointY="15.5" IsExpanded="true" />
-        <AssociationConnector Association="MyWebsiteModel.FK_Account_Detail_Account" ManuallyRouted="false" />
-        <AssociationConnector Association="MyWebsiteModel.FK_Manga_Detail_Account" ManuallyRouted="false" />
-        <AssociationConnector Association="MyWebsiteModel.FK_Notification_Account" ManuallyRouted="false" />
-        <AssociationConnector Association="MyWebsiteModel.FK_Page_Account" ManuallyRouted="false" />
-        <AssociationConnector Association="MyWebsiteModel.FK_Text_Account" ManuallyRouted="false" />
-        <AssociationConnector Association="MyWebsiteModel.FK_Translation_Account" ManuallyRouted="false" />
         <AssociationConnector Association="MyWebsiteModel.FK_Account_Detail_Point" ManuallyRouted="false" />
         <AssociationConnector Association="MyWebsiteModel.FK_Page_Category" ManuallyRouted="false" />
-        <AssociationConnector Association="MyWebsiteModel.FK_Chapter_Manga" ManuallyRouted="false" />
         <AssociationConnector Association="MyWebsiteModel.FK_Page_Chapter" ManuallyRouted="false" />
         <AssociationConnector Association="MyWebsiteModel.FK_Translation_Detail_Chapter" ManuallyRouted="false" />
         <AssociationConnector Association="MyWebsiteModel.FK_Text_Font" ManuallyRouted="false" />
         <AssociationConnector Association="MyWebsiteModel.FK_Manga_Genres_Genre" ManuallyRouted="false" />
         <AssociationConnector Association="MyWebsiteModel.FK_Translation_Language" ManuallyRouted="false" />
-        <AssociationConnector Association="MyWebsiteModel.FK_Manga_Detail_Manga1" ManuallyRouted="false" />
-        <AssociationConnector Association="MyWebsiteModel.FK_Manga_Genres_Manga" ManuallyRouted="false" />
-        <AssociationConnector Association="MyWebsiteModel.FK_Manga_Status" ManuallyRouted="false" />
-        <AssociationConnector Association="MyWebsiteModel.FK_Translation_Manga" ManuallyRouted="false" />
         <AssociationConnector Association="MyWebsiteModel.FK_Manga_Detail_Role" ManuallyRouted="false" />
         <AssociationConnector Association="MyWebsiteModel.FK_Notification_NotifyType" ManuallyRouted="false" />
         <AssociationConnector Association="MyWebsiteModel.FK_TextBox_Page" ManuallyRouted="false" />
         <AssociationConnector Association="MyWebsiteModel.FK_Text_TextBox1" ManuallyRouted="false" />
         <AssociationConnector Association="MyWebsiteModel.FK_Text_Translation" ManuallyRouted="false" />
         <AssociationConnector Association="MyWebsiteModel.FK_Translation_Detail_Translation" ManuallyRouted="false" />
-        <AssociationConnector Association="MyWebsiteModel.Bookmark" ManuallyRouted="false" />
         <EntityTypeShape EntityType="MyWebsiteModel.PointHistory" Width="1.5" PointX="3" PointY="21.375" />
-        <AssociationConnector Association="MyWebsiteModel.FK_PointHistory_Account" />
         <EntityTypeShape EntityType="MyWebsiteModel.sysdiagram" Width="1.5" PointX="3.375" PointY="0.75" />
+        <EntityTypeShape EntityType="MyWebsiteModel.Account" Width="1.5" PointX="1.125" PointY="12.125" />
+        <EntityTypeShape EntityType="MyWebsiteModel.Bookmark" Width="1.5" PointX="0.75" PointY="5.75" />
+        <EntityTypeShape EntityType="MyWebsiteModel.Manga" Width="1.5" PointX="6.375" PointY="1.75" />
+        <AssociationConnector Association="MyWebsiteModel.FK_Account_Detail_Account" />
+        <AssociationConnector Association="MyWebsiteModel.FK_Manga_Detail_Account" />
+        <AssociationConnector Association="MyWebsiteModel.FK_Notification_Account" />
+        <AssociationConnector Association="MyWebsiteModel.FK_Page_Account" />
+        <AssociationConnector Association="MyWebsiteModel.FK_PointHistory_Account" />
+        <AssociationConnector Association="MyWebsiteModel.FK_Text_Account" />
+        <AssociationConnector Association="MyWebsiteModel.FK_Translation_Account" />
+        <AssociationConnector Association="MyWebsiteModel.FK_Chapter_Manga" />
+        <AssociationConnector Association="MyWebsiteModel.FK_Manga_Detail_Manga1" />
+        <AssociationConnector Association="MyWebsiteModel.FK_Manga_Genres_Manga" />
+        <AssociationConnector Association="MyWebsiteModel.FK_Manga_Status" />
+        <AssociationConnector Association="MyWebsiteModel.FK_Translation_Manga" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

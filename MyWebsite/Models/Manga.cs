@@ -21,7 +21,6 @@ namespace MyWebsite.Models
             this.Manga_Detail = new HashSet<Manga_Detail>();
             this.Manga_Genres = new HashSet<Manga_Genres>();
             this.Translations = new HashSet<Translation>();
-            this.Accounts = new HashSet<Account>();
         }
     
         public int MangaId { get; set; }
@@ -44,7 +43,5 @@ namespace MyWebsite.Models
         public virtual Status Status { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Translation> Translations { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Account> Accounts { get; set; }
     }
 }

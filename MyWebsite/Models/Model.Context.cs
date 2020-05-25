@@ -25,7 +25,6 @@ namespace MyWebsite.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Account> Accounts { get; set; }
         public virtual DbSet<Account_Detail> Account_Detail { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<Chapter> Chapters { get; set; }
@@ -33,7 +32,6 @@ namespace MyWebsite.Models
         public virtual DbSet<Font> Fonts { get; set; }
         public virtual DbSet<Genre> Genres { get; set; }
         public virtual DbSet<Language> Languages { get; set; }
-        public virtual DbSet<Manga> Mangas { get; set; }
         public virtual DbSet<Manga_Detail> Manga_Detail { get; set; }
         public virtual DbSet<Manga_Genres> Manga_Genres { get; set; }
         public virtual DbSet<Notification> Notifications { get; set; }
@@ -48,5 +46,8 @@ namespace MyWebsite.Models
         public virtual DbSet<Translation_Detail> Translation_Detail { get; set; }
         public virtual DbSet<PointHistory> PointHistories { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
+        public virtual DbSet<Account> Accounts { get; set; }
+        public virtual DbSet<Bookmark> Bookmarks { get; set; }
+        public virtual DbSet<Manga> Mangas { get; set; }
     }
 }

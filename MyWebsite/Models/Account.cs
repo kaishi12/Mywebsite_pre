@@ -21,10 +21,9 @@ namespace MyWebsite.Models
             this.Manga_Detail = new HashSet<Manga_Detail>();
             this.Notifications = new HashSet<Notification>();
             this.Pages = new HashSet<Page>();
+            this.PointHistories = new HashSet<PointHistory>();
             this.Texts = new HashSet<Text>();
             this.Translations = new HashSet<Translation>();
-            this.Mangas = new HashSet<Manga>();
-            this.PointHistories = new HashSet<PointHistory>();
         }
     
         public int AccountId { get; set; }
@@ -52,12 +51,10 @@ namespace MyWebsite.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Page> Pages { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PointHistory> PointHistories { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Text> Texts { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Translation> Translations { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Manga> Mangas { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PointHistory> PointHistories { get; set; }
     }
 }
