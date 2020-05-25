@@ -725,6 +725,9 @@
     <Compile Include="Models\Status.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\sysdiagram.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Text.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>

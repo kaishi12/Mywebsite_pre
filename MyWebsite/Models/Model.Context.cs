@@ -45,5 +45,6 @@ namespace MyWebsite.Models
         public virtual DbSet<TextBox> TextBoxes { get; set; }
         public virtual DbSet<Translation> Translations { get; set; }
         public virtual DbSet<Translation_Detail> Translation_Detail { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
     }
 }

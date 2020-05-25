@@ -29,8 +29,6 @@
     <Property Name="Total" Type="float" />
     <Property Name="Active" Type="bit" Nullable="false" />
   </EntityType>
-  <!--Errors Found During Generation:
-warning 6002: The table/view 'MyWebsite.dbo.Bookmark' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="Bookmark">
     <Key>
       <PropertyRef Name="AccountId" />
@@ -195,6 +193,16 @@ warning 6002: The table/view 'MyWebsite.dbo.Bookmark' does not have a primary ke
     <Property Name="FullName" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="Active" Type="bit" Nullable="false" />
   </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
   <EntityType Name="Text">
     <Key>
       <PropertyRef Name="TextId" />
@@ -224,6 +232,14 @@ warning 6002: The table/view 'MyWebsite.dbo.Bookmark' does not have a primary ke
     <Property Name="PageId" Type="int" Nullable="false" />
     <Property Name="Active" Type="bit" Nullable="false" />
     <Property Name="Degree" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TheoDoi">
+    <Key>
+      <PropertyRef Name="MangaId" />
+      <PropertyRef Name="AccountId" />
+    </Key>
+    <Property Name="MangaId" Type="int" Nullable="false" />
+    <Property Name="AccountId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Translation">
     <Key>
@@ -499,6 +515,30 @@ warning 6002: The table/view 'MyWebsite.dbo.Bookmark' does not have a primary ke
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_TheoDoi_Account">
+    <End Role="Account" Type="Self.Account" Multiplicity="1" />
+    <End Role="TheoDoi" Type="Self.TheoDoi" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Account">
+        <PropertyRef Name="AccountId" />
+      </Principal>
+      <Dependent Role="TheoDoi">
+        <PropertyRef Name="AccountId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TheoDoi_Manga">
+    <End Role="Manga" Type="Self.Manga" Multiplicity="1" />
+    <End Role="TheoDoi" Type="Self.TheoDoi" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Manga">
+        <PropertyRef Name="MangaId" />
+      </Principal>
+      <Dependent Role="TheoDoi">
+        <PropertyRef Name="MangaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Translation_Account">
     <End Role="Account" Type="Self.Account" Multiplicity="1" />
     <End Role="Translation" Type="Self.Translation" Multiplicity="*" />
@@ -562,6 +602,7 @@ warning 6002: The table/view 'MyWebsite.dbo.Bookmark' does not have a primary ke
   <EntityContainer Name="MyWebsiteModelStoreContainer">
     <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Account_Detail" EntityType="Self.Account_Detail" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Bookmark" EntityType="Self.Bookmark" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Chapter" EntityType="Self.Chapter" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Font" EntityType="Self.Font" Schema="dbo" store:Type="Tables" />
@@ -576,16 +617,12 @@ warning 6002: The table/view 'MyWebsite.dbo.Bookmark' does not have a primary ke
     <EntitySet Name="Point" EntityType="Self.Point" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Status" EntityType="Self.Status" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Text" EntityType="Self.Text" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TextBox" EntityType="Self.TextBox" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TheoDoi" EntityType="Self.TheoDoi" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Translation" EntityType="Self.Translation" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Translation_Detail" EntityType="Self.Translation_Detail" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Bookmark" EntityType="Self.Bookmark" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [Bookmark].[AccountId] AS [AccountId], 
-    [Bookmark].[MangaId] AS [MangaId]
-    FROM [dbo].[Bookmark] AS [Bookmark]</DefiningQuery>
-    </EntitySet>
     <AssociationSet Name="FK_Account_Detail_Account" Association="Self.FK_Account_Detail_Account">
       <End Role="Account" EntitySet="Account" />
       <End Role="Account_Detail" EntitySet="Account_Detail" />
@@ -669,6 +706,14 @@ warning 6002: The table/view 'MyWebsite.dbo.Bookmark' does not have a primary ke
     <AssociationSet Name="FK_TextBox_Page" Association="Self.FK_TextBox_Page">
       <End Role="Page" EntitySet="Page" />
       <End Role="TextBox" EntitySet="TextBox" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TheoDoi_Account" Association="Self.FK_TheoDoi_Account">
+      <End Role="Account" EntitySet="Account" />
+      <End Role="TheoDoi" EntitySet="TheoDoi" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TheoDoi_Manga" Association="Self.FK_TheoDoi_Manga">
+      <End Role="Manga" EntitySet="Manga" />
+      <End Role="TheoDoi" EntitySet="TheoDoi" />
     </AssociationSet>
     <AssociationSet Name="FK_Translation_Account" Association="Self.FK_Translation_Account">
       <End Role="Account" EntitySet="Account" />

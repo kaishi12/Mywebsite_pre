@@ -94,14 +94,5 @@ $('.owl-carousel').owlCarousel({
     }
 })
 /*-----------------------------------------------------------------------------------*/
-/* Bookmark Toggle Show/Hide
+/* Bookmark
 /*-----------------------------------------------------------------------------------*/
-jQuery(document).ready(function () {
-    jQuery('.toggle_hide').hide();
-
-    jQuery(".bookmarkb").css('cursor', 'pointer').click(function () {
-        var $this = $(this);
-        $this.next("div").fadeToggle(200);
-        $('.toggle_hide').not($this.next("div")).fadeOut(800);
-    });
-});

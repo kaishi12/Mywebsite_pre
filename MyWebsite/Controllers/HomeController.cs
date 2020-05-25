@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using MyWebsite.ViewModels.Account;
 
 namespace MyWebsite.Controllers
 {
@@ -399,5 +400,21 @@ namespace MyWebsite.Controllers
             return PartialView();
         }
         #endregion
+
+        //#region Bookmark
+        //[HttpPost]
+        //public ActionResult AddBookmark(int mangaId)
+        //{
+        //    AccountModel user = (AccountModel)Session["UserInfo"];
+        //    if (user != null)
+        //    {
+        //        db.Bo
+        //    }
+        //    else
+        //    {
+        //        return RedirectToAction("Login");
+        //    }
+        //}
+        //#endregion
     }
 }

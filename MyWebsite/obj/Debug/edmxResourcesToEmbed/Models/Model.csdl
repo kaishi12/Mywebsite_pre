@@ -25,6 +25,7 @@
     <NavigationProperty Name="Texts" Relationship="Self.FK_Text_Account" FromRole="Account" ToRole="Text" />
     <NavigationProperty Name="Translations" Relationship="Self.FK_Translation_Account" FromRole="Account" ToRole="Translation" />
     <NavigationProperty Name="Mangas" Relationship="Self.Bookmark" FromRole="Account" ToRole="Manga" />
+    <NavigationProperty Name="Mangas1" Relationship="MyWebsiteModel.TheoDoi" FromRole="Account" ToRole="Manga" />
   </EntityType>
   <EntityType Name="Account_Detail">
     <Key>
@@ -118,6 +119,7 @@
     <NavigationProperty Name="Status" Relationship="Self.FK_Manga_Status" FromRole="Manga" ToRole="Status" />
     <NavigationProperty Name="Translations" Relationship="Self.FK_Translation_Manga" FromRole="Manga" ToRole="Translation" />
     <NavigationProperty Name="Accounts" Relationship="Self.Bookmark" FromRole="Manga" ToRole="Account" />
+    <NavigationProperty Name="Accounts1" Relationship="MyWebsiteModel.TheoDoi" FromRole="Manga" ToRole="Account" />
   </EntityType>
   <EntityType Name="Manga_Detail">
     <Key>
@@ -700,5 +702,24 @@
       <End Role="Account" EntitySet="Accounts" />
       <End Role="Manga" EntitySet="Mangas" />
     </AssociationSet>
+    <AssociationSet Name="TheoDoi" Association="MyWebsiteModel.TheoDoi">
+      <End Role="Account" EntitySet="Accounts" />
+      <End Role="Manga" EntitySet="Mangas" />
+    </AssociationSet>
+    <EntitySet Name="sysdiagrams" EntityType="MyWebsiteModel.sysdiagram" />
   </EntityContainer>
+  <Association Name="TheoDoi">
+    <End Type="MyWebsiteModel.Account" Role="Account" Multiplicity="*" />
+    <End Type="MyWebsiteModel.Manga" Role="Manga" Multiplicity="*" />
+  </Association>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
 </Schema>

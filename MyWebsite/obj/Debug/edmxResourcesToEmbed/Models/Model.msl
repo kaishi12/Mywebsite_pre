@@ -261,5 +261,24 @@
         <ScalarProperty Name="MangaId" ColumnName="MangaId" />
       </EndProperty>
     </AssociationSetMapping>
+    <AssociationSetMapping Name="TheoDoi" TypeName="MyWebsiteModel.TheoDoi" StoreEntitySet="TheoDoi">
+      <EndProperty Name="Manga">
+        <ScalarProperty Name="MangaId" ColumnName="MangaId" />
+      </EndProperty>
+      <EndProperty Name="Account">
+        <ScalarProperty Name="AccountId" ColumnName="AccountId" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="MyWebsiteModel.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="definition" ColumnName="definition" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>
