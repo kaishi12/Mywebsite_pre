@@ -24,7 +24,7 @@ namespace MyWebsite.Controllers
         public ActionResult PageDetail(int PageId)
         {
             var page = data.Pages.SingleOrDefault(p => p.PageId == PageId);
-            var listPage = data.Pages.Where(m => m.ChapterId == page.ChapterId && m.Active == true).ToList();
+            var listPage = data.Pages.Where(m => m.ChapterId == page.ChapterId && m.Active == true && m.CategoryId ==(int)CategoriesPage.Raw).ToList();
            
            
                 List<TextBox> list = new List<TextBox>();

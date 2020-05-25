@@ -61,10 +61,20 @@
                                     @Html.DisplayFor(modelItem => item.CreatAt)
                                 </td>
                                 <td>
-                                    <a class="btn btn-default primary" href="/Contribute/Editor?ChapterId=@item.FirstChapter&CategoryId=1">
-                                       Tải lên clear-text
-                                    </a>  
-                                   
+                                    @if (item.FirstChapter == -1)
+                                    {
+                                        <button title="truyện này chưa có chương nào" disabled class="btn btn-default primary" href="/Contribute/Editor?ChapterId=@item.FirstChapter&CategoryId=1">
+                                            Tải lên clear-text
+                                        </button>
+                                    }
+                                    else
+                                    {
+                                        <a class="btn btn-default primary" href="/Contribute/Editor?ChapterId=@item.FirstChapter&CategoryId=1">
+                                            Tải lên clear-text
+                                        </a>
+                                    }
+
+
 
                                 </td>
                             </tr>

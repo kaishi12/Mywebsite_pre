@@ -316,6 +316,20 @@ namespace MyWebsite.Controllers
             ViewBag.Manga = realmanga;
             return View();
         }
+        public ActionResult GetInfoJoin(int id)
+        {
+            var list = data.Manga_Detail.Where(m => m.Active == true && m.MangaId == id && m.Status ==(int) StatusMember.Accept).Select(m=> new InfoJoinModel { RoleId = m.RoleId,AccountId = m.AccountId, LanguageId = m.Language,UserName = m.Account.UserName});
+            var Ql = list.FirstOrDefault(m => m.RoleId == (int)EnumRole.CM);
+            var DT = list.Where(m => m.RoleId == (int)EnumRole.TR);
+            var UC = list.Where(m => m.RoleId == (int)EnumRole.UC);
+            var TM = list.Where(m => m.RoleId == (int)EnumRole.TM).ToList();
+            var listlanguage = data.Languages.Where(m => m.Active == true).ToList();
+            foreach(var item in TM)
+            {
+                item.Language = listlanguage.FirstOrDefault(m => m.LanguageId == item.LanguageId).FullName;
+            }
+            return Json(new { ql = Ql, dt = DT, uc = UC, tm = TM }, JsonRequestBehavior.AllowGet);
+        }
         public class StatusModelManga
         {
             public int StatusId { get; set; }
@@ -343,6 +357,14 @@ namespace MyWebsite.Controllers
             public int MangaId { get; set; }
             public string FullName { get; set; }
             public string CoverLink { get; set; }
+        }
+        public class InfoJoinModel
+        {
+            public int AccountId { get; set; }
+            public string UserName { get; set; }
+            public int RoleId { get; set; }
+            public int? LanguageId { get; set; }
+            public string Language { get; set; }
         }
         
     }

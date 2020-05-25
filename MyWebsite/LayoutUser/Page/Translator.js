@@ -109,7 +109,7 @@ function DrawImg() {
     $('#tblEntAttributes').append($('<tbody>'));
 }
 
-function RotateRec(status, cete, X, Y, W, H, degrees, cx, cy, text, font, outline, color, italic, bold, size, color) {
+async function RotateRec(status, cete, X, Y, W, H, degrees, cx, cy, text, font, outline, color, italic, bold, size, color) {
 
     let fontTextBox = "";
     if (italic == 1) {

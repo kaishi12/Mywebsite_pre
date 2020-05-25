@@ -28,13 +28,13 @@
                     
                     <div class="col-sm-5">
                         <div id="FullName" class="h4 text-primary">Đã tham gia</div>
-                        <div style="margin-bottom:7px;">Quản lý truyện:	<span id="Author" class="label">Kaishi1</span></div>
-                        <div class="_400 ">Tải lên Clear-text :	<span id="Genres" class="label">ádadad</span>,<span id="Genres" class="label">ádadad</span>,<span id="Genres" class="label">ádadad</span>,<span id="Genres" class="label">ádadad</span>,<span id="Genres" class="label">ádadad</span></div>
-                        <br />
-                        <div class="_400 ">Dịch Truyện :	<span id="View"></span></div>
-                        <div>
+                        <div style="margin-bottom:7px;">Quản lý truyện:	<span id="ql" class="label">Kaishi1</span></div>
+                        <div style="margin-bottom:7px;" class="_400 " id="uc">Tải lên Clear-text :	</div>
+                        
+                        <div style="margin-bottom:7px;" class="_400 " id="dt">Dịch Truyện :</div>
+                        <div style="margin-bottom:7px;" id="tm">
                             Quản lý bản dịch :
-                            <span id="Des"></span>
+                           
                         </div>
                     </div>
                 </div>
@@ -98,6 +98,9 @@
         </div>
     </div>
 <script>
+    $(document).ready(function () {
+        LoadInfoJoin();
+    })
     $("#SelectRole").on("change", function () {
         if ($(this).val() == 4  )
             $("#SelectLanguage").show("slow");
@@ -110,13 +113,12 @@
     if ($("#Language").val() != null) {
         language = $("#Language").val();
     }
-    console.log(language);
         $.ajax({
             url: "/Manga/Join",
             type: "post",
            
             data: {
-                id: +$("#MangaId").val(),
+                id:  +urlParams[urlParams.length-1],
                 role: +$("#SelectRole").val(),
                 language: +language,
                 type: 0
@@ -136,5 +138,33 @@
             }
         });
     })
-    
+    function LoadInfoJoin() {
+        const queryString = window.location.pathname;
+        const urlParams = queryString.split("/");
+         $.ajax({
+            url: "/Manga/GetInfoJoin",
+            type: "post",
+           
+            data: {
+                id: urlParams[urlParams.length-1],
+            },
+             success: function (result) {
+                 console.log(result);
+                $("#ql").text(result.ql.UserName);
+                $.each(result.dt, function (arrayID, element) {
+
+                 $("#dt").append('<span class="label primary">'+element.UserName+'</span>,');
+                });
+                $.each(result.uc, function (arrayID, element) {
+
+                 $("#uc").append('<span class="label primary">'+element.UserName+'</span>,');
+                });
+                 $.each(result.tm, function (arrayID, element) {
+
+                     $("#tm").append('<div style="margin-bottom:7px;"> ' + element.Language + ' :<span class="label primary">'+element.UserName+'</span> </div>');
+                });
+
+            }
+        });
+    }
 </script>

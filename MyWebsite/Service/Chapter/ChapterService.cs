@@ -124,9 +124,18 @@ namespace MyWebsite.Service.Chapter
         }
         public int GetFirstChapter(int MangaId)
         {
-            var param = new DynamicParameters();
-            param.Add("@MangaId", MangaId);
-            return (int)DALHelpers.ExecuteScalarByStore("Chapter_GetFirstChapter", param);
+            try
+            {
+                var param = new DynamicParameters();
+                param.Add("@MangaId", MangaId);
+                var a = (int)DALHelpers.ExecuteScalarByStore("Chapter_GetFirstChapter", param);
+                return (int)DALHelpers.ExecuteScalarByStore("Chapter_GetFirstChapter", param);
+            }
+            catch
+            {
+                return -1;
+            }
+            
         }
         public int? GetFirstPage(int MangaId)
         {
