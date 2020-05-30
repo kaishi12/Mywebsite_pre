@@ -141,7 +141,12 @@ namespace MyWebsite.Controllers
         {
             AccountModel accountModel = (AccountModel)Session["UserInfo"];
            var list = MangaService.GetListMangaByAccountIdandRoleId(accountModel.AccountId, (int)EnumRole.CM);
-            var chapter = data.Chapters.Where(m => m.Active == true).GroupBy(m => m.MangaId).Select(m =>new { id = m.Key, count = m.Count(), totalview = m.Where(l=>l.ViewNumber != null).Sum(l=>l.ViewNumber) }).ToList();
+            var translation = data.Translations.Where(m => m.Active).ToList();
+            foreach(var item in list)
+            {
+                item.TransCount = translation.Where(m => m.MangaId == item.MangaId).Count();
+            }    
+            var chapter = data.Chapters.Where(m => m.Active == true).GroupBy(m => m.MangaId).Select(m => new { id = m.Key, count = m.Count(), totalview = m.Sum(l => l.ViewNumber) }).ToList();
             foreach(var item in list)
             {
                 item.ChapterCount = chapter.FirstOrDefault(m => m.id == item.MangaId) == null ? 0 : chapter.FirstOrDefault(m => m.id == item.MangaId).count;

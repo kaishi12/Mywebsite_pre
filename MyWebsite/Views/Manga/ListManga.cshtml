@@ -14,12 +14,12 @@
             <li class="breadcrumb-item active">Danh sách truyện đã tạo</li>
         </ol>
     </div>
-    <div class="box black">
+    <div class="box">
         @using (Html.BeginForm("ListManga", "Manga", FormMethod.Post))
         {
             <div class="box-body">
                 <div class="table-responsive">
-                    <table ui-jp="dataTable" id="datatable" class="table table-striped b-t b-b black">
+                    <table ui-jp="dataTable" id="datatable" class="table table-striped b-t b-b">
                         <thead>
                             <tr>
 
@@ -70,7 +70,7 @@
                                     @Html.DisplayFor(modelItem => item.TotalView)
                                 </td>
                                 <td style="text-align:center">
-                                    @Html.DisplayFor(modelItem => item.CreatAt)
+                                    @Html.DisplayFor(modelItem => item.TransCount)
                                 </td>
 
                                 <td style="text-align:center">

@@ -49,7 +49,7 @@
                             <input value="@Model.FullName" id="FullName" name="FullName" ui-jp="parsley" class="form-control" type="text" placeholder="Tên Truyện" data-parsley-required-message="Không được để trống" required />
                         </div>
                         <div class="col-sm-2">
-                            <button class=" btn btn-fw info" id="CheckNameManga" type="button"> Kiểm tra</button>
+                            <button class=" btn btn-fw primary" id="CheckNameManga" type="button"> Kiểm tra</button>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -75,7 +75,7 @@
                             <span style="color:red">(*)</span>
                         </label>
                         <div class="col-sm-10">
-                            <select class="form-control c-select" id="StatusId" name="StatusId">
+                            <select class="form-control select2" ui-jp="select2" ui-options="{theme: 'bootstrap'}" id="StatusId" name="StatusId">
                                 @foreach (var item in ViewBag.Status)
                                 {
                                     if (item.StatusId == Model.StatusId)
@@ -84,7 +84,7 @@
                                     }
                                     else
                                     {
-                                        <option  style="color:black" value="@item.StatusId">@item.FullName</option>
+                                        <option style="color:black" value="@item.StatusId">@item.FullName</option>
                                     }
                                 }
                             </select>
@@ -122,7 +122,7 @@
                         </div>
                     </div>
                     <input id="MangaId" name="MangaId" type="hidden" value="@Model.MangaId" />
-                    <button type="button" id="SaveManga" name="btnCreate" class="btn btn-fw info offset-md-10 " disabled> Tạo</button>
+                    <button type="button" id="SaveManga" name="btnCreate" class="btn btn-fw primary offset-md-10 " disabled> Tạo</button>
                 </div>
             </div>
         </form>
@@ -145,6 +145,7 @@
         str = str.trim();
         $('#Alias').val(str);
     })
+    
 </script>
 
 

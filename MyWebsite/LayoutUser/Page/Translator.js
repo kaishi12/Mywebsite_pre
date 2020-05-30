@@ -132,6 +132,7 @@ async function RotateRec(status, cete, X, Y, W, H, degrees, cx, cy, text, font, 
     cete.fillText("#" + count, X, Y);
     const fontList = [];
     fontList.push(fontTextBox);
+    if (fontList.count > 0)
     await prepareFontLoad(fontList);
     if (status == 1) {
         paint_centered_wrap(cete, X, Y, W, H, text, fontTextBox, 12, 2, color);

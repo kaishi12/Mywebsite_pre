@@ -386,7 +386,7 @@ font-family: inherit;
     left: 0; } }
 
 .form-control {
-    border-color: rgb(12, 194, 170);
+    
     border-radius: 0;
 }
   .form-control:focus {

@@ -14,14 +14,14 @@
     </div>
 
     <div style="top:6px">
-        <button class="btn btn-default col-md-2 offset-md-10" data-toggle="modal" data-target="#AddModal">Thêm thể loại</button>
+        <button class="btn primary col-md-2 offset-md-10" data-toggle="modal" data-target="#AddModal">Thêm thể loại</button>
     </div>
     <br />
-    <div class="box black">
+    <div class="box ">
 
         <div class="box-body">
             <div class="table-responsive">
-                <table ui-jp="dataTable" id="datatable" class="table table-striped b-t b-b black">
+                <table ui-jp="dataTable" id="datatable" class="table table-striped b-t b-b ">
                     <thead>
                         <tr>
                             <th style="text-align:center">STT</th>
@@ -29,7 +29,7 @@
                             <th style="text-align:center">Code</th>
                             <th style="text-align:center">Alias</th>
                             <th style="text-align:center">Mô tả</th>
-                            <th style="text-align:center"></th>
+                            <th style="text-align:center">Tùy chọn</th>
 
                         </tr>
                     </thead>
@@ -44,7 +44,7 @@
 <div id="EditModal" class="modal" data-backdrop="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-header primary">
                 <h5 id="GenreName" class="modal-title">Modal</h5>
                 <input type="hidden" id="GenreId" />
             </div>
@@ -91,8 +91,8 @@
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn dark-white p-x-md" data-dismiss="modal">Thoát</button>
-                <button type="button" class="btn danger p-x-md" id="SaveEdit">Chỉnh sửa</button>
+                <button type="button" class="btn danger p-x-md" data-dismiss="modal">Thoát</button>
+                <button type="button" class="btn primary p-x-md" id="SaveEdit">Chỉnh sửa</button>
             </div>
         </div><!-- /.modal-content -->
     </div>
@@ -100,7 +100,7 @@
 <div id="AddModal" class="modal" data-backdrop="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-header primary">
                 <h5 class="modal-title">Thêm thể loại</h5>
             </div>
             <div class="modal-body text-center p-lg">
@@ -146,8 +146,8 @@
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn dark-white p-x-md" data-dismiss="modal">Thoát</button>
-                <button type="button" class="btn danger p-x-md" id="SaveAdd">Thêm</button>
+                <button type="button" class="btn danger p-x-md" data-dismiss="modal">Thoát</button>
+                <button type="button" class="btn primary p-x-md" id="SaveAdd">Thêm</button>
             </div>
         </div><!-- /.modal-content -->
     </div>
@@ -193,7 +193,7 @@
                 },
                 "aoColumnDefs": [
                     {
-                        "aTargets": [0, 1, 2,3,4],
+                        "aTargets": [0, 1, 2,3,4,5],
                         "sClass": "text-center",
                         "bSortable": false
                     },
@@ -201,13 +201,13 @@
                         "aTargets": [5],
                         "mRender": function (data, type, row) {
                             var edit =
-                                "<a title='Chi tiết' class='btn btn-sm btn-primary' onclick='showEditModal(" +
+                                "<a title='Chi tiết' class='btn btn-sm primary' onclick='showEditModal(" +
                                 data +
                                 ")'>Chi tiết</a>";
                             var del =
-                                "<a title='Xóa' class='btn btn-sm btn-primary' onclick='Delete(" +
+                                "<a title='Xóa' class='btn btn-sm primary' onclick='Delete(" +
                                 data +
-                                ")'>Xóa</a>";
+                                ")'>Khóa</a>";
                             return edit + " " + del ;
                         },
                     }

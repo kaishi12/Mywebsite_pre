@@ -14,14 +14,14 @@
     </div>
 
     <div style="top:6px">
-        <button class="btn btn-default col-md-2 offset-md-10" data-toggle="modal" data-target="#AddModal">Thêm tài khoản</button>
+        <button class="btn primary col-md-2 offset-md-10" data-toggle="modal" data-target="#AddModal">Thêm tài khoản</button>
     </div>
     <br />
-    <div class="box black">
+    <div class="box ">
 
         <div class="box-body">
             <div class="table-responsive">
-                <table ui-jp="dataTable" id="datatable" class="table table-striped b-t b-b black">
+                <table ui-jp="dataTable" id="datatable" class="table table-striped b-t b-b ">
                     <thead>
                         <tr>
                             <th style="text-align:center">STT</th>
@@ -146,9 +146,9 @@
                         "aTargets": [6],
                         "mRender": function (data, type, row) {
                             var del =
-                                "<a title='Xóa' class='btn btn-sm btn-primary' onclick='Delete(" +
+                                "<a title='Xóa' class='btn btn-sm primary' onclick='Delete(" +
                                 data +
-                                ")'>Xóa</a>";
+                                ")'>Khóa</a>";
                             return  del ;
                         },
                     }

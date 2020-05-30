@@ -91,7 +91,7 @@ div {
       <li class="breadcrumb-item active">Dịch truyện</li>
     </ol>
   </div>
-  <div class="box black">
+  <div class="box ">
     <div class="box-header primary">
       <h2 style="font-family: myFirstFont">@ViewBag.MangaFullName</h2>
     </div>
@@ -103,7 +103,7 @@ div {
               <span>Chương:</span>
             </label>
             <div class="col-sm-8">
-              <select class="form-control c-select" id="SelectChapter" name="SelectChapter">
+              <select class="form-control select2" ui-jp="select2" ui-options="{theme: 'bootstrap'}" id="SelectChapter" name="SelectChapter">
                 @foreach (var item in ViewBag.chapterlist)
                 {
                   if (ViewBag.ChapterId != null && ViewBag.ChapterId == item.ChapterId)
@@ -127,7 +127,7 @@ div {
               <span>Trang:</span>
             </label>
             <div class="col-sm-8">
-              <select class="form-control c-select" id="SelectPage" name="SelectPage">
+              <select class="form-control select2" ui-jp="select2" ui-options="{theme: 'bootstrap'}" id="SelectPage" name="SelectPage">
                 @foreach (var item in ViewBag.listpage)
                 {
                   if (item.Key == Model.PageId)
@@ -151,7 +151,7 @@ div {
               <span>Ngôn ngữ:</span>
             </label>
             <div class="col-sm-8">
-              <select class="form-control c-select" id="SelectLanguage" name="SelectLanguage">
+              <select class="form-control select2" ui-jp="select2" ui-options="{theme: 'bootstrap'}" id="SelectLanguage" name="SelectLanguage">
                 @foreach (var item in ViewBag.Language)
                 {
                   if (ViewBag.TranslationId != null && ViewBag.TranslationId == item.TransationId)
@@ -175,13 +175,13 @@ div {
 
       <div class="row">
         <div class="col-sm-6">
-          <div class="box primary">
+          <div class="box ">
             <div class="box-header primary" style="text-align: center ">
               <div style="display:inline-block">
                 <span class="col-sm-2"><button class="btn btn-danger " id="buttonRaw">RAW</button></span>
 
                 <span class="col-sm-2"><button class="btn btn-danger " id="buttonClearText">Clear-Text</button></span>
-                <span class="col-sm-2"><button class="btn btn-danger dropdown-toggle" id="buttonLanguage">Ngôn ngữ</button></span>
+                @*<span class="col-sm-2"><button class="btn btn-danger dropdown-toggle" id="buttonLanguage">Ngôn ngữ</button></span>*@
               </div>
 
             </div>
@@ -247,7 +247,7 @@ div {
 
             </div>
             <div class="table-responsive">
-              <table class="table table-bordered m-0 black" id="tblEntAttributes">
+              <table class="table table-bordered m-0 " id="tblEntAttributes">
 
                 <thead>
                   <tr>
@@ -348,7 +348,7 @@ div {
   <div id="m-a-f" class="modal fade" data-backdrop="true" style="display: none;" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
-        <div class="modal-header">
+        <div class="modal-header primary">
           <h5 class="modal-title">Tùy chỉnh thoại</h5>
         </div>
         <div class="modal-body">
@@ -403,8 +403,8 @@ div {
 
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn dark-white p-x-md" data-dismiss="modal">Hủy</button>
-          <button data-Id="1" id="Join" type="button" class="btn danger p-x-md" data-dismiss="modal">Áp dụng</button>
+          <button type="button" class="btn danger p-x-md" data-dismiss="modal">Hủy</button>
+          <button data-Id="1" id="Join" type="button" class="btn primary p-x-md" data-dismiss="modal">Áp dụng</button>
         </div>
       </div><!-- /.modal-content -->
     </div>

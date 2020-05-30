@@ -30,15 +30,11 @@
     <Property Name="Total" Type="float" />
     <Property Name="Active" Type="bit" Nullable="false" />
   </EntityType>
-  <!--Errors Found During Generation:
-warning 6002: The table/view 'MyWebsite.dbo.Bookmark' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="Bookmark">
     <Key>
-      <PropertyRef Name="AccountId" />
-      <PropertyRef Name="MangaId" />
+      <PropertyRef Name="id" />
     </Key>
-    <Property Name="AccountId" Type="int" Nullable="false" />
-    <Property Name="MangaId" Type="int" Nullable="false" />
+    <Property Name="id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Category">
     <Key>
@@ -304,30 +300,6 @@ warning 6002: The table/view 'MyWebsite.dbo.Bookmark' does not have a primary ke
       </Principal>
       <Dependent Role="Account_Detail">
         <PropertyRef Name="PointId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Bookmark_Account">
-    <End Role="Account" Type="Self.Account" Multiplicity="1" />
-    <End Role="Bookmark" Type="Self.Bookmark" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Account">
-        <PropertyRef Name="AccountId" />
-      </Principal>
-      <Dependent Role="Bookmark">
-        <PropertyRef Name="AccountId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Bookmark_Manga">
-    <End Role="Manga" Type="Self.Manga" Multiplicity="1" />
-    <End Role="Bookmark" Type="Self.Bookmark" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Manga">
-        <PropertyRef Name="MangaId" />
-      </Principal>
-      <Dependent Role="Bookmark">
-        <PropertyRef Name="MangaId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -610,6 +582,7 @@ warning 6002: The table/view 'MyWebsite.dbo.Bookmark' does not have a primary ke
   <EntityContainer Name="MyWebsiteModelStoreContainer">
     <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Account_Detail" EntityType="Self.Account_Detail" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Bookmark" EntityType="Self.Bookmark" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Chapter" EntityType="Self.Chapter" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Document" EntityType="Self.Document" Schema="dbo" store:Type="Tables" />
@@ -631,12 +604,6 @@ warning 6002: The table/view 'MyWebsite.dbo.Bookmark' does not have a primary ke
     <EntitySet Name="TextBox" EntityType="Self.TextBox" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Translation" EntityType="Self.Translation" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Translation_Detail" EntityType="Self.Translation_Detail" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Bookmark" EntityType="Self.Bookmark" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [Bookmark].[AccountId] AS [AccountId], 
-    [Bookmark].[MangaId] AS [MangaId]
-    FROM [dbo].[Bookmark] AS [Bookmark]</DefiningQuery>
-    </EntitySet>
     <AssociationSet Name="FK_Account_Detail_Account" Association="Self.FK_Account_Detail_Account">
       <End Role="Account" EntitySet="Account" />
       <End Role="Account_Detail" EntitySet="Account_Detail" />
@@ -644,14 +611,6 @@ warning 6002: The table/view 'MyWebsite.dbo.Bookmark' does not have a primary ke
     <AssociationSet Name="FK_Account_Detail_Point" Association="Self.FK_Account_Detail_Point">
       <End Role="Point" EntitySet="Point" />
       <End Role="Account_Detail" EntitySet="Account_Detail" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Bookmark_Account" Association="Self.FK_Bookmark_Account">
-      <End Role="Account" EntitySet="Account" />
-      <End Role="Bookmark" EntitySet="Bookmark" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Bookmark_Manga" Association="Self.FK_Bookmark_Manga">
-      <End Role="Manga" EntitySet="Manga" />
-      <End Role="Bookmark" EntitySet="Bookmark" />
     </AssociationSet>
     <AssociationSet Name="FK_Chapter_Manga" Association="Self.FK_Chapter_Manga">
       <End Role="Manga" EntitySet="Manga" />

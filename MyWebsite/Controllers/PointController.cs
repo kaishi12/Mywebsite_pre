@@ -51,7 +51,7 @@ namespace MyWebsite.Controllers
             AccountModel model = (AccountModel)Session["UserInfo"];
             var count = 1;
             var listmanga = data.Mangas.Where(m => m.Active == true).Select(m => new { m.MangaId, m.FullName }).ToList();
-            var datatable = data.PointHistories.Where(m=>m.Active == true && m.AccountId == model.AccountId).ToList().Select(m => new IConvertible[]
+            var datatable = data.PointHistories.Where(m=>m.Active == true && m.AccountId == model.AccountId).GroupBy(m => m.ToDay).ToList().LastOrDefault().Select(m => new IConvertible[]
               {
                 count++,
                 listmanga.FirstOrDefault(l=>l.MangaId == m.MangaId) != null ? listmanga.FirstOrDefault(l=>l.MangaId == m.MangaId).FullName : "N/A",

@@ -13,13 +13,13 @@
             <li class="breadcrumb-item active">Chi tiết chương</li>
         </ol>
     </div>
-    <div class="box-header blue" style="margin-bottom:5px">
+    <div class="box-header primary" style="margin-bottom:5px">
         <h2>CHI TIẾT CHƯƠNG: @Model.FullName</h2>
     </div>
     <div class="row">
         <div class="col-sm-2" style="padding-left:12px;padding-right:12px">
             <div class="box">
-                <div class="box-header yellow">Menu</div>
+                <div class="box-header primary">Tùy chọn</div>
                 <div class="p-y">
                     <div class="nav-active-border left b-{{app.setting.theme.primary}}">
                         <ul class="list-unstyled m-t-n-sm">
@@ -69,7 +69,7 @@
 
                                     <button class="btn black" type="button" id="delbtn" style="margin-right:20px;"><i class="material-icons md-18">&#xe872;</i></button>
 
-                                    <button disabled type="submit" class="SaveNewPage btn blue">Lưu</button>
+                                    <button disabled type="submit" class="SaveNewPage btn primary">Lưu</button>
                                 </div>
 
                             </div>
@@ -80,7 +80,7 @@
                                         <div  id=@("CurPage" + item.PageId)  class="col-xs-6 col-sm-4 col-md-3" style="padding-left:12px;padding-right:12px">
                                             <div class="box p-a-xs">
 
-                                                <img id="img1" style="min-height:500px" src="~/PageLink/@item.PageLink" alt="" class="img-responsive">
+                                                <img id="img1" style="min-height:400px" src="~/PageLink/@item.PageLink" alt="" class="img-responsive">
                                                 <div class="p-a-sm">
                                                     <div class="text-ellipsis">
 
@@ -113,7 +113,7 @@
 
                                             <input type="hidden" name="PageId" id="PageId" value="@item.PageId" />
 
-                                            <a href="~/PageLink/@item.PageLink"><img style="min-height:500px" id=" @("img"+item.PageId)" src="~/PageLink/@item.PageLink" alt="" class="img-responsive"></a>
+                                            <a href="~/PageLink/@item.PageLink"><img style="min-height:400px" id=" @("img"+item.PageId)" src="~/PageLink/@item.PageLink" alt="" class="img-responsive"></a>
                                             <div class="p-a-sm">
                                                 <div class="text-ellipsis">
                                                     <span>trang @item.OrderNumber</span>
