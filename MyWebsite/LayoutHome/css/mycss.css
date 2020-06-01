@@ -148,17 +148,36 @@ header{
     cursor:not-allowed;
 }
 
-.mangacount {
+.dropdown-customize .dropdown-menu-customize {
+    max-height:300px;
+    overflow:auto;
+}
+
+.dropdown-customize .dropdown-item-customize {
+    display: flex;
+    transition:all 0.3s;
+}
+
+.dropdown-customize .dropdown-item-customize:hover{
+    color:red;
+}
+
+.dropdown-customize .dropdown-item-customize img {
+    width: 50px;
+    height: 60px;
+}
+
+.dropdown-customize .mangacount {
     position: absolute;
     top: 5%;
-    width:20px;
-    height:20px;
-    font-size:10px;
-    text-align:center;
-    line-height:22px;
-    background-color:rgba(255, 0, 0,0.7);
-    border-radius:50%;
-    z-index:10;
+    width: 20px;
+    height: 20px;
+    font-size: 10px;
+    text-align: center;
+    line-height: 22px;
+    background-color: rgba(255, 0, 0,0.7);
+    border-radius: 50%;
+    z-index: 10;
 }
 
 

@@ -2228,10 +2228,9 @@ footer {
 }
 
 .aye_icon {
-    background: url(../images/aye.png) no-repeat;
     font-size: 14px;
     color: #7e7e7e;
-    padding: 2px 0 0 28px;
+    padding: 2px 0 0 10px;
     margin-right: 10px;
     float: left;
     line-height: 22px

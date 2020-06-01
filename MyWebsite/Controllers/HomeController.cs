@@ -433,18 +433,28 @@ namespace MyWebsite.Controllers
                 var data = (from tr in db.Mangas
                             join bmark in db.Bookmarks on tr.MangaId equals bmark.MangaId
                             join acc in db.Accounts on bmark.AccountId equals acc.AccountId
-                            where acc.AccountId == account.AccountId                         
+                            where acc.AccountId == account.AccountId
                             //where bmark.SeenStatus == false
                             select new ViewModels.Home.Bookmark.BookmarkHead
                             {
-                                MangaId=tr.MangaId,
-                                MangaName=tr.FullName,
-                                MangaAlias=tr.Alias,
-                                CoverImg=tr.CoverLink,
+                                MangaId = tr.MangaId,
+                                MangaName = tr.FullName,
+                                MangaAlias = tr.Alias,
+                                CoverImg = tr.CoverLink,
+                                UpdateDate = tr.UpdateAt.ToString()
+                            }).AsEnumerable()
+                            .Select(x => new ViewModels.Home.Bookmark.BookmarkHead()
+                            {
+                                MangaId = x.MangaId,
+                                MangaName = x.MangaName,
+                                MangaAlias = x.MangaAlias,
+                                CoverImg = x.CoverImg,
+                                SeenStatus = x.SeenStatus,
+                                UpdateDate = Convert.ToDateTime(x.UpdateDate).ToShortDateString()
                             });
+                ViewBag.MangaCount = data.Count();
                 if (data.Count() != 0)
-                {
-                    ViewBag.MangaCount = data.Count();
+                {  
                     ViewBag.Data = data.ToList();
                 }
                 else

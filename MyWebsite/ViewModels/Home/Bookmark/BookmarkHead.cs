@@ -11,8 +11,7 @@ namespace MyWebsite.ViewModels.Home.Bookmark
         public string MangaName { get; set; }
         public string MangaAlias { get; set; }
         public string CoverImg { get; set; }
-        public int ChapterId { get; set; }
-        public DateTime UpdateDate { get; set; }
+        public string UpdateDate { get; set; }
         public bool SeenStatus { get; set; }
     }
 }
