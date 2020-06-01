@@ -31,11 +31,13 @@
   </EntityType>
   <EntityType Name="Bookmark">
     <Key>
-      <PropertyRef Name="AccountId" />
       <PropertyRef Name="MangaId" />
+      <PropertyRef Name="AccountId" />
     </Key>
-    <Property Name="AccountId" Type="int" Nullable="false" />
     <Property Name="MangaId" Type="int" Nullable="false" />
+    <Property Name="AccountId" Type="int" Nullable="false" />
+    <Property Name="LastSeenChap" Type="int" Nullable="false" />
+    <Property Name="SeenStatus" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="Category">
     <Key>
@@ -232,14 +234,6 @@
     <Property Name="PageId" Type="int" Nullable="false" />
     <Property Name="Active" Type="bit" Nullable="false" />
     <Property Name="Degree" Type="int" Nullable="false" />
-  </EntityType>
-  <EntityType Name="TheoDoi">
-    <Key>
-      <PropertyRef Name="MangaId" />
-      <PropertyRef Name="AccountId" />
-    </Key>
-    <Property Name="MangaId" Type="int" Nullable="false" />
-    <Property Name="AccountId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Translation">
     <Key>
@@ -515,30 +509,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_TheoDoi_Account">
-    <End Role="Account" Type="Self.Account" Multiplicity="1" />
-    <End Role="TheoDoi" Type="Self.TheoDoi" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Account">
-        <PropertyRef Name="AccountId" />
-      </Principal>
-      <Dependent Role="TheoDoi">
-        <PropertyRef Name="AccountId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_TheoDoi_Manga">
-    <End Role="Manga" Type="Self.Manga" Multiplicity="1" />
-    <End Role="TheoDoi" Type="Self.TheoDoi" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Manga">
-        <PropertyRef Name="MangaId" />
-      </Principal>
-      <Dependent Role="TheoDoi">
-        <PropertyRef Name="MangaId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_Translation_Account">
     <End Role="Account" Type="Self.Account" Multiplicity="1" />
     <End Role="Translation" Type="Self.Translation" Multiplicity="*" />
@@ -620,7 +590,6 @@
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Text" EntityType="Self.Text" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TextBox" EntityType="Self.TextBox" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="TheoDoi" EntityType="Self.TheoDoi" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Translation" EntityType="Self.Translation" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Translation_Detail" EntityType="Self.Translation_Detail" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK_Account_Detail_Account" Association="Self.FK_Account_Detail_Account">
@@ -706,14 +675,6 @@
     <AssociationSet Name="FK_TextBox_Page" Association="Self.FK_TextBox_Page">
       <End Role="Page" EntitySet="Page" />
       <End Role="TextBox" EntitySet="TextBox" />
-    </AssociationSet>
-    <AssociationSet Name="FK_TheoDoi_Account" Association="Self.FK_TheoDoi_Account">
-      <End Role="Account" EntitySet="Account" />
-      <End Role="TheoDoi" EntitySet="TheoDoi" />
-    </AssociationSet>
-    <AssociationSet Name="FK_TheoDoi_Manga" Association="Self.FK_TheoDoi_Manga">
-      <End Role="Manga" EntitySet="Manga" />
-      <End Role="TheoDoi" EntitySet="TheoDoi" />
     </AssociationSet>
     <AssociationSet Name="FK_Translation_Account" Association="Self.FK_Translation_Account">
       <End Role="Account" EntitySet="Account" />

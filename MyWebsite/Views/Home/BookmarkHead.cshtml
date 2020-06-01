@@ -1,0 +1,39 @@
+﻿@*<div class="nav-item dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Dropdown button
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        @if (ViewBag.Message != null)
+        {
+            foreach (var truyen in ViewBag.Data)
+            {
+                <a class="dropdown-item" href="/manga/@truyen.MangaAlias-@truyen.MangaId" title="@truyen.MangaName">@truyen.FullName</a>
+            }
+
+        }
+
+    </div>
+</div>*@
+<li class="dropdown">
+    <a href="/Bookmark" class="dropdown-toggle" data-toggle="dropdown">
+        <a href="/Bookmark">
+            <i class="fa fa-book"></i> Bookmark
+            <span class="mangacount">@ViewBag.MangaCount</span>
+        </a>
+        
+    </a>
+    <ul class="dropdown-menu">
+        @if (ViewBag.Message == null)
+        {
+            foreach (var truyen in ViewBag.Data)
+            {
+                <li><a class="dropdown-item" id="updatebookmarkb" data-manga-id="@truyen.MangaId" href="/manga/@truyen.MangaAlias-@truyen.MangaId" title="@truyen.MangaName">@truyen.MangaName</a></li>
+            }
+
+        }
+        else
+        {
+            <li>@ViewBag.Message</li>
+        }
+    </ul>
+</li>

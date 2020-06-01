@@ -668,6 +668,9 @@
     <Compile Include="Models\Account_Detail.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Bookmark.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Category.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -765,6 +768,8 @@
     <Compile Include="ViewModels\Account\AccountModel.cs" />
     <Compile Include="ViewModels\Chapter\ChapterModel.cs" />
     <Compile Include="ViewModels\Home\Author\MangaByAuthor.cs" />
+    <Compile Include="ViewModels\Home\Bookmark\Bookmark.cs" />
+    <Compile Include="ViewModels\Home\Bookmark\BookmarkHead.cs" />
     <Compile Include="ViewModels\Home\Chapter\Get1Chapter.cs" />
     <Compile Include="ViewModels\Home\Chapter\Get2Chapter.cs" />
     <Compile Include="ViewModels\Home\Chapter\GetLastedChapter.cs" />
@@ -1065,6 +1070,9 @@
     <Content Include="Views\Point\Index.cshtml" />
     <Content Include="Views\Document\Index.cshtml" />
     <Content Include="Views\Home\Fbpage.cshtml" />
+    <Content Include="Views\Home\BookmarkSpan.cshtml" />
+    <Content Include="Views\Home\BookmarkList.cshtml" />
+    <Content Include="Views\Home\BookmarkHead.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

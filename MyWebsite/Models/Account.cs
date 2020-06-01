@@ -18,13 +18,12 @@ namespace MyWebsite.Models
         public Account()
         {
             this.Account_Detail = new HashSet<Account_Detail>();
+            this.Bookmarks = new HashSet<Bookmark>();
             this.Manga_Detail = new HashSet<Manga_Detail>();
             this.Notifications = new HashSet<Notification>();
             this.Pages = new HashSet<Page>();
             this.Texts = new HashSet<Text>();
             this.Translations = new HashSet<Translation>();
-            this.Mangas = new HashSet<Manga>();
-            this.Mangas1 = new HashSet<Manga>();
         }
     
         public int AccountId { get; set; }
@@ -45,6 +44,8 @@ namespace MyWebsite.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Account_Detail> Account_Detail { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Bookmark> Bookmarks { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Manga_Detail> Manga_Detail { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Notification> Notifications { get; set; }
@@ -54,9 +55,5 @@ namespace MyWebsite.Models
         public virtual ICollection<Text> Texts { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Translation> Translations { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Manga> Mangas { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Manga> Mangas1 { get; set; }
     }
 }

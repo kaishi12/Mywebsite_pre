@@ -7,6 +7,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using MyWebsite.ViewModels.Account;
+using System.Data.SqlClient;
+using System.Configuration;
 
 namespace MyWebsite.Controllers
 {
@@ -21,6 +23,25 @@ namespace MyWebsite.Controllers
             var sl = (from chap in db.Chapters where chap.MangaId == id select chap).ToList();
             Tong = sl.Sum(n => n.ViewNumber);
             return Tong;
+        }
+        private int ChapterCount(int id)
+        {
+            int Tong = 0;
+            var sl = (from chap in db.Chapters where chap.MangaId == id select chap).ToList();
+            Tong = sl.Count();
+            return Tong;
+        }
+
+        private bool CheckLastSeenChap(int lastSeen,int allChap)
+        {
+            if (lastSeen == allChap)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
         #endregion
 
@@ -94,9 +115,11 @@ namespace MyWebsite.Controllers
         #region MangaDetails
         public ActionResult MangaDetail(string alias, string language)
         {
+            var mangaId= (from tr in db.Mangas where tr.Alias == alias select tr.MangaId).SingleOrDefault().ToString();
+            Session["MangaId"] = mangaId;
             var Manga = db.Mangas.SingleOrDefault(m => m.Alias == alias);
             ViewBag.MangaAlias = alias;
-            ViewBag.MangaId =( from tr in db.Mangas where tr.Alias == alias select tr.MangaId).SingleOrDefault().ToString();
+            ViewBag.MangaId = mangaId;
             ViewBag.CurLang = language;
             if (Manga != null)
             {
@@ -401,20 +424,160 @@ namespace MyWebsite.Controllers
         }
         #endregion
 
-        //#region Bookmark
-        //[HttpPost]
-        //public ActionResult AddBookmark(int mangaId)
-        //{
-        //    AccountModel user = (AccountModel)Session["UserInfo"];
-        //    if (user != null)
-        //    {
-        //        db.Bo
-        //    }
-        //    else
-        //    {
-        //        return RedirectToAction("Login");
-        //    }
-        //}
-        //#endregion
+        #region Bookmark
+        public ActionResult BookmarkHead()
+        {
+            if (Session["UserInfo"] != null)
+            {
+                AccountModel account = (AccountModel)Session["UserInfo"];
+                var data = (from tr in db.Mangas
+                            join bmark in db.Bookmarks on tr.MangaId equals bmark.MangaId
+                            join acc in db.Accounts on bmark.AccountId equals acc.AccountId
+                            where acc.AccountId == account.AccountId                         
+                            //where bmark.SeenStatus == false
+                            select new ViewModels.Home.Bookmark.BookmarkHead
+                            {
+                                MangaId=tr.MangaId,
+                                MangaName=tr.FullName,
+                                MangaAlias=tr.Alias,
+                                CoverImg=tr.CoverLink,
+                            });
+                if (data.Count() != 0)
+                {
+                    ViewBag.MangaCount = data.Count();
+                    ViewBag.Data = data.ToList();
+                }
+                else
+                {
+                    ViewBag.Message = "Đã xem hết truyện theo dõi";
+                }
+                
+            }
+            return PartialView();
+        }
+        public ActionResult BookmarkSpan()
+        {
+            AccountModel account = (AccountModel)Session["UserInfo"];
+            int mangaId = Convert.ToInt32(Session["MangaId"]);
+            var data = (from tr in db.Mangas
+                        join bmark in db.Bookmarks on tr.MangaId equals bmark.MangaId
+                        join acc in db.Accounts on bmark.AccountId equals acc.AccountId
+                        where tr.MangaId == mangaId && acc.AccountId == account.AccountId
+                        select bmark).FirstOrDefault();
+            ViewBag.Data = data;
+            return PartialView();
+        }
+
+        public ActionResult BookmarkList()
+        {
+            AccountModel user = (AccountModel)Session["UserInfo"];
+            try
+            {
+                var data = (from tr in db.Mangas
+                            join bmark in db.Bookmarks on tr.MangaId equals bmark.MangaId
+                            join acc in db.Accounts on bmark.AccountId equals acc.AccountId
+                            where acc.AccountId == user.AccountId
+                            select new ViewModels.Home.Bookmark.Bookmark
+                            {
+                                MangaId = tr.MangaId,
+                                MangaName = tr.FullName,
+                                MangaAlias = tr.Alias,
+                                CoverImg = tr.CoverLink,
+                                LastSeenChap = bmark.LastSeenChap,
+                                SeenStatus = bmark.SeenStatus
+                            }).AsEnumerable()
+                        .Select(x => new ViewModels.Home.Bookmark.Bookmark()
+                        {
+                            MangaId = x.MangaId,
+                            MangaName = x.MangaName,
+                            MangaAlias = x.MangaAlias,
+                            CoverImg = x.CoverImg,
+                            LastSeenChap = x.LastSeenChap,
+                            SeenStatus = x.SeenStatus,
+                            AllChapCount = ChapterCount(x.MangaId)
+                        }).OrderBy(x => x.SeenStatus).ThenBy(x => x.MangaName).ToList();
+                ViewBag.UserId = user.AccountId;
+                if (data.Count == 0)
+                {
+                    ViewBag.KoCoTruyen = "Yes";
+                    ViewBag.ThongBao = "Chưa có truyện theo dõi";
+                }
+                return View(data);
+            }
+            catch
+            {
+                return RedirectToAction("Login", "Account");
+            }
+            
+        }
+
+        [HttpPost]
+        public JsonResult AddBookmark()
+        {
+            if (Session["UserInfo"] != null)
+            {
+                AccountModel account = (AccountModel)Session["UserInfo"];
+                int mangaId = Convert.ToInt32(Session["MangaId"]);
+                Bookmark obj = new Bookmark();
+                obj.MangaId = mangaId;
+                obj.AccountId = account.AccountId;
+                obj.LastSeenChap = ChapterCount(mangaId);
+                obj.SeenStatus = true;
+                db.Bookmarks.Add(obj);
+                db.SaveChanges();
+            }
+            return Json(true, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public JsonResult DelBookmark()
+        {
+            if (Session["UserInfo"] != null)
+            {
+                AccountModel account = (AccountModel)Session["UserInfo"];
+                int mangaId = Convert.ToInt32(Session["MangaId"]);
+                Bookmark obj = db.Bookmarks.Where(x => x.AccountId == account.AccountId).Where(x => x.MangaId == mangaId).SingleOrDefault();
+                db.Bookmarks.Remove(obj);
+                db.SaveChanges();
+            }
+            return Json(true, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public JsonResult UpdateBookmark(int idManga, int? idChapter)
+        {
+            if (Session["UserInfo"] != null)
+            {
+                AccountModel account = (AccountModel)Session["UserInfo"];
+                Bookmark update = db.Bookmarks.Where(x => x.AccountId == account.AccountId).Where(x => x.MangaId == idManga).SingleOrDefault();
+                if(update != null)
+                {
+                    int checkSeenChap;
+                    if (idChapter == null)
+                    {
+                        checkSeenChap = ChapterCount(idManga);
+                    }
+                    else
+                    {
+                        checkSeenChap = Convert.ToInt32(db.Chapters.Where(x => x.ChapterId == idChapter).Where(x => x.MangaId == idManga).Select(x => x.OrderNumber).SingleOrDefault());
+                    }
+                    if (update.LastSeenChap < checkSeenChap)
+                    {
+                        update.LastSeenChap = checkSeenChap;
+                        if (update.LastSeenChap == ChapterCount(idManga))
+                        {
+                            update.SeenStatus = true;
+                        }
+                        else
+                        {
+                            update.SeenStatus = false;
+                        }
+                        db.SaveChanges();
+                    }
+                }
+            }              
+            return Json(true, JsonRequestBehavior.AllowGet);
+        }
+        #endregion
     }
 }

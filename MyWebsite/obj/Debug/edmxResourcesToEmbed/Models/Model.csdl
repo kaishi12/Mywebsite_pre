@@ -19,13 +19,12 @@
     <Property Name="Status" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="Account_Detail" Relationship="Self.FK_Account_Detail_Account" FromRole="Account" ToRole="Account_Detail" />
+    <NavigationProperty Name="Bookmarks" Relationship="Self.FK_Bookmark_Account" FromRole="Account" ToRole="Bookmark" />
     <NavigationProperty Name="Manga_Detail" Relationship="Self.FK_Manga_Detail_Account" FromRole="Account" ToRole="Manga_Detail" />
     <NavigationProperty Name="Notifications" Relationship="Self.FK_Notification_Account" FromRole="Account" ToRole="Notification" />
     <NavigationProperty Name="Pages" Relationship="Self.FK_Page_Account" FromRole="Account" ToRole="Page" />
     <NavigationProperty Name="Texts" Relationship="Self.FK_Text_Account" FromRole="Account" ToRole="Text" />
     <NavigationProperty Name="Translations" Relationship="Self.FK_Translation_Account" FromRole="Account" ToRole="Translation" />
-    <NavigationProperty Name="Mangas" Relationship="Self.Bookmark" FromRole="Account" ToRole="Manga" />
-    <NavigationProperty Name="Mangas1" Relationship="MyWebsiteModel.TheoDoi" FromRole="Account" ToRole="Manga" />
   </EntityType>
   <EntityType Name="Account_Detail">
     <Key>
@@ -38,6 +37,18 @@
     <Property Name="Active" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="Account" Relationship="Self.FK_Account_Detail_Account" FromRole="Account_Detail" ToRole="Account" />
     <NavigationProperty Name="Point" Relationship="Self.FK_Account_Detail_Point" FromRole="Account_Detail" ToRole="Point" />
+  </EntityType>
+  <EntityType Name="Bookmark">
+    <Key>
+      <PropertyRef Name="AccountId" />
+      <PropertyRef Name="MangaId" />
+    </Key>
+    <Property Name="AccountId" Type="Int32" Nullable="false" />
+    <Property Name="MangaId" Type="Int32" Nullable="false" />
+    <Property Name="LastSeenChap" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Account" Relationship="Self.FK_Bookmark_Account" FromRole="Bookmark" ToRole="Account" />
+    <NavigationProperty Name="Manga" Relationship="Self.FK_Bookmark_Manga" FromRole="Bookmark" ToRole="Manga" />
+    <Property Name="SeenStatus" Type="Boolean" Nullable="false" />
   </EntityType>
   <EntityType Name="Category">
     <Key>
@@ -113,13 +124,12 @@
     <Property Name="Alias" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="StatusId" Type="Int32" Nullable="false" />
     <Property Name="UpdateAt" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Bookmarks" Relationship="Self.FK_Bookmark_Manga" FromRole="Manga" ToRole="Bookmark" />
     <NavigationProperty Name="Chapters" Relationship="Self.FK_Chapter_Manga" FromRole="Manga" ToRole="Chapter" />
     <NavigationProperty Name="Manga_Detail" Relationship="Self.FK_Manga_Detail_Manga1" FromRole="Manga" ToRole="Manga_Detail" />
     <NavigationProperty Name="Manga_Genres" Relationship="Self.FK_Manga_Genres_Manga" FromRole="Manga" ToRole="Manga_Genres" />
     <NavigationProperty Name="Status" Relationship="Self.FK_Manga_Status" FromRole="Manga" ToRole="Status" />
     <NavigationProperty Name="Translations" Relationship="Self.FK_Translation_Manga" FromRole="Manga" ToRole="Translation" />
-    <NavigationProperty Name="Accounts" Relationship="Self.Bookmark" FromRole="Manga" ToRole="Account" />
-    <NavigationProperty Name="Accounts1" Relationship="MyWebsiteModel.TheoDoi" FromRole="Manga" ToRole="Account" />
   </EntityType>
   <EntityType Name="Manga_Detail">
     <Key>
@@ -224,6 +234,16 @@
     <Property Name="Active" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="Mangas" Relationship="Self.FK_Manga_Status" FromRole="Status" ToRole="Manga" />
   </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
   <EntityType Name="Text">
     <Key>
       <PropertyRef Name="TextId" />
@@ -301,6 +321,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Bookmark_Account">
+    <End Role="Account" Type="Self.Account" Multiplicity="1" />
+    <End Role="Bookmark" Type="Self.Bookmark" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Account">
+        <PropertyRef Name="AccountId" />
+      </Principal>
+      <Dependent Role="Bookmark">
+        <PropertyRef Name="AccountId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Manga_Detail_Account">
     <End Role="Account" Type="Self.Account" Multiplicity="1" />
     <End Role="Manga_Detail" Type="Self.Manga_Detail" Multiplicity="*" />
@@ -370,6 +402,18 @@
       </Principal>
       <Dependent Role="Account_Detail">
         <PropertyRef Name="PointId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Bookmark_Manga">
+    <End Role="Manga" Type="Self.Manga" Multiplicity="1" />
+    <End Role="Bookmark" Type="Self.Bookmark" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Manga">
+        <PropertyRef Name="MangaId" />
+      </Principal>
+      <Dependent Role="Bookmark">
+        <PropertyRef Name="MangaId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -577,13 +621,10 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="Bookmark">
-    <End Role="Account" Type="Self.Account" Multiplicity="*" />
-    <End Role="Manga" Type="Self.Manga" Multiplicity="*" />
-  </Association>
   <EntityContainer Name="MyWebsiteEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Accounts" EntityType="Self.Account" />
     <EntitySet Name="Account_Detail" EntityType="Self.Account_Detail" />
+    <EntitySet Name="Bookmarks" EntityType="Self.Bookmark" />
     <EntitySet Name="Categories" EntityType="Self.Category" />
     <EntitySet Name="Chapters" EntityType="Self.Chapter" />
     <EntitySet Name="Fonts" EntityType="Self.Font" />
@@ -598,6 +639,7 @@
     <EntitySet Name="Points" EntityType="Self.Point" />
     <EntitySet Name="Roles" EntityType="Self.Role" />
     <EntitySet Name="Status" EntityType="Self.Status" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
     <EntitySet Name="Texts" EntityType="Self.Text" />
     <EntitySet Name="TextBoxes" EntityType="Self.TextBox" />
     <EntitySet Name="Translations" EntityType="Self.Translation" />
@@ -605,6 +647,10 @@
     <AssociationSet Name="FK_Account_Detail_Account" Association="Self.FK_Account_Detail_Account">
       <End Role="Account" EntitySet="Accounts" />
       <End Role="Account_Detail" EntitySet="Account_Detail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Bookmark_Account" Association="Self.FK_Bookmark_Account">
+      <End Role="Account" EntitySet="Accounts" />
+      <End Role="Bookmark" EntitySet="Bookmarks" />
     </AssociationSet>
     <AssociationSet Name="FK_Manga_Detail_Account" Association="Self.FK_Manga_Detail_Account">
       <End Role="Account" EntitySet="Accounts" />
@@ -629,6 +675,10 @@
     <AssociationSet Name="FK_Account_Detail_Point" Association="Self.FK_Account_Detail_Point">
       <End Role="Point" EntitySet="Points" />
       <End Role="Account_Detail" EntitySet="Account_Detail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Bookmark_Manga" Association="Self.FK_Bookmark_Manga">
+      <End Role="Manga" EntitySet="Mangas" />
+      <End Role="Bookmark" EntitySet="Bookmarks" />
     </AssociationSet>
     <AssociationSet Name="FK_Page_Category" Association="Self.FK_Page_Category">
       <End Role="Category" EntitySet="Categories" />
@@ -698,28 +748,5 @@
       <End Role="Translation" EntitySet="Translations" />
       <End Role="Translation_Detail" EntitySet="Translation_Detail" />
     </AssociationSet>
-    <AssociationSet Name="Bookmark" Association="Self.Bookmark">
-      <End Role="Account" EntitySet="Accounts" />
-      <End Role="Manga" EntitySet="Mangas" />
-    </AssociationSet>
-    <AssociationSet Name="TheoDoi" Association="MyWebsiteModel.TheoDoi">
-      <End Role="Account" EntitySet="Accounts" />
-      <End Role="Manga" EntitySet="Mangas" />
-    </AssociationSet>
-    <EntitySet Name="sysdiagrams" EntityType="MyWebsiteModel.sysdiagram" />
   </EntityContainer>
-  <Association Name="TheoDoi">
-    <End Type="MyWebsiteModel.Account" Role="Account" Multiplicity="*" />
-    <End Type="MyWebsiteModel.Manga" Role="Manga" Multiplicity="*" />
-  </Association>
-  <EntityType Name="sysdiagram">
-    <Key>
-      <PropertyRef Name="diagram_id" />
-    </Key>
-    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="principal_id" Type="Int32" Nullable="false" />
-    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="version" Type="Int32" />
-    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
-  </EntityType>
 </Schema>

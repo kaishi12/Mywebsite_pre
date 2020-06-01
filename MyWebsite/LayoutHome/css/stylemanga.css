@@ -503,7 +503,7 @@ h3 {
 
 .xem-nhieu-item {
     float: left;
-    width: 100%;/RootPicture/Icons/circle-arrow.png
+    width: 100%;/*/RootPicture/Icons/circle-arrow.png*/
     height: auto;
 }
 
@@ -1164,11 +1164,12 @@ h3 {
     float: left;
     width: 47.5%;
     padding: 1%;
+    padding-top:0;
     margin: .25%;
     color: #626262;
     background: #fff;
-    height: 177px;
-    overflow: hidden
+    /*height: 177px;
+    overflow: hidden*/
 }
 
     .list-truyen-item-wrap .list-story-item-wrap-chapter {

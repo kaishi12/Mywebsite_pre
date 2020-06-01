@@ -17,12 +17,11 @@ namespace MyWebsite.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Manga()
         {
+            this.Bookmarks = new HashSet<Bookmark>();
             this.Chapters = new HashSet<Chapter>();
             this.Manga_Detail = new HashSet<Manga_Detail>();
             this.Manga_Genres = new HashSet<Manga_Genres>();
             this.Translations = new HashSet<Translation>();
-            this.Accounts = new HashSet<Account>();
-            this.Accounts1 = new HashSet<Account>();
         }
     
         public int MangaId { get; set; }
@@ -37,6 +36,8 @@ namespace MyWebsite.Models
         public System.DateTime UpdateAt { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Bookmark> Bookmarks { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Chapter> Chapters { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Manga_Detail> Manga_Detail { get; set; }
@@ -45,9 +46,5 @@ namespace MyWebsite.Models
         public virtual Status Status { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Translation> Translations { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Account> Accounts { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Account> Accounts1 { get; set; }
     }
 }

@@ -27,6 +27,7 @@ namespace MyWebsite.Models
     
         public virtual DbSet<Account> Accounts { get; set; }
         public virtual DbSet<Account_Detail> Account_Detail { get; set; }
+        public virtual DbSet<Bookmark> Bookmarks { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<Chapter> Chapters { get; set; }
         public virtual DbSet<Font> Fonts { get; set; }
@@ -41,10 +42,10 @@ namespace MyWebsite.Models
         public virtual DbSet<Point> Points { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<Status> Status { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<Text> Texts { get; set; }
         public virtual DbSet<TextBox> TextBoxes { get; set; }
         public virtual DbSet<Translation> Translations { get; set; }
         public virtual DbSet<Translation_Detail> Translation_Detail { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
     }
 }

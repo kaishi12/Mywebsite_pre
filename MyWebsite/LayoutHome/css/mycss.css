@@ -1,21 +1,6 @@
-﻿
-.bookmarkb {
-    font-weight: normal;
-    padding: 3px 5px;
-    margin: -5px 0 0 5px;
-    border: 1px solid #02afe1;
-    background-color: #78daf6;
-    border-radius: 3px;
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
-    -khtml-border-radius: 3px;
-    cursor: pointer;
-    display: inline-block
-}
-
-.toggle_hide {
+﻿/*.toggle_hide {
     display: none;
-}
+}*/
 
 .owl__item{
     position:relative;
@@ -134,4 +119,47 @@ header{
     width:100%;
     font-size:15px;
 }
+
+/*Bookmark*/
+.bookmarklist {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50%;
+}
+
+.bookmarkb {
+    font-weight: normal;
+    padding: 3px 5px;
+    margin: -5px 0 0 5px;
+    border: 1px solid #02afe1;
+    background-color: #78daf6;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -khtml-border-radius: 3px;
+    cursor: pointer;
+    display: inline-block
+}
+
+.bookmarkb.alreadyseen{
+    background-color:#ccc;
+    cursor:not-allowed;
+}
+
+.mangacount {
+    position: absolute;
+    top: 5%;
+    width:20px;
+    height:20px;
+    font-size:10px;
+    text-align:center;
+    line-height:22px;
+    background-color:rgba(255, 0, 0,0.7);
+    border-radius:50%;
+    z-index:10;
+}
+
+
 

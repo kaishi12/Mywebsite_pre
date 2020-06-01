@@ -96,3 +96,71 @@ $('.owl-carousel').owlCarousel({
 /*-----------------------------------------------------------------------------------*/
 /* Bookmark
 /*-----------------------------------------------------------------------------------*/
+$("#notlogin").click(function() {
+    alert('Vui lòng đăng nhập');
+    location.href = "/Home";
+})
+
+$("#addbookmarkb").click(function() {
+    $.ajax({
+        url: "/AddBookmark/",
+        method: "POST",
+        type:"json"
+    }).success(function() {
+        alert("Đã thêm bookmark");
+        location.reload();
+    }).error(function() {
+        alert("Lỗi vui lòng liên hệ admin");
+    });
+})
+
+$("[id=delbookmarkb]").click(function() {
+    if (confirm('Bạn có chắc muốn xóa khỏi bookmark ?')) {
+        $.ajax({
+            url: "/DelBookmark/",
+            method: "POST",
+            type:"json"
+        }).success(function() {
+            alert("Đã xóa khỏi bookmark");
+            location.reload();
+        }).error(function() {
+            alert("Lỗi vui lòng liên hệ admin");
+        });
+    }
+})
+
+//$("#updatetolast").click(function() {
+//    var idManga = $(this).data("manga-id");
+//    $.ajax({
+//        url: "/UpdateBookmarkToLast/ " + idManga,
+//        method: "POST",
+//        type: "json",
+//    }).success(function() {
+//        $("#trCheck").removeClass("table-info");
+//    }).error(function() {
+//        alert("Lỗi vui lòng liên hệ admin");
+//    });
+//})
+
+
+$("[id=updatebookmarkb]").click(function() {
+    var idManga = $(this).data("manga-id");
+    var idChapter = $(this).data("chapter-id")
+    if (idChapter === undefined) {
+        var urllink = "/UpdateBookmark/" + idManga;
+    } else {
+        var urllink = "/UpdateBookmark/" + idManga + "/" + idChapter;
+    }
+    $.ajax({
+        url: urllink,
+        method: "POST",
+        type: "json",
+    }).success(function() {
+        $("#trCheck").removeClass("table-info");
+    }).error(function() {
+        alert("Lỗi vui lòng liên hệ admin");
+    });
+})
+
+
+
