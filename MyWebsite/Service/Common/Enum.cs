@@ -101,4 +101,10 @@ namespace MyWebsite.Service.Common
         ZA = 1,
         Update = 2,
     }
+    public enum FeebackStatus
+    {
+        await = 0,
+        process = 1,
+        done = 2,
+    }
 }

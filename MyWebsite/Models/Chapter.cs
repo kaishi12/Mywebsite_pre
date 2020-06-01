@@ -30,10 +30,10 @@ namespace MyWebsite.Models
         public int MangaId { get; set; }
         public string Alias { get; set; }
     
+        public virtual Manga Manga { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Page> Pages { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Translation_Detail> Translation_Detail { get; set; }
-        public virtual Manga Manga { get; set; }
     }
 }

@@ -68,6 +68,18 @@
     <Property Name="Active" Type="bit" />
     <Property Name="Name" Type="nvarchar(max)" />
   </EntityType>
+  <EntityType Name="FeedBack">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AccountId" Type="int" />
+    <Property Name="Description" Type="text" />
+    <Property Name="date" Type="datetime" />
+    <Property Name="status" Type="int" />
+    <Property Name="active" Type="bit" />
+    <Property Name="title" Type="nvarchar" MaxLength="255" />
+  </EntityType>
   <EntityType Name="Font">
     <Key>
       <PropertyRef Name="FontId" />
@@ -198,6 +210,7 @@
     <Property Name="UPCLEARPoint" Type="float" />
     <Property Name="Active" Type="bit" />
     <Property Name="MangaId" Type="int" />
+    <Property Name="Views" Type="int" />
   </EntityType>
   <EntityType Name="Role">
     <Key>
@@ -312,6 +325,18 @@
       </Principal>
       <Dependent Role="Chapter">
         <PropertyRef Name="MangaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FeedBack_Account">
+    <End Role="Account" Type="Self.Account" Multiplicity="0..1" />
+    <End Role="FeedBack" Type="Self.FeedBack" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Account">
+        <PropertyRef Name="AccountId" />
+      </Principal>
+      <Dependent Role="FeedBack">
+        <PropertyRef Name="AccountId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -586,6 +611,7 @@
     <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Chapter" EntityType="Self.Chapter" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Document" EntityType="Self.Document" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FeedBack" EntityType="Self.FeedBack" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Font" EntityType="Self.Font" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Genre" EntityType="Self.Genre" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Language" EntityType="Self.Language" Schema="dbo" store:Type="Tables" />
@@ -615,6 +641,10 @@
     <AssociationSet Name="FK_Chapter_Manga" Association="Self.FK_Chapter_Manga">
       <End Role="Manga" EntitySet="Manga" />
       <End Role="Chapter" EntitySet="Chapter" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FeedBack_Account" Association="Self.FK_FeedBack_Account">
+      <End Role="Account" EntitySet="Account" />
+      <End Role="FeedBack" EntitySet="FeedBack" />
     </AssociationSet>
     <AssociationSet Name="FK_Manga_Detail_Account" Association="Self.FK_Manga_Detail_Account">
       <End Role="Account" EntitySet="Account" />

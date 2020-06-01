@@ -28,9 +28,9 @@ namespace MyWebsite.Models
         public int FontSize { get; set; }
         public bool Italic { get; set; }
     
+        public virtual Account Account { get; set; }
         public virtual Font Font { get; set; }
         public virtual TextBox TextBox { get; set; }
         public virtual Translation Translation { get; set; }
-        public virtual Account Account { get; set; }
     }
 }

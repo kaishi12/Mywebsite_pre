@@ -71,6 +71,7 @@ namespace MyWebsite.Controllers
                 model.Id = editmodel.code;
                 model.Description = editmodel.des;
                 model.Alias = editmodel.alias;
+                model.Active = true;
                 data.Genres.Add(model);
                 data.SaveChanges();
                 return Json(new { rs = true, mess = "Thêm thành công" }, JsonRequestBehavior.AllowGet);

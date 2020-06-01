@@ -232,6 +232,7 @@
     <EntitySetMapping Name="PointHistories">
       <EntityTypeMapping TypeName="MyWebsiteModel.PointHistory">
         <MappingFragment StoreEntitySet="PointHistory">
+          <ScalarProperty Name="Views" ColumnName="Views" />
           <ScalarProperty Name="MangaId" ColumnName="MangaId" />
           <ScalarProperty Name="Active" ColumnName="Active" />
           <ScalarProperty Name="UPCLEARPoint" ColumnName="UPCLEARPoint" />
@@ -296,6 +297,19 @@
           <ScalarProperty Name="FullName" ColumnName="FullName" />
           <ScalarProperty Name="CoverLink" ColumnName="CoverLink" />
           <ScalarProperty Name="MangaId" ColumnName="MangaId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FeedBacks">
+      <EntityTypeMapping TypeName="MyWebsiteModel.FeedBack">
+        <MappingFragment StoreEntitySet="FeedBack">
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="active" ColumnName="active" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="date" ColumnName="date" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="AccountId" ColumnName="AccountId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

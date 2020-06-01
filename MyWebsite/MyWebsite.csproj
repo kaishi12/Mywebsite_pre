@@ -669,6 +669,7 @@
     <Compile Include="Controllers\ContributeController.cs" />
     <Compile Include="Controllers\DocumentController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
+    <Compile Include="Controllers\FeedbackController.cs" />
     <Compile Include="Controllers\GenresController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MangaController.cs" />
@@ -698,6 +699,9 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Document.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FeedBack.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Font.cs">
@@ -1120,6 +1124,8 @@
     <Content Include="Views\PointHistory\MemberHistory.cshtml" />
     <Content Include="Views\Manga\ListAllManga.cshtml" />
     <Content Include="Views\Manga\MangaProfile.cshtml" />
+    <Content Include="Views\Feedback\Index.cshtml" />
+    <Content Include="Views\Feedback\List.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

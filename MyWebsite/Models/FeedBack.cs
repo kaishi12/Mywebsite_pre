@@ -12,18 +12,15 @@ namespace MyWebsite.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class PointHistory
+    public partial class FeedBack
     {
-        public int HistoryId { get; set; }
-        public Nullable<System.DateTime> ToDay { get; set; }
+        public int Id { get; set; }
         public Nullable<int> AccountId { get; set; }
-        public Nullable<double> DTPoint { get; set; }
-        public Nullable<double> QLBDPoint { get; set; }
-        public Nullable<double> QLTPoint { get; set; }
-        public Nullable<double> UPCLEARPoint { get; set; }
-        public Nullable<bool> Active { get; set; }
-        public Nullable<int> MangaId { get; set; }
-        public Nullable<int> Views { get; set; }
+        public string Description { get; set; }
+        public Nullable<System.DateTime> date { get; set; }
+        public Nullable<int> status { get; set; }
+        public Nullable<bool> active { get; set; }
+        public string title { get; set; }
     
         public virtual Account Account { get; set; }
     }

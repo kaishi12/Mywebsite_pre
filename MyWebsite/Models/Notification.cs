@@ -22,7 +22,7 @@ namespace MyWebsite.Models
         public int NotifyTypeId { get; set; }
         public bool SeenStatus { get; set; }
     
-        public virtual NotifyType NotifyType { get; set; }
         public virtual Account Account { get; set; }
+        public virtual NotifyType NotifyType { get; set; }
     }
 }

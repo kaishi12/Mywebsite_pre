@@ -532,6 +532,11 @@
       <End Role="Manga" EntitySet="Mangas" />
       <End Role="Translation" EntitySet="Translations" />
     </AssociationSet>
+    <EntitySet Name="FeedBacks" EntityType="MyWebsiteModel.FeedBack" />
+    <AssociationSet Name="FK_FeedBack_Account" Association="MyWebsiteModel.FK_FeedBack_Account">
+      <End Role="Account" EntitySet="Accounts" />
+      <End Role="FeedBack" EntitySet="FeedBacks" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="PointHistory">
     <Key>
@@ -547,6 +552,7 @@
     <Property Name="Active" Type="Boolean" />
     <Property Name="MangaId" Type="Int32" />
     <NavigationProperty Name="Account" Relationship="MyWebsiteModel.FK_PointHistory_Account" FromRole="PointHistory" ToRole="Account" />
+    <Property Name="Views" Type="Int32" />
   </EntityType>
   <EntityType Name="sysdiagram">
     <Key>
@@ -584,6 +590,7 @@
     <NavigationProperty Name="PointHistories" Relationship="MyWebsiteModel.FK_PointHistory_Account" FromRole="Account" ToRole="PointHistory" />
     <NavigationProperty Name="Texts" Relationship="MyWebsiteModel.FK_Text_Account" FromRole="Account" ToRole="Text" />
     <NavigationProperty Name="Translations" Relationship="MyWebsiteModel.FK_Translation_Account" FromRole="Account" ToRole="Translation" />
+    <NavigationProperty Name="FeedBacks" Relationship="MyWebsiteModel.FK_FeedBack_Account" FromRole="Account" ToRole="FeedBack" />
   </EntityType>
   <EntityType Name="Bookmark">
     <Key>
@@ -752,6 +759,31 @@
       </Principal>
       <Dependent Role="Translation">
         <PropertyRef Name="MangaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="FeedBack">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AccountId" Type="Int32" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="date" Type="DateTime" Precision="3" />
+    <Property Name="status" Type="Int32" />
+    <Property Name="active" Type="Boolean" />
+    <NavigationProperty Name="Account" Relationship="MyWebsiteModel.FK_FeedBack_Account" FromRole="FeedBack" ToRole="Account" />
+    <Property Name="title" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <Association Name="FK_FeedBack_Account">
+    <End Type="MyWebsiteModel.Account" Role="Account" Multiplicity="0..1" />
+    <End Type="MyWebsiteModel.FeedBack" Role="FeedBack" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Account">
+        <PropertyRef Name="AccountId" />
+      </Principal>
+      <Dependent Role="FeedBack">
+        <PropertyRef Name="AccountId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

@@ -23,8 +23,8 @@ namespace MyWebsite.Models
         public System.DateTime CreateAt { get; set; }
         public Nullable<int> Status { get; set; }
     
-        public virtual Role Role { get; set; }
         public virtual Account Account { get; set; }
         public virtual Manga Manga { get; set; }
+        public virtual Role Role { get; set; }
     }
 }

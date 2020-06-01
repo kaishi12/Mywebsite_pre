@@ -87,7 +87,22 @@ namespace MyWebsite.Controllers
                         model.QLBDPoint = qlbd;
                         model.QLTPoint = qlt;
                         model.UPCLEARPoint = upclear;
+                        var view = data.PointHistories.Where(m => m.MangaId == manga).ToList().LastOrDefault(); 
+                        if(view != null)
+                        {
+                            model.Views = data.Chapters.Where(m => m.MangaId == manga).Sum(m => m.ViewNumber) - view.Views ;
+                        }
+                        else
+                        {
+                            if(data.Chapters.Where(m => m.MangaId == manga).Count() ==  0)
+                            {
+                                model.Views = 0;
+                            }   
+                            else
+                            model.Views = data.Chapters.Where(m => m.MangaId == manga).Sum(m => m.ViewNumber);
+                        }
                         data.PointHistories.Add(model);
+                        data.SaveChanges();
                     }
                 }
                 data.SaveChanges();
