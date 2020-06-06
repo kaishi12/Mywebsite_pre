@@ -17,6 +17,7 @@ namespace MyWebsite.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Manga()
         {
+            this.Bookmarks = new HashSet<Bookmark>();
             this.Chapters = new HashSet<Chapter>();
             this.Manga_Detail = new HashSet<Manga_Detail>();
             this.Manga_Genres = new HashSet<Manga_Genres>();
@@ -34,6 +35,8 @@ namespace MyWebsite.Models
         public int StatusId { get; set; }
         public System.DateTime UpdateAt { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Bookmark> Bookmarks { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Chapter> Chapters { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -503,7 +503,7 @@ h3 {
 
 .xem-nhieu-item {
     float: left;
-    width: 100%;/RootPicture/Icons/circle-arrow.png
+    width: 100%;/*/RootPicture/Icons/circle-arrow.png*/
     height: auto;
 }
 
@@ -1071,9 +1071,10 @@ h3 {
 }
 
 .comment-info {
+    margin-top:5px;
     background: #fff;
     float: left;
-    width: 98%;
+    width: 100%;
     padding: 10px 1%
 }
 
@@ -1163,11 +1164,12 @@ h3 {
     float: left;
     width: 47.5%;
     padding: 1%;
+    padding-top:0;
     margin: .25%;
     color: #626262;
     background: #fff;
-    height: 177px;
-    overflow: hidden
+    /*height: 177px;
+    overflow: hidden*/
 }
 
     .list-truyen-item-wrap .list-story-item-wrap-chapter {
@@ -2226,10 +2228,9 @@ footer {
 }
 
 .aye_icon {
-    background: url(../images/aye.png) no-repeat;
     font-size: 14px;
     color: #7e7e7e;
-    padding: 2px 0 0 28px;
+    padding: 2px 0 0 10px;
     margin-right: 10px;
     float: left;
     line-height: 22px

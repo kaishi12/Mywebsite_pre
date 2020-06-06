@@ -39,6 +39,7 @@
         <AssociationConnector Association="MyWebsiteModel.FK_Text_Account" ManuallyRouted="false" />
         <AssociationConnector Association="MyWebsiteModel.FK_Translation_Account" ManuallyRouted="false" />
         <AssociationConnector Association="MyWebsiteModel.FK_Account_Detail_Point" ManuallyRouted="false" />
+        <AssociationConnector Association="MyWebsiteModel.FK_Bookmark_Manga" ManuallyRouted="false" />
         <AssociationConnector Association="MyWebsiteModel.FK_Page_Category" ManuallyRouted="false" />
         <AssociationConnector Association="MyWebsiteModel.FK_Chapter_Manga" ManuallyRouted="false" />
         <AssociationConnector Association="MyWebsiteModel.FK_Page_Chapter" ManuallyRouted="false" />

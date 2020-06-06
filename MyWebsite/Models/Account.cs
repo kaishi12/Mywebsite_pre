@@ -18,7 +18,10 @@ namespace MyWebsite.Models
         public Account()
         {
             this.Account_Detail = new HashSet<Account_Detail>();
+
             this.FeedBacks = new HashSet<FeedBack>();
+
+            this.Bookmarks = new HashSet<Bookmark>();
             this.Manga_Detail = new HashSet<Manga_Detail>();
             this.Notifications = new HashSet<Notification>();
             this.Pages = new HashSet<Page>();
@@ -47,6 +50,9 @@ namespace MyWebsite.Models
         public virtual ICollection<Account_Detail> Account_Detail { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FeedBack> FeedBacks { get; set; }
+
+        public virtual ICollection<Bookmark> Bookmarks { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Manga_Detail> Manga_Detail { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

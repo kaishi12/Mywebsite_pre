@@ -33,10 +33,10 @@ namespace MyWebsite
                 SqlDependency sqlDep = new SqlDependency(cmd);
                 sqlDep.OnChange += sqlDep_OnChange;
                 //we must have to execute the command here
-                using (SqlDataReader reader = cmd.ExecuteReader())
-                {
-                    //nothing need to add here now
-                }
+                //using (SqlDataReader reader = cmd.ExecuteReader())
+                //{
+                //    //nothing need to add here now
+                //}
             }
         }
 

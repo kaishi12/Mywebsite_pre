@@ -32,7 +32,7 @@
                         @foreach (var chuongtruyen in truyen.Last3Chapter)
                         {
                             <li>
-                                <span><a class="sts sts_1" href="/read/@chuongtruyen.Alias/@truyen.MangaId-@chuongtruyen.ChapterId/@chuongtruyen.LanguageName" title="@chuongtruyen.FullName">(@chuongtruyen.LanguageName)@chuongtruyen.FullName</a></span>
+                                <span><a class="sts sts_1" id="updatebookmarkb" data-manga-id="@truyen.MangaId" data-chapter-id="@chuongtruyen.ChapterId" href="/read/@chuongtruyen.Alias/@truyen.MangaId-@chuongtruyen.ChapterId/@chuongtruyen.LanguageName" title="@chuongtruyen.FullName">(@chuongtruyen.LanguageName)@chuongtruyen.FullName</a></span>
                                 <i>@chuongtruyen.UpdateAt</i>
                             </li>
                         }

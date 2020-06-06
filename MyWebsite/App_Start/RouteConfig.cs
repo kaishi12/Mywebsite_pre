@@ -20,6 +20,13 @@ namespace MyWebsite
 
             routes.MapRoute("MangaDetails-Language","manga/{alias}-{idManga}/{language}",new { controller = "Home", action = "MangaDetail" },new { idManga = @"\d+" }, new[] { "MyWebsite.Controllers" });
             routes.MapRoute("MangaDetails","manga/{alias}-{idManga}",new { controller = "Home", action = "MangaDetail" },new { idManga = @"\d+" }, new[] { "MyWebsite.Controllers" });
+            routes.MapRoute("AddBookmark", "AddBookmark", new { controller = "Home", action = "AddBookmark" }, new[] { "MyWebsite.Controllers" });
+            routes.MapRoute("DelBookmark", "DelBookmark", new { controller = "Home", action = "DelBookmark" }, new[] { "MyWebsite.Controllers" });
+            routes.MapRoute("UpdateBookmarkToLast", "UpdateBookmark/{idManga}", new { controller = "Home", action = "UpdateBookmark" }, new[] { "MyWebsite.Controllers" });
+            routes.MapRoute("UpdateBookmarkToChap", "UpdateBookmark/{idManga}/{idChapter}", new { controller = "Home", action = "UpdateBookmark" }, new[] { "MyWebsite.Controllers" });
+            routes.MapRoute("Bookmark", "Bookmark", new { controller = "Home", action = "BookmarkList" }, new[] { "MyWebsite.Controllers" });
+
+            routes.MapRoute("SearchManga", "SearchManga", new { controller = "Home", action = "SearchManga" }, new[] { "MyWebsite.Controllers" });
 
             //Account
             routes.MapRoute("Login","Login",new { controller = "Account", action = "Login" });

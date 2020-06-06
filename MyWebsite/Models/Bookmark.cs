@@ -14,6 +14,14 @@ namespace MyWebsite.Models
     
     public partial class Bookmark
     {
+
         public int id { get; set; }
+        public int AccountId { get; set; }
+        public int MangaId { get; set; }
+        public int LastSeenChap { get; set; }
+        public bool SeenStatus { get; set; }
+    
+        public virtual Account Account { get; set; }
+        public virtual Manga Manga { get; set; }
     }
 }

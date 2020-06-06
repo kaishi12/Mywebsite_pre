@@ -926,6 +926,10 @@ header .navbar li a {
 	padding-top: 10px;
     margin-top:5px;
 }
+
+header .navbar li a i{
+    margin-left:3px;
+}
 .nav-right {
 	float: right;
 	position: relative;
