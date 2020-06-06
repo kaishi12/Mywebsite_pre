@@ -88,7 +88,9 @@
         </div><!-- /.modal-content -->
     </div>
 </div>
-<script>
+@section Scripts
+{
+    <script>
      $(document).ready(function () {
             loadEmpGroup();
      });
@@ -164,7 +166,7 @@
                  $("#StatusName").text(result.name);
                  $("#StatusId").val(result.id);
                  $("#nameEdit").val(result.name);
-                 
+
                 }
             });
          $('#EditModal').modal('show');
@@ -174,18 +176,18 @@
          $("#StatusName").text("Trạng thái truyện");
          $("#StatusId").val("");
          $("#nameEdit").val("");
-       
+
     }
     function ResetAddModal() {
          $("#name").val("");
-       
+
     }
     $("#SaveEdit").on("click", function () {
          if ($('#nameEdit').val() == "") {
             alert("Vui lòng nhập tên thể loại");
                 return;
             }
-            
+
             $.ajax({
                 type: 'POST',
                 url: '@Url.Action("Edit", "StatusManga")',
@@ -212,13 +214,13 @@
             alert("Vui lòng nhập tên trạng thái");
                 return;
             }
-           
+
             $.ajax({
                 type: 'POST',
                 url: '@Url.Action("Add", "StatusManga")',
                 data: {
                     'name': $("#name").val(),
-                   
+
                 },
                 success: function(result) {
                     if (result.rs == true) {
@@ -259,4 +261,6 @@
                     });
 }
     }
-</script>
+    </script>
+}
+

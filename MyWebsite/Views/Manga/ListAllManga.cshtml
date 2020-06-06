@@ -112,8 +112,10 @@
 <div hidden>
     <input hidden id="Page" value="@ViewBag.Page" />
 </div>
-<script src="~/LayoutUser/jquery.lazy.js"></script>
-<script>
+@section Scripts
+{
+    <script src="~/LayoutUser/jquery.lazy.js"></script>
+    <script>
 
     $(document).ready(function () {
         const queryString = window.location.search;
@@ -164,7 +166,7 @@
 
         // position tooltip relative to mouse coordinates
         $(this).mousemove(function () {
-            
+
             $('#tooltip').css({ 'top': mouseY - 10, 'left': mouseX + 10 });
         });
     }).mouseout(function () {
@@ -373,4 +375,5 @@
                 }
             });
     }
-</script>
+    </script>
+}

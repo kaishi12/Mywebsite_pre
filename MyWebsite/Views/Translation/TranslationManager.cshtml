@@ -18,7 +18,7 @@
         <div class="box-header primary">
             <h2> @ViewBag.MangaFullName</h2>
             @*<span class="text-muted" >@ViewBag.Language</span>*@
-            <input hidden id="Translation"  value="@ViewBag.Traslation.TransationId"/>
+            <input hidden id="Translation" value="@ViewBag.Traslation.TransationId" />
         </div>
         <div class="box-body m-b">
             <div class="row">
@@ -28,7 +28,7 @@
                             <span>Chương</span>
 
                         </label>
-                        <select class=" col-sm-8 form-control c-select" id="SelectChapter" name="SelectChapter">
+                         <select class="form-control select2" ui-jp="select2" ui-options="{theme: 'bootstrap'}" id="SelectChapter" name="SelectChapter">
                             @foreach (var item in ViewBag.chapterlist)
                             {
                                 if (ViewBag.ChapterId != null && ViewBag.ChapterId == item.ChapterId)
@@ -42,16 +42,16 @@
                             }
                         </select>
                     </div>
-                      
-                        
-                    </div>
+
+
+                </div>
                 <div class="col-sm-4" style="padding-bottom:10px;">
                     <div class="form-group row">
                         <label class="col-sm-3 form-control-label">
                             <span>Trang:</span>
 
                         </label>
-                        <select class="col-sm-8 form-control c-select" id="SelectPage" name="SelectPage">
+                         <select class="form-control select2" ui-jp="select2" ui-options="{theme: 'bootstrap'}" id="SelectPage" name="SelectPage">
                             @foreach (var item in ViewBag.listpage)
                             {
                                 if (item.Key == Model.PageId)
@@ -65,9 +65,9 @@
                             }
                         </select>
                     </div>
-                       
-                    </div>
+
                 </div>
+            </div>
             <div class="row">
                 <div id="DivCanvas" class="col-sm-6">
                     @if (ViewBag.PageClear != null)
@@ -102,12 +102,12 @@
 
                         </div>
                         <div class="table-responsive">
-                            <table class="table table-bordered black m-0" id="tblEntAttributes">
+                            <table class="table table-bordered  m-0" id="tblEntAttributes">
 
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                      <th>
+                                        <th>
                                             Lời thoại
                                         </th>
                                         <th>
@@ -128,25 +128,26 @@
 
                                             var Cor = item.Coordinate.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
                                             <tr>
-                                                <td class="Att " data-attDe="@item.Degree" data-attX="@Cor[0]" data-attY="@Cor[1]" data-attW="@item.Witdh" data-attH="@item.Height"><span class="form-control">@count</span> </td>
-                                                <td>
-                                                    <select class="AttText form-control c-select">
+                                                <td width="10%" class="Att " data-attDe="@item.Degree" data-attX="@Cor[0]" data-attY="@Cor[1]" data-attW="@item.Witdh" data-attH="@item.Height">@count </td>
+                                                <td width="70%">
+                                                    <select style="width:100%" class=" AttText form-control select2" ui-jp="select2" ui-options="{theme: 'bootstrap'}">
+                                                    
                                                         @foreach (var text in item.Texts.Where(m => m.TranslationId == ViewBag.Traslation.TransationId))
                                                         {
                                                             if (text.Allow == true)
                                                             {
-                                                                <option style="color:black" selected data-bold="@text.Bold" data-size="@text.FontSize" data-font="@text.Font.FullName" data-fontid="@text.FontId" data-Italic="@text.Italic" data-color="@text.ColorText.Trim()" value="@text.TextId" id="@item.TextBoxId">@text.TextContent</option>
+                                                                <option style="color:black" selected data-bold="@text.Bold" data-size="@text.FontSize" data-font="@text.Font.FullName" data-fontid="@text.FontId" data-Italic="@text.Italic" data-color="@text.ColorText" value="@text.TextId" id="@item.TextBoxId">@text.TextContent</option>
                                                             }
                                                             else
                                                             {
-                                                                <option style="color:black" data-bold="@text.Bold" data-size="@text.FontSize" data-font="@text.Font.FullName" data-fontid="@text.FontId" data-Italic="@text.Italic" data-color="@text.ColorText.Trim()" value="@text.TextId" id="@item.TextBoxId">@text.TextContent</option>
+                                                                <option style="color:black" data-bold="@text.Bold" data-size="@text.FontSize" data-font="@text.Font.FullName" data-fontid="@text.FontId" data-Italic="@text.Italic" data-color="@text.ColorText" value="@text.TextId" id="@item.TextBoxId">@text.TextContent</option>
 
                                                             }
                                                         }
                                                     </select>
                                                 </td>
 
-                                                <td ><button data-textboxid="@item.TextBoxId" data-id="1" class="AttBtn btn btn-fw danger">Duyệt</button></td>
+                                                <td width="20%"><button data-textboxid="@item.TextBoxId" data-id="1" class="AttBtn btn btn-sm primary">Duyệt</button></td>
 
                                             </tr>
                                             count++;
@@ -162,13 +163,14 @@
         </div>
     </div>
 </div>
-<!--<canvas hidden id="canvas1" width="1000" height="1000" style="border:1px solid #000000;">
-    Your browser does not support the HTML5 canvas tag.
-</canvas>-->
 
 
+@section Scripts
+{
     <script src="~/LayoutUser/Translation/TranslationManager.js"></script>
-  
+}
+
+
 
 
 

@@ -1,6 +1,27 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="MyWebsiteModelStoreContainer" CdmEntityContainer="MyWebsiteEntities">
+    <EntitySetMapping Name="Accounts">
+      <EntityTypeMapping TypeName="MyWebsiteModel.Account">
+        <MappingFragment StoreEntitySet="Account">
+          <ScalarProperty Name="AccountId" ColumnName="AccountId" />
+          <ScalarProperty Name="FullName" ColumnName="FullName" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="AvatarLink" ColumnName="AvatarLink" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="PassWord" ColumnName="PassWord" />
+          <ScalarProperty Name="ResetPasswordCode" ColumnName="ResetPasswordCode" />
+          <ScalarProperty Name="FacebookLink" ColumnName="FacebookLink" />
+          <ScalarProperty Name="TwitterLink" ColumnName="TwitterLink" />
+          <ScalarProperty Name="InstagramLink" ColumnName="InstagramLink" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Note" ColumnName="Note" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Account_Detail">
       <EntityTypeMapping TypeName="MyWebsiteModel.Account_Detail">
         <MappingFragment StoreEntitySet="Account_Detail">
@@ -8,6 +29,13 @@
           <ScalarProperty Name="PointId" ColumnName="PointId" />
           <ScalarProperty Name="Total" ColumnName="Total" />
           <ScalarProperty Name="Active" ColumnName="Active" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Bookmarks">
+      <EntityTypeMapping TypeName="MyWebsiteModel.Bookmark">
+        <MappingFragment StoreEntitySet="Bookmark">
+          <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -46,6 +74,19 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="FeedBacks">
+      <EntityTypeMapping TypeName="MyWebsiteModel.FeedBack">
+        <MappingFragment StoreEntitySet="FeedBack">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="AccountId" ColumnName="AccountId" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="date" ColumnName="date" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="active" ColumnName="active" />
+          <ScalarProperty Name="title" ColumnName="title" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Fonts">
       <EntityTypeMapping TypeName="MyWebsiteModel.Font">
         <MappingFragment StoreEntitySet="Font">
@@ -77,6 +118,22 @@
           <ScalarProperty Name="Note" ColumnName="Note" />
           <ScalarProperty Name="Active" ColumnName="Active" />
           <ScalarProperty Name="Code" ColumnName="Code" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Mangas">
+      <EntityTypeMapping TypeName="MyWebsiteModel.Manga">
+        <MappingFragment StoreEntitySet="Manga">
+          <ScalarProperty Name="MangaId" ColumnName="MangaId" />
+          <ScalarProperty Name="CoverLink" ColumnName="CoverLink" />
+          <ScalarProperty Name="FullName" ColumnName="FullName" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="CreateAt" ColumnName="CreateAt" />
+          <ScalarProperty Name="Author" ColumnName="Author" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="Alias" ColumnName="Alias" />
+          <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+          <ScalarProperty Name="UpdateAt" ColumnName="UpdateAt" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -154,6 +211,22 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="PointHistories">
+      <EntityTypeMapping TypeName="MyWebsiteModel.PointHistory">
+        <MappingFragment StoreEntitySet="PointHistory">
+          <ScalarProperty Name="HistoryId" ColumnName="HistoryId" />
+          <ScalarProperty Name="ToDay" ColumnName="ToDay" />
+          <ScalarProperty Name="AccountId" ColumnName="AccountId" />
+          <ScalarProperty Name="DTPoint" ColumnName="DTPoint" />
+          <ScalarProperty Name="QLBDPoint" ColumnName="QLBDPoint" />
+          <ScalarProperty Name="QLTPoint" ColumnName="QLTPoint" />
+          <ScalarProperty Name="UPCLEARPoint" ColumnName="UPCLEARPoint" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="MangaId" ColumnName="MangaId" />
+          <ScalarProperty Name="Views" ColumnName="Views" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Roles">
       <EntityTypeMapping TypeName="MyWebsiteModel.Role">
         <MappingFragment StoreEntitySet="Role">
@@ -167,10 +240,21 @@
     <EntitySetMapping Name="Status">
       <EntityTypeMapping TypeName="MyWebsiteModel.Status">
         <MappingFragment StoreEntitySet="Status">
-          <ScalarProperty Name="Alias" ColumnName="Alias" />
           <ScalarProperty Name="StatusId" ColumnName="StatusId" />
           <ScalarProperty Name="FullName" ColumnName="FullName" />
           <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="Alias" ColumnName="Alias" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="MyWebsiteModel.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -226,90 +310,6 @@
           <ScalarProperty Name="Active" ColumnName="Active" />
           <ScalarProperty Name="UpdateAt" ColumnName="UpdateAt" />
           <ScalarProperty Name="CreateAt" ColumnName="CreateAt" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="PointHistories">
-      <EntityTypeMapping TypeName="MyWebsiteModel.PointHistory">
-        <MappingFragment StoreEntitySet="PointHistory">
-          <ScalarProperty Name="Views" ColumnName="Views" />
-          <ScalarProperty Name="MangaId" ColumnName="MangaId" />
-          <ScalarProperty Name="Active" ColumnName="Active" />
-          <ScalarProperty Name="UPCLEARPoint" ColumnName="UPCLEARPoint" />
-          <ScalarProperty Name="QLTPoint" ColumnName="QLTPoint" />
-          <ScalarProperty Name="QLBDPoint" ColumnName="QLBDPoint" />
-          <ScalarProperty Name="DTPoint" ColumnName="DTPoint" />
-          <ScalarProperty Name="AccountId" ColumnName="AccountId" />
-          <ScalarProperty Name="ToDay" ColumnName="ToDay" />
-          <ScalarProperty Name="HistoryId" ColumnName="HistoryId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="sysdiagrams">
-      <EntityTypeMapping TypeName="MyWebsiteModel.sysdiagram">
-        <MappingFragment StoreEntitySet="sysdiagrams">
-          <ScalarProperty Name="definition" ColumnName="definition" />
-          <ScalarProperty Name="version" ColumnName="version" />
-          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-          <ScalarProperty Name="name" ColumnName="name" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Accounts">
-      <EntityTypeMapping TypeName="MyWebsiteModel.Account">
-        <MappingFragment StoreEntitySet="Account">
-          <ScalarProperty Name="Type" ColumnName="Type" />
-          <ScalarProperty Name="Note" ColumnName="Note" />
-          <ScalarProperty Name="Status" ColumnName="Status" />
-          <ScalarProperty Name="InstagramLink" ColumnName="InstagramLink" />
-          <ScalarProperty Name="TwitterLink" ColumnName="TwitterLink" />
-          <ScalarProperty Name="FacebookLink" ColumnName="FacebookLink" />
-          <ScalarProperty Name="ResetPasswordCode" ColumnName="ResetPasswordCode" />
-          <ScalarProperty Name="PassWord" ColumnName="PassWord" />
-          <ScalarProperty Name="UserName" ColumnName="UserName" />
-          <ScalarProperty Name="Active" ColumnName="Active" />
-          <ScalarProperty Name="AvatarLink" ColumnName="AvatarLink" />
-          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
-          <ScalarProperty Name="Email" ColumnName="Email" />
-          <ScalarProperty Name="FullName" ColumnName="FullName" />
-          <ScalarProperty Name="AccountId" ColumnName="AccountId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Bookmarks">
-      <EntityTypeMapping TypeName="MyWebsiteModel.Bookmark">
-        <MappingFragment StoreEntitySet="Bookmark">
-          <ScalarProperty Name="id" ColumnName="id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Mangas">
-      <EntityTypeMapping TypeName="MyWebsiteModel.Manga">
-        <MappingFragment StoreEntitySet="Manga">
-          <ScalarProperty Name="UpdateAt" ColumnName="UpdateAt" />
-          <ScalarProperty Name="StatusId" ColumnName="StatusId" />
-          <ScalarProperty Name="Alias" ColumnName="Alias" />
-          <ScalarProperty Name="Active" ColumnName="Active" />
-          <ScalarProperty Name="Author" ColumnName="Author" />
-          <ScalarProperty Name="CreateAt" ColumnName="CreateAt" />
-          <ScalarProperty Name="Description" ColumnName="Description" />
-          <ScalarProperty Name="FullName" ColumnName="FullName" />
-          <ScalarProperty Name="CoverLink" ColumnName="CoverLink" />
-          <ScalarProperty Name="MangaId" ColumnName="MangaId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="FeedBacks">
-      <EntityTypeMapping TypeName="MyWebsiteModel.FeedBack">
-        <MappingFragment StoreEntitySet="FeedBack">
-          <ScalarProperty Name="title" ColumnName="title" />
-          <ScalarProperty Name="active" ColumnName="active" />
-          <ScalarProperty Name="status" ColumnName="status" />
-          <ScalarProperty Name="date" ColumnName="date" />
-          <ScalarProperty Name="Description" ColumnName="Description" />
-          <ScalarProperty Name="AccountId" ColumnName="AccountId" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

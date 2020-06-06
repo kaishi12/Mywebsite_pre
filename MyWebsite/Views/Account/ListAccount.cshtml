@@ -91,13 +91,15 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn dark-white p-x-md" data-dismiss="modal">Thoát</button>
-                <button type="button" class="btn danger p-x-md" id="SaveAdd">Thêm</button>
+                <button type="button" class="btn danger p-x-md" data-dismiss="modal">Thoát</button>
+                <button type="button" class="btn primary p-x-md" id="SaveAdd">Thêm</button>
             </div>
         </div><!-- /.modal-content -->
     </div>
 </div>
-<script>
+@section Scripts
+{
+    <script>
      $(document).ready(function () {
             loadEmpGroup();
      });
@@ -224,4 +226,6 @@
                     });
 }
     }
-</script>
+    </script>
+}
+

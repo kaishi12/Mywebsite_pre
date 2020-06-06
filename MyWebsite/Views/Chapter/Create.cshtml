@@ -31,7 +31,7 @@
                     @Html.AntiForgeryToken()
                     <input hidden id="PageFullName" name="PageFullName" />
                     <input hidden id="PageOrderNumber" name="PageOrderNumber" />
-                    
+
                     <div class="row m-b">
                         <input hidden value="@ViewBag.MangaId" id="MangaId" name="MangaId" />
                         <div class="col-sm-3">
@@ -79,6 +79,9 @@
 
     </div>
 </div>
-
-
+@section Scripts
+{
     <script src="~/LayoutUser/Chapter/Create.js"></script>
+}
+
+

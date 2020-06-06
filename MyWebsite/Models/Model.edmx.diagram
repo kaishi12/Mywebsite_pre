@@ -28,7 +28,7 @@
         <EntityTypeShape EntityType="MyWebsiteModel.sysdiagram" Width="1.5" PointX="5.75" PointY="2.125" IsExpanded="true" />
         <EntityTypeShape EntityType="MyWebsiteModel.Text" Width="1.5" PointX="11.25" PointY="17.5" IsExpanded="true" />
         <EntityTypeShape EntityType="MyWebsiteModel.TextBox" Width="1.5" PointX="5.25" PointY="22.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="MyWebsiteModel.Translation" Width="1.5" PointX="6" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyWebsiteModel.Translation" Width="1.5" PointX="6.125" PointY="19.125" IsExpanded="true" />
         <EntityTypeShape EntityType="MyWebsiteModel.Translation_Detail" Width="1.5" PointX="8.25" PointY="19.125" IsExpanded="true" />
         <AssociationConnector Association="MyWebsiteModel.FK_Account_Detail_Account" ManuallyRouted="false" />
         <AssociationConnector Association="MyWebsiteModel.FK_FeedBack_Account" ManuallyRouted="false" />

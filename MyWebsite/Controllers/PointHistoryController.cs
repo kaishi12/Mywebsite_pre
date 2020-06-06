@@ -102,7 +102,7 @@ namespace MyWebsite.Controllers
                             model.Views = data.Chapters.Where(m => m.MangaId == manga).Sum(m => m.ViewNumber);
                         }
                         data.PointHistories.Add(model);
-                        data.SaveChanges();
+                       
                     }
                 }
                 data.SaveChanges();

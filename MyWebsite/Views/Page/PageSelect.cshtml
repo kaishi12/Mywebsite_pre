@@ -4,8 +4,8 @@
     Layout = "~/Views/Shared/_LayoutUser.cshtml";
 }
 <style>
-    #Select14.box-header{
-        border:10px;
+    #Select14.box-header {
+        border: 10px;
     }
 </style>
 <div class="padding">
@@ -26,22 +26,22 @@
         <div class="row" style="padding-bottom:10px;padding-left:0px">
             <label class="col-sm-1 form-control-label">
                 <span>Trang:</span>
-               
+
             </label>
             <div class="col-sm-4">
-              <select class="form-control c-select" id="ChapterList" name="ChapterList" onchange="window.location.href=this.value;">
-                @foreach (var item in ViewBag.ListPage)
-                {
-                  if (item.PageId == ViewBag.PageId)
-                  {
-                    <option selected style="color:black" value="/PageSelect/@item.PageId ">@item.FullName</option>
-                  }
-                  else
-                  {
-                    <option style="color:black" value="/PageSelect/@item.PageId ">@item.FullName</option>
-                  }
-                }
-              </select>
+                <select class="form-control c-select" id="ChapterList" name="ChapterList" onchange="window.location.href=this.value;">
+                    @foreach (var item in ViewBag.ListPage)
+                    {
+                        if (item.PageId == ViewBag.PageId)
+                        {
+                            <option selected style="color:black" value="/PageSelect/@item.PageId ">@item.FullName</option>
+                        }
+                        else
+                        {
+                            <option style="color:black" value="/PageSelect/@item.PageId ">@item.FullName</option>
+                        }
+                    }
+                </select>
             </div>
 
         </div>
@@ -53,7 +53,7 @@
                 {
                     if (item.Status == (int)StatusPage.Wait)
                     {
-                        <div  class="col-xs-6 col-sm-4 col-md-3" style="padding-left:12px;padding-right:12px">
+                        <div class="col-xs-6 col-sm-4 col-md-3" style="padding-left:12px;padding-right:12px">
 
                             <div id=@("Select"+item.PageId) class="box p-a-xs accent">
                                 <div id="@("Header"+item.PageId)" class="box-header">Chưa chọn</div>
@@ -71,7 +71,7 @@
                     }
                     else
                     {
-                        <div  class="col-xs-6 col-sm-4 col-md-3" style="padding-left:12px;padding-right:12px">
+                        <div class="col-xs-6 col-sm-4 col-md-3" style="padding-left:12px;padding-right:12px">
 
                             <div id=@("Select"+item.PageId) class="box p-a-xs primary">
                                 <div id="@("Header"+item.PageId)" class="box-header">Đã chọn</div>
@@ -101,18 +101,19 @@
 
     </div>
 </div>
-
+@section Scripts
+{
     <script>
-      
+
         function ChangeStatusPage(input, status) {
-           
+
             let PageId;
             if (status == 1) {
                 PageId = input.id.replace("UnSave", "");
             }
             else {
-                 $(".UnSave").click();
-                 PageId = input.id.replace("Save", "");
+                $(".UnSave").click();
+                PageId = input.id.replace("Save", "");
             }
             $.ajax({
                 url: "/Page/UpdateStatusPage",
@@ -130,23 +131,23 @@
                         let btn = "";
                         if (status == 1) {
                             alert("Lưu thành công");
-                               btn = ' <button style="display: block;margin-left: auto;margin-right: auto" onclick="ChangeStatusPage(this,2)" type="button" id="Save' + PageId + '" class="md-btn md-raised m-b-sm w-xs danger">Chọn</button>';
+                            btn = ' <button style="display: block;margin-left: auto;margin-right: auto" onclick="ChangeStatusPage(this,2)" type="button" id="Save' + PageId + '" class="md-btn md-raised m-b-sm w-xs danger">Chọn</button>';
                             $(str).removeClass("primary");
                             $(str).addClass("accent");
                             header.text("Chưa chọn");
-                           
-                           }
+
+                        }
                         else {
                             alert("Lưu thành công");
-                           btn = ' <button style="display: block;margin-left: auto;margin-right: auto" onclick="ChangeStatusPage(this,1)" type="button" id="UnSave' + PageId + '" class="md-btn md-raised m-b-sm w-xs danger UnSave">Hủy Chọn</button>';
+                            btn = ' <button style="display: block;margin-left: auto;margin-right: auto" onclick="ChangeStatusPage(this,1)" type="button" id="UnSave' + PageId + '" class="md-btn md-raised m-b-sm w-xs danger UnSave">Hủy Chọn</button>';
                             $(str).removeClass("accent");
                             $(str).addClass("primary");
                             header.text("Đã chọn");
-                            
+
                         }
                         footer.empty();
                         footer.append(btn);
-                        
+
                     }
 
                     else {
@@ -157,9 +158,11 @@
                 }
             });
         }
-       
-        
+
+
     </script>
+}
+
 
 
 

@@ -23,7 +23,7 @@
         <div class="row" style="padding-bottom:10px;padding-left:0px">
             <div class="col-sm-4">
                 Chương:
-                <select class="form-control c-select black" id="ChapterList" name="ChapterList">
+                 <select class="form-control select2" ui-jp="select2" ui-options="{theme: 'bootstrap'}" id="ChapterList" name="ChapterList">
                     @foreach (var item in ViewBag.chapterlist)
                     {
                         if (item.ChapterId == Model.ChapterId)
@@ -39,7 +39,7 @@
             </div>
             <div class="col-sm-4">
                 Loại trang:
-                <select class="form-control c-select black" id="CategoryId" name="CategoryId">
+                 <select class="form-control select2" ui-jp="select2" ui-options="{theme: 'bootstrap'}" id="CategoryId" name="CategoryId">
                     @if (ViewBag.CategoryId == 1)
                     {
                         <option class="black text-primary" value="1" selected>Trang Raw</option>
@@ -166,9 +166,12 @@
     </div>
 </div>
 
+@section Scripts
+{
+    <script src="~/LayoutUser/Contribute/Editor.js"></script>
 
+}
 
-<script src="~/LayoutUser/Contribute/Editor.js"></script>
 
 
 

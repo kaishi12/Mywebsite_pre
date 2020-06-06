@@ -7,7 +7,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.DynamicData;
 using System.Web.Mvc;
+using System.Web.UI.WebControls;
 
 namespace MyWebsite.Controllers
 {
@@ -120,7 +122,7 @@ namespace MyWebsite.Controllers
             }
             var fonts = data.Fonts.Where(m => m.Active == true);
             var textbox = Firstpage.TextBoxes.Where(m => m.Active == true).ToList();
-            List<TextBox> textBoxes = new List<TextBox>();
+            List<Models.TextBox> textBoxes = new List<Models.TextBox>();
             foreach (var text in textbox)
             {
                 text.Texts.Clear();
@@ -162,9 +164,17 @@ namespace MyWebsite.Controllers
                         var Text = data.Texts.SingleOrDefault(m => m.TextId == item.TextId);
                         Text.TextContent = item.TextContent;
                         Text.Italic = item.Italic;
+                        if(item.FontSize == 0)
+                            Text.FontSize = 16;
+                        else
                         Text.FontSize = item.FontSize;
                         Text.FontId = item.FontId;
                         Text.Bold = item.Bold;
+                        if(item.ColorText == null)
+                        {
+                            Text.ColorText = "#000000";
+                        }
+                        else
                         Text.ColorText = item.ColorText;
                         data.SaveChanges();
                     }
@@ -172,11 +182,22 @@ namespace MyWebsite.Controllers
                     {
                         if (item.Active)
                         {
-                            item.FontId = data.Fonts.FirstOrDefault().FontId;
-                            item.ColorText = item.ColorText;
-                            item.Bold = item.Bold;
-                            item.Italic = item.Italic;
-                            item.FontSize = item.FontSize;
+                            if(item.FontId == 0)
+                            {
+                                item.FontId = data.Fonts.FirstOrDefault().FontId;
+                            }
+                            else
+                            item.FontId = item.FontId;
+                            if(item.FontSize == 0)
+                            {
+                                item.FontSize = 16;
+                            }
+                            if (item.ColorText == null)
+                            {
+                                item.ColorText = "#000000";
+                            }
+                            
+
                         }
                         item.AccountId = accountModel.AccountId;
                         data.Texts.Add(item);

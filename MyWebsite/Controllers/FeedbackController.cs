@@ -25,7 +25,7 @@ namespace MyWebsite.Controllers
             return View();
         }
         [AccountStatus]
-        public ActionResult GetFeedBack(string des,string title)
+        public ActionResult GetFeedBack(string des, string title)
         {
             try
             {
@@ -52,7 +52,7 @@ namespace MyWebsite.Controllers
         {
             var count = 1;
             var listacc = data.Accounts.Where(m => m.Active).ToList();
-            var datatable1 = data.FeedBacks.Where(m=>m.active == true).ToList();
+            var datatable1 = data.FeedBacks.Where(m => m.active == true).ToList();
             var datatable = data.FeedBacks.ToList().Select(m => new IConvertible[]
                 {
                 count++,
@@ -64,6 +64,26 @@ namespace MyWebsite.Controllers
                 m.Id
                 });
             return Json(datatable, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult PrepareEdit(int id)
+        {
+            var datas = data.FeedBacks.FirstOrDefault(m => m.Id == id);
+            var tmpModel = new
+            {
+                id = datas.Id,
+                title = datas.title,
+                des = datas.Description,
+                status = datas.status
+                
+            };
+            return Json(tmpModel, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult Save(int id, int status)
+        {
+            var datas = data.FeedBacks.FirstOrDefault(m => m.Id == id);
+            datas.status = status;
+            data.SaveChanges();
+            return Json(true, JsonRequestBehavior.AllowGet);
         }
     }
 }

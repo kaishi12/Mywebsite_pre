@@ -15,45 +15,49 @@
     <div class="box">
         <div class="box-body">
             <div class="box-body">
-               
-                    <div class="form-group">
-                        <label for="title">Tiêu đề:</label>
-                        <input type="text" class="form-control" id="title" placeholder="...">
-                    </div>
-                    <div class="form-group">
-                        <label for="des">Nội dung:</label>
-                        <textarea id="des" class="form-control" rows="2"></textarea>
-                    </div>
 
-              
-                
+                <div class="form-group">
+                    <label for="title">Tiêu đề:</label>
+                    <input type="text" class="form-control" id="title" placeholder="tiêu đề phẩn hồi">
+                </div>
+                <div class="form-group">
+                    <label for="des">Nội dung:</label>
+                    <textarea  placeholder="nội dung phẩn hồi" id="des" class="form-control" rows="2"></textarea>
+                </div>
+
+
+
                 <button id="fbbtn" class="btn primary pull-right">Phản hồi</button>
             </div>
-           
+
         </div>
         <div class="box-footer">
-           
+
         </div>
     </div>
 </div>
-<script>
-    $("#fbbtn").on("click",function () {
+@section Scripts
+{
+    <script>
+        $("#fbbtn").on("click", function () {
 
-        $.ajax({
-            type: 'POST',
-            url: '/Feedback/GetFeedBack',
-            data:
-            {
-                des: $("#des").val(),
-                title: $("#title").val(),
-            },
-            success: function (result) {
-                console.log(result);
-                if (result == true) {
-                    alert("Đã feedback thành công!");
+            $.ajax({
+                type: 'POST',
+                url: '/Feedback/GetFeedBack',
+                data:
+                {
+                    des: $("#des").val(),
+                    title: $("#title").val(),
+                },
+                success: function (result) {
+                    console.log(result);
+                    if (result == true) {
+                        alert("Đã feedback thành công!");
+                    }
                 }
-            }
-        });
-    })
+            });
+        })
 
-</script>
+    </script>
+
+}

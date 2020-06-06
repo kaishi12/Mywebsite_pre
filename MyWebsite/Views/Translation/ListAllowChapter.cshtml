@@ -26,7 +26,7 @@
             <h2>DANH SÁCH CHƯƠNG: @Model.FirstOrDefault().Manga.FullName</h2>
             <input hidden id="Translation" value="@ViewBag.TranslationId" />
         </div>
-       
+
 
         <div class="box-body">
 
@@ -129,32 +129,32 @@
                                         var res = item.Translation_Detail.SingleOrDefault(m => m.TranslationId == ViewBag.TranslationId);
                                         if (Text == 0 || Textboxs == 0 || parameterValue1 == 0 || parameterValue == 0)
                                         {
-                                        
+
                                             <button disabled data-chapterId="@item.ChapterId" class="AllowButton btn dark">Chưa duyệt</button>
 
-                                        
-                                    }
-                                    else
+
+                                        }
+                                        else
                                     if (Text / Textboxs == 1 && parameterValue1 / parameterValue == 1)
-                                    {
-                                        if (res != null && res.Active == true)
                                         {
-                                            <button  data-status="1"  data-chapterId="@item.ChapterId" class="AllowButton btn dark">Đã duyệt</button>
+                                            if (res != null && res.Active == true)
+                                            {
+                                                <button data-status="1" data-chapterId="@item.ChapterId" class="AllowButton btn dark">Đã duyệt</button>
+                                            }
+                                            else
+                                            {
+                                                <button data-status="1" data-chapterId="@item.ChapterId" class="AllowButton btn dark">Chưa duyệt</button>
+                                            }
                                         }
                                         else
                                         {
-                                            <button data-status="1" data-chapterId="@item.ChapterId" class="AllowButton btn dark">Chưa duyệt</button>
+                                            <button disabled data-chapterId="@item.ChapterId" class="AllowButton btn dark">Chưa duyệt</button>
+
                                         }
                                     }
-                                    else
-                                    {
-                                        <button disabled data-chapterId="@item.ChapterId" class="AllowButton btn dark">Chưa duyệt</button>
-
-                                    }
-                                    }
-                                    </td>
-                                </tr>
-                            }
+                                </td>
+                            </tr>
+                        }
                     </tbody>
                 </table>
             </div>
@@ -162,8 +162,11 @@
     </div>
 
 </div>
+@section Scripts
+{
+    <script src="~/LayoutUser/Translation/ListAllowChapter.js"></script>
+}
 
 
-   <script src="~/LayoutUser/Translation/ListAllowChapter.js"></script>
 
 

@@ -5,7 +5,7 @@
 }
 
 
- 
+
 <div class="padding">
     <div class="m-b">
         <ol class="breadcrumb primary">
@@ -39,12 +39,12 @@
                         }
                         else
                         {
-                            <option  class="black text-primary" value="@item.PageId">@item.FullName</option>
+                            <option class="black text-primary" value="@item.PageId">@item.FullName</option>
                         }
                     }
                 </select>
 
-                <div class="box"  data-step="2" data-intro="Mấy cái khung bạn thao tác nó hiện ở đây này">
+                <div class="box" data-step="2" data-intro="Mấy cái khung bạn thao tác nó hiện ở đây này">
                     <div class="box-header primary">
                         <h3>Danh sách khung</h3>
                         <div class="box-tool">
@@ -75,7 +75,7 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                  
+
                                     <th>
                                         Độ Xoay
                                     </th>
@@ -87,26 +87,26 @@
 
 
                             <tbody>
-                               
-                               @{ 
 
-                                   int count = 1;
+                                @{
 
-                                   foreach (var item in ViewBag.list)
-                                   {
-                                    
-                                       var Cor = item.Coordinate.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+                                    int count = 1;
+
+                                    foreach (var item in ViewBag.list)
+                                    {
+
+                                        var Cor = item.Coordinate.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
                                         <tr>
                                             <td class="Att" data-attX="@Cor[0]" data-attY="@Cor[1]" data-attW="@item.Witdh" data-attH="@item.Height"><span class="form-control">@count</span> </td>
                                             <td><input class="form-control attDe" type="number" id="1" value="@(item.Degree + 90)" />  </td>
                                             <td>
-                                                <button  class="btn btn-fw danger" onclick="Remove(this)">Xóa</button>
+                                                <button class="btn btn-fw danger" onclick="Remove(this)">Xóa</button>
                                             </td>
                                             <td hidden>@item.TextBoxId </td>
                                         </tr>
-                                           count++;
-                                       }
-                                   }
+                                        count++;
+                                    }
+                                }
                             </tbody>
                         </table>
 
@@ -115,17 +115,18 @@
             </div>
         </div>
     </div>
-    <!--<canvas hidden id="canvas1" width="1000" height="1000" style="border:1px solid #000000;">
-        Your browser does not support the HTML5 canvas tag.
-    </canvas>-->
+</div>
+@section Scripts
+{
+    <script src="~/LayoutUser/Page/Canvas.js"></script>
+    <script>
+        $("#SelectPage").on("change", function () {
+            window.location.href = "/Page/PageDetail?PageId=" + $(this).val();
+        })
 
-     <script src="~/LayoutUser/Page/Canvas.js"></script>
-        <script>
-            $("#SelectPage").on("change", function () {
-                window.location.href = "/Page/PageDetail?PageId=" + $(this).val();
-            })
-            
-        </script>
+    </script>
+}
 
-    
+
+
 

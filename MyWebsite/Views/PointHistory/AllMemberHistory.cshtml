@@ -16,11 +16,11 @@
         <button class="btn btn primary col-md-2 offset-md-10" id="CalPoint">Tính điểm</button>
     </div>
     <br />
-    <div class="box black">
+    <div class="box ">
 
         <div class="box-body">
-            <div class="table-responsive" >
-                <table ui-jp="dataTable" id="datatable" class="table table-striped b-t b-b black">
+            <div class="table-responsive">
+                <table ui-jp="dataTable" id="datatable" class="table table-striped b-t b-b ">
                     <thead>
                         <tr>
                             <th style="text-align:center">STT</th>
@@ -42,11 +42,13 @@
     </div>
 
 </div>
-<script>
-     $(document).ready(function () {
+@section Scripts
+{
+    <script>
+        $(document).ready(function () {
             loadEmpGroup();
-     });
-     function loadEmpGroup() {
+        });
+        function loadEmpGroup() {
 
             $.ajax({
                 type: 'POST',
@@ -56,20 +58,20 @@
                     initTimeFrameDatatable(result);
                 }
             });
-    }
-    $("#CalPoint").on("click", function () {
-        $.ajax({
+        }
+        $("#CalPoint").on("click", function () {
+            $.ajax({
                 type: 'POST',
                 url: '/PointHistory/CalPoint',
-            success: function (result) {
-                if (result.rs)
-                    loadEmpGroup();
-                else
-                    alert(result.mess);
+                success: function (result) {
+                    if (result.rs)
+                        loadEmpGroup();
+                    else
+                        alert(result.mess);
                 }
             });
-    })
-    function initTimeFrameDatatable(data) {
+        })
+        function initTimeFrameDatatable(data) {
             $("#datatable").dataTable().fnDestroy();
             $("#datatable").dataTable({
                 stateSave: true,
@@ -95,7 +97,7 @@
                 },
                 "aoColumnDefs": [
                     {
-                        "aTargets": [0, 1,2,3,4,5,6,7,8],
+                        "aTargets": [0, 1, 2, 3, 4, 5, 6, 7, 8],
                         "sClass": "text-center",
                         "bSortable": false
                     }
@@ -103,5 +105,7 @@
                 "bAutoWidth": false,
             });
 
-    }
-</script>
+        }
+    </script>
+}
+

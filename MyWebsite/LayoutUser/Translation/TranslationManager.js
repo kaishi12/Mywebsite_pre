@@ -5,6 +5,7 @@
 
 var img = new Image();
 var ctx1, scale, canvas1;
+const prepareFontLoad = (fontList) => Promise.all(fontList.map(font => document.fonts.load(font)))
 window.onload = function () {
 
     img = document.getElementById("girl");
@@ -33,7 +34,7 @@ function DrawImg() {
     $('#tblEntAttributes').append($('<tbody>'));
 }
 
-function RotateRec(cete, X, Y, W, H, degrees, cx, cy, text, font, outline, color, italic, bold, size, color) {
+async function RotateRec(cete, X, Y, W, H, degrees, cx, cy, text, font, outline, color, italic, bold, size, color) {
    
 
     let fontTextBox = "";
@@ -56,7 +57,10 @@ function RotateRec(cete, X, Y, W, H, degrees, cx, cy, text, font, outline, color
     cete.font = size1 + "px PlayfairDisplay";
     ctx.fillStyle = "red";
     cete.fillText("#" + count, X, Y);
-  
+    const fontList = [];
+    fontList.push(fontTextBox);
+    if (fontList.count > 0)
+        await prepareFontLoad(fontList);
         paint_centered_wrap(cete, X, Y, W, H, text, fontTextBox, 12, 2, color);
     
     cete.restore();

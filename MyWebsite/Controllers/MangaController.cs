@@ -315,6 +315,7 @@ namespace MyWebsite.Controllers
             realmanga.FullName = manga.FullName;
             realmanga.Description = manga.Description;
             realmanga.Author = manga.Author;
+            realmanga.Image = manga.CoverLink;
             var genres = manga.Manga_Genres.Where(m => m.Active == true).Select(m => new GenresModelManga { GenreId = m.GenreId, FullName = m.Genre.FullName }).ToList();
             ViewBag.Genre = genres;
             realmanga.View = manga.Chapters.Sum(m => m.ViewNumber);
@@ -355,6 +356,7 @@ namespace MyWebsite.Controllers
             public string Description { get; set; }
             public string Author { get; set; }
             public int View { get; set; }
+            public string Image { get; set; }
             public List<GenresModelManga> genres { get; set; }
         }
         public class ListAllMangaFistLoad

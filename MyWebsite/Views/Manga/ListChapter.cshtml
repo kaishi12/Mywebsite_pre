@@ -27,10 +27,12 @@
         </div>
         <div class="box-tool">
             <ul class="nav">
-                <li class="nav-item inline dropdown"><a class="nav-link" data-toggle="dropdown"><i class="material-icons md-18"></i></a>
-                <div class="dropdown-menu dropdown-menu-scale pull-right">
-                    <a class="dropdown-item" href="/Chapter/Create/?MangaId=@ViewBag.MangaId">
-                    <span> <i class="fa fa-plus" style="color:red" title="Tạo khung truyện"></i> </span> Thêm chương mới</a>
+                <li class="nav-item inline dropdown">
+                    <a class="nav-link" data-toggle="dropdown"><i class="material-icons md-18"></i></a>
+                    <div class="dropdown-menu dropdown-menu-scale pull-right">
+                        <a class="dropdown-item" href="/Chapter/Create/?MangaId=@ViewBag.MangaId">
+                            <span> <i class="fa fa-plus" style="color:red" title="Tạo khung truyện"></i> </span> Thêm chương mới
+                        </a>
                     </div>
                 </li>
             </ul>
@@ -94,7 +96,7 @@
                                         Chỉnh sửa
                                     </td>
                                 }
-                               
+
                                 else
                                 {
                                     <td>
@@ -125,7 +127,7 @@
                     <h5 class="modal-title">Chỉnh sửa chương</h5>
                 </div>
                 <form id="UpdateChapterfrm">
-                
+
                     <div class="modal-body text-center p-lg row">
 
                         <input id="ChapterId" name="ChapterId" hidden />
@@ -134,7 +136,7 @@
                             <label style="float:left">STT</label>
                             <input type="number" class="form-control" required id="OrderNumber" name="OrderNumber" data-parsley-error-message="Yêu cầu nhập thứ tự chương" />
                         </div>
-                        
+
                         <div class="col-sm-10">
                             <label style="float:left">Tên chương truyện</label>
                             <input type="text" class="form-control" id="FullName" name="FullName" required data-parsley-error-message="Yêu cầu nhập tên chương" />
@@ -151,8 +153,11 @@
         </div>
     </div>
 </div>
-
+@section Scripts
+{
     <script src="~/LayoutUser/Truyen/ListChapter.js"></script>
+}
+
 
 
 

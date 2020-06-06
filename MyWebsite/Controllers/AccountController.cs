@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using MyWebsite.Models;
 using MyWebsite.Service.Account;
+using MyWebsite.Service.Chapter;
 using MyWebsite.Service.Common;
 using MyWebsite.Service.Language;
 using MyWebsite.Service.Manga;
@@ -143,10 +144,7 @@ namespace MyWebsite.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (model.UserName == "adminkaishi" && model.PassWord == "adminkaishi")
-                {
-                    return RedirectToAction("ListFont", "Admin");
-                }
+
                 var result = AccountService.Login(model);
                 if (result != null)
                 {
@@ -156,16 +154,17 @@ namespace MyWebsite.Controllers
                     var currentTime = DateTime.Now;
                     Session["LastUpdated"] = currentTime;
                     NC.RegisterNotification(currentTime);
-                    return RedirectToAction("UserManagment");
+                    return RedirectToAction("Home");
                 }
                 else
                 {
-                    ViewBag.Login = "Đăng nhập thất bại";
+                    ViewBag.Failedcount = "Sai tài khoản hoặc mật khẩu";
                     return View();
                 }
             }
             else
             {
+                ViewBag.NotValidUser = "Tài khoản hoặc mật khẩu không hơp lệ";
                 return View();
             }
         }
@@ -317,9 +316,9 @@ namespace MyWebsite.Controllers
             var listMangaOwned = data.Manga_Detail.Where(m => m.AccountId == model.AccountId && m.RoleId == 1).Select(m => m.MangaId);
             List<Manga_Detail> ListRequestByPeople = new List<Manga_Detail>();
 
-           
-                ListRequestByPeople.AddRange(data.Manga_Detail.Where(m => m.Type == 0 && listMangaOwned.Any(l=>l==m.MangaId)).OrderBy(m => m.CreateAt));
-            
+
+            ListRequestByPeople.AddRange(data.Manga_Detail.Where(m => m.Type == 0 && listMangaOwned.Any(l => l == m.MangaId)).OrderBy(m => m.CreateAt));
+
             return View(ListRequestByPeople);
         }
         /// <summary>
@@ -388,7 +387,7 @@ namespace MyWebsite.Controllers
             return Json(datatable, JsonRequestBehavior.AllowGet);
         }
         [AdminStatus]
-        public ActionResult Add(string username,string pwd,string email,int type)
+        public ActionResult Add(string username, string pwd, string email, int type)
         {
             try
             {
@@ -433,6 +432,43 @@ namespace MyWebsite.Controllers
                 var message = "Có lỗi trong quá trình xử lý, vui lòng liên hệ admin";
                 return Json(new { rs = false, mess = message }, JsonRequestBehavior.AllowGet);
             }
+        }
+        public ActionResult GetMangaFromRole(int role)
+        {
+             ChapterService ChapterService = new ChapterService();
+            AccountModel model = (AccountModel)Session["UserInfo"];
+            var list = data.Manga_Detail.Where(m => m.AccountId == model.AccountId && m.Active == true && m.RoleId == role && m.Status.Value == (int)StatusMember.Accept).Select(m => m.MangaId).ToList();
+            var listmanga = data.Mangas.Where(m => list.Any(l => l == m.MangaId) && m.Active && m.Chapters.Count > 0).Select(m => new MangaForRole{ id = m.MangaId, name = m.FullName }).ToList();
+            if(role ==(int) EnumRole.TM)
+            {
+                foreach(var item in listmanga)
+                {
+                    item.trans = data.Translations.FirstOrDefault(m => m.AccountId == model.AccountId && m.MangaId == item.id && m.Active == true).TransationId;
+                    item.chapter = ChapterService.GetFirstChapter(item.id);
+                }
+            }
+            if (role == (int)EnumRole.TR)
+            {
+                foreach (var item in listmanga)
+                {
+                    item.page = (int)ChapterService.GetFirstPage(item.id);
+                }
+            }
+            if (role == (int)EnumRole.UC)
+            {
+                foreach (var item in listmanga)
+                {
+                    item.chapter = ChapterService.GetFirstChapter(item.id);
+                }
+            }
+            return Json(listmanga, JsonRequestBehavior.AllowGet);
+        }
+        public class MangaForRole{
+        public int id { get; set; }
+            public string name { get; set; }
+            public int trans { get; set; }
+            public int page { get; set; }
+            public int chapter { get; set; }
         }
 
     }

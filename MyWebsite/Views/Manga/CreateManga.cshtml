@@ -5,7 +5,7 @@
 <!-- Bootstrap -->
 
 <style>
-    img{
+    img {
         max-width: 100%;
         max-height: 100%;
         display: block; /* remove extra space below image */
@@ -21,14 +21,14 @@
     </div>
 
     <div class="box">
-        
+
         <form id="form1" method="post" action="/Manga/CreateManga" enctype="multipart/form-data">
             @Html.AntiForgeryToken()
             <div class="box-body row">
                 <div class="col-sm-3">
                     <div class=" form-file col-sm-10">
                         <div id="formupload" style="padding-bottom:10px;">
-                            <img id="Imganhbia" src="~/RootPicture/tenor.gif"  />
+                            <img id="Imganhbia" src="~/RootPicture/tenor.gif" />
                         </div>
                         <input hidden="hidden" type="file" id="AnhBia" name="AnhBia" class="form-control" onchange="readURL(this);" required>
                         <button type="button" class="btn btn-fw primary" id="uploadbutton">Chọn Ảnh Bìa</button>
@@ -86,7 +86,7 @@
                         </label>
 
                         <div class="col-sm-10">
-                            <textarea  class="form-control" placeholder="Mô tả" id="Description" name="Description"></textarea>
+                            <textarea class="form-control" placeholder="Mô tả" id="Description" name="Description"></textarea>
                         </div>
                     </div>
 
@@ -99,7 +99,7 @@
                             <select name="ListGenre" id="ListGenre" class="form-control select2 black" multiple multiple ui-jp="select2" ui-options="{theme: 'bootstrap'}" required>
                                 @foreach (var item in ViewBag.Genre)
                                 {
-                                    <option class="black text-primary" value="@item.GenreId" >@item.FullName</option>
+                                    <option class="black text-primary" value="@item.GenreId">@item.FullName</option>
                                 }
                             </select>
                         </div>
@@ -110,7 +110,8 @@
         </form>
     </div>
 </div>
-
+@section Scripts
+{
     <script src="~/LayoutUser/Truyen/TaoMoi.js"></script>
     <script>
         $('#FullName').on("blur", function () {
@@ -128,6 +129,8 @@
             $('#Alias').val(str);
         })
     </script>
+}
+
 
 
 

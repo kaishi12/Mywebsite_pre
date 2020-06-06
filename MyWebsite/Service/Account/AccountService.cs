@@ -107,7 +107,7 @@ namespace MyWebsite.Service.Account
                     var translation = TranslationService.CheckTranslationExist(MangaId, language);
                     if (translation == 0)
                     {
-                        TranslationService.AddNew(MangaId,AccountId,0, language);
+                        TranslationService.AddNew(MangaId,AccountId,1, language);
                     }
                     else
                     {
