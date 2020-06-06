@@ -14,20 +14,20 @@
     </div>
 
     <div style="top:6px">
-        <button class="btn btn-default col-md-2 offset-md-10" data-toggle="modal" data-target="#AddModal">Thêm thể loại</button>
+        <button class="btn primary col-md-2 offset-md-10" data-toggle="modal" data-target="#AddModal">Thêm document</button>
     </div>
     <br />
-    <div class="box black">
+    <div class="box ">
 
         <div class="box-body">
             <div class="table-responsive">
-                <table ui-jp="dataTable" id="datatable" class="table table-striped b-t b-b black">
+                <table ui-jp="dataTable" id="datatable" class="table table-striped b-t b-b ">
                     <thead>
                         <tr>
                             <th style="text-align:center">STT</th>
                             <th style="text-align:center">Tên</th>
                             <th style="text-align:center">Nội dung</th>
-                            <th style="text-align:center"></th>
+                            <th style="text-align:center">Tùy chọn</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -139,7 +139,7 @@
 
             $.ajax({
                 type: 'POST',
-                url: '/LoadAllDocumentTable/Document',
+                url: '/Document/LoadAllDocumentTable',
 
                 success: function (result) {
                     initTimeFrameDatatable(result);
@@ -172,7 +172,7 @@
                 },
                 "aoColumnDefs": [
                     {
-                        "aTargets": [0, 1,2],
+                        "aTargets": [0, 1,2,3],
                         "sClass": "text-center",
                         "bSortable": false
                     },
@@ -180,11 +180,11 @@
                         "aTargets": [3],
                         "mRender": function (data, type, row) {
                             var edit =
-                                "<a title='Chi tiết' class='btn btn-sm btn-primary' onclick='showEditModal(" +
+                                "<a title='Chi tiết' class='btn btn-sm primary' onclick='showEditModal(" +
                                 data +
                                 ")'>Chi tiết</a>";
                             var del =
-                                "<a title='Xóa' class='btn btn-sm btn-primary' onclick='Delete(" +
+                                "<a title='Xóa' class='btn btn-sm primary' onclick='Delete(" +
                                 data +
                                 ")'>Xóa</a>";
                             return edit + " " + del ;
