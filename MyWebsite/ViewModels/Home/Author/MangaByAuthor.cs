@@ -17,6 +17,7 @@ namespace MyWebsite.ViewModels.Home.Author
         public string Alias { get; set; }
         public int StatusId { get; set; }
         public string UpdateAt { get; set; }
+        public string DefaultLang { get; set; }
 
         public List<LastestChapter> Last2Chapter { get; set; }
     }

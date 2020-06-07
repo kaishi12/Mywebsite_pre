@@ -1,28 +1,43 @@
-﻿@*@using Testing.Models;
+﻿@using MyWebsite.ViewModels.Account
 @{
-    NguoiDung nguoi = (NguoiDung)Session["TaiKhoan"];
+    AccountModel nguoi = (AccountModel)Session["UserInfo"];
 }
 @if (nguoi != null)
 {
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "menu" }))
     {
         @Html.AntiForgeryToken()
-
-        <ul class="nav navbar-nav navbar-right" >
-            <li>
-                @Html.ActionLink("Hello " + nguoi.Taikhoan + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
-                <ul id="TaiKhoan">
-                    <li><a href="/User/Index">Bảng điều khiển</a></li>
-                    <li><a href="#">Thống kê</a></li>
-                    <li><a href="#">Danh sách theo dõi</a></li>
-                    <li>@Html.ActionLink("Thoát", "DangXuat", "User")</li>
-                </ul>
-            </li>          
-        </ul>
+    <li>
+        @Html.Action("BookmarkHead", "Home")
+    </li>
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                @*@Html.ActionLink("Hello " + nguoi.UserName + "!" +"<i class='fa fa-angle-down'></i>", "UserManagment", "Account", routeValues: null, htmlAttributes: new { title = "Manage" })*@        
+                <a href="/UserManagment">Hello @nguoi.UserName<i class="fa fa-angle-down"></i></a>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="/UserManagment">Bảng điều khiển</a>
+                <a class="dropdown-item" href="#">Thống kê</a>
+                <a class="dropdown-item" href="/Bookmark/">Danh sách theo dõi</a>
+                @Html.ActionLink("Thoát", "Logout", "Account",null,new {@class ="dropdown-item"})
+            </div>
+        </li>
+        @*<ul class="nav navbar-nav navbar-right">
+                <li>
+                    @Html.ActionLink("Hello " + nguoi.UserName + "!", "UserManagment", "Account", routeValues: null, htmlAttributes: new { title = "Manage" })
+                    <ul id="TaiKhoan">
+                        <li><a href="/UserManagment">Bảng điều khiển</a></li>
+                        <li><a href="#">Thống kê</a></li>
+                        <li><a href="#">Danh sách theo dõi</a></li>
+                        <li>@Html.ActionLink("Thoát", "Logout", "Account")</li>
+                    </ul>
+                </li>
+            </ul>*@
     }
 }
 else
 {
-        <li>@Html.ActionLink("Đăng ký", "DangKy", "User")</li>
-        <li>@Html.ActionLink("Đăng Nhập", "DangNhap", "User")</li>
-}*@
+
+    <li>@Html.ActionLink("Đăng ký", "Register", "Account")</li>
+    <li>@Html.ActionLink("Đăng Nhập", "Login", "Account")</li>
+}

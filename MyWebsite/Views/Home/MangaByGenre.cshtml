@@ -40,7 +40,7 @@
         @foreach (var truyen in Model)
         {
             <div class="list-truyen-item-wrap">
-                <a rel="nofollow" href="/manga/@truyen.Alias-@truyen.MangaId" title="@truyen.FullName">
+                <a rel="nofollow" href="/manga/@truyen.Alias-@truyen.MangaId/@truyen.DefaultLang" title="@truyen.FullName">
                     <img src="~/Cover/@truyen.CoverLink" onError="this.onerror=null;this.src='/RootPicture/error-404.jpg';" alt="@truyen.FullName">
                 </a>
                 <h3>

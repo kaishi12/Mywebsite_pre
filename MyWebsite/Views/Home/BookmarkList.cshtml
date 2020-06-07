@@ -1,0 +1,110 @@
+﻿
+@{
+    ViewBag.Title = "BookmarkList";
+    Layout = "~/Views/Shared/_Layout3.cshtml";
+}
+
+<div class="leftCol listCol" style="margin-top:10px">
+    <div class="truyen-list">
+        <div class="breadcrumb breadcrumbs">
+            <p>
+                <span>
+                    <a href="/Home/Index" class="home" title="Manga online">
+                        Manga online
+                    </a>
+                </span>
+                <span class="separator" style="color:white">»</span>
+                <span style="color:white">
+                    Truyện đang theo dõi
+                </span>
+                @*<span class="separator">»</span>
+                Page 1*@
+            </p>
+        </div>
+        @if (ViewBag.KoCoTruyen == "Yes")
+        {
+            <div style="background-color:white; justify-content:center; border-radius:5px;">
+                <h1 style="color:black; text-align:center; font-size:30px; padding:20px; ">@ViewBag.ThongBao</h1>
+            </div>
+        }
+        else
+        {
+            if (Model != null)
+            {
+
+                <div class="list-truyen-item-wrap w-100">
+                    <table class="table bookmark">
+                        <thead class="thead-light">
+                            <tr>
+                                <th scope="col" style="width:65%; margin-left:40px">Truyện</th>
+                                <th scope="col" class="text-center" style="width:15%">Số chương</th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var truyen in Model)
+                            {
+                                if (truyen.SeenStatus == false)
+                                {
+                                    <tr class="table-info" id="trCheck-@truyen.MangaId">
+                                        <td>
+                                            <a rel="nofollow" href="/manga/@truyen.MangaAlias-@truyen.MangaId" title="@truyen.MangaName">
+                                                <img src="~/Cover/@truyen.CoverImg" onError="this.onerror=null;this.src='/RootPicture/error-404.jpg';" alt="@truyen.MangaName">
+                                            </a>
+                                            <h3>
+                                                <a id="manganamefollow" rel="nofollow" href="/manga/@truyen.MangaAlias-@truyen.MangaId" title="@truyen.MangaName">@truyen.MangaName</a>
+                                            </h3>
+                                            @Html.Action("GetLasted1Chapter", "Home", new { id = @truyen.MangaId })
+                                        </td>
+                                        <td><p class="text-center">@truyen.AllChapCount</p></td>
+                                        <td style="position:relative">
+                                            <div class="bookmarklist text-center">
+                                                <span class="bookmarkb my-2 mx-0" id="updatebookmarkb" data-manga-id="@truyen.MangaId"><i class="fa fa-check"></i> Đánh dấu đã xem</span>
+                                                <span class="bookmarkb my-2" id="delbookmarkb" data-manga-id="@truyen.MangaId"><i class="fa fa-trash"></i> Xóa Bookmark</span>
+                                            </div>                                           
+                                        </td>
+                                    </tr>
+                                }
+                                else
+                                {
+                                    <tr id="trCheck-@truyen.MangaId">
+                                        <td>
+                                            <a rel="nofollow" href="/manga/@truyen.MangaAlias-@truyen.MangaId" title="@truyen.MangaName">
+                                                <img src="~/Cover/@truyen.CoverImg" onError="this.onerror=null;this.src='/RootPicture/error-404.jpg';" alt="@truyen.MangaName">
+                                            </a>
+                                            <h3>
+                                                <a rel="nofollow" href="/manga/@truyen.MangaAlias-@truyen.MangaId" title="@truyen.MangaName">@truyen.MangaName</a>
+                                            </h3>
+                                            @Html.Action("GetLasted1Chapter", "Home", new { id = @truyen.MangaId })
+                                        </td>
+                                        <td><p class="text-center">@truyen.AllChapCount</p></td>
+                                        <td style="position:relative">
+                                            <div class="bookmarklist text-center">
+                                                <span class="bookmarkb alreadyseen my-2 mx-0"><i class="fa fa-check"></i> Đã xem tới chap mới nhất</span>
+                                                <span class="bookmarkb my-2" id="delbookmarkb" data-manga-id="@truyen.MangaId"><i class="fa fa-trash"></i> Xóa Bookmark</span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+
+            }
+        }
+
+        <div style="clear: both"></div>
+
+        @*<div id="loadpage">
+            <div class="xem-them">
+                 Pagination
+                <ul class="pagination">
+                    @Html.PagedListPager(Model, page => Url.Action("MangaByGenre", new { page = page }), new PagedListRenderOptions { DisplayEllipsesWhenNotShowingAllPageNumbers = false })
+                </ul>
+            </div>
+        </div>*@
+    </div>
+</div>
+
+

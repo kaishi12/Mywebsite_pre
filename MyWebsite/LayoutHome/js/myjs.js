@@ -1,4 +1,6 @@
-﻿/*-----------------------------------------------------------------------------------*/
+﻿//import { log } from "util";
+
+/*-----------------------------------------------------------------------------------*/
 /*	Go TO TOP
 /*-----------------------------------------------------------------------------------*/
 var offset = 300,
@@ -33,7 +35,7 @@ var common = {
     },
     registerEvent: function () {
         $("#txtKeyword").autocomplete({
-            minLength: 1,
+            minLength: 2,
             source: function (request, response) {
                 $.ajax({
                     url: "/Home/ListName",
@@ -57,7 +59,7 @@ var common = {
         })
             .autocomplete("instance")._renderItem = function (ul, item) {
                 return $("<li>")
-                    .append('<a href="/manga/'+item.Alias+'-'+item.MangaId+'">' + item.FullName + "</a>")
+                    .append('<a href="/manga/'+item.MangaAlias+'-'+item.MangaId+'/'+item.DefaultLang+'">' + item.FullName + "</a>")
                     .appendTo(ul);
             };
     }
@@ -94,14 +96,95 @@ $('.owl-carousel').owlCarousel({
     }
 })
 /*-----------------------------------------------------------------------------------*/
-/* Bookmark Toggle Show/Hide
+/* Bookmark
 /*-----------------------------------------------------------------------------------*/
-jQuery(document).ready(function () {
-    jQuery('.toggle_hide').hide();
+$("#notlogin").click(function() {
+    alert('Vui lòng đăng nhập');
+    location.href = "/Home";
+})
 
-    jQuery(".bookmarkb").css('cursor', 'pointer').click(function () {
-        var $this = $(this);
-        $this.next("div").fadeToggle(200);
-        $('.toggle_hide').not($this.next("div")).fadeOut(800);
+$("#addbookmarkb").click(function() {
+    $.ajax({
+        url: "/AddBookmark/",
+        method: "POST",
+        type:"json"
+    }).success(function() {
+        alert("Đã thêm bookmark");
+        location.reload();
+    }).error(function() {
+        alert("Lỗi vui lòng liên hệ admin");
     });
-});
+})
+
+$("[id=delbookmarkb]").click(function () {
+    var idManga = $(this).data("manga-id");
+    if (confirm('Bạn có chắc muốn xóa khỏi bookmark ?')) {
+        $.ajax({
+            url: "/DelBookmark/" + idManga,
+            method: "POST",
+            type:"json"
+        }).success(function() {
+            alert("Đã xóa khỏi bookmark");
+            $("[id=trCheck-" + idManga + "]").css('display', 'none');
+        }).error(function() {
+            alert("Lỗi vui lòng liên hệ admin");
+        });
+    }
+})
+
+//$("#updatetolast").click(function() {
+//    var idManga = $(this).data("manga-id");
+//    $.ajax({
+//        url: "/UpdateBookmarkToLast/ " + idManga,
+//        method: "POST",
+//        type: "json",
+//    }).success(function() {
+//        $("#trCheck").removeClass("table-info");
+//    }).error(function() {
+//        alert("Lỗi vui lòng liên hệ admin");
+//    });
+//})
+
+
+$("[id=updatebookmarkb]").click(function() {
+    var idManga = $(this).data("manga-id");
+    var idChapter = $(this).data("chapter-id")
+    if (idChapter === undefined) {
+        var urllink = "/UpdateBookmark/" + idManga;
+    } else {
+        var urllink = "/UpdateBookmark/" + idManga + "/" + idChapter;
+    }
+    $.ajax({
+        url: urllink,
+        method: "POST",
+        type: "json",
+    }).success(function () {
+        //$("[id=trCheck-" + idManga + "]", function () {
+        //    var data = $(this).find("td div span .bookmarkb#updatebookmarkb");
+        //    data.addClass('alreradyseen');
+        //    data.html("<i class='fa fa-check'></i> Đã xem tới chap mới nhất");
+        //    $(this).removeClass('table-info');
+        //})
+        $("[id=trCheck-" + idManga + "]").removeClass("table-info");
+        $("[id=trCheck-" + idManga + "]").find("#updatebookmarkb").addClass('alreadyseen');
+        $("[id=trCheck-" + idManga + "]").find("#updatebookmarkb").html('<i class="fa fa-check"></i> Đã xem tới chap mới nhất')
+        //let data = $("[id=trCheck-" + idManga + "]").find("td div span ")
+        //$(`#trCheck-${idManga}`).unbind("click").bind("click", function () {
+        //    $(this).find("td div span #updatebookmarkb").addClass('alreadyseen');
+        //    $(this).find("td div span #updatebookmarkb").text(' Đã xem tới chap mới nhất');
+        //    $(this).removeClass('table-info');
+        //})
+        //$(`#trCheck-${idManga}`, function () {
+        //    let data = $(this).find("td div span:first-child")
+        //    data.addClass('alreadyseen');
+        //    data.html('<i class="fa fa-check"></i> Đã xem tới chap mới nhất');
+        //    $(this).attr('class','test');
+        //}) 
+
+    }).error(function() {
+        alert("Lỗi vui lòng liên hệ admin");
+    });
+})
+
+
+
