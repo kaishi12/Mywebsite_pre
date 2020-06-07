@@ -17,8 +17,8 @@
                 <p>
                     <span class="breadcrumbs-title"></span>
                     <span @*itemscope itemtype="http://data-vocabulary.org/Breadcrumb"*@>
-                        <a itemprop="url" href="/Home/Index" class="home" title="Manga Online">
-                            <span itemprop="title">Manga Online</span>
+                        <a itemprop="url" href="/Home/Index" class="home" title="Trang chủ">
+                            <span itemprop="title">Trang chủ</span>
                         </a>
                     </span>
                     <span class="separator">»</span>
@@ -34,7 +34,7 @@
     <div class="manga-info-top" id="manga-info-top">
         <div class="manga-info-pic">
             <img src="~/Cover/@Model.CoverLink" onError="this.onerror=null;this.src='/RootPicture/error-404.jpg';" alt="@Model.FullName" />
-            <span onclick="movetolistchapter();" class="btn_chapterslist">DANH SÁCH CHƯƠNG</span>
+            @*<span onclick="movetolistchapter();" class="btn_chapterslist">DANH SÁCH CHƯƠNG</span>*@
         </div>
         <ul class="manga-info-text">
             <li>
@@ -46,7 +46,7 @@
                 <a href="/author/@Model.Author">@Model.Author</a>
             </li>
             <li>Trạng thái : Ongoing</li>
-            <li>Last updated : @Model.UpdateAt.ToShortDateString()</li>
+            <li>Cập nhật gần nhất : @Model.UpdateAt.ToShortDateString()</li>
             <li style="display: none;">TransGroup : </li>
             <li>Lượt xem: @Html.Action("ViewNumber", "Home", new { id = @Model.MangaId })</li>
             <li>

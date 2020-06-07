@@ -13,5 +13,6 @@ namespace MyWebsite.ViewModels.Home.Genre
         public string Author { get; set; }
         public string Description { get; set; }
         public string Alias { get; set; }
+        public string DefaultLang { get; set; }
     }
 }

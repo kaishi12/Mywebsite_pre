@@ -20,7 +20,7 @@
             @foreach (var truyen in Model)
             {
                 <div class="itemupdate first">
-                    <a class="cover" href="/manga/@truyen.Alias-@truyen.MangaId">
+                    <a class="cover" href="/manga/@truyen.Alias-@truyen.MangaId/@truyen.DefaultLang">
                         <img src="~/Cover/@truyen.CoverLink" onError="this.onerror=null;this.src='/RootPicture/error-404.jpg';" width="60" height="85">
                     </a>
                     <ul>
@@ -32,8 +32,8 @@
                         @foreach (var chuongtruyen in truyen.Last3Chapter)
                         {
                             <li>
-                                <span><a class="sts sts_1" id="updatebookmarkb" data-manga-id="@truyen.MangaId" data-chapter-id="@chuongtruyen.ChapterId" href="/read/@chuongtruyen.Alias/@truyen.MangaId-@chuongtruyen.ChapterId/@chuongtruyen.LanguageName" title="@chuongtruyen.FullName">(@chuongtruyen.LanguageName)@chuongtruyen.FullName</a></span>
-                                <i>@chuongtruyen.UpdateAt</i>
+                                <span><a class="sts sts_1" id="updatebookmarkb" data-manga-id="@truyen.MangaId" data-chapter-id="@chuongtruyen.ChapterId" href="/read/@chuongtruyen.Alias/@truyen.MangaId-@chuongtruyen.ChapterId/@chuongtruyen.LanguageName" title="@chuongtruyen.FullName">[@chuongtruyen.LanguageName] @chuongtruyen.FullName</a></span>
+                                <i class="timeago" title="@chuongtruyen.UpdateAt"></i>
                             </li>
                         }
                     </ul>

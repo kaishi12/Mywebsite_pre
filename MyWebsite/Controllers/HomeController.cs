@@ -32,16 +32,25 @@ namespace MyWebsite.Controllers
             return Tong;
         }
 
-        private bool CheckLastSeenChap(int lastSeen,int allChap)
+        public string CheckLanguage(int idManga)
         {
-            if (lastSeen == allChap)
+            var defaultLang = (from tr in db.Mangas
+                               join trans in db.Translations on tr.MangaId equals trans.MangaId
+                               join lang in db.Languages on trans.LanguageId equals lang.LanguageId
+                               where tr.MangaId == idManga
+                               select lang.Code).ToList();
+            for (int i = 0; i < defaultLang.Count(); i++)
             {
-                return true;
+                if (defaultLang.ElementAt(i).Contains("VN"))
+                {
+                    return defaultLang.ElementAt(i);
+                }
+                else
+                {
+                    return defaultLang.ElementAt(0);
+                }
             }
-            else
-            {
-                return false;
-            }
+            return defaultLang.ElementAt(0);
         }
         #endregion
 
@@ -59,18 +68,17 @@ namespace MyWebsite.Controllers
                               FullName = grp.Key.FullName,
                               CoverLink = grp.Key.CoverLink,
                               Alias = grp.Key.Alias
+                          }).AsEnumerable()
+                          .Select(x => new ViewModels.Home.Slides.Slides
+                          {
+                              MangaId = x.MangaId,
+                              FullName = x.FullName,
+                              CoverLink = x.CoverLink,
+                              ViewNumber = SumLuotXem(x.ViewNumber),
+                              Alias = x.Alias,
+                              DefaultLang = CheckLanguage(x.MangaId)
                           });
-            foreach (var item in truyen)
-            {
-                ViewModels.Home.Slides.Slides manga = new ViewModels.Home.Slides.Slides();
-                manga.MangaId = item.MangaId;
-                manga.FullName = item.FullName;
-                manga.CoverLink = item.CoverLink;
-                manga.ViewNumber = SumLuotXem(item.MangaId);
-                manga.Alias = item.Alias;
-                list.Add(manga);
-            }
-            ViewBag.Slide = list.OrderByDescending(n => n.ViewNumber).Take(12);
+            ViewBag.Slide = truyen.OrderByDescending(n => n.ViewNumber).Take(12);
             return PartialView();
         }
 
@@ -87,6 +95,7 @@ namespace MyWebsite.Controllers
                 manga.CoverLink = item.CoverLink;
                 manga.CreateAt = item.CreateAt;
                 manga.MangaId = item.MangaId;
+                manga.DefaultLang = CheckLanguage(item.MangaId);
                 manga.FullName = item.FullName;
 
                 List<ViewModels.Home.Index.LastestChapter> last3Chapter = new List<ViewModels.Home.Index.LastestChapter>();
@@ -115,7 +124,7 @@ namespace MyWebsite.Controllers
         #region MangaDetails
         public ActionResult MangaDetail(string alias, string language)
         {
-            var mangaId= (from tr in db.Mangas where tr.Alias == alias select tr.MangaId).SingleOrDefault().ToString();
+            var mangaId = (from tr in db.Mangas where tr.Alias == alias select tr.MangaId).SingleOrDefault().ToString();
             Session["MangaId"] = mangaId;
             var Manga = db.Mangas.SingleOrDefault(m => m.Alias == alias);
             ViewBag.MangaAlias = alias;
@@ -128,7 +137,7 @@ namespace MyWebsite.Controllers
             else
             {
                 return RedirectToAction("PageError", "Error");
-            }         
+            }
         }
 
         public ActionResult MangaGenres(int id)
@@ -162,15 +171,18 @@ namespace MyWebsite.Controllers
         #region DocTruyen(DocChapter)
         public ActionResult ReadChapter(string alias, int idManga, int idChapter, string language)
         {
-            var chuongtr = db.Pages.Where(m => m.ChapterId == idChapter && m.CategoryId == 2 && m.Status == 0).OrderBy(m => m.OrderNumber).ToList();
+            var chuongtr = db.Pages.Where(m => m.ChapterId == idChapter && m.CategoryId == 1 && m.Status == 0).OrderBy(m => m.OrderNumber).ToList();
             ViewBag.MangaName = (from tr in db.Mangas where tr.MangaId == idManga select tr.FullName).FirstOrDefault().ToString();
             ViewBag.MangaAlias = (from tr in db.Mangas where tr.MangaId == idManga select tr.Alias).FirstOrDefault().ToString();
             ViewBag.ChapterAlias = alias;
+
             ViewBag.ChapterName = (from chtr in db.Chapters where chtr.ChapterId == idChapter select chtr.FullName).FirstOrDefault().ToString();
             ViewBag.MangaId = idManga;
-            ViewBag.ChapterId = idChapter;     
+            ViewBag.ChapterId = idChapter;
             ViewBag.CurLang = language;
-
+            Chapter dbChapter = db.Chapters.Where(x => x.MangaId == idManga && x.ChapterId == idChapter).SingleOrDefault();
+            dbChapter.ViewNumber++;
+            db.SaveChanges();
             return View(chuongtr);
         }
 
@@ -252,6 +264,7 @@ namespace MyWebsite.Controllers
                 manga.CoverLink = item.CoverLink;
                 manga.Description = item.Description;
                 manga.CreateAt = item.CreateAt.ToShortDateString();
+                manga.DefaultLang = CheckLanguage(item.MangaId);
                 manga.Author = item.Author;
                 manga.Active = item.Active;
                 manga.Alias = item.Alias;
@@ -312,6 +325,16 @@ namespace MyWebsite.Controllers
                               Author = grp.Key.Author,
                               Description = grp.Key.Description,
                               Alias = grp.Key.Alias,
+                          }).AsEnumerable()
+                          .Select(x => new ViewModels.Home.Genre.MangaByGenre
+                          {
+                              MangaId = x.MangaId,
+                              FullName = x.FullName,
+                              CoverLink = x.CoverLink,
+                              Author = x.Author,
+                              Description = x.Description,
+                              Alias = x.Alias,
+                              DefaultLang = CheckLanguage(x.MangaId)
                           }).OrderByDescending(a => a.FullName).ToList();
 
             if (truyen.Count == 0)
@@ -355,7 +378,25 @@ namespace MyWebsite.Controllers
         #region TruyenMoi
         public ActionResult NewManga()
         {
-            var list = (from tr in db.Mangas select tr).OrderByDescending(a => a.CreateAt).Take(10);
+            var list = (from tr in db.Mangas
+                        select new ViewModels.Home.NewManga.NewManga
+                        {
+                            MangaId = tr.MangaId,
+                            MangaAlias = tr.Alias,
+                            FullName = tr.FullName,
+                            CoverLink = tr.CoverLink,
+                            CreateAt = tr.CreateAt,
+                        }).AsEnumerable()
+                        .Select(x => new ViewModels.Home.NewManga.NewManga()
+                        {
+                            MangaId = x.MangaId,
+                            MangaAlias = x.MangaAlias,
+                            FullName = x.FullName,
+                            CoverLink = x.CoverLink,
+                            CreateAt = x.CreateAt,
+                            DefaultLang = CheckLanguage(x.MangaId)
+                        })
+                        .OrderByDescending(a => a.CreateAt).Take(12);
             return PartialView(list);
         }
         #endregion
@@ -367,7 +408,25 @@ namespace MyWebsite.Controllers
         public ActionResult SearchManga(string keyword, int? page)
         {
             ViewBag.TuKhoa = keyword;
-            List<Manga> lstKQTK = db.Mangas.Where(n => n.FullName.Contains(keyword)).ToList();
+            var lstKQTK = (from tr in db.Mangas
+                           where tr.FullName.Contains(keyword)
+                           select new ViewModels.Home.SearchManga.SearchManga
+                           {
+                               MangaId = tr.MangaId,
+                               FullName = tr.FullName,
+                               CoverLink = tr.CoverLink,
+                               MangaAlias = tr.Alias,
+                               Author = tr.Author
+                           }).AsEnumerable()
+                .Select(x => new ViewModels.Home.SearchManga.SearchManga
+                {
+                    MangaId = x.MangaId,
+                    FullName = x.FullName,
+                    CoverLink = x.CoverLink,
+                    MangaAlias = x.MangaAlias,
+                    Author = x.Author,
+                    DefaultLang = CheckLanguage(x.MangaId)
+                }).ToList();
 
             //Phân trang
             int pageNum = (page ?? 1);
@@ -385,7 +444,27 @@ namespace MyWebsite.Controllers
         {
             string keyword = f["txtKeyword"].ToString();
             ViewBag.TuKhoa = keyword;
-            List<Manga> lstKQTK = db.Mangas.Where(n => n.FullName.Contains(keyword)).ToList();
+
+            var lstKQTK = (from tr in db.Mangas
+                           where tr.FullName.Contains(keyword)
+                           select new ViewModels.Home.SearchManga.SearchManga
+                           {
+                               MangaId = tr.MangaId,
+                               FullName = tr.FullName,
+                               CoverLink = tr.CoverLink,
+                               MangaAlias = tr.Alias,
+                               Author = tr.Author
+                           }).AsEnumerable()
+                .Select(x => new ViewModels.Home.SearchManga.SearchManga
+                {
+                    MangaId = x.MangaId,
+                    FullName = x.FullName,
+                    CoverLink = x.CoverLink,
+                    MangaAlias = x.MangaAlias,
+                    Author = x.Author,
+                    DefaultLang = CheckLanguage(x.MangaId)
+                }).ToList();
+
 
             //Phân trang
             int pageNum = (page ?? 1);
@@ -402,12 +481,21 @@ namespace MyWebsite.Controllers
 
         public JsonResult ListName(string term)
         {
-            var datab = from tr in db.Mangas
-                        join chap in db.Chapters
-                        on tr.MangaId equals chap.MangaId
-                        where tr.StatusId == 1 && tr.FullName.Contains(term)
-                        group new { tr, chap } by new { tr.MangaId, tr.FullName, tr.CoverLink, tr.Alias } into grp
-                        select new { grp.Key.MangaId, grp.Key.FullName, grp.Key.Alias, grp.Key.CoverLink };
+            var datab = (from tr in db.Mangas
+                         join chap in db.Chapters
+                         on tr.MangaId equals chap.MangaId
+                         where tr.StatusId == 1 && tr.FullName.Contains(term)
+                         group new { tr, chap } by new { tr.MangaId, tr.FullName, tr.CoverLink, tr.Alias } into grp
+                         select new { grp.Key.MangaId, grp.Key.FullName, grp.Key.Alias })
+                            .AsEnumerable().Select(x => new ViewModels.Home.SearchManga.ListName
+                            {
+                                MangaId = x.MangaId,
+                                FullName = x.FullName,
+                                MangaAlias = x.Alias,
+                                DefaultLang = CheckLanguage(x.MangaId),
+                            });
+
+            var test = datab.Count();
             //var db=data.Truyens.Where(x => x.TenProject.Contains(term)).Select(x =>new { x.MaProject, x.TenProject });
             return Json(new
             {
@@ -434,7 +522,7 @@ namespace MyWebsite.Controllers
                             join bmark in db.Bookmarks on tr.MangaId equals bmark.MangaId
                             join acc in db.Accounts on bmark.AccountId equals acc.AccountId
                             where acc.AccountId == account.AccountId
-                            //where bmark.SeenStatus == false
+                            where bmark.SeenStatus == false
                             select new ViewModels.Home.Bookmark.BookmarkHead
                             {
                                 MangaId = tr.MangaId,
@@ -454,14 +542,14 @@ namespace MyWebsite.Controllers
                             });
                 ViewBag.MangaCount = data.Count();
                 if (data.Count() != 0)
-                {  
+                {
                     ViewBag.Data = data.ToList();
                 }
                 else
                 {
                     ViewBag.Message = "Đã xem hết truyện theo dõi";
                 }
-                
+
             }
             return PartialView();
         }
@@ -518,7 +606,7 @@ namespace MyWebsite.Controllers
             {
                 return RedirectToAction("Login", "Account");
             }
-            
+
         }
 
         [HttpPost]
@@ -540,15 +628,15 @@ namespace MyWebsite.Controllers
         }
 
         [HttpPost]
-        public JsonResult DelBookmark()
+        public JsonResult DelBookmark(int idManga)
         {
             if (Session["UserInfo"] != null)
             {
                 AccountModel account = (AccountModel)Session["UserInfo"];
-                int mangaId = Convert.ToInt32(Session["MangaId"]);
-                Bookmark obj = db.Bookmarks.Where(x => x.AccountId == account.AccountId).Where(x => x.MangaId == mangaId).SingleOrDefault();
+                Bookmark obj = db.Bookmarks.Where(x => x.AccountId == account.AccountId).Where(x => x.MangaId == idManga).SingleOrDefault();
+                ViewBag.MangaId = idManga;
                 db.Bookmarks.Remove(obj);
-                db.SaveChanges();
+                //db.SaveChanges();
             }
             return Json(true, JsonRequestBehavior.AllowGet);
         }
@@ -560,7 +648,7 @@ namespace MyWebsite.Controllers
             {
                 AccountModel account = (AccountModel)Session["UserInfo"];
                 Bookmark update = db.Bookmarks.Where(x => x.AccountId == account.AccountId).Where(x => x.MangaId == idManga).SingleOrDefault();
-                if(update != null)
+                if (update != null)
                 {
                     int checkSeenChap;
                     if (idChapter == null)
@@ -582,10 +670,10 @@ namespace MyWebsite.Controllers
                         {
                             update.SeenStatus = false;
                         }
-                        db.SaveChanges();
+                        //db.SaveChanges();
                     }
                 }
-            }              
+            }
             return Json(true, JsonRequestBehavior.AllowGet);
         }
         #endregion

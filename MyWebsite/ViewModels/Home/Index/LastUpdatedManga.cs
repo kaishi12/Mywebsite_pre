@@ -13,6 +13,7 @@ namespace MyWebsite.ViewModels.Home.Index
         public string Description { get; set; }
         public string Author { get; set; }
         public string Alias { get; set; }
+        public string DefaultLang { get; set; }
         public int StatusActive { get; set; }
         public DateTime CreateAt { get; set; }
         public List<LastestChapter> Last3Chapter { get; set; }

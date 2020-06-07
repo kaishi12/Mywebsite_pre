@@ -171,6 +171,8 @@
     <Content Include="LayoutHome\js\jquery.fatNav.min.js" />
     <Content Include="LayoutHome\js\jquery.lighter.js" />
     <Content Include="LayoutHome\js\jquery.magnific-popup.min.js" />
+    <Content Include="LayoutHome\js\jquery.min.js" />
+    <Content Include="LayoutHome\js\jquery.timeago.js" />
     <Content Include="LayoutHome\js\lazysizes.min.js" />
     <Content Include="LayoutHome\js\main.js" />
     <Content Include="LayoutHome\js\modernizr.js" />
@@ -626,6 +628,7 @@
       <DependentUpon>Model.edmx</DependentUpon>
       <LastGenOutput>Model.cs</LastGenOutput>
     </Content>
+    <Content Include="RootPicture\backgroup.jpg" />
     <Content Include="RootPicture\error-404.jpg" />
     <Content Include="RootPicture\Icons\manga-author.png" />
     <Content Include="RootPicture\Icons\manga-genre.png" />
@@ -776,6 +779,9 @@
     <Compile Include="ViewModels\Home\Genre\MangaByGenre.cs" />
     <Compile Include="ViewModels\Home\Index\LastUpdatedManga.cs" />
     <Compile Include="ViewModels\Home\MangaDetail\ListChapter.cs" />
+    <Compile Include="ViewModels\Home\NewManga\NewManga.cs" />
+    <Compile Include="ViewModels\Home\SearchManga\ListName.cs" />
+    <Compile Include="ViewModels\Home\SearchManga\SearchManga.cs" />
     <Compile Include="ViewModels\Home\Slides\Slides.cs" />
     <Compile Include="ViewModels\Language\LanguageModel.cs" />
     <Compile Include="ViewModels\Manga\MangaModel.cs" />

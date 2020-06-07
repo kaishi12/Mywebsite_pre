@@ -16,10 +16,10 @@
     <div class="breadcrumb breadcrumbs">
         <p>
             <a href="/Home/Index">
-                <span>Manga Online</span>
+                <span>Trang chủ </span>
             </a>
             <span>»</span>
-            <span style="color:white">Tìm kiếm tác giả</span>
+            <span style="color:white">Tác giả</span>
         </p>
     </div>
     <div class="daily-update" style="margin-top:5px">
@@ -29,7 +29,7 @@
             @foreach (var truyen in Model)
             {
                 <div class="story_item">
-                    <a rel="nofollow" href="/manga/@truyen.Alias-@truyen.MangaId">
+                    <a rel="nofollow" href="/manga/@truyen.Alias-@truyen.MangaId/@truyen.DefaultLang">
                         <img src="~/Cover/@truyen.CoverLink" onError="this.onerror=null;this.src='/RootPicture/error-404.jpg';" alt="@truyen.FullName" />
                     </a>
                     <div class="story_item_right">
@@ -37,8 +37,8 @@
                             <a href="/manga/@truyen.Alias-@truyen.MangaId">@truyen.FullName</a>
                             <em class=""></em>
                         </h3>
-                        <span>Tác giả(s): @truyen.Author</span>
-                        <span>Updated: @truyen.UpdateAt</span>
+                        <span>Tác giả: @truyen.Author</span>
+                        <span>Cập nhật: @truyen.UpdateAt</span>
                         <span>Lượt xem: @Html.Action("ViewNumber", "Home", new { id = @truyen.MangaId })</span>
                         @Html.Action("GetLasted2Chapter", "Home", new { id = @truyen.MangaId })
                     </div>

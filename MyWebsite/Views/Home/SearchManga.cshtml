@@ -1,6 +1,6 @@
 ﻿@using PagedList.Mvc;
 @using PagedList;
-@model IPagedList<MyWebsite.Models.Manga>
+@model IPagedList<MyWebsite.ViewModels.Home.SearchManga.SearchManga>
 
 @{
     ViewBag.Title = "KetQuaTimKiem";
@@ -12,25 +12,25 @@
     <div class="breadcrumb breadcrumbs">
         <p>
             <a href="/Home/Index">
-                <span>Manga Online</span>
+                <span>Trang chủ</span>
             </a>
             <span>»</span>
-            <span style="color:white">Search manga</span>
+            <span style="color:white">Tìm kiếm truyện</span>
         </p>
     </div>
     <div class="daily-update" style="margin-top:5px">
-        <h3 class="title update-title">Keyword: @ViewBag.TuKhoa</h3>
+        <h3 class="title update-title">Từ khóa: @ViewBag.TuKhoa</h3>
         <div class="panel_story_list">
             @*Từng truyện*@
             @foreach (var truyen in Model)
             {
                 <div class="story_item">
-                    <a rel="nofollow" href="/manga/@truyen.Alias-@truyen.MangaId">
+                    <a rel="nofollow" href="/manga/@truyen.MangaAlias-@truyen.MangaId/@truyen.DefaultLang">
                         <img src="~/Cover/@truyen.CoverLink" onError="this.onerror=null;this.src='/Images/Error404/error-404.jpg';" alt="@truyen.FullName" />
                     </a>
                     <div class="story_item_right">
                         <h3 class="story_name">
-                            <a href="/manga/@truyen.Alias-@truyen.MangaId">@truyen.FullName</a>
+                            <a href="/manga/@truyen.MangaAlias-@truyen.MangaId">@truyen.FullName</a>
                             <em class=""></em>
                         </h3>
                         @Html.Action("GetLasted2Chapter", "Home", new { id = @truyen.MangaId })
@@ -50,7 +50,7 @@
         <div class="xem-them">
             <!-- Pagination -->
             <ul class="pagination">
-                @Html.PagedListPager(Model, page => Url.Action("KetQuaTimKiem", new { page = page }), new PagedListRenderOptions { DisplayEllipsesWhenNotShowingAllPageNumbers = false })
+                @Html.PagedListPager(Model, page => Url.Action("SearchManga", new { page = page }), new PagedListRenderOptions { DisplayEllipsesWhenNotShowingAllPageNumbers = false })
             </ul>
         </div>
     </div>

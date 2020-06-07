@@ -46,7 +46,7 @@
                             {
                                 if (truyen.SeenStatus == false)
                                 {
-                                    <tr class="table-info" id="trCheck">
+                                    <tr class="table-info" id="trCheck-@truyen.MangaId">
                                         <td>
                                             <a rel="nofollow" href="/manga/@truyen.MangaAlias-@truyen.MangaId" title="@truyen.MangaName">
                                                 <img src="~/Cover/@truyen.CoverImg" onError="this.onerror=null;this.src='/RootPicture/error-404.jpg';" alt="@truyen.MangaName">
@@ -60,14 +60,14 @@
                                         <td style="position:relative">
                                             <div class="bookmarklist text-center">
                                                 <span class="bookmarkb my-2 mx-0" id="updatebookmarkb" data-manga-id="@truyen.MangaId"><i class="fa fa-check"></i> Đánh dấu đã xem</span>
-                                                <span class="bookmarkb my-2" id="delbookmarkb"><i class="fa fa-trash"></i> Xóa Bookmark</span>
+                                                <span class="bookmarkb my-2" id="delbookmarkb" data-manga-id="@truyen.MangaId"><i class="fa fa-trash"></i> Xóa Bookmark</span>
                                             </div>                                           
                                         </td>
                                     </tr>
                                 }
                                 else
                                 {
-                                    <tr>
+                                    <tr id="trCheck-@truyen.MangaId">
                                         <td>
                                             <a rel="nofollow" href="/manga/@truyen.MangaAlias-@truyen.MangaId" title="@truyen.MangaName">
                                                 <img src="~/Cover/@truyen.CoverImg" onError="this.onerror=null;this.src='/RootPicture/error-404.jpg';" alt="@truyen.MangaName">
@@ -81,7 +81,7 @@
                                         <td style="position:relative">
                                             <div class="bookmarklist text-center">
                                                 <span class="bookmarkb alreadyseen my-2 mx-0"><i class="fa fa-check"></i> Đã xem tới chap mới nhất</span>
-                                                <span class="bookmarkb my-2" id="delbookmarkb"><i class="fa fa-trash"></i> Xóa Bookmark</span>
+                                                <span class="bookmarkb my-2" id="delbookmarkb" data-manga-id="@truyen.MangaId"><i class="fa fa-trash"></i> Xóa Bookmark</span>
                                             </div>
                                         </td>
                                     </tr>

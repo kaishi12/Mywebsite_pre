@@ -12,5 +12,6 @@ namespace MyWebsite.ViewModels.Home.Slides
         public string CoverLink { get; set; }
         public string Alias { get; set; }
         public int ViewNumber { get; set; }
+        public string DefaultLang { get; set; }
     }
 }
