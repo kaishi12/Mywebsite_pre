@@ -433,11 +433,11 @@ namespace MyWebsite.Controllers
             //Phân trang
             int pageNum = (page ?? 1);
             int pageSize = 9;
-            if (lstKQTK.Count == 0)
+            if (lstKQTK.Count() == 0)
             {
                 ViewBag.ThongBao = "Không tìm thấy kết quả";
             }
-            ViewBag.ThongBao = "Đã tìm thấy " + lstKQTK.Count + " kết quả";
+            ViewBag.ThongBao = "Đã tìm thấy " + lstKQTK.Count() + " kết quả";
             return View(lstKQTK.OrderBy(n => n.FullName).ToPagedList(pageNum, pageSize));
         }
 
@@ -471,11 +471,11 @@ namespace MyWebsite.Controllers
             //Phân trang
             int pageNum = (page ?? 1);
             int pageSize = 9;
-            if (lstKQTK.Count == 0)
+            if (lstKQTK.Count() == 0)
             {
                 ViewBag.ThongBao = "Không tìm thấy kết quả";
             }
-            ViewBag.ThongBao = "Đã tìm thấy " + lstKQTK.Count + " kết quả";
+            ViewBag.ThongBao = "Đã tìm thấy " + lstKQTK.Count() + " kết quả";
             return View(lstKQTK.OrderBy(n => n.FullName).ToPagedList(pageNum, pageSize));
         }
 
@@ -638,7 +638,7 @@ namespace MyWebsite.Controllers
                             AllChapCount = ChapterCount(x.MangaId)
                         }).OrderBy(x => x.SeenStatus).ThenBy(x => x.MangaName).ToList();
                 ViewBag.UserId = user.AccountId;
-                if (data.Count == 0)
+                if (data.Count() == 0)
                 {
                     ViewBag.KoCoTruyen = "Yes";
                     ViewBag.ThongBao = "Chưa có truyện theo dõi";

@@ -32,9 +32,13 @@
   </EntityType>
   <EntityType Name="Bookmark">
     <Key>
-      <PropertyRef Name="id" />
+      <PropertyRef Name="MangaId" />
+      <PropertyRef Name="AccountId" />
     </Key>
-    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="MangaId" Type="int" Nullable="false" />
+    <Property Name="AccountId" Type="int" Nullable="false" />
+    <Property Name="LastSeenChap" Type="int" Nullable="false" />
+    <Property Name="SeenStatus" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="Category">
     <Key>
@@ -313,6 +317,30 @@
       </Principal>
       <Dependent Role="Account_Detail">
         <PropertyRef Name="PointId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Bookmark_Account">
+    <End Role="Account" Type="Self.Account" Multiplicity="1" />
+    <End Role="Bookmark" Type="Self.Bookmark" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Account">
+        <PropertyRef Name="AccountId" />
+      </Principal>
+      <Dependent Role="Bookmark">
+        <PropertyRef Name="AccountId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Bookmark_Manga">
+    <End Role="Manga" Type="Self.Manga" Multiplicity="1" />
+    <End Role="Bookmark" Type="Self.Bookmark" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Manga">
+        <PropertyRef Name="MangaId" />
+      </Principal>
+      <Dependent Role="Bookmark">
+        <PropertyRef Name="MangaId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -637,6 +665,14 @@
     <AssociationSet Name="FK_Account_Detail_Point" Association="Self.FK_Account_Detail_Point">
       <End Role="Point" EntitySet="Point" />
       <End Role="Account_Detail" EntitySet="Account_Detail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Bookmark_Account" Association="Self.FK_Bookmark_Account">
+      <End Role="Account" EntitySet="Account" />
+      <End Role="Bookmark" EntitySet="Bookmark" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Bookmark_Manga" Association="Self.FK_Bookmark_Manga">
+      <End Role="Manga" EntitySet="Manga" />
+      <End Role="Bookmark" EntitySet="Bookmark" />
     </AssociationSet>
     <AssociationSet Name="FK_Chapter_Manga" Association="Self.FK_Chapter_Manga">
       <End Role="Manga" EntitySet="Manga" />

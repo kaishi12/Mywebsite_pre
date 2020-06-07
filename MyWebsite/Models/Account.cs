@@ -25,6 +25,7 @@ namespace MyWebsite.Models
             this.PointHistories = new HashSet<PointHistory>();
             this.Texts = new HashSet<Text>();
             this.Translations = new HashSet<Translation>();
+            this.Bookmarks = new HashSet<Bookmark>();
         }
     
         public int AccountId { get; set; }
@@ -59,5 +60,7 @@ namespace MyWebsite.Models
         public virtual ICollection<Text> Texts { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Translation> Translations { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Bookmark> Bookmarks { get; set; }
     }
 }

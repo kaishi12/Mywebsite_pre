@@ -608,10 +608,6 @@
     <Content Include="LayoutHome\rs-plugin\font\revicons.eot" />
     <Content Include="LayoutHome\rs-plugin\font\revicons.ttf" />
     <Content Include="LayoutHome\rs-plugin\font\revicons.woff" />
-    <EntityDeploy Include="Models\Model1Test.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Model1Test.Designer.cs</LastGenOutput>
-    </EntityDeploy>
     <Content Include="Models\Model.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model.edmx</DependentUpon>
@@ -622,9 +618,6 @@
       <DependentUpon>Model.edmx</DependentUpon>
       <LastGenOutput>Model.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\Model1Test.edmx.diagram">
-      <DependentUpon>Model1Test.edmx</DependentUpon>
-    </Content>
     <EntityDeploy Include="Models\Model.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Model.Designer.cs</LastGenOutput>
@@ -633,16 +626,6 @@
       <DependentUpon>Model.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-1.6.4-vsdoc.js" />
-    <Content Include="Models\Model1Test.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Model1Test.edmx</DependentUpon>
-      <LastGenOutput>Model1Test.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\Model1Test.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Model1Test.edmx</DependentUpon>
-      <LastGenOutput>Model1Test.cs</LastGenOutput>
-    </Content>
     <Content Include="RootPicture\error-404.jpg" />
     <Content Include="RootPicture\Icons\manga-author.png" />
     <Content Include="RootPicture\Icons\manga-genre.png" />
@@ -737,21 +720,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\Model1Test.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model1Test.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Model1Test.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model1Test.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Model1Test.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model1Test.edmx</DependentUpon>
-    </Compile>
     <Compile Include="Models\Notification.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -815,12 +783,17 @@
     <Compile Include="ViewModels\Chapter\ChapterModel.cs" />
     <Compile Include="ViewModels\Genre\EditGenreModel.cs" />
     <Compile Include="ViewModels\Home\Author\MangaByAuthor.cs" />
+    <Compile Include="ViewModels\Home\Bookmark\Bookmark.cs" />
+    <Compile Include="ViewModels\Home\Bookmark\BookmarkHead.cs" />
     <Compile Include="ViewModels\Home\Chapter\Get1Chapter.cs" />
     <Compile Include="ViewModels\Home\Chapter\Get2Chapter.cs" />
     <Compile Include="ViewModels\Home\Chapter\GetLastedChapter.cs" />
     <Compile Include="ViewModels\Home\Genre\MangaByGenre.cs" />
     <Compile Include="ViewModels\Home\Index\LastUpdatedManga.cs" />
     <Compile Include="ViewModels\Home\MangaDetail\ListChapter.cs" />
+    <Compile Include="ViewModels\Home\NewManga\NewManga.cs" />
+    <Compile Include="ViewModels\Home\SearchManga\ListName.cs" />
+    <Compile Include="ViewModels\Home\SearchManga\SearchManga.cs" />
     <Compile Include="ViewModels\Home\Slides\Slides.cs" />
     <Compile Include="ViewModels\Language\LanguageModel.cs" />
     <Compile Include="ViewModels\Manga\MangaModel.cs" />

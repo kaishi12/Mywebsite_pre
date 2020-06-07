@@ -272,4 +272,3 @@ E:\Mywebsite_pre\MyWebsite\obj\Debug\MyWebsite.csproj.CoreCompileInputs.cache
 E:\Mywebsite_pre\MyWebsite\obj\Debug\MyWebsite.csproj.CopyComplete
 E:\Mywebsite_pre\MyWebsite\obj\Debug\MyWebsite.dll
 E:\Mywebsite_pre\MyWebsite\obj\Debug\MyWebsite.pdb
-E:\Mywebsite_pre\MyWebsite\obj\Debug\MyWebsite.csprojAssemblyReference.cache

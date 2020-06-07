@@ -32,13 +32,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Bookmarks">
-      <EntityTypeMapping TypeName="MyWebsiteModel.Bookmark">
-        <MappingFragment StoreEntitySet="Bookmark">
-          <ScalarProperty Name="id" ColumnName="id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Categories">
       <EntityTypeMapping TypeName="MyWebsiteModel.Category">
         <MappingFragment StoreEntitySet="Category">
@@ -310,6 +303,16 @@
           <ScalarProperty Name="Active" ColumnName="Active" />
           <ScalarProperty Name="UpdateAt" ColumnName="UpdateAt" />
           <ScalarProperty Name="CreateAt" ColumnName="CreateAt" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Bookmarks">
+      <EntityTypeMapping TypeName="MyWebsiteModel.Bookmark">
+        <MappingFragment StoreEntitySet="Bookmark">
+          <ScalarProperty Name="SeenStatus" ColumnName="SeenStatus" />
+          <ScalarProperty Name="LastSeenChap" ColumnName="LastSeenChap" />
+          <ScalarProperty Name="AccountId" ColumnName="AccountId" />
+          <ScalarProperty Name="MangaId" ColumnName="MangaId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

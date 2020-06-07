@@ -12,14 +12,13 @@ namespace MyWebsite.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Bookmark
+    public partial class Document
     {
-        public int MangaId { get; set; }
-        public int AccountId { get; set; }
-        public int LastSeenChap { get; set; }
-        public bool SeenStatus { get; set; }
-    
-        public virtual Account Account { get; set; }
-        public virtual Manga Manga { get; set; }
+        public int Id { get; set; }
+        public Nullable<int> Order { get; set; }
+        public string Text { get; set; }
+        public string Image { get; set; }
+        public Nullable<bool> Active { get; set; }
+        public string Name { get; set; }
     }
 }

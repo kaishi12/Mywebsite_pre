@@ -27,6 +27,7 @@
     <NavigationProperty Name="PointHistories" Relationship="Self.FK_PointHistory_Account" FromRole="Account" ToRole="PointHistory" />
     <NavigationProperty Name="Texts" Relationship="Self.FK_Text_Account" FromRole="Account" ToRole="Text" />
     <NavigationProperty Name="Translations" Relationship="Self.FK_Translation_Account" FromRole="Account" ToRole="Translation" />
+    <NavigationProperty Name="Bookmarks" Relationship="MyWebsiteModel.FK_Bookmark_Account" FromRole="Account" ToRole="Bookmark" />
   </EntityType>
   <EntityType Name="Account_Detail">
     <Key>
@@ -39,12 +40,6 @@
     <Property Name="Active" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="Account" Relationship="Self.FK_Account_Detail_Account" FromRole="Account_Detail" ToRole="Account" />
     <NavigationProperty Name="Point" Relationship="Self.FK_Account_Detail_Point" FromRole="Account_Detail" ToRole="Point" />
-  </EntityType>
-  <EntityType Name="Bookmark">
-    <Key>
-      <PropertyRef Name="id" />
-    </Key>
-    <Property Name="id" Type="Int32" Nullable="false" />
   </EntityType>
   <EntityType Name="Category">
     <Key>
@@ -148,6 +143,7 @@
     <NavigationProperty Name="Manga_Genres" Relationship="Self.FK_Manga_Genres_Manga" FromRole="Manga" ToRole="Manga_Genres" />
     <NavigationProperty Name="Status" Relationship="Self.FK_Manga_Status" FromRole="Manga" ToRole="Status" />
     <NavigationProperty Name="Translations" Relationship="Self.FK_Translation_Manga" FromRole="Manga" ToRole="Translation" />
+    <NavigationProperty Name="Bookmarks" Relationship="MyWebsiteModel.FK_Bookmark_Manga" FromRole="Manga" ToRole="Bookmark" />
   </EntityType>
   <EntityType Name="Manga_Detail">
     <Key>
@@ -659,7 +655,6 @@
   <EntityContainer Name="MyWebsiteEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Accounts" EntityType="Self.Account" />
     <EntitySet Name="Account_Detail" EntityType="Self.Account_Detail" />
-    <EntitySet Name="Bookmarks" EntityType="Self.Bookmark" />
     <EntitySet Name="Categories" EntityType="Self.Category" />
     <EntitySet Name="Chapters" EntityType="Self.Chapter" />
     <EntitySet Name="Documents" EntityType="Self.Document" />
@@ -786,5 +781,50 @@
       <End Role="Translation" EntitySet="Translations" />
       <End Role="Translation_Detail" EntitySet="Translation_Detail" />
     </AssociationSet>
+    <EntitySet Name="Bookmarks" EntityType="MyWebsiteModel.Bookmark" />
+    <AssociationSet Name="FK_Bookmark_Account" Association="MyWebsiteModel.FK_Bookmark_Account">
+      <End Role="Account" EntitySet="Accounts" />
+      <End Role="Bookmark" EntitySet="Bookmarks" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Bookmark_Manga" Association="MyWebsiteModel.FK_Bookmark_Manga">
+      <End Role="Manga" EntitySet="Mangas" />
+      <End Role="Bookmark" EntitySet="Bookmarks" />
+    </AssociationSet>
   </EntityContainer>
+  <EntityType Name="Bookmark">
+    <Key>
+      <PropertyRef Name="MangaId" />
+      <PropertyRef Name="AccountId" />
+    </Key>
+    <Property Name="MangaId" Type="Int32" Nullable="false" />
+    <Property Name="AccountId" Type="Int32" Nullable="false" />
+    <Property Name="LastSeenChap" Type="Int32" Nullable="false" />
+    <Property Name="SeenStatus" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Account" Relationship="MyWebsiteModel.FK_Bookmark_Account" FromRole="Bookmark" ToRole="Account" />
+    <NavigationProperty Name="Manga" Relationship="MyWebsiteModel.FK_Bookmark_Manga" FromRole="Bookmark" ToRole="Manga" />
+  </EntityType>
+  <Association Name="FK_Bookmark_Account">
+    <End Type="MyWebsiteModel.Account" Role="Account" Multiplicity="1" />
+    <End Type="MyWebsiteModel.Bookmark" Role="Bookmark" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Account">
+        <PropertyRef Name="AccountId" />
+      </Principal>
+      <Dependent Role="Bookmark">
+        <PropertyRef Name="AccountId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Bookmark_Manga">
+    <End Type="MyWebsiteModel.Manga" Role="Manga" Multiplicity="1" />
+    <End Type="MyWebsiteModel.Bookmark" Role="Bookmark" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Manga">
+        <PropertyRef Name="MangaId" />
+      </Principal>
+      <Dependent Role="Bookmark">
+        <PropertyRef Name="MangaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

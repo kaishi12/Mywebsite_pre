@@ -7,7 +7,6 @@
       <Diagram DiagramId="7b97dccbb18848e0b691799aa5833824" Name="Diagram1">
         <EntityTypeShape EntityType="MyWebsiteModel.Account" Width="1.5" PointX="0.75" PointY="13.625" IsExpanded="true" />
         <EntityTypeShape EntityType="MyWebsiteModel.Account_Detail" Width="1.5" PointX="3" PointY="12.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="MyWebsiteModel.Bookmark" Width="1.5" PointX="0.75" PointY="2.125" IsExpanded="true" />
         <EntityTypeShape EntityType="MyWebsiteModel.Category" Width="1.5" PointX="0.75" PointY="20.375" IsExpanded="true" />
         <EntityTypeShape EntityType="MyWebsiteModel.Chapter" Width="1.5" PointX="6" PointY="26.75" IsExpanded="true" />
         <EntityTypeShape EntityType="MyWebsiteModel.Document" Width="1.5" PointX="8.75" PointY="2.125" IsExpanded="true" />
@@ -56,6 +55,9 @@
         <AssociationConnector Association="MyWebsiteModel.FK_Text_TextBox1" ManuallyRouted="false" />
         <AssociationConnector Association="MyWebsiteModel.FK_Text_Translation" ManuallyRouted="false" />
         <AssociationConnector Association="MyWebsiteModel.FK_Translation_Detail_Translation" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="MyWebsiteModel.Bookmark" Width="1.5" PointX="9" PointY="10.5" />
+        <AssociationConnector Association="MyWebsiteModel.FK_Bookmark_Account" />
+        <AssociationConnector Association="MyWebsiteModel.FK_Bookmark_Manga" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
