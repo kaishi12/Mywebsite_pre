@@ -3,16 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace MyWebsite.ViewModels.Home.Genre
+namespace MyWebsite.ViewModels.Home.NewManga
 {
-    public class MangaByGenre
+    public class NewManga
     {
         public int MangaId { get; set; }
         public string FullName { get; set; }
         public string CoverLink { get; set; }
-        public string Author { get; set; }
-        public string Description { get; set; }
-        public string Alias { get; set; }
+        public string MangaAlias { get; set; }
+        public DateTime CreateAt { get; set; }
         public string DefaultLang { get; set; }
     }
 }
