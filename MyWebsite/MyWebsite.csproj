@@ -636,6 +636,7 @@
     <Content Include="RootPicture\Icons\manga-status.png" />
     <Content Include="RootPicture\Icons\manga-timeupdate.png" />
     <Content Include="RootPicture\Icons\manga-views.png" />
+    <Content Include="RootPicture\logo-small.png" />
     <Content Include="RootPicture\Oshino Shinobu.jpg" />
     <Content Include="RootPicture\tenor.gif" />
     <Content Include="Scripts\jquery-1.6.4.js" />
