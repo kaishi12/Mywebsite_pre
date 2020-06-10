@@ -629,6 +629,7 @@
       <LastGenOutput>Model.cs</LastGenOutput>
     </Content>
     <Content Include="RootPicture\backgroup.jpg" />
+    <Content Include="RootPicture\Big_logo.png" />
     <Content Include="RootPicture\error-404.jpg" />
     <Content Include="RootPicture\Icons\manga-author.png" />
     <Content Include="RootPicture\Icons\manga-genre.png" />
@@ -636,8 +637,8 @@
     <Content Include="RootPicture\Icons\manga-status.png" />
     <Content Include="RootPicture\Icons\manga-timeupdate.png" />
     <Content Include="RootPicture\Icons\manga-views.png" />
-    <Content Include="RootPicture\logo-small.png" />
     <Content Include="RootPicture\Oshino Shinobu.jpg" />
+    <Content Include="RootPicture\Small_logo.png" />
     <Content Include="RootPicture\tenor.gif" />
     <Content Include="Scripts\jquery-1.6.4.js" />
     <Content Include="Scripts\jquery-1.6.4.min.js" />
