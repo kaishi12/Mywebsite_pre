@@ -16,13 +16,12 @@
 </div>*@
 <li class="dropdown dropdown-customize">
     <a href="/Bookmark" class="dropdown-toggle" data-toggle="dropdown">
-        <a href="/Bookmark">
-            <i class="fa fa-book"></i> Bookmark
-            <span class="mangacount">@ViewBag.MangaCount</span>
-        </a>
+        <i class="fa fa-book"></i> Bookmark
+        <span class="mangacount">@ViewBag.MangaCount</span>
+        <i class="fa fa-angle-down d-sm-inline d-lg-block"></i>
         
     </a>
-    <ul class="dropdown-menu dropdown-menu-customize" style="padding:10px 0;">
+    <ul class="dropdown-menu dropdown-menu-customize d-lg-block d-none" style="padding:10px 0;">
         @if (ViewBag.Message == null)
         {
             foreach (var truyen in ViewBag.Data)

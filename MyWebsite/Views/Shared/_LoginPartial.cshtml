@@ -13,9 +13,9 @@
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 @*@Html.ActionLink("Hello " + nguoi.UserName + "!" +"<i class='fa fa-angle-down'></i>", "UserManagment", "Account", routeValues: null, htmlAttributes: new { title = "Manage" })*@        
-                <a href="/UserManagment">Hello @nguoi.UserName<i class="fa fa-angle-down"></i></a>
+                Chào @nguoi.UserName<i class="fa fa-angle-down d-lg-block d-none"></i>
             </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <div class="dropdown-menu d-lg-block d-none" aria-labelledby="navbarDropdown">
                 <a class="dropdown-item" href="/UserManagment">Bảng điều khiển</a>
                 <a class="dropdown-item" href="#">Thống kê</a>
                 <a class="dropdown-item" href="/Bookmark/">Danh sách theo dõi</a>

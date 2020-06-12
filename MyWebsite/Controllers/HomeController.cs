@@ -612,44 +612,52 @@ namespace MyWebsite.Controllers
         public ActionResult BookmarkList()
         {
             AccountModel user = (AccountModel)Session["UserInfo"];
-            try
+            if (user != null)
             {
-                var data = (from tr in db.Mangas
-                            join bmark in db.Bookmarks on tr.MangaId equals bmark.MangaId
-                            join acc in db.Accounts on bmark.AccountId equals acc.AccountId
-                            where acc.AccountId == user.AccountId
-                            select new ViewModels.Home.Bookmark.Bookmark
+                try
+                {
+                    var data = (from tr in db.Mangas
+                                join bmark in db.Bookmarks on tr.MangaId equals bmark.MangaId
+                                join acc in db.Accounts on bmark.AccountId equals acc.AccountId
+                                where acc.AccountId == user.AccountId
+                                select new ViewModels.Home.Bookmark.Bookmark
+                                {
+                                    MangaId = tr.MangaId,
+                                    MangaName = tr.FullName,
+                                    MangaAlias = tr.Alias,
+                                    CoverImg = tr.CoverLink,
+                                    LastSeenChap = bmark.LastSeenChap,
+                                    SeenStatus = bmark.SeenStatus
+                                }).AsEnumerable()
+                            .Select(x => new ViewModels.Home.Bookmark.Bookmark()
                             {
-                                MangaId = tr.MangaId,
-                                MangaName = tr.FullName,
-                                MangaAlias = tr.Alias,
-                                CoverImg = tr.CoverLink,
-                                LastSeenChap = bmark.LastSeenChap,
-                                SeenStatus = bmark.SeenStatus
-                            }).AsEnumerable()
-                        .Select(x => new ViewModels.Home.Bookmark.Bookmark()
-                        {
-                            MangaId = x.MangaId,
-                            MangaName = x.MangaName,
-                            MangaAlias = x.MangaAlias,
-                            CoverImg = x.CoverImg,
-                            LastSeenChap = x.LastSeenChap,
-                            SeenStatus = x.SeenStatus,
-                            AllChapCount = ChapterCount(x.MangaId)
-                        }).OrderBy(x => x.SeenStatus).ThenBy(x => x.MangaName).ToList();
-                ViewBag.UserId = user.AccountId;
-                if (data.Count() == 0)
+                                MangaId = x.MangaId,
+                                MangaName = x.MangaName,
+                                MangaAlias = x.MangaAlias,
+                                CoverImg = x.CoverImg,
+                                LastSeenChap = x.LastSeenChap,
+                                SeenStatus = x.SeenStatus,
+                                AllChapCount = ChapterCount(x.MangaId)
+                            }).OrderBy(x => x.SeenStatus).ThenBy(x => x.MangaName).ToList();
+                    ViewBag.UserId = user.AccountId;
+                    if (data.Count == 0)
+                    {
+                        ViewBag.KoCoTruyen = "Yes";
+                        ViewBag.ThongBao = "Chưa có truyện theo dõi";
+                    }
+                    return View(data);
+                }
+                catch
                 {
                     ViewBag.KoCoTruyen = "Yes";
-                    ViewBag.ThongBao = "Chưa có truyện theo dõi";
+                    ViewBag.ThongBao = "Lỗi hệ thống";
+                    return View();
                 }
-                return View(data);
             }
-            catch
+            else
             {
                 return RedirectToAction("Login", "Account");
             }
-
         }
 
         [HttpPost]
@@ -679,7 +687,7 @@ namespace MyWebsite.Controllers
                 Bookmark obj = db.Bookmarks.Where(x => x.AccountId == account.AccountId).Where(x => x.MangaId == idManga).SingleOrDefault();
                 ViewBag.MangaId = idManga;
                 db.Bookmarks.Remove(obj);
-                //db.SaveChanges();
+                db.SaveChanges();
             }
             return Json(true, JsonRequestBehavior.AllowGet);
         }
@@ -713,7 +721,7 @@ namespace MyWebsite.Controllers
                         {
                             update.SeenStatus = false;
                         }
-                        //db.SaveChanges();
+                        db.SaveChanges();
                     }
                 }
             }

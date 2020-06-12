@@ -56,7 +56,7 @@
                 <div class="container-full">
 
                     <!-- Logo -->
-                    @*<div class="logo"> <a href="index.html"><img class="img-responsive" src="images/logo.svg" alt=""></a> </div>*@
+                    <div class="logo"> <a href="/Home/Index"><img src="~/RootPicture/Small_logo.png" /></a> </div>
                     <nav class="navbar ownmenu navbar-expand-lg ">
                         <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span></span> </button>
                         <div class="collapse navbar-collapse" id="navbarNav">
@@ -89,21 +89,21 @@
                                     </form>
                                 </li>
                                 @*<li id="txtTimKiem" class="search">
-                                        @using (Html.BeginForm("KetQuaTimKiem", "TimKiem"))
-                                        {
-                                            @Html.TextBox("txtTimKiem", "", htmlAttributes: new { @class = "TextBoxTimKiem", @placeholder = "Nhập từ khóa tìm kiếm" })
-                                            <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
-                                        }
-                                    </li>*@
+                        @using (Html.BeginForm("KetQuaTimKiem", "TimKiem"))
+                        {
+                            @Html.TextBox("txtTimKiem", "", htmlAttributes: new { @class = "TextBoxTimKiem", @placeholder = "Nhập từ khóa tìm kiếm" })
+                            <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+                        }
+                    </li>*@
                             </ul>
                         </div>
                     </nav>
 
                     <!-- Curency -->
                     @*<div class="curency">
-                            <a href="#." class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> VN<i class="fa fa-angle-down"></i> </a>
-                            <div class="dropdown-menu"> <a class="dropdown-item" href="#">VN</a> <a class="dropdown-item" href="#">USD</a> </div>
-                        </div>*@
+            <a href="#." class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> VN<i class="fa fa-angle-down"></i> </a>
+            <div class="dropdown-menu"> <a class="dropdown-item" href="#">VN</a> <a class="dropdown-item" href="#">USD</a> </div>
+        </div>*@
                 </div>
             </div>
             @*<div class="clearfix"></div>*@
@@ -132,7 +132,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-6">
-                            <p>©  2018 BoShop All right reserved. <a href="https://webicode.com/">webicode</a></p>
+                            <p>Copyright © 2020 web xem truyện. <a href="/Home/Index">web đọc truyện</a></p>
                         </div>
                         <div class="col-md-6 text-right"> @*<img src="images/card-icon.png" alt="">*@ </div>
                     </div>

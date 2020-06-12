@@ -460,6 +460,8 @@ header .logo {
 }
 header .logo img {
 	z-index: 3;
+    width:188px;
+    border-radius:5px;
 	position: relative;
 }
 .sticky-wrapper {
@@ -1071,7 +1073,9 @@ header .navbar-collapse {
 }
 .container-full .navbar-collapse {
 	margin-right: 0px;
-    margin-top: 4px;
+    /*margin-top: 4px;*/
+    /*background:black;*/
+    border-radius:10px;
 }
 header .user-acc li {
 	display: inline-block;

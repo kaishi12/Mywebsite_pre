@@ -56,7 +56,7 @@
                 <div class="container-full">
 
                     <!-- Logo -->
-                    @*<div class="logo"> <a href="index.html"><img class="img-responsive" src="images/logo.svg" alt=""></a> </div>*@
+                    <div class="logo"> <a href="/Home/Index"><img src="~/RootPicture/Small_logo.png" /></a> </div>
                     <nav class="navbar ownmenu navbar-expand-lg ">
                         <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span></span> </button>
                         <div class="collapse navbar-collapse" id="navbarNav">
@@ -67,7 +67,7 @@
                                 </li>
                                 <!-- THỂ LOẠI MENU -->
                                 <li class="dropdown megamenu">
-                                    <a href="#." class="dropdown-toggle" data-toggle="dropdown">Thể loại<i class="fa fa-angle-down"></i></a>
+                                    <a href="#." class="dropdown-toggle" data-toggle="dropdown">Thể loại<i class="fa fa-angle-down d-lg-block"></i></a>
                                     <div class="dropdown-menu">
                                         <div class="row">
                                             <!-- Shop Pages -->
@@ -89,12 +89,12 @@
                                     </form>
                                 </li>
                                 @*<li id="txtTimKiem" class="search">
-                                        @using (Html.BeginForm("KetQuaTimKiem", "TimKiem"))
-                                        {
-                                            @Html.TextBox("txtTimKiem", "", htmlAttributes: new { @class = "TextBoxTimKiem", @placeholder = "Nhập từ khóa tìm kiếm" })
-                                            <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
-                                        }
-                                    </li>*@
+                    @using (Html.BeginForm("KetQuaTimKiem", "TimKiem"))
+                    {
+                        @Html.TextBox("txtTimKiem", "", htmlAttributes: new { @class = "TextBoxTimKiem", @placeholder = "Nhập từ khóa tìm kiếm" })
+                        <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+                    }
+                </li>*@
                             </ul>
                         </div>
                     </nav>
@@ -124,7 +124,7 @@
                     <div class="middleCol">
                         <div style="clear: both"></div>
                         @Html.Action("NewManga", "Home")
-                        @Html.Action("Fbpage","Home")
+                        @*@Html.Action("Fbpage","Home")*@
                         @*<div class="panel-category">
                                 <h3 class="panel-category-title">GENRES</h3>
                                 <table>
@@ -171,7 +171,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-6">
-                            <p>©  2018 BoShop All right reserved. <a href="https://webicode.com/">webicode</a></p>
+                            <p>Copyright © 2020 web xem truyện. <a href="/Home/Index">web đọc truyện</a></p>
                         </div>
                         <div class="col-md-6 text-right"> @*<img src="images/card-icon.png" alt="">*@ </div>
                     </div>
@@ -211,7 +211,7 @@
     </script>
     <div id="fb-root"></div>
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v7.0&appId=3238982352813056&autoLogAppEvents=1"></script>
-    <script src="~/LayoutHome/js/jquery.min.js"></script>
+    @*<script src="~/LayoutHome/js/jquery.min.js"></script>*@
     <script src="~/LayoutHome/js/jquery.timeago.js"></script>
     <script>
         jQuery(document).ready(function() {

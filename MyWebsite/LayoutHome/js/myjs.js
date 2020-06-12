@@ -116,6 +116,22 @@ $("#addbookmarkb").click(function() {
     });
 })
 
+$("#delbookmarka").click(function () {
+    var idManga = $(this).data("manga-id");
+    if (confirm('Bạn có chắc muốn xóa khỏi bookmark ?')) {
+        $.ajax({
+            url: "/DelBookmark/" + idManga,
+            method: "POST",
+            type: "json"
+        }).success(function () {
+            alert("Đã xóa khỏi bookmark");
+            location.reload();
+        }).error(function () {
+            alert("Lỗi vui lòng liên hệ admin");
+        });
+    }
+})
+
 $("[id=delbookmarkb]").click(function () {
     var idManga = $(this).data("manga-id");
     if (confirm('Bạn có chắc muốn xóa khỏi bookmark ?')) {

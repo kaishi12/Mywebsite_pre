@@ -461,7 +461,7 @@ header {
 header .logo {
 	width: 100%;
 	margin: 0px;
-	padding: 15px 0px;
+	/*padding: 15px 0px;*/
 	text-align: center;
 	border: none;
 }
@@ -1285,7 +1285,7 @@ header .logo a {
 	display: inline-block;
 }
 header .navbar .nav {
-	margin-top: 50px;
+	/*margin-top: 50px;*/
 }
 header .ownmenu .nav .dropdown-menu li .dropdown-menu {
 	display: none !important;
@@ -1651,6 +1651,7 @@ footer h6 {
 	height: 45px;
 	width: 45px;
 	padding: 0px;
+    top:-70px;
 	margin: 0px;
 	color: #000;
 	text-align: center;
