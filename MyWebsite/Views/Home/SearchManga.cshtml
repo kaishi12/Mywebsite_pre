@@ -2,28 +2,28 @@
 @using PagedList;
 @model IPagedList<MyWebsite.ViewModels.Home.SearchManga.SearchManga>
 
-@{
-    ViewBag.Title = "KetQuaTimKiem";
+    @{
+    ViewBag.Title = "TransManga - Dịch truyện online";
     Layout = "~/Views/Shared/_Layout.cshtml";
-}
+    }
 
 
-<div class="leftCol">
-    <div class="breadcrumb breadcrumbs">
-        <p>
-            <a href="/Home/Index">
-                <span>Trang chủ</span>
-            </a>
-            <span>»</span>
-            <span style="color:white">Tìm kiếm truyện</span>
-        </p>
-    </div>
-    <div class="daily-update" style="margin-top:5px">
-        <h3 class="title update-title">Từ khóa: @ViewBag.TuKhoa</h3>
-        <div class="panel_story_list">
-            @*Từng truyện*@
-            @foreach (var truyen in Model)
-            {
+    <div class="leftCol">
+        <div class="breadcrumb breadcrumbs">
+            <p>
+                <a href="/">
+                    <span>Trang chủ</span>
+                </a>
+                <span>»</span>
+                <span style="color:white">Tìm kiếm truyện</span>
+            </p>
+        </div>
+        <div class="daily-update" style="margin-top:5px">
+            <h3 class="title update-title">Từ khóa: @ViewBag.TuKhoa</h3>
+            <div class="panel_story_list">
+                @*Từng truyện*@
+                @foreach (var truyen in Model)
+                {
                 <div class="story_item">
                     <a rel="nofollow" href="/manga/@truyen.MangaAlias-@truyen.MangaId/@truyen.DefaultLang">
                         <img src="~/Cover/@truyen.CoverLink" onError="this.onerror=null;this.src='/Images/Error404/error-404.jpg';" alt="@truyen.FullName" />
@@ -39,19 +39,19 @@
                         <span>View : @Html.Action("ViewNumber", "Home", new { id = @truyen.MangaId })</span>
                     </div>
                 </div>
-            }
+                }
+            </div>
         </div>
-    </div>
-    <div style="clear: both"></div>
-    @*<div style="background: #FFF; float: left; margin-top: 10px;padding: 10px; width: calc(100% - 20px);">
+        <div style="clear: both"></div>
+        @*<div style="background: #FFF; float: left; margin-top: 10px;padding: 10px; width: calc(100% - 20px);">
             <div class="fb-comments" data-href="http://manganelo.com/story_list" data-width="100%" data-numposts="10" data-colorscheme="light"></div>
         </div>*@
-    <div id="loadpage">
-        <div class="xem-them">
-            <!-- Pagination -->
-            <ul class="pagination">
-                @Html.PagedListPager(Model, page => Url.Action("SearchManga", new { page = page }), new PagedListRenderOptions { DisplayEllipsesWhenNotShowingAllPageNumbers = false })
-            </ul>
+        <div id="loadpage">
+            <div class="xem-them">
+                <!-- Pagination -->
+                <ul class="pagination">
+                    @Html.PagedListPager(Model, page => Url.Action("SearchManga", new { page = page }), new PagedListRenderOptions { DisplayEllipsesWhenNotShowingAllPageNumbers = false })
+                </ul>
+            </div>
         </div>
     </div>
-</div>

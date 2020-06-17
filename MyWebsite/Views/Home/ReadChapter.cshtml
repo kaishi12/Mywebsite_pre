@@ -1,22 +1,19 @@
 ﻿@model IEnumerable<MyWebsite.Models.Page>
 @{
+    ViewBag.title = ViewBag.ChapterName;
     Layout = "~/Views/Shared/_Layout2.cshtml";
 }
-
+<br />
 <body class="trang-doc">
-    <div class="logo_chapter">
-        <a href="/Home/Index" title="Manga Online">
-            <img src="~/RootPicture/Small_logo.png" style="width:400px;" alt="Manga Online" title="Manga Online">
-        </a>
-    </div>
+   
     <div class="breadcrumb breadcrumbs bred_doc">
         <div class="rdfa-breadcrumb">
             <div>
                 <p>
                     <span class="breadcrumbs-title"> </span>
                     <span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
-                        <a itemprop="url" href="/Home/Index" class="home" title="Manga Online">
-                            <span itemprop="title">Manga Online</span>
+                        <a itemprop="url" href="/" class="home" title="Manga Online">
+                            <span itemprop="title">Trang chủ</span>
                         </a>
                     </span>
                     <span class="separator">»</span>

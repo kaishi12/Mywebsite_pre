@@ -2,9 +2,11 @@
 @model MyWebsite.Models.Manga
 @using MyWebsite.ViewModels.Account;
 @{
+    ViewBag.Title = Model.FullName;
     Layout = "~/Views/Shared/_Layout.cshtml";
     AccountModel nguoi = (AccountModel)Session["UserInfo"];
 }
+
 <div class="leftCol">
     <div style="float: left;width: 100%;text-align: center;">
         @*<div style="max-width: 100%; width: 728px; height: 90px; margin: 0px auto; overflow: hidden;">
@@ -17,7 +19,7 @@
                 <p>
                     <span class="breadcrumbs-title"></span>
                     <span @*itemscope itemtype="http://data-vocabulary.org/Breadcrumb"*@>
-                        <a itemprop="url" href="/Home/Index" class="home" title="Trang chủ">
+                        <a itemprop="url" href="/" class="home" title="Trang chủ">
                             <span itemprop="title">Trang chủ</span>
                         </a>
                     </span>
@@ -109,7 +111,7 @@
     @*@Html.Action("PickLanguage","Home",new { idManga =Model.MangaId})*@
     <div class="content-extent" style="margin-top:5px;">
         <select style="font-size:20px" onchange="window.location.href=$(this).val()">
-            <option selected>-Please Select Laguague To Read-</option>
+            <option selected>-Chọn ngôn ngữ để đọc-</option>
             @foreach (var lang in Model.Translations)
             {
                 if (ViewBag.CurLang == lang.Language.Code)

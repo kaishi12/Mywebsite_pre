@@ -889,7 +889,7 @@ h3 {
     }
 
         .manga-info-text li:nth-of-type(1) {
-            font: 700 24px Open Sans,Tahoma,Geneva,sans-serif;
+            font: 700 18px Open Sans,Tahoma,Geneva,sans-serif;
             color: #373737;
             background: url(/RootPicture/Icons/manga-name.png) left top no-repeat
         }
@@ -916,30 +916,30 @@ h3 {
 
         .manga-info-text li:nth-of-type(4) {
             background: url(/RootPicture/Icons/manga-timeupdate.png) left top no-repeat;
-            font: 300 16px Open Sans,Tahoma,Geneva,sans-serif;
+            font: 300 18px Open Sans,Tahoma,Geneva,sans-serif;
             color: #626262
         }
 
         .manga-info-text li:nth-of-type(5) {
             background: url(/RootPicture/Icons/manga-info-nguon.png) left top no-repeat;
-            font: 300 16px Open Sans,Tahoma,Geneva,sans-serif;
+            font: 300 18px Open Sans,Tahoma,Geneva,sans-serif;
             color: #626262
         }
 
             .manga-info-text li:nth-of-type(5) a {
-                font: 300 16px Open Sans,Tahoma,Geneva,sans-serif;
+                font: 300 18px Open Sans,Tahoma,Geneva,sans-serif;
                 color: #059e9a !important
             }
 
         .manga-info-text li:nth-of-type(6) {
             background: url(/RootPicture/Icons/manga-views.png) left top no-repeat;
-            font: 300 16px Open Sans,Tahoma,Geneva,sans-serif;
+            font: 300 18px Open Sans,Tahoma,Geneva,sans-serif;
             color: #626262
         }
 
         .manga-info-text li:nth-of-type(7) {
             background: url(/RootPicture/Icons/manga-genre.png) left top no-repeat;
-            font: 300 16px Open Sans,Tahoma,Geneva,sans-serif;
+            font: 300 18px Open Sans,Tahoma,Geneva,sans-serif;
             color: #626262
         }
 
@@ -953,7 +953,7 @@ h3 {
                 }
 
         .manga-info-text li:nth-of-type(8) {
-            font: 300 16px Open Sans,Tahoma,Geneva,sans-serif;
+            font: 300 18px Open Sans,Tahoma,Geneva,sans-serif;
             color: #626262;
             margin-top:10px
         }

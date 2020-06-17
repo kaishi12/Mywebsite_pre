@@ -268,8 +268,8 @@ E:\Mywebsite_pre\MyWebsite\bin\System.Web.Webpages.Razor.xml
 E:\Mywebsite_pre\MyWebsite\bin\System.Web.Helpers.xml
 E:\Mywebsite_pre\MyWebsite\bin\System.Web.Mvc.xml
 E:\Mywebsite_pre\MyWebsite\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+E:\Mywebsite_pre\MyWebsite\obj\Debug\MyWebsite.csprojAssemblyReference.cache
 E:\Mywebsite_pre\MyWebsite\obj\Debug\MyWebsite.csproj.CoreCompileInputs.cache
 E:\Mywebsite_pre\MyWebsite\obj\Debug\MyWebsite.csproj.CopyComplete
 E:\Mywebsite_pre\MyWebsite\obj\Debug\MyWebsite.dll
 E:\Mywebsite_pre\MyWebsite\obj\Debug\MyWebsite.pdb
-E:\Mywebsite_pre\MyWebsite\obj\Debug\MyWebsite.csprojAssemblyReference.cache
