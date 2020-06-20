@@ -518,7 +518,13 @@ namespace MyWebsite.Controllers
                 page.orderNumber = item.OrderNumber;
                 page.link = item.PageLink;
                 var listtextbox = new List<TextBoxViewModel>();
-                foreach(var textbox in db.TextBoxes.Where(m=>m.PageId == item.PageId_Fa && m.Active == true))
+                var TextBoxes = db.TextBoxes.Where(m => m.PageId == item.PageId_Fa && m.Active == true);
+                if(TextBoxes == null)
+                {
+                    continue;
+                }
+                var check = 0;
+                foreach (var textbox in TextBoxes)
                 {
                     TextBoxViewModel textboxmodel = new TextBoxViewModel();
                     textboxmodel.Id = textbox.TextBoxId;
@@ -527,18 +533,31 @@ namespace MyWebsite.Controllers
                     textboxmodel.witdh = textbox.Witdh;
                     textboxmodel.degree = textbox.Degree;
                     var text = textbox.Texts.FirstOrDefault(m => m.Active && m.Allow == true && m.TextBoxId == textbox.TextBoxId);
+                    if(text == null)
+                    {
+                        check = 1;
+                        break;
+                    }    
                     TextViewModel textmodel = new TextViewModel();
                     textmodel.bold = text.Bold;
                     textmodel.color = text.ColorText;
                     textmodel.italic = text.Italic;
                     textmodel.content = text.TextContent;
-                    textmodel.font = "MTO augie";
+                    textmodel.font = text.Font.FullName;
                     textmodel.size = text.FontSize;
                     textboxmodel.texts = textmodel;
                     listtextbox.Add(textboxmodel);
                 }
-                page.textboxes = listtextbox;
-                listpage.Add(page);
+                if (check != 0)
+                {
+                    continue;
+                }
+                else
+                {
+                    page.textboxes = listtextbox;
+                    listpage.Add(page);
+                }    
+               
             }
             return Json(new
             {

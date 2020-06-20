@@ -156,11 +156,11 @@ paint_centered_wrap = function (cete, x, y, w, h, text, fontTextBox, fh, spl, co
 }
 function LoadCom(obj) {
     $.each(obj, function (arrayID, element) {
-
-        let namecanvas = "canvas" + element[0].Id;
+       
+        let namecanvas = "canvas" + element.Id;
         let canvas = document.getElementById(namecanvas);
         let ctx = canvas.getContext("2d");
-        LoadText(ctx, element[0].textboxes);
+        LoadText(ctx, element.textboxes);
     });
 }
 var obj = [];
@@ -173,8 +173,8 @@ async function LoadAllText() {
             language: 1
         },
         success: function (result) {
-            obj = result;
-
+            obj = result.data;
+            
         }
     });
 }

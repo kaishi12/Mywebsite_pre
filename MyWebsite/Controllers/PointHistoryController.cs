@@ -31,7 +31,7 @@ namespace MyWebsite.Controllers
             var count = 1;
             var listacc = data.Accounts.Where(m => m.Active == true).Select(m => new { m.AccountId, m.UserName }).ToList();
             var listmanga = data.Mangas.Where(m => m.Active == true).Select(m => new { m.MangaId, m.FullName }).ToList();
-            var datatable = data.PointHistories.Where(m => m.Active == true).OrderBy(m=>m.ToDay).ToList().Select(m => new IConvertible[] {
+            var datatable = data.PointHistories.Where(m => m.Active == true).OrderByDescending(m=>m.ToDay).ToList().Select(m => new IConvertible[] {
                 count++,
                 listacc.FirstOrDefault(l=>l.AccountId == m.AccountId) != null ? listacc.FirstOrDefault(l=>l.AccountId == m.AccountId).UserName : "N/A",
                 m.ToDay != null ? m.ToDay.Value.ToString("dd/MM/yyyy") : "N/A",
@@ -90,6 +90,11 @@ namespace MyWebsite.Controllers
                         var view = data.PointHistories.Where(m => m.MangaId == manga).ToList().LastOrDefault(); 
                         if(view != null)
                         {
+                            if(data.Chapters.Where(m => m.MangaId == manga).Count() == 0)
+                            {
+                                model.Views = view.Views;
+                            }
+                            else
                             model.Views = data.Chapters.Where(m => m.MangaId == manga).Sum(m => m.ViewNumber) - view.Views ;
                         }
                         else
