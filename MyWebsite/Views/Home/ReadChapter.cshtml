@@ -5,7 +5,7 @@
 }
 <br />
 <body class="trang-doc">
-   
+   <input  hidden id="Languageid" value="@ViewBag.CurLang"/>
     <div class="breadcrumb breadcrumbs bred_doc">
         <div class="rdfa-breadcrumb">
             <div>
@@ -42,12 +42,16 @@
         <h2>@ViewBag.MangaName @ViewBag.ChapterName</h2>
     </div>
 
-    <div class="vung-doc" id="vungdoc" style="flex:auto; display:grid;">
+    <div oncontextmenu="return false;" class="vung-doc" id="vungdoc" style="flex:auto; display:grid;">
         @foreach (var truyen in Model)
         {
         <div id="Imge" style="flex:auto; display:grid;">
-            <img id="@truyen.PageId" class="lazy" data-src="/PageLink/@truyen.PageLink" data-id="@truyen.PageId">
+            <div>
+                <img id="@truyen.PageId" class="lazy" data-src="/PageLink/@truyen.PageLink" data-id="@truyen.PageId">
+            </div>
+            
         </div>
+        <br />
             
         }
     </div>

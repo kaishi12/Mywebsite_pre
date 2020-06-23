@@ -1,8 +1,23 @@
 ﻿var listcanvas = [];
-function LoadImg() {
+function CreateCanvas(element) {
+    $(element).parent().hide();
+    let canvas1 = document.createElement('canvas');
+    canvas1.id = "canvas" + element.data('id');
+    let img = document.getElementById(element.data('id'));
+    canvas1.height = img.height;
+    canvas1.width = img.width;
+    canvas1.style.display = "block";
+    canvas1.style.marginLeft = "auto";
+    canvas1.style.marginRight = "auto";
+    let ctx = canvas1.getContext("2d");
+    ctx.drawImage(img, 0, 0);
+    $(element).parent().parent().append(canvas1);
+}
+ function LoadImg() {
 
     $('.lazy').lazy({
-        placeholder: "/RootPicture/tenor.gif",
+       
+        
         // called before an elements gets handled
         beforeLoad: function (element) {
             var imageSrc = element.data('src');
@@ -10,21 +25,10 @@ function LoadImg() {
         },
 
         // called after an element was successfully handled
-        afterLoad: function (element) {
+        afterLoad:  function (element) {
             var imageSrc = element.data('src');
             console.log('image "' + imageSrc + '" was loaded successfully');
-            $(element).parent().hide();
-            let canvas1 = document.createElement('canvas');
-            canvas1.id = "canvas" + element.data('id');
-            let img = document.getElementById(element.data('id'));
-            canvas1.height = img.height;
-            canvas1.width = img.width;
-            canvas1.style.display = "block";
-            canvas1.style.marginLeft = "auto";
-            canvas1.style.marginRight = "auto";
-            let ctx = canvas1.getContext("2d");
-            ctx.drawImage(img, 0, 0);
-            $(element).parent().parent().append(canvas1);
+             CreateCanvas(element);
         },
 
         // called whenever an element could not be handled
@@ -70,7 +74,7 @@ async function LoadText(cete, result) {
         cete.translate(cx, cy);            
         cete.rotate(De);  
         cete.translate(-cx, -cy);
-        paint_centered_wrap(cete, CorX, CorY, CorW, CorH, text, fontTextBox, 12, 2, color);
+        paint_centered_wrap(cete, CorX, CorY, CorW, CorH, text, fontTextBox, 20, 2, color);
         cete.restore();
     }
 
@@ -170,7 +174,7 @@ async function LoadAllText() {
         url: "/Home/GetTexts",
         data: {
             chapterid: $("#ChapterId").val(),
-            language: 1
+            language: +$("#Languageid").val()
         },
         success: function (result) {
             obj = result.data;
@@ -182,7 +186,8 @@ const prepareFontLoad = (fontList) => Promise.all(fontList.map(font => document.
 $(document).ready(function () {
     loadjscssfile("/LayoutUser/assets/fonts/font.css", "css");
         LoadAllText();
-        LoadImg();
+    LoadImg();
+    LoadInfoTeam();
 });
 function loadjscssfile(filename, filetype) {
     if (filetype == "js") { //if filename is a external JavaScript file
@@ -198,6 +203,61 @@ function loadjscssfile(filename, filetype) {
     }
     if (typeof fileref != "undefined")
         document.getElementsByTagName("head")[0].appendChild(fileref)
+}
+function LoadInfoTeam() {
+    let ql = "Quản lý truyện: ";
+    let dt = "Dịch truyện: ";
+    let qlbd = "Quản lý bản dịch: ";
+    let uc = "Tải lên clear-text: ";
+    $.ajax({
+        type: "POST",
+        url: "/Home/GetInfoTeam",
+        data: {
+            chapterid: $("#ChapterId").val(),
+            language: +$("#Languageid").val()
+        },
+        success: function (result) {
+            console.log(result.creator);
+            ql += result.creator;
+            qlbd += result.tm;
+            $.each(result.trans, function (arrayID, element) {
+                if (arrayID >0)
+                    dt += ", " + element;
+                else
+                    dt +=  element;
+            });
+            $.each(result.upload, function (arrayID, element) {
+                if (arrayID > 0)
+                    uc += ", " + element;
+                else
+                    uc += element;
+               
+            });
+            let canvas1 = document.createElement('canvas');
+
+            let img = document.getElementById('vungdoc');
+
+            canvas1.height = 220;
+            canvas1.width = 900;
+            canvas1.style.border = "1px solid #d3d3d3";
+            canvas1.style.marginLeft = "auto";
+            canvas1.style.marginRight = "auto";
+            let ctx = canvas1.getContext("2d");
+            ctx.beginPath();
+            ctx.rect(0, 0, 900, 220);
+            ctx.fillStyle = "white";
+            ctx.font = "20px Arial";
+            ctx.fill();
+            ctx.fillStyle = "black";
+            ctx.textAlign = "center";
+            ctx.fillText(ql, 450, 50);
+            ctx.fillText(dt, 450, 90);
+            ctx.fillText(qlbd, 450, 130);
+            ctx.fillText(uc, 450, 170);
+            $("#vungdoc").append(canvas1);
+        }
+    });
+   
 }
 
 

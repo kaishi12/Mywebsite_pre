@@ -11,6 +11,7 @@ using System.Web.Mvc;
 using MyWebsite.ViewModels.Account;
 using System.Data.SqlClient;
 using System.Configuration;
+using MyWebsite.Service.Common;
 
 namespace MyWebsite.Controllers
 {
@@ -181,7 +182,7 @@ namespace MyWebsite.Controllers
             ViewBag.ChapterName = (from chtr in db.Chapters where chtr.ChapterId == idChapter select chtr.FullName).FirstOrDefault().ToString();
             ViewBag.MangaId = idManga;
             ViewBag.ChapterId = idChapter;
-            ViewBag.CurLang = language;
+            ViewBag.CurLang = db.Languages.FirstOrDefault(m=>m.Code == language).LanguageId;
             Chapter dbChapter = db.Chapters.Where(x => x.MangaId == idManga && x.ChapterId == idChapter).SingleOrDefault();
             dbChapter.ViewNumber++;
             db.SaveChanges();
@@ -565,7 +566,33 @@ namespace MyWebsite.Controllers
             }, JsonRequestBehavior.AllowGet);
 
         }
-
+        public ActionResult GetInfoTeam(int chapterid,int language)
+        {
+            var textbox = db.Texts.Where(m => m.TextBox.Page.ChapterId == chapterid && m.Active && m.Allow.Value);
+            var page = db.Pages.Where(m => m.ChapterId == chapterid && m.CategoryId == 2 && m.Status.Value == 2);
+            List<string> trans = new List<string>();
+            List<string> upload = new List<string>();
+            foreach (var item in textbox)
+            {
+                if(!trans.Contains(item.Account.UserName))
+                trans.Add(item.Account.UserName);
+            }
+            foreach (var item in page)
+            {
+                if (!upload.Contains(item.Account.UserName))
+                    upload.Add(item.Account.UserName);
+            }
+            var manga = db.Chapters.Find(chapterid).MangaId;
+            var creator = db.Manga_Detail.FirstOrDefault(m => m.MangaId == manga && m.RoleId == (int)EnumRole.CM).Account.UserName;
+            var tm = db.Manga_Detail.FirstOrDefault(m => m.MangaId == manga && m.RoleId == (int)EnumRole.TM && m.Language == language).Account.UserName;
+            return Json(new
+            {
+                trans = trans,
+                upload = upload,
+                creator = creator,
+                tm = tm
+            }, JsonRequestBehavior.AllowGet);
+        }
 
         #region FBPage
         public ActionResult Fbpage()
