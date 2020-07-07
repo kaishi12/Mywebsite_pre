@@ -24,24 +24,28 @@ namespace MyWebsite
             using (SqlConnection con = new SqlConnection(conStr))
             {
                 SqlCommand cmd = new SqlCommand(sqlCommand, con);
-                cmd.Parameters.AddWithValue("@CreateAt", currentTime);
+                //cmd.Parameters.AddWithValue("@CreateAt", currentTime);
                 if (con.State != System.Data.ConnectionState.Open)
                 {
                     con.Open();
                 }
                 cmd.Notification = null;
                 SqlDependency sqlDep = new SqlDependency(cmd);
-                sqlDep.OnChange += sqlDep_OnChange;
+                sqlDep.OnChange += new OnChangeEventHandler(sqlDep_OnChange);
+                //sqlDep.OnChange += sqlDep_OnChange;
                 //we must have to execute the command here
-                //using (SqlDataReader reader = cmd.ExecuteReader())
-                //{
-                //    //nothing need to add here now
-                //}
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    //nothing need to add here now
+                }
             }
+            
         }
 
         void sqlDep_OnChange(object sender, SqlNotificationEventArgs e)
         {
+            
+
             //or you can also check => if (e.Info == SqlNotificationInfo.Insert) , if you want notification only for inserted record  
             if (e.Type == SqlNotificationType.Change)
             {

@@ -24,25 +24,28 @@
     <ul class="dropdown-menu dropdown-menu-customize d-lg-block d-none" style="padding:10px 0;">
         @if (ViewBag.Message == null)
         {
-            foreach (var truyen in ViewBag.Data)
-            {
-                <li class="border-bottom-1">
-                    <a class="dropdown-item" style="padding:5px 10px;" id="updatebookmarkb" data-manga-id="@truyen.MangaId" href="/manga/@truyen.MangaAlias-@truyen.MangaId" title="@truyen.MangaName">
-                        <div class="dropdown-item-customize">
-                            <img src="~/Cover/@truyen.CoverImg" onError="this.onerror=null;this.src='/RootPicture/error-404.jpg';">
-                            <div class="manga-info-custom">
-                                <p>@truyen.MangaName</p>
-                                <p>@truyen.UpdateDate</p>
-                            </div>
-                        </div>
-                    </a>
-                </li>
-            }
+        foreach (var truyen in ViewBag.Data)
+        {
+        <li class="border-bottom-1">
+            <a class="dropdown-item" style="padding:5px 10px;" id="updatebookmarkb" data-manga-id="@truyen.MangaId" href="/manga/@truyen.MangaAlias-@truyen.MangaId" title="@truyen.MangaName">
+                <div class="dropdown-item-customize">
+                    <img src="~/Cover/@truyen.CoverImg" onError="this.onerror=null;this.src='/RootPicture/error-404.jpg';">
+                    <div class="manga-info-custom">
+                        <p>@truyen.MangaName</p>
+                        <p>@truyen.UpdateDate</p>
+                    </div>
+                </div>
+            </a>
+        </li>
+        }
 
         }
         else
         {
-            <li><p class="text-center">@ViewBag.Message</p></li>
+        <li><p class="text-center">@ViewBag.Message</p></li>
         }
+        <li> <hr /></li>
+       
+        <li><a href="/Bookmark" ><p class="text-center">Xem tất cả </p></a></li>
     </ul>
 </li>

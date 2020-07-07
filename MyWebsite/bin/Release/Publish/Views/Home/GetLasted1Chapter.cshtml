@@ -1,0 +1,11 @@
+﻿<a rel="nofollow" id="updatebookmarkb" data-manga-id="@Model.MangaId" href="/read/@Model.AliasChapter/@Model.MangaId-@Model.ChapterId/@Model.LangId" title="@Model.FullNameChapter" class="list-story-item-wrap-chapter">
+    > <span class="text-uppercase">[@Model.LangId]</span> @Model.FullNameChapter</a>
+<div>
+    <span class="aye_icon"><i class="fa fa-eye" aria-hidden="true"></i> Lượt xem: @Html.Action("ViewNumber", "Home", new { id = @Model.MangaId })</span>
+</div>
+<br>
+<br>
+<p>
+    Mô tả: @Model.Description
+    @*<a rel="nofollow" href="/manga/@Model.AliasManga-@Model.MangaId" title="">More.</a>*@
+</p>

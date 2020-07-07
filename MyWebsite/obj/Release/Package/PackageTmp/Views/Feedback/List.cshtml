@@ -1,0 +1,214 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+<style>
+</style>
+<div class="padding">
+    <div class="m-b primary">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/Account/Home">Trang chủ</a></li>
+            <li class="breadcrumb-item active">Danh sách feedback</li>
+        </ol>
+    </div>
+
+
+
+    <div class="box ">
+
+        <div class="box-body">
+            <div class="table-responsive">
+                <table ui-jp="dataTable" id="datatable" class="table table-striped b-t b-b ">
+                    <thead>
+                        <tr>
+                            <th style="text-align:center">STT</th>
+                            <th style="text-align:center">Tài khoản</th>
+                            <th style="text-align:center">tiêu đề</th>
+                            <th style="text-align:center">ngày</th>
+                            <th style="text-align:center">Xử lý</th>
+                            <th style="text-align:center">trạng thái</th>
+                            <th style="text-align:center">Tùy chọn</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div id="Edit" class="modal" data-backdrop="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header primary">
+                    <h5 class="modal-title">Chỉnh sửa</h5>
+                    <input id="id" class="form-control" hidden />
+                </div>
+                <div class="modal-body text-center p-lg">
+                    <div class="form-group row">
+                        <label class="col-sm-4 form-control-label">
+                            <span>Tiêu đề</span>
+                        </label>
+                        <div class="col-sm-8">
+
+                            <input readonly id="titles" class="form-control" />
+                        </div>
+
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 form-control-label">
+                            <span>Nội dung</span>
+                        </label>
+                        <div class="col-sm-8">
+
+                            <textarea disabled id="des" class="form-control" rows="2"></textarea>
+                        </div>
+
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 form-control-label">
+                            <span>Xử lý</span>
+                        </label>
+                        <div class="col-sm-8">
+
+                            <select style="width:100%;" class="form-control select2" ui-jp="select2" ui-options="{theme: 'bootstrap'}" id="status" name="status">
+                                <option value="0"> Đang chờ</option>
+                                <option value="1"> Đang xử lý</option>
+                                <option value="2"> Đã xử lý</option>
+                            </select>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn danger p-x-md" data-dismiss="modal">Thoát</button>
+                    <button type="button" class="btn primary p-x-md" id="SaveAdd">Sửa</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div>
+    </div>
+</div>
+@section Scripts
+{
+    <script>
+        $(document).ready(function () {
+            loadEmpGroup();
+        });
+        function loadEmpGroup() {
+
+            $.ajax({
+                type: 'POST',
+                url: '/Feedback/GetListFeedback',
+
+                success: function (result) {
+                    initTimeFrameDatatable(result);
+                }
+            });
+        }
+
+        function initTimeFrameDatatable(data) {
+            $("#datatable").dataTable().fnDestroy();
+            $("#datatable").dataTable({
+                stateSave: true,
+                "bFilter": true,
+                "bSort": false,
+                "data": data,
+                "bRetrieve": true,
+                "bScrollCollapse": true,
+                "bProcessing": true,
+                "oLanguage": {
+                    "sSearch": "Tìm kiếm:",
+                    "sSearchPlaceholder": "...",
+                    "sZeroRecords": "Không có dữ liệu phù hợp",
+                    "sInfo": "Hiển thị từ _START_ đến _END_ trên tổng số _TOTAL_ dòng",
+                    "sEmptyTable": "Không có dữ liệu",
+                    "sInfoFiltered": " - lọc ra từ _MAX_ dòng",
+                    "sLengthMenu": "Hiển thị _MENU_ dòng",
+                    "sProcessing": "Đang xử lý...",
+                    "oPaginate": {
+                        "sNext": "<i class='fa fa-chevron-right'></i>",
+                        "sPrevious": "<i class='fa fa-chevron-left'></i>"
+                    }
+                },
+                "aoColumnDefs": [
+                    {
+                        "aTargets": [0, 1, 2, 3, 4, 5, 6],
+                        "sClass": "text-center",
+                        "bSortable": false
+                    },
+                    {
+                        "aTargets": [6],
+                        "mRender": function (data, type, row) {
+                            var edit =
+                                "<a title='Chi tiết' class='btn btn-sm primary' onclick='showEditModal(" +
+                                data +
+                                ")'>Chi tiết</a>";
+                            return edit ;
+                        },
+                    },
+                    {
+                        "aTargets": [4],
+                        "mRender": function (data, type, row) {
+                            if (data == 0) {
+                                return "Đang chờ";
+                            }
+                            if (data == 1) {
+                                return "Đang xử lý";
+                            }
+                            if (data == 2) {
+                                return "Đã xử lý";
+                            }
+
+                        },
+                    }
+                ],
+                "bAutoWidth": false,
+            });
+
+        }
+         function showEditModal(id) {
+         $.ajax({
+                type: 'POST',
+                url: '@Url.Action("PrepareEdit", "Feedback")',
+             data: {
+                 id: id
+             },
+             success: function (result) {
+                 console.log(result.title);
+                 $("#id").val(id);
+                 $("#titles").val(result.title);
+                 $("#des").val(result.des);
+                 $("#status").val(result.status).change();
+
+                }
+            });
+             $('#Edit').modal('show');
+
+        }
+        $("#SaveAdd").on("click", function () {
+         
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("Save", "Feedback")',
+                data: {
+                    'id': $("#id").val(),
+                    'status': $("#status").val(),
+                   
+                },
+                success: function(result) {
+                    if (result == true) {
+                        alert("Sửa trạng thái thành công");
+                        loadEmpGroup();
+                        $('#Edit').modal('hide');
+                    } else {
+                        alert("Có lỗi xảy ra, vui lòng thử lại");
+                    }
+                },
+                error: function (error) {
+                    alert("Có lỗi xảy ra, vui lòng thử lại");
+                }
+            });
+      })
+    </script>
+}
+

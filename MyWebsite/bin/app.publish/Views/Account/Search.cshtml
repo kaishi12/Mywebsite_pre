@@ -1,0 +1,191 @@
+﻿@{
+    ViewBag.Title = "PageDetail";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+<div class="padding">
+    <div class="m-b">
+        <ol class="breadcrumb primary">
+            <li class="breadcrumb-item"><a href="/Account/Home">Trang chủ</a></li>
+            <li class="breadcrumb-item active">Tìm kiếm</li>
+        </ol>
+    </div>
+    <form action="#" class="m-b-md">
+        <div class="input-group input-group-lg">
+            <span class="input-group-btn">
+                <button id="Type" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false" value="Người dùng">
+                    Người dùng <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li class="TypeSelection" style="text-align:center">Người dùng</li>
+                    <li class="TypeSelection" style="text-align:center">Truyện</li>
+                </ul>
+            </span>
+            <input id="SearchInput" type="text" class="form-control" placeholder="Type keyword">
+
+            <span class="input-group-btn">
+                <button id="SearchButton" class="btn white" type="button">Tìm kiếm</button>
+            </span>
+        </div>
+    </form>
+    <div>
+        <div class="result">
+            <p hidden class="m-b-md"><strong>0</strong> Kết quả cho: <strong>á</strong></p>
+        </div>
+    </div>
+    <div class="tab-content">
+        <div class="tab-pane p-v-sm active" id="tab_1">
+            <div id="class1" class="box m-t p-a-sm">
+
+                <ul class="list"></ul>
+
+            </div>
+        </div>
+
+        <div id="m-a-f-X" class="modal fade" data-backdrop="true" style="display: none;" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Xin gia nhập</h5>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <input hidden id="MangaId" name="MangaId" />
+                            <div class="form-group row">
+                                <label class="col-sm-4 form-control-label">
+                                    <span>Tên Truyện</span>
+                                    <span style="color:red">(*)</span>
+                                </label>
+                                <div class="col-sm-8">
+
+                                    <input style="overflow:hidden;text-overflow: ellipsis" disabled id="FullName" name="FullName" class="form-control" type="text" value="tensei shitara slime datta ken: the ways of strolling in the demon country" />
+                                </div>
+
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-4 form-control-label">
+                                    <span>Vị trí</span>
+                                    <span style="color:red">(*)</span>
+                                </label>
+                                <div class="col-sm-8">
+
+                                    <select id="SelectRole" class="form-control select2-bootstrap-append">
+                                        @foreach (var item in ViewBag.ListRole)
+                                        {
+                                            <option value="@item.RoleId">@item.FullName</option>
+                                        }
+                                    </select>
+                                </div>
+
+                            </div>
+                            <div id="SelectLanguage" style="display:none" class="form-group row">
+                                <label class="col-sm-4 form-control-label">
+                                    <span>Ngôn ngữ</span>
+                                    <span style="color:red">(*)</span>
+                                </label>
+                                <div class="col-sm-8">
+                                    <select id="Language" class="form-control select2-bootstrap-append">
+                                        @foreach (var item in ViewBag.ListLanguage)
+                                        {
+                                            <option value="@item.LanguageId">@item.FullName</option>
+                                        }
+                                    </select>
+
+                                </div>
+
+                            </div>
+                        </form>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn dark-white p-x-md" data-dismiss="modal">Hủy</button>
+                        <button id="Join" type="button" class="btn danger p-x-md" data-dismiss="modal">Xin gia nhập</button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div>
+        </div>
+        <div id="m-a-f-M" class="modal fade" data-backdrop="true" style="display: none;" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Mời gia nhập</h5>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <input hidden id="AccountId" name="AccountId" />
+                            <div class="form-group row">
+                                <label class="col-sm-4 form-control-label">
+                                    <span>Tên người</span>
+                                    <span style="color:red">(*)</span>
+                                </label>
+                                <div class="col-sm-8">
+
+                                    <input style="overflow:hidden;text-overflow: ellipsis" disabled id="UserName" name="UserName" class="form-control" type="text" value="tensei shitara slime datta ken: the ways of strolling in the demon country" />
+                                </div>
+
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-4 form-control-label">
+                                    <span>Tên Truyện</span>
+                                    <span style="color:red">(*)</span>
+                                </label>
+                                <div class="col-sm-8">
+                                    <select id="SelectManga" class="form-control select2-bootstrap-append">
+                                        @foreach (var item in ViewBag.ListManga)
+                                        {
+                                            <option value="@item.MangaId">@item.Manga.FullName</option>
+                                        }
+                                    </select>
+
+                                </div>
+
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-4 form-control-label">
+                                    <span>Vị trí</span>
+                                    <span style="color:red">(*)</span>
+                                </label>
+                                <div class="col-sm-8">
+
+                                    <select id="SelectRoleM" class="form-control select2-bootstrap-append">
+                                        @foreach (var item in ViewBag.ListRole)
+                                        {
+                                            <option value="@item.RoleId">@item.FullName</option>
+                                        }
+                                    </select>
+                                </div>
+
+                            </div>
+                            <div id="SelectLanguageM" style="display:none" class="form-group row">
+                                <label class="col-sm-4 form-control-label">
+                                    <span>Ngôn ngữ</span>
+                                    <span style="color:red">(*)</span>
+                                </label>
+                                <div class="col-sm-8">
+                                    <select id="LanguageM" class="form-control select2-bootstrap-append">
+                                        @foreach (var item in ViewBag.ListLanguage)
+                                        {
+                                            <option value="@item.LanguageId">@item.FullName</option>
+                                        }
+                                    </select>
+
+                                </div>
+
+                            </div>
+                        </form>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn dark-white p-x-md" data-dismiss="modal">Hủy</button>
+                        <button id="Invite" type="button" class="btn danger p-x-md" data-dismiss="modal">Mời gia nhập</button>
+                    </div>
+                </div> /.modal-content
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts
+{
+    <script src="~/LayoutUser/Account/Search.js"></script>
+}
+

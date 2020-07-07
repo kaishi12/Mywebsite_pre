@@ -1,0 +1,4 @@
+﻿@foreach (var theloai in Model)
+{
+    <a href="/genre/@theloai.Alias" title="@theloai.FullName">@theloai.FullName</a><span>, </span>
+}

@@ -90,9 +90,9 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
@@ -1085,7 +1085,6 @@
     <Content Include="Views\Home\MangaByGenre.cshtml" />
     <Content Include="Views\Home\GetLasted1Chapter.cshtml" />
     <Content Include="Views\Home\NewManga.cshtml" />
-    <Content Include="Views\Home\KetQuaTimKiem.cshtml" />
     <Content Include="Views\Point\Index.cshtml" />
     <Content Include="Views\Document\Index.cshtml" />
     <Content Include="Views\Genres\Index.cshtml" />
@@ -1116,6 +1115,7 @@
     <Folder Include="Cover\" />
     <Folder Include="LayoutHome\images\" />
     <Folder Include="PageLink\" />
+    <Folder Include="Properties\PublishProfiles\" />
     <Folder Include="Views\Notification\" />
   </ItemGroup>
   <ItemGroup>

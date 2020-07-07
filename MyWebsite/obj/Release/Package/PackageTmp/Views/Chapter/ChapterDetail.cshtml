@@ -1,0 +1,162 @@
+﻿@model MyWebsite.Models.Chapter
+
+@{
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+<div class="padding">
+    <div class="m-b primary">
+        <ol class="breadcrumb ">
+            <li class="breadcrumb-item"><a href="/Account/Home">Trang chủ</a></li>
+            <li class="breadcrumb-item"><a href="/ListManga">Danh sách truyện đã tạo</a></li>
+            <li class="breadcrumb-item"><a href="/ListChapter/@Model.MangaId">Danh sách chương </a></li>
+            <li class="breadcrumb-item active">Chi tiết chương</li>
+        </ol>
+    </div>
+    <div class="box-header primary" style="margin-bottom:5px">
+        <h2>CHI TIẾT CHƯƠNG: @Model.FullName</h2>
+    </div>
+    <div class="row">
+        <div class="col-sm-2" style="padding-left:12px;padding-right:12px">
+            <div class="box">
+                <div class="box-header primary">Tùy chọn</div>
+                <div class="p-y">
+                    <div class="nav-active-border left b-{{app.setting.theme.primary}}">
+                        <ul class="list-unstyled m-t-n-sm">
+
+                            <li class="nav-item">
+                                <a class="nav-link block active" active aria-expanded="" data-toggle="tab" data-target="#tab-1">Thêm Trang</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link block" data-toggle="tab" data-target="#tab-2">Chỉnh sửa trang</a>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-10">
+            <div class="tab-content pos-rlt">
+
+                <div class="tab-pane active" aria-expanded="true" id="tab-1">
+
+                    <div style="margin:30px">
+                        @using (Html.BeginForm("AddNewPage", "Chapter", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                        {
+
+                            <div class="m-b text-sm">
+                                @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group">
+                                <label> Thứ tự trang mới nhất</label>
+                                <div class="row m-b">
+                                    <div class="col-md-3" style="margin-right:20px;margin-left:8px">
+
+                                        <input type="number" id="TotalNumber" class="form-control" value="@Model.Pages.Where(m=>m.Active == true  && m.CategoryId == 1).Count()" disabled>
+                                    </div>
+
+
+                                    <input type="hidden" id="ChapterId" name="ChapterId" value="@Model.ChapterId" />
+                                    <input type="hidden" id="FullName" name="FullName" value="@Model.FullName" />
+                                    <input type="hidden" id="MangaId" name="MangaId" value="@Model.MangaId" />
+                                    <input hidden id="PageFullName" name="PageFullName" />
+                                    <input hidden id="CurrentPage" name="CurrentPage" value="@Model.Pages.LastOrDefault(m=>m.Active == true).OrderNumber" />
+                                    <input hidden id="PageOrderNumber" name="PageOrderNumber" />
+
+                                    <button id="addbtn" class="btn black" type="button" style="margin-right:20px;"><i class="material-icons md-18">&#xe145;</i></button>
+
+
+                                    <button class="btn black" type="button" id="delbtn" style="margin-right:20px;"><i class="material-icons md-18">&#xe872;</i></button>
+
+                                    <button disabled type="submit" class="SaveNewPage btn primary">Lưu</button>
+                                </div>
+
+                            </div>
+                            <div class="row" id="UploadRaw">
+                                @foreach (var item in Model.Pages.Where(m => m.CategoryId == 1 && m.Active == true).OrderBy(m => m.OrderNumber))
+                                {
+
+                                    <div id=@("CurPage" + item.PageId) class="col-xs-6 col-sm-4 col-md-3" style="padding-left:12px;padding-right:12px">
+                                        <div class="box p-a-xs">
+
+                                            <img id="img1" style="min-height:400px" src="~/PageLink/@item.PageLink" alt="" class="img-responsive">
+                                            <div class="p-a-sm">
+                                                <div class="text-ellipsis">
+
+                                                    <span>@item.FullName</span>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                }
+                            </div>
+
+
+                        }
+                    </div>
+
+
+                </div>
+                <div class="tab-pane" id="tab-2">
+
+                    @*@Html.Action("CongCu", new { matruyen = ViewBag.MaTruyen, machuong = ViewBag.MaChuong })*@
+                    <div class="row">
+                        @foreach (var item in Model.Pages.Where(m => m.CategoryId == 1 && m.Active == true).ToList())
+                        {
+                            <div id=@("Remove" + item.PageId) class="col-xs-6 col-sm-4 col-md-3" style="padding-left:12px;padding-right:12px">
+                                <div class="box p-a-xs">
+                                    <form id=@("UpdatePage" + item.PageId) enctype="multipart/form-data">
+
+                                        <input type="hidden" name="PageId" id="PageId" value="@item.PageId" />
+
+                                        <a href="~/PageLink/@item.PageLink"><img style="min-height:400px" id=" @("img"+item.PageId)" src="~/PageLink/@item.PageLink" alt="" class="img-responsive"></a>
+                                        <div class="p-a-sm">
+                                            <div class="text-ellipsis">
+                                                <span>trang @item.OrderNumber</span>
+                                                <br />
+                                                <span>Có @Model.Pages.Where(m => m.PageId_Fa == item.PageId).Count() trang clear-text</span>
+                                                <input hidden style="margin-left:10px" type="file" id=" @("file"+item.PageId)" name="fileupload" onchange="Upload(this)" />
+                                            </div>
+
+
+                                            <div style="padding-left:0px;padding-right:0px;padding-bottom:0px;" class="box-footer row">
+
+                                                <button id="@item.PageId" type="button" class="UploadButton md-btn md-raised m-b-sm w-xs primary" style="display: block;margin-left: auto;margin-right: auto;">Sửa</button>
+                                                <button type="button" class="md-btn md-raised m-b-sm w-xs info" style="display: block;margin-left: auto;margin-right: auto;"><a href="/PageSelect/@item.PageId"> Duyệt</a></button>
+                                                <button onclick="SavePage(this)" type="button" disabled id=@("Save" + @item.PageId) class="md-btn md-raised m-b-sm w-xs success" style="display: block;margin-left: auto;margin-right: auto;">Lưu</button>
+                                                <button onclick="ChangeStatusPage(this,0)" type="button" id=@("Save" + @item.PageId) class="md-btn md-raised m-b-sm w-xs danger" style="display: block;margin-left: auto;margin-right: auto;">Xóa</button>
+                                            </div>
+
+
+                                        </div>
+
+                                    </form>
+                                </div>
+                            </div>
+
+
+                        }
+
+
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts
+{
+    <script src="~/LayoutUser/Chapter/ChapterDetail.js"></script>
+
+}
+
+
+
+
+

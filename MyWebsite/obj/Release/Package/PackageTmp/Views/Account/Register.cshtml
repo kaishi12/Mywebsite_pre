@@ -1,0 +1,62 @@
+﻿@model MyWebsite.ViewModels.Account.AccountModel
+
+@{
+    ViewBag.Title = "DangKy";
+    Layout = "~/Views/Shared/ResAndLogLayout.cshtml";
+}
+<div class="center-block w-xxl w-auto-xs p-y-md" style="text-align: -webkit-center;width: 380px;">
+    <div class="navbar">
+        <div class="pull-center">
+            <div ui-include="'../views/blocks/navbar.brand.html'"></div>
+        </div>
+    </div>
+    <div class="p-a box-color r box-shadow-z1 text-color black">
+        <div class="m-b text-sm" style="text-align:center;color:#0cc2aa">
+
+            <h2>ĐĂNG KÍ TÀI KHOẢN</h2>
+        </div>
+        <div class="form" style="text-align: initial">
+            @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { ui_jp = "parsley" }))
+            {
+                @Html.AntiForgeryToken()
+                <div class="m-b text-sm">
+                    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+                </div>
+                <div class="md-form-group ">
+                    <span style="color:whitesmoke">Tài khoản:</span>
+                    @Html.TextBoxFor(model => model.UserName, new { @class = "md-input", style = "color:white", type = "text", required = "required", data_parsley_length = "[6, 32]", data_parsley_length_message = "Yêu cầu từ 6-32 kí tự", data_parsley_required_message = "Không được để trống", pattern = "[A-Fa-f0-9]", data_parsley_pattern_message = "Không được chứa kí tự đặc biệt" })
+
+                </div>
+                <div class="md-form-group">
+                    <span style="color:whitesmoke">Mật khẩu:</span>
+                    @Html.PasswordFor(model => model.PassWord, new { @class = "md-input", style = "color:white", required = "required", data_parsley_length = "[6, 32]", data_parsley_length_message = "Yêu cầu từ 6-32 kí tự", data_parsley_required_message = "Không được để trống" })
+
+                </div>
+
+                <div class="md-form-group">
+                    <span style="color:whitesmoke">Email:</span>
+                    @Html.TextBoxFor(model => model.Email, new { @class = "md-input", style = "color:white", type = "email", required = "required", data_parsley_required_message = "Không được để trống", data_parsley_type_message = "Yêu cầu định dạng email" })
+
+                </div>
+                <div class="md-form-group">
+                    <span style="color:whitesmoke">Vị trí dự định:</span><br />
+                    <select style="color:white" class="form-control">
+                        <option style="color:black">Quản lí truyện</option>
+                        <option style="color:black">Dịch truyện</option>
+                        <option style="color:black">Tải lên Clear-text</option>
+                        <option style="color:black">Quản lí bản dịch</option>
+                    </select>
+
+                </div>
+
+
+
+                <button type="submit" class="btn primary btn-block p-x-md">Đăng Ký</button>
+            }
+        </div>
+        <div class="p-v-lg text-center">
+            <div style="color:whitesmoke">Đã có tài khoản? <a ui-sref="access.signin" href="/Account/Login" class="text-primary _600">Đăng Nhập</a></div>
+        </div>
+    </div>
+
+</div>

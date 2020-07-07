@@ -230,7 +230,7 @@ namespace MyWebsite.Controllers
             if (genre != null)
             {
                 var idgenre = data.Genres.FirstOrDefault(m => m.Alias == genre).GenreId;
-                list = list.Where(m => m.Manga_Genres.Where(g => g.GenreId == idgenre) != null);
+                list = list.Where(m => m.Manga_Genres.Contains(m.Manga_Genres.FirstOrDefault(g => g.GenreId == idgenre)));
             }
             if (status != null && status != "all")
             {
@@ -249,8 +249,8 @@ namespace MyWebsite.Controllers
             {
                 list = list.OrderByDescending(m => m.UpdateAt);
             }
-            
-            ViewBag.List = list.Select(m=> new ListAllMangaFistLoad { MangaId = m.MangaId,CoverLink = m.CoverLink,FullName = m.FullName }).Skip((int)MangaPerPage.number * (page-1)).Take((int)MangaPerPage.number).ToList();
+            var listt = list.ToList();
+            ViewBag.List = listt.Select(m=> new ListAllMangaFistLoad { MangaId = m.MangaId,CoverLink = m.CoverLink,FullName = m.FullName }).Skip((int)MangaPerPage.number * (page-1)).Take((int)MangaPerPage.number).ToList();
             ViewBag.Page = Math.Ceiling((double)data.Mangas.Where(m => m.Active == true).Count() / (double)MangaPerPage.number);
             ViewBag.Status = data.Status.Where(m => m.Active).Select(m => new StatusModelManga { StatusId = m.StatusId, FullName = m.FullName, Alias = m.Alias }).ToList();
            var Genres = data.Genres.Where(m => m.Active).Select(m => new GenresModelManga { GenreId = m.GenreId, FullName = m.FullName, Description = m.Description,Alias = m.Alias }).ToList();
@@ -267,7 +267,7 @@ namespace MyWebsite.Controllers
             if (genre != "")
             {
                 var idgenre = data.Genres.FirstOrDefault(m => m.Alias == genre).GenreId;
-                list = list.Where(m => m.Manga_Genres.Where(g => g.GenreId == idgenre) != null);
+                list = list.Where(m => m.Manga_Genres.Contains(m.Manga_Genres.FirstOrDefault(g => g.GenreId == idgenre)));
             }
             if (status != "" && status != "all")
             {

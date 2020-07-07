@@ -1,0 +1,100 @@
+﻿
+@model IEnumerable<MyWebsite.ViewModels.Manga.MangaModel>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+<style>
+  
+</style>
+<div class="padding">
+    <div class="m-b primary">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/Account/Home">Trang chủ</a></li>
+            <li class="breadcrumb-item active">Danh sách truyện đã tạo</li>
+        </ol>
+    </div>
+    <div class="box">
+        @using (Html.BeginForm("ListManga", "Manga", FormMethod.Post))
+        {
+            <div class="box-body">
+                <div class="table-responsive">
+                    <table ui-jp="dataTable" id="datatable" class="table table-striped b-t b-b">
+                        <thead>
+                            <tr>
+
+                                <th style="text-align:center">Ảnh Bìa</th>
+                                <th style="text-align:center">Thông tin</th>
+                                <th style="text-align:center">Tổng chương</th>
+                                <th style="text-align:center">Tổng lượt xem</th>
+                                <th style="text-align:center">Tổng bản dịch</th>
+                                <th style="text-align:center">Tùy chọn</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                            <tr>
+                                <td style="text-align:center">
+
+                                    <span>
+                                        <img class="img-thumbnail"   src="~/Cover/@item.CoverLink" style="max-width:120px;max-height:80px" />
+                                    </span>
+
+
+                                </td>
+                                <td class="center">
+                                    <span>
+                                        <span class="text-primary">Tên truyện:</span>  @Html.DisplayFor(modelItem => item.FullName) 
+                                    </span>
+                                    <br />
+                                    <span class="pull-left">
+                                        <span class="text-primary">Tác giả:</span> <text class="text-muted">@Html.DisplayFor(modelItem => item.Author)</text>   
+                                    </span>
+
+                                    <span class="pull-right">
+                                        <span class="text-primary">Trạng thái:</span>   @Html.DisplayFor(modelItem => item.status)
+                                    </span>
+                                    <br />
+                                    <span>
+                                        <span class="text-primary">Cập nhật lần cuối:</span>     @Html.DisplayFor(modelItem => item.CreatAt)
+                                    </span>
+                                    <br />
+                                   
+                                </td>
+                                <td style="text-align:center">
+                                    @Html.DisplayFor(modelItem => item.ChapterCount)
+                                </td>
+                                <td style="text-align:center">
+                                    @Html.DisplayFor(modelItem => item.TotalView)
+                                </td>
+                                <td style="text-align:center">
+                                    @Html.DisplayFor(modelItem => item.TransCount)
+                                </td>
+
+                                <td style="text-align:center">
+                                    <a href="~/UpdateManga/@item.MangaId">
+                                        <i class="fa fa-edit fa-lg" style="margin-right:10px;color:cornflowerblue" title="Cập nhật truyện"></i>
+
+                                    </a>
+                                    <a href="/ListChapter/@item.MangaId">
+                                        <i class="fa  fa-list-ol fa-lg" title="Danh sách chương" style="margin-right:10px;color:red"></i>
+                                    </a>
+                                    
+
+                                </td>
+                               
+                            </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        }
+    </div>
+
+</div>
+
+
+

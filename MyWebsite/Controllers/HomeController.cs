@@ -90,7 +90,7 @@ namespace MyWebsite.Controllers
             List<ViewModels.Home.Index.LastUpdatedManga> list = new List<ViewModels.Home.Index.LastUpdatedManga>();
             int pageSize = 10;
             int pageNum = (page ?? 1);
-            var web = db.Mangas.OrderByDescending(n => n.UpdateAt);
+            var web = db.Mangas.Where(m=>m.Chapters.Count > 0).OrderByDescending(n => n.UpdateAt);
             foreach (var item in web)
             {
                 ViewModels.Home.Index.LastUpdatedManga manga = new ViewModels.Home.Index.LastUpdatedManga();
@@ -527,6 +527,7 @@ namespace MyWebsite.Controllers
                 var check = 0;
                 foreach (var textbox in TextBoxes)
                 {
+                    
                     TextBoxViewModel textboxmodel = new TextBoxViewModel();
                     textboxmodel.Id = textbox.TextBoxId;
                     textboxmodel.Cor = textbox.Coordinate;
@@ -536,8 +537,13 @@ namespace MyWebsite.Controllers
                     var text = textbox.Texts.FirstOrDefault(m => m.Active && m.Allow == true && m.TextBoxId == textbox.TextBoxId);
                     if(text == null)
                     {
-                        check = 1;
-                        break;
+                        
+                        continue;
+                    }
+                    else
+                    {
+                        check += 1;
+                        
                     }    
                     TextViewModel textmodel = new TextViewModel();
                     textmodel.bold = text.Bold;
@@ -549,7 +555,7 @@ namespace MyWebsite.Controllers
                     textboxmodel.texts = textmodel;
                     listtextbox.Add(textboxmodel);
                 }
-                if (check != 0)
+                if (check <= 0)
                 {
                     continue;
                 }
@@ -747,28 +753,8 @@ namespace MyWebsite.Controllers
                 Bookmark update = db.Bookmarks.Where(x => x.AccountId == account.AccountId).Where(x => x.MangaId == idManga).SingleOrDefault();
                 if (update != null)
                 {
-                    int checkSeenChap;
-                    if (idChapter == null)
-                    {
-                        checkSeenChap = ChapterCount(idManga);
-                    }
-                    else
-                    {
-                        checkSeenChap = Convert.ToInt32(db.Chapters.Where(x => x.ChapterId == idChapter).Where(x => x.MangaId == idManga).Select(x => x.OrderNumber).SingleOrDefault());
-                    }
-                    if (update.LastSeenChap < checkSeenChap)
-                    {
-                        update.LastSeenChap = checkSeenChap;
-                        if (update.LastSeenChap == ChapterCount(idManga))
-                        {
-                            update.SeenStatus = true;
-                        }
-                        else
-                        {
-                            update.SeenStatus = false;
-                        }
-                        db.SaveChanges();
-                    }
+                    update.SeenStatus = true;
+                    db.SaveChanges();
                 }
             }
             return Json(true, JsonRequestBehavior.AllowGet);

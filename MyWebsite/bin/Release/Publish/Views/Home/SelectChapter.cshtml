@@ -1,0 +1,37 @@
+﻿
+<div style="text-align:center; display:flex" class="item-fltr">
+    @if (ViewBag.PrevChapter != null)
+    {
+        @*<a class="btn" style="float:left" href="/Home/ReadChapter/?id=@ViewBag.chuongtruoc.MangaId&chuong=@ViewBag.chuongtruoc.ChapterId " title="Chương trước">Chương trước</a>*@
+        <a class="btn chuongtruoc" style="border-radius:5px;" href="/read/@ViewBag.PrevChapter.Alias/@ViewBag.PrevChapter.MangaId-@ViewBag.PrevChapter.ChapterId/@ViewBag.CurLang" title="Chương trước">Chương trước</a>
+    }
+    else
+    {
+        <a class="btn disabled chuongtruoc" style="float:left; border-radius:5px;" href="#." title="Chương trước">Chương trước</a>
+    }
+
+    <select name="list_chapters1" id="list_chapters1" onchange="window.location.href=$(this).val()" @*style="height:50px; padding:10px;"*@>
+        @foreach (var truyen in ViewBag.ChapterList)
+        {
+            if (ViewBag.ChapterId == truyen.ChapterId)
+            {
+                <option selected value="/read/@truyen.Alias/@ViewBag.MangaId-@truyen.ChapterId/@ViewBag.CurLang"> @truyen.FullName</option>
+            }
+            else
+            {
+                <option value="/read/@truyen.Alias/@ViewBag.MangaId-@truyen.ChapterId/@ViewBag.CurLang">@truyen.FullName</option>
+            }
+        }
+    </select>
+
+    @if (ViewBag.NextChapter != null)
+    {
+        @*<a class="btn" style="float:left" href="/Home/ReadChapter/?id=@ViewBag.matruyen&chuong=@ViewBag.chuongsau.ChapterId&mabandich=@ViewBag.Mabandich" title="Chương sau">Chương sau</a>*@
+        <a class="btn chuongsau" style="border-radius:5px;" href="/read/@ViewBag.NextChapter.Alias/@ViewBag.NextChapter.MangaId-@ViewBag.NextChapter.ChapterId/@ViewBag.CurLang" title="Chương sau">Chương sau</a>
+    }
+    else
+    {
+        <a class="btn disabled chuongsau" style="float:left; border-radius:5px;" href="#." title="Chương sau">Chương sau</a>
+    }
+</div>
+

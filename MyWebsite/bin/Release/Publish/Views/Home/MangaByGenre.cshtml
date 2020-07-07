@@ -1,0 +1,63 @@
+﻿@using MyWebsite.Models;
+@using PagedList.Mvc;
+@model PagedList.PagedList<MyWebsite.ViewModels.Home.Genre.MangaByGenre>
+
+@{
+    ViewBag.Title = "TruyenTheoTheLoai";
+    Layout = "~/Views/Shared/_Layout3.cshtml";
+}
+
+<!-- Pagination -->
+@*<ul class="pagination in-center">
+        @Html.PagedListPager(Model, page => Url.Action("TruyenTheoTheLoai", new { page = page, @id = ViewBag.MaTheLoai }))
+    </ul>*@
+
+
+<div></div>
+<div class="leftCol listCol" style="margin-top:10px">
+    <div class="truyen-list">
+        <div class="breadcrumb breadcrumbs">
+            <p>
+                <span>
+                    <a href="/Home/Index" class="home" title="Manga online">
+                        Manga online
+                    </a>
+                </span>
+                <span class="separator" style="color:white">»</span>
+                <span style="color:white">
+                    Thể loại » @ViewBag.TheLoai
+                </span>
+                @*<span class="separator">»</span>
+                    Page 1*@
+            </p>
+        </div>
+        @if (ViewBag.KoCoTruyen == "Yes")
+        {
+            <div style="background-color:white; justify-content:center; border-radius:5px;">
+                <h1 style="color:black; text-align:center; font-size:30px; padding:20px; ">@ViewBag.ThongBao</h1>
+            </div>
+        }
+        @foreach (var truyen in Model)
+        {
+            <div class="list-truyen-item-wrap">
+                <a rel="nofollow" href="/manga/@truyen.Alias-@truyen.MangaId/@truyen.DefaultLang" title="@truyen.FullName">
+                    <img src="~/Cover/@truyen.CoverLink" onError="this.onerror=null;this.src='/RootPicture/error-404.jpg';" alt="@truyen.FullName">
+                </a>
+                <h3>
+                    <a rel="nofollow" href="/manga/@truyen.Alias-@truyen.MangaId" title="@truyen.FullName">@truyen.FullName</a>
+                </h3>
+                @Html.Action("GetLasted1Chapter", "Home", new { id = @truyen.MangaId })
+            </div>
+        }
+        <div style="clear: both"></div>
+
+        <div id="loadpage">
+            <div class="xem-them">
+                <!-- Pagination -->
+                <ul class="pagination">
+                    @Html.PagedListPager(Model, page => Url.Action("MangaByGenre", new { page = page }), new PagedListRenderOptions { DisplayEllipsesWhenNotShowingAllPageNumbers = false })
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

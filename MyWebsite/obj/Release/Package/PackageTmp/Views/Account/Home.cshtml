@@ -1,0 +1,571 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+@model MyWebsite.ViewModels.Account.AccountModel
+<style>
+    .Info-BoxFooter {
+        text-align: center;
+        padding: inherit
+    }
+
+    img {
+        width: initial;
+        max-height: 300px;
+        /*Scale down will take the necessary specified space that is 100px x 100px without stretching the image*/
+    }
+</style>
+<div class="padding">
+    <div class="m-b">
+        <ol class="breadcrumb primary">
+            <li class="breadcrumb-item active"><a>Trang chủ</a></li>
+        </ol>
+    </div>
+    <div class="box">
+        <div class="box-body">
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="box p-a dark">
+                        <div class="pull-left m-r">
+                            <span class="w-48 rounded accent">
+                                <i class="material-icons"></i>
+                            </span>
+                        </div>
+                        <div class="clear">
+                            <h4 class="m-a-0 text-lg _300">
+                                <a href="">
+                                    @ViewBag.MangaCount
+                                    <span class="text-sm">Truyện đã đăng</span>
+                                </a>
+                            </h4>
+                            <small class="text-muted">@ViewBag.Join yêu cầu gia nhập.(Đã duyệt @ViewBag.Joined)</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="box p-a dark">
+                        <div class="pull-left m-r">
+                            <span class="w-48 rounded primary">
+                                <i class="material-icons"></i>
+                            </span>
+                        </div>
+                        <div class="clear">
+                            <h4 class="m-a-0 text-lg _300">
+                                <a href="">
+                                    @ViewBag.Invite
+                                    <span class="text-sm"> Lời mời tham gia</span>
+                                </a>
+                            </h4>
+                            <small class="text-muted">@ViewBag.Invited Đã được duyệt.</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="box p-a dark">
+                        <div class="pull-left m-r">
+                            <span class="w-48 rounded warn">
+                                <i class="material-icons"></i>
+                            </span>
+                        </div>
+                        <div class="clear">
+                            <h4 class="m-a-0 text-lg _300">
+                                <a href="">
+                                    @ViewBag.Translation
+                                    <span class="text-sm">Bản dịch đang quản lí</span>
+                                </a>
+                            </h4>
+                            <small class="text-muted">
+                                Các ngôn ngữ đã tham gia: <br />
+                                @foreach (var item in ViewBag.Language)
+                                {
+                                    <span>@(item + ",")</span>
+                                }
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+
+
+                <div class="col-sm-7">
+                    @* Danh sách truyện bạn đang quản lí  *@
+                    <div class="box black">
+                        <div class="box-header primary">
+
+                            <h3 style="display:inline">Truyện đang quản lí</h3>
+                            <a href="@Url.Action("ListManga","Manga")" style="display:inline;float:right"><h3>Xem tất cả <i class="fa fa-caret-right"></i></h3></a>
+
+                        </div>
+                        <div class="box-divider black"></div>
+                        <div class="box-body  row">
+
+
+
+                            @foreach (var item in ViewBag.ListMangaCreated)
+                            {
+                                <div class="col-xs-6 col-sm-4 col-md-4">
+                                    <div class="box p-a-xs">
+                                        <div class="box-body  grey-900" style="padding:5px">
+                                            <img class="img-responsive" src="~/Cover/@item.CoverLink" />
+
+                                        </div>
+
+                                        <div class="box-footer grey-900 Info-BoxFooter">
+                                            <text class="text-ellipsis">@item.FullName</text>
+                                            <a class="btn btn-xs btn-md primary " href="@Url.Action("ListChapter","Manga",new { MangaId = item.MangaId })">
+                                                Chương
+                                            </a>
+                                            <a class="btn btn-xs btn-md danger" href="@Url.Action("UpdateManga","Manga",new { MangaId = item.MangaId })">
+                                                Cập nhật
+
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+
+                        </div>
+                    </div>
+                    @* Danh sách truyện bạn đã đăng kí dịch*@
+                    <div class="box black">
+                        <div class="box-header primary">
+                            <h3 style="display:inline">Truyện đã đăng kí dịch</h3>
+                            <a href="@Url.Action("TranslatorList","Contribute")" style="display:inline;float:right"><h3>Xem tất cả <i class="fa fa-caret-right"></i></h3></a>
+
+                        </div>
+                        <div class="box-divider black"></div>
+                        <div class="box-body row">
+                            @foreach (var item in ViewBag.ListMangaWithTranslateRole)
+                            {
+                                <div class="col-xs-6 col-sm-4 col-md-4">
+                                    <div class="box p-a-xs">
+                                        <div class="box-body  grey-900" style="padding:5px">
+                                            <img class="img-responsive" src="~/Cover/@item.CoverLink" />
+
+                                        </div>
+
+                                        <div class="box-footer grey-900 Info-BoxFooter">
+                                            <text class="text-ellipsis">@item.FullName</text>
+                                            <button class="btn btn-xs btn-md primary ">
+                                                Dịch truyện
+                                            </button>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+
+
+
+                        </div>
+                    </div>
+                    @* Danh sách truyện bạn đã đăng kí Chỉnh sửa*@
+                    <div class="box black">
+                        <div class="box-header primary">
+                            <h3 style="display:inline">Truyện đã đăng kí tải lên Clear-text</h3>
+                            <a href="@Url.Action("EditorList","Contribute")" style="display:inline;float:right"><h3>Xem tất cả <i class="fa fa-caret-right"></i></h3></a>
+
+                        </div>
+                        <div class="box-divider black"></div>
+                        <div class="box-body row">
+                            @foreach (var item in ViewBag.ListMangaWithEditorRole)
+                            {
+                                <div class="col-xs-6 col-sm-4 col-md-4">
+                                    <div class="box p-a-xs">
+                                        <div class="box-body  grey-900" style="padding:5px">
+                                            <img class="img-responsive" src="~/Cover/@item.CoverLink" />
+
+                                        </div>
+
+                                        <div class="box-footer grey-900 Info-BoxFooter">
+                                            <text class="text-ellipsis">@item.FullName</text>
+                                            <a class="btn btn-xs btn-md primary " href="/EditorList">
+                                                Tải lên clear-text
+                                            </a>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+
+
+
+                        </div>
+                    </div>
+                    @* Danh sách truyện bạn đã đăng kí quản lí bản dịch*@
+                    <div class="box black">
+                        <div class="box-header primary">
+                            <h3 style="display:inline">Truyện đã đăng kí làm quản lý</h3>
+                            <a href="@Url.Action("ListManga","Translation")" style="display:inline;float:right"><h3>Xem tất cả <i class="fa fa-caret-right"></i></h3></a>
+
+                        </div>
+                        <div class="box-divider black"></div>
+                        <div class="box-body row">
+                            @foreach (var item in ViewBag.ListMangaWithTranslationManagerRole)
+                            {
+                                <div class="col-xs-6 col-sm-4 col-md-4">
+                                    <div class="box p-a-xs">
+                                        <div class="box-body  grey-900" style="padding:5px">
+                                            <img class="img-responsive" src="~/Cover/@item.CoverLink" />
+
+                                        </div>
+
+                                        <div class="box-footer grey-900 Info-BoxFooter">
+                                            <text class="text-ellipsis">@item.FullName</text>
+                                            <button class="btn btn-xs btn-md primary ">
+                                                Duyệt trang
+                                            </button>
+                                            <button class="btn btn-xs btn-md danger">
+                                                Duyệt chương
+
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-5">
+                    <div class="box black">
+                        <div class="box-header primary">
+                            <h3 style="display:inline">Truyện gần đây</h3>
+                            <a href="@Url.Action("ListAllManga", "Manga", new { page = 1 ,sort = 1})" style="display:inline;float:right"><h3>Xem tất cả <i class="fa fa-caret-right"></i></h3></a>
+
+                        </div>
+
+                        <ul class="list-group thumbnail scrollable list-inline">
+                            @foreach (var item in ViewBag.ListNewManga)
+                            {
+                                string a = item.MangaId.ToString() + ";" + item.FullName;
+                                <li class="list-item">
+                                    <span class="list-left w-128"><img src="~/Cover/@item.CoverLink" class="img-thumbnail" /></span>
+
+                                    <div class="list-body">
+                                        <div class="m-y-sm pull-right">
+                                            <button id="XinGiaNhap" type="button" name="@a" class="btn btn-xs primary rounded my-2 my-sm-0 " data-toggle="modal" data-target="#m-a-f-X">
+                                                Xin gia nhập
+                                            </button>
+                                        </div>
+                                        <div>
+                                            <a class="text-primary">@item.FullName </a>
+                                        </div>
+                                        <div class="text-sm">
+                                            <span><strong>Người quản lí:</strong> @item.UserName</span><br />
+                                            <span><strong>Thể loại:</strong><text>@item.GenreList</text> </span> <br />
+                                            <span><strong>Tác giả:</strong> @item.Author</span>
+                                            <br />
+                                            <text class="text-ellipsis"><strong>Mô tả:</strong> @item.Description </text>
+                                        </div>
+                                    </div>
+                                </li>
+
+                            }
+
+
+
+                        </ul>
+                        <div id="m-a-f-X" class="modal fade" data-backdrop="true" style="display: none;" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header primary">
+                                        <h5 class="modal-title ">Xin gia nhập</h5>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form>
+                                            <input hidden id="MangaId" name="MangaId" />
+                                            <div class="form-group row">
+                                                <label class="col-sm-4 form-control-label">
+                                                    <span>Tên Truyện</span>
+                                                    <span style="color:red">(*)</span>
+                                                </label>
+                                                <div class="col-sm-8">
+
+                                                    <input style="overflow:hidden;text-overflow: ellipsis" disabled id="FullName" name="FullName" class="form-control" type="text" value="tensei shitara slime datta ken: the ways of strolling in the demon country" />
+                                                </div>
+
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-sm-4 form-control-label">
+                                                    <span>Vị trí</span>
+                                                </label>
+                                                <div class="col-sm-8">
+
+                                                    <select style="width:100%" id="SelectRole" class="form-control select2" ui-jp="select2" ui-options="{theme: 'bootstrap'}">
+
+                                                        <option value="3">Translator</option>
+                                                        <option value="2">Clear-text Uploader</option>
+                                                        <option value="4">Translate Manager</option>
+                                                    </select>
+                                                </div>
+
+                                            </div>
+                                            <div id="SelectLanguage" style="display:none" class="form-group row">
+                                                <label class="col-sm-4 form-control-label">
+                                                    <span>Ngôn ngữ</span>
+                                                </label>
+                                                <div class="col-sm-8">
+                                                    <select id="Language" class="form-control select2-bootstrap-append">
+                                                        @foreach (var item in ViewBag.ListLanguage)
+                                                        {
+                                                            <option value="@item.LanguageId">@item.FullName</option>
+                                                        }
+                                                    </select>
+
+                                                </div>
+
+                                            </div>
+                                        </form>
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn danger p-x-md" data-dismiss="modal">Hủy</button>
+                                        <button id="Join" type="button" class="btn primary p-x-md" data-dismiss="modal">Xin gia nhập</button>
+                                    </div>
+                                </div><!-- /.modal-content -->
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Yêu cầu xin gia nhập truyện -->
+                    <div class="box black">
+                        <div class="box-header">
+                            <h3 style="display:inline">
+                                <strong class="text text-primary">
+                                    Xin gia nhập
+                                </strong>
+
+
+                            </h3>
+                            <a class="text-primary" style="display:inline;float:right"><h3>Xem tất cả <i class="fa fa-caret-right"></i></h3></a>
+                        </div>
+                        <ul class="list inset">
+                            @{
+                                int ListRequestByPeopleCount = 0;
+                                foreach (var item in ViewBag.ListRequestByPeople)
+                                {
+                                    ListRequestByPeopleCount++;
+                                    <li class="list-item">
+                                        <span class="list-left w-128"><img src="~/Cover/@item.Manga.CoverLink" class="img-thumbnail" /></span>
+                                        <div class="list-body">
+
+                                            <div class="m-y-sm pull-right">
+                                                <button class="btn btn-xs  Status Deny danger">Chưa duyệt</button>
+                                                <button class="btn btn-xs Status Accept primary" style="display:none">Đã duyệt</button>
+                                                <button class="ChangeStatus btn btn-lg btn-xs btn-outline b-primary text-primary" data-placement="top" title="Cập nhật" data-language="@item.Language" data-roleid="@item.RoleId" data-username="@item.Account.UserName" data-status="2" data-mangaid="@item.MangaId"><i class="fa fa-pencil"></i></button>
+                                            </div>
+                                            <div>
+                                                <a href="" class="text-primary">@item.Manga.FullName</a>
+                                            </div>
+                                            <div class="text-sm">
+                                                <span class="text-muted">
+                                                    <strong>Tên:</strong> @item.Account.UserName <br />
+                                                    <strong>Vị trí:</strong> @item.Role.FullName
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                }
+                                if (ListRequestByPeopleCount == 0)
+                                {
+                                    <li class="list-item">
+                                        <span>Không có yêu cầu mới nào</span>
+                                    </li>
+                                }
+                            }
+                        </ul>
+                    </div>
+                    <!-- Yêu cầu mời gia nhập truyện -->
+                    <div class="box black">
+                        <div class="box-header">
+                            <h3 style="display:inline">
+                                <strong class="text text-primary">
+                                    Lời mời gia nhập
+                                </strong>
+
+                            </h3>
+                            <a class="text-primary" style="display:inline;float:right"><h3>Xem tất cả <i class="fa fa-caret-right"></i></h3></a>
+                        </div>
+                        <ul class="list inset">
+                            @{
+                                int ListRequestToYouCount = 0;
+                                foreach (var item in ViewBag.ListRequestToYou)
+                                {
+                                    ListRequestToYouCount++;
+                                    <li class="list-item">
+                                        <span class="list-left w-128"><img src="~/Cover/@item.Manga.CoverLink" class="img-thumbnail" /></span>
+                                        <div class="list-body">
+
+                                            <div class="m-y-sm pull-right">
+                                                <button class="btn btn-xs danger">Chưa duyệt</button>
+                                                <button class="ChangeStatus btn btn-lg btn-xs btn-outline b-primary text-primary" data-toggle="tooltip" data-placement="top" title="Cập nhật" data-language="@item.Language" data-roleid="@item.RoleId" data-username="@item.Account.UserName" data-status="0" data-mangaid="@item.MangaId"><i class="fa fa-pencil"></i></button>
+                                            </div>
+                                            <div>
+                                                <a href="">@item.Manga.FullName</a>
+                                            </div>
+                                            <div class="text-sm">
+                                                <span class="text-muted"><strong>Tên:</strong> @item.Account.FullName, <strong>Vị trí:</strong> @item.Role.FullName</span> <span class="label"></span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                }
+                                if (ListRequestToYouCount == 0)
+                                {
+                                    <li class="list-item">
+                                        <span>Không có yêu mới cầu nào</span>
+                                    </li>
+                                }
+                            }
+
+
+                        </ul>
+                    </div>
+                    <!-- Yêu cầu mời gia nhập đã gửi -->
+                    <div class="box black">
+                        <div class="box-header">
+                            <h3 style="display:inline">
+                                <strong class="text text-primary">
+                                    Lời mời đã gửi
+                                </strong>
+
+                            </h3>
+                            <a class="text-primary" style="display:inline;float:right"><h3>Xem tất cả <i class="fa fa-caret-right"></i></h3></a>
+                        </div>
+                        <ul class="list inset">
+                            @if (ViewBag.ListRequestToPeople.Count <= 0)
+                            {
+                                <li class="list-item">
+                                    <span>Không có yêu cầu mới nào</span>
+                                </li>
+                            }
+                            else
+                            {
+                                foreach (var item in ViewBag.ListRequestToPeople)
+                                {
+
+                                    <li class="list-item">
+                                        <span class="list-left w-128"><img src="~/Cover/@item.Manga.CoverLink" class="img-thumbnail" /></span>
+                                        <div class="list-body">
+
+                                            <div class="m-y-sm pull-right">
+                                                <label class="btn btn-xs danger">Chưa duyệt</label>
+
+                                            </div>
+                                            <div>
+                                                <a class="text-primary" href="">@item.Manga.FullName</a>
+                                            </div>
+                                            <div class="text-sm">
+                                                <span class="text-muted"><strong>Tên:</strong> @item.Account.FullName <br /> <strong>Vị trí:</strong> @item.Role.FullName</span> <span class="label"></span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                }
+                            }
+                        </ul>
+                    </div>
+                    <!-- Yêu cầu xin gia nhập đã gửi -->
+                    <div class="box black">
+                        <div class="box-header">
+                            <h3 style="display:inline">
+                                <strong class="text text-primary">
+                                    Xin gia nhập đã gửi
+                                </strong>
+
+                            </h3>
+                            <a class="text-primary" style="display:inline;float:right"><h3>Xem tất cả <i class="fa fa-caret-right"></i></h3></a>
+                        </div>
+                        <ul class="list inset">
+
+                            @if (ViewBag.ListRequestByYou.Count <= 0)
+                            {
+                                <li class="list-item">
+                                    <span>Không có yêu cầu mới nào</span>
+                                </li>
+                            }
+                            else
+                            {
+                                foreach (var item in ViewBag.ListRequestByYou)
+                                {
+
+                                    <li class="list-item">
+                                        <span class="list-left w-128"><img src="~/Cover/@item.Manga.CoverLink" class="img-thumbnail" /></span>
+                                        <div class="list-body">
+                                            @if (item.Status == 1)
+                                            {
+                                                <div class="m-y-sm pull-right">
+                                                    <label class="btn btn-xs  danger">Chưa được duyệt</label>
+                                                </div>
+                                            }
+                                            else if (item.Status == 0)
+                                            {
+                                                <div class="m-y-sm pull-right">
+                                                    <label class="btn btn-xs  danger">Đã bị loại</label>
+                                                </div>
+                                            }
+                                            else
+                                            {
+                                                <div class="m-y-sm pull-right">
+                                                    <label class="btn btn-xs  primary">Đã duyệt</label>
+                                                </div>
+                                            }
+                                            <div>
+                                                <a href="">@item.Manga.FullName</a>
+                                            </div>
+                                            <div class="text-sm">
+                                                <span class="text-muted"><strong>Tên:</strong> @item.Account.FullName, <strong>Vị trí:</strong> @item.Role.FullName</span> <span class="label"></span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                }
+                            }
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts
+{
+    <script src="~/LayoutUser/Account/Search.js"></script>
+    <script>
+        $(function () {
+            $(".ChangeStatus").on("click", function () {
+                var thisbutton = $(this);
+                //console.log(thisbutton.data("language"));
+                if (confirm("Bạn có đồng ý yêu cầu này?")) {
+                    $.ajax({
+                        url: "/Account/ChangeStatusMangaDetail",
+                        type: 'post',
+                        data: {
+                            UserName: thisbutton.data("username")
+                            , MangaId: thisbutton.data("mangaid")
+                            , RoleId: thisbutton.data("roleid")
+                            , Status: thisbutton.data("status")
+                            , language: thisbutton.data("language")
+                        },
+                        success: function (result) {
+                            if (result == "1") {
+                                alert("Cập nhật thành công!");
+                                thisbutton.parent().find(".Deny").fadeOut(500, function () {
+                                    thisbutton.parent().find(".Accept").fadeIn();
+                                });
+
+                                thisbutton.fadeOut();
+                            }
+                            else
+                                alert("Cập nhật thất bại, vui lòng thử lại sau!");
+                        },
+                    });
+                };
+
+
+            })
+        })
+    </script>
+}
+
+
+
+

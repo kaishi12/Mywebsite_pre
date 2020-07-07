@@ -31,6 +31,7 @@
 var count = 0;
 
 $(function () {
+    console.log(1);
     // Declare a proxy to reference the hub.
     var notificationHub = $.connection.notificationHub;
 

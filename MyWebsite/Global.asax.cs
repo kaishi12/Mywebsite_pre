@@ -16,7 +16,7 @@ namespace MyWebsite
         {
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
-            //SqlDependency.Start(conStr);
+            SqlDependency.Start(conStr);
         }
        
         protected void Application_End()

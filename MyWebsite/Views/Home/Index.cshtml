@@ -48,45 +48,7 @@
             <ul class="pagination">
                 @Html.PagedListPager(Model, page => Url.Action("Index", new { page = page }), new PagedListRenderOptions { DisplayEllipsesWhenNotShowingAllPageNumbers = false })
             </ul>
-            @*@if (ViewBag.TotalPage > 1)
-                {
-                    var pageDisplay = ViewBag.MaxPage;
-                    int totalPage = (int)ViewBag.TotalPage;
-                    int currentPage = ((int)ViewBag.Page);
-
-                    var startPageIndex = Math.Max(1, currentPage - pageDisplay / 2);
-                    var endPageIndex = Math.Min(totalPage, currentPage + pageDisplay / 2);
-
-                    var link = "/Home/Index";
-
-                  <ul class="pagination">
-                     @if (currentPage > ViewBag.First)
-                     {
-                        <li class="first"><a href="@link?page=@ViewBag.First" title="Trang đầu" ><i class="fa fa-angle-double-left" aria-hidden="true"></i></a></li>
-                        <li class="prev"><a href="@link?page=@ViewBag.Prev" title="Trang trước" ><i class="fa fa-angle-left" aria-hidden="true"></i></a></li>
-                     }
-                     @for (int i = startPageIndex; i <= endPageIndex; i++)
-                     {
-                         if (currentPage == i)
-                         {
-                             <li class="active"><a title="Trang @i">@i</a></li>
-                         }
-                         else
-                         {
-                            <li><a href="@link?page=@i" title="Trang @i">@i</a></li>
-                         }
-                     }
-                     @if (currentPage < totalPage)
-                     {
-                        <li class="next"><a href="@link?page=@ViewBag.Next" title="Trang sau" ><i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
-                        <li class="last"><a href="@link?page=@ViewBag.Last" title="Trang cuối" ><i class="fa fa-angle-double-right" aria-hidden="true"></i></a></li>
-                     }
-                 </ul>
-                }
-                else
-                {
-                    <h2>Nothing</h2>
-                }*@
+           
         </div>
     </div>
     <div id="mystickytooltip" class="stickytooltip"></div>

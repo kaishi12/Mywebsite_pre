@@ -1,0 +1,63 @@
+﻿
+@{
+    ViewBag.Title = "abc";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+<div class="padding">
+    <div class="m-b primary">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/Account/Home">Trang chủ</a></li>
+            <li class="breadcrumb-item active">Feedback</li>
+        </ol>
+    </div>
+
+    <div class="box">
+        <div class="box-body">
+            <div class="box-body">
+
+                <div class="form-group">
+                    <label for="title">Tiêu đề:</label>
+                    <input type="text" class="form-control" id="title" placeholder="tiêu đề phẩn hồi">
+                </div>
+                <div class="form-group">
+                    <label for="des">Nội dung:</label>
+                    <textarea  placeholder="nội dung phẩn hồi" id="des" class="form-control" rows="2"></textarea>
+                </div>
+
+
+
+                <button id="fbbtn" class="btn primary pull-right">Phản hồi</button>
+            </div>
+
+        </div>
+        <div class="box-footer">
+
+        </div>
+    </div>
+</div>
+@section Scripts
+{
+    <script>
+        $("#fbbtn").on("click", function () {
+
+            $.ajax({
+                type: 'POST',
+                url: '/Feedback/GetFeedBack',
+                data:
+                {
+                    des: $("#des").val(),
+                    title: $("#title").val(),
+                },
+                success: function (result) {
+                    console.log(result);
+                    if (result == true) {
+                        alert("Đã feedback thành công!");
+                    }
+                }
+            });
+        })
+
+    </script>
+
+}

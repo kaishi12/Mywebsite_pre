@@ -1,0 +1,66 @@
+﻿@model MyWebsite.ViewModels.Account.AccountModel
+
+@{
+    ViewBag.Title = "Đăng Nhập";
+    Layout = "~/Views/Shared/ResAndLogLayout.cshtml";
+}
+<style>
+    .btn{
+        cursor:pointer;
+    }
+</style>
+
+<div class="center-block w-xxl w-auto-xs p-y-md">
+    
+    
+    <div class="navbar">
+        <div class="pull-center">
+        </div>
+    </div>
+    <div class="p-a-md box-color r box-shadow-z1 text-color m-a black">
+        <div class="m-b text-sm" style="text-align:center;font-weight:bolder;color:red">
+
+            <h2 class="text-primary">ĐĂNG NHẬP</h2> 
+        </div>
+        <div class="form">
+            @using (Html.BeginForm("Login", "Account", FormMethod.Post, new { ui_jp = "parsley" }))
+            {
+                @Html.AntiForgeryToken()
+            <div id="login">
+                <div class="md-form-group">
+                    <span style="color:whitesmoke">Tài khoản</span>
+                    @Html.TextBoxFor(model => model.UserName, new { @class = "md-input", style = "color:white", type = "text", required = "required", data_parsley_required_message = "Không được để trống" })
+
+                </div>
+                <div class="md-form-group">
+                    <span style="color:whitesmoke">Mật khẩu</span>
+                    @Html.PasswordFor(model => model.PassWord, new { @class = "md-input ", style = "color:white", type = "password", required = "required", data_parsley_required_message = "Không được để trống" })
+
+                </div>
+                <div class="m-b-md  ">
+
+                    <div class="m-b "><a ui-sref="access.forgot-password" href="forgot-password.html" class="text-primary _600">Quên mật khẩu?</a></div>
+                </div>
+                <div class="form-group error">
+                    @if (@ViewBag.Failedcount != null)
+                    {
+
+                        <label class="text-danger"> Failed Attempt count is: @ViewBag.Failedcount</label>
+                    }
+
+                    @if (@ViewBag.NotValidUser != null)
+                    {
+
+                        <label class="text-danger"> @ViewBag.NotValidUser</label>
+                    }
+                </div>
+
+                <button type="submit" class="btn primary btn-block p-x-md">Đăng Nhập</button>
+            </div>
+            }
+        </div>
+        <div style="text-align:center;padding-top:inherit"> <span style="color:whitesmoke">Chưa có tài khoản? </span> <a ui-sref="access.signup" href="/Account/Register" class="text-primary _600  ">Đăng ký</a></div>
+    </div>
+
+</div>
+
