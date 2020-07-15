@@ -24,7 +24,7 @@ namespace MyWebsite
             using (SqlConnection con = new SqlConnection(conStr))
             {
                 SqlCommand cmd = new SqlCommand(sqlCommand, con);
-                //cmd.Parameters.AddWithValue("@CreateAt", currentTime);
+                cmd.Parameters.AddWithValue("@CreateAt", currentTime);
                 if (con.State != System.Data.ConnectionState.Open)
                 {
                     con.Open();

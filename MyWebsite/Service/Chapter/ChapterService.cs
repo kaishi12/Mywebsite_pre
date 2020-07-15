@@ -68,13 +68,13 @@ namespace MyWebsite.Service.Chapter
                 Page page = data.Pages.SingleOrDefault(m => m.PageId == PageId);
                 if (PageLink != "")
                     page.PageLink = PageLink;
-                
-                    page.Active = StatusActive;
+
+                page.Active = StatusActive;
                 data.SaveChanges();
-                if ( page.CategoryId == 2)
+                if (page.CategoryId == 2)
                 {
                     NotificationService notificationService = new NotificationService();
-                    var res = notificationService.AddnewNoticeSenpai("Upload", page.OrderNumber,page.Chapter.OrderNumber, page.Chapter.Manga.FullName, page.AccountId,"");
+                    var res = notificationService.AddnewNoticeSenpai("Upload", page.OrderNumber, page.Chapter.OrderNumber, page.Chapter.Manga.FullName, page.AccountId, "");
                 }
                 return true;
             }
@@ -83,39 +83,35 @@ namespace MyWebsite.Service.Chapter
                 return false;
             }
         }
-        public int AddNewCleartextPage(int AccountId, int PageId, string PageLink)
+        public int AddNewCleartextPage(int AccountId, Page pageFA, string PageLink)
         {
             try
             {
-                var pageFA = data.Pages.SingleOrDefault(m => m.PageId == PageId && m.Active == true);
-                if (pageFA != null)
-                {
-                    var res = data.Pages.SingleOrDefault(m => m.AccountId == AccountId && m.PageId_Fa == PageId);
-                    if (res == null)
-                    {
-                        Page page = new Page();
-                        page.PageId_Fa = PageId;
-                        page.OrderNumber = pageFA.OrderNumber;
-                        page.CategoryId = 2;
-                        page.AccountId = AccountId;
-                        page.ChapterId = pageFA.ChapterId;
-                        page.CreateAt = DateTime.Now;
-                        page.FullName = pageFA.FullName + "-Clear-text-";
-                        page.PageLink = PageLink;
-                        page.Active = true;
-                        page.Status = (int)StatusPage.Wait;
-                        data.Pages.Add(page);
-                    }
-                    else
-                    {
-                        res.PageLink = PageLink;
-                    }
 
-                    data.SaveChanges();
-                    return 1;
+
+                var res = data.Pages.SingleOrDefault(m => m.AccountId == AccountId && m.PageId_Fa == pageFA.PageId);
+                if (res == null)
+                {
+                    Page page = new Page();
+                    page.PageId_Fa = pageFA.PageId;
+                    page.OrderNumber = pageFA.OrderNumber;
+                    page.CategoryId = 2;
+                    page.AccountId = AccountId;
+                    page.ChapterId = pageFA.ChapterId;
+                    page.CreateAt = DateTime.Now;
+                    page.FullName = pageFA.FullName + "-Clear-text-";
+                    page.PageLink = PageLink;
+                    page.Active = true;
+                    page.Status = (int)StatusPage.Wait;
+                    data.Pages.Add(page);
                 }
                 else
-                    return 0;
+                {
+                    res.PageLink = PageLink;
+                }
+
+                data.SaveChanges();
+                return 1;
             }
             catch (Exception ex)
             {
@@ -135,7 +131,7 @@ namespace MyWebsite.Service.Chapter
             {
                 return -1;
             }
-            
+
         }
         public int? GetFirstPage(int MangaId)
         {

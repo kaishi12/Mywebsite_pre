@@ -56,10 +56,10 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>07/26/2012 01:48:56</publishTime>
     </File>
     <File Include="bin/MyWebsite.dll">
-      <publishTime>07/06/2020 15:23:25</publishTime>
+      <publishTime>07/10/2020 14:46:49</publishTime>
     </File>
     <File Include="bin/MyWebsite.pdb">
-      <publishTime>07/06/2020 15:23:25</publishTime>
+      <publishTime>07/10/2020 14:46:49</publishTime>
     </File>
     <File Include="bin/Newtonsoft.Json.dll">
       <publishTime>08/03/2014 20:33:56</publishTime>
@@ -1577,7 +1577,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>12/14/2019 02:37:33</publishTime>
     </File>
     <File Include="LayoutUser/Common/Layout.js">
-      <publishTime>02/29/2020 08:29:31</publishTime>
+      <publishTime>07/07/2020 21:20:13</publishTime>
     </File>
     <File Include="LayoutUser/Contribute/Editor.js">
       <publishTime>02/29/2020 08:29:31</publishTime>
@@ -2456,7 +2456,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>06/07/2020 20:04:09</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
-      <publishTime>06/17/2020 17:31:34</publishTime>
+      <publishTime>07/07/2020 21:10:21</publishTime>
     </File>
     <File Include="Views/Home/MangaByAuthor.cshtml">
       <publishTime>06/17/2020 17:32:28</publishTime>
@@ -2477,7 +2477,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>06/07/2020 20:04:09</publishTime>
     </File>
     <File Include="Views/Home/ReadChapter.cshtml">
-      <publishTime>06/27/2020 18:53:24</publishTime>
+      <publishTime>07/07/2020 21:17:15</publishTime>
     </File>
     <File Include="Views/Home/SelectChapter.cshtml">
       <publishTime>05/03/2020 18:05:45</publishTime>
@@ -2546,13 +2546,13 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>10/05/2019 13:23:18</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>06/23/2020 14:56:43</publishTime>
+      <publishTime>07/07/2020 21:12:07</publishTime>
     </File>
     <File Include="Views/Shared/_Layout2.cshtml">
-      <publishTime>06/27/2020 18:20:00</publishTime>
+      <publishTime>07/07/2020 21:12:44</publishTime>
     </File>
     <File Include="Views/Shared/_Layout3.cshtml">
-      <publishTime>06/23/2020 14:57:42</publishTime>
+      <publishTime>07/07/2020 21:12:55</publishTime>
     </File>
     <File Include="Views/Shared/_LayoutAdmin.cshtml">
       <publishTime>06/23/2020 14:57:45</publishTime>
@@ -2561,7 +2561,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>06/17/2020 18:26:01</publishTime>
     </File>
     <File Include="Views/Shared/_LoginPartial.cshtml">
-      <publishTime>06/12/2020 19:17:25</publishTime>
+      <publishTime>07/07/2020 21:10:57</publishTime>
     </File>
     <File Include="Views/StatusManga/Index.cshtml">
       <publishTime>06/07/2020 19:57:10</publishTime>
@@ -2582,7 +2582,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>09/29/2019 13:28:40</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>07/06/2020 15:11:01</publishTime>
+      <publishTime>07/10/2020 14:46:51</publishTime>
     </File>
   </ItemGroup>
 </Project>

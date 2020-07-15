@@ -172,7 +172,7 @@ namespace MyWebsite.Controllers
             return View(list);
 
         }
-        [Object]
+       
         public ActionResult ListChapter(int MangaId)
         {
 

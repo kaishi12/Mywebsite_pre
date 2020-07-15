@@ -22,11 +22,11 @@ namespace MyWebsite.Controllers
         {
             return View();
         }
-        [Object]
+       
         public ActionResult ChapterDetail(int ChapterId)
         {
             var chapter = data.Chapters.FirstOrDefault(m => m.ChapterId == ChapterId);
-            
+
             return View(chapter);
         }
         public ActionResult Create(int MangaId)
@@ -44,17 +44,24 @@ namespace MyWebsite.Controllers
             {
                 string[] ListOrderNumber = PageOrderNumber.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
                 string[] ListFullName = PageFullName.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
-
-
+                var folder = Path.GetRandomFileName();
+                if (!Directory.Exists(Path.Combine(Server.MapPath("~/PageLink"), folder)))
+                    Directory.CreateDirectory(Path.Combine(Server.MapPath("~/PageLink"), folder));
+                var rawfolder = "Raw";
+                if (!Directory.Exists(Path.Combine(Server.MapPath("~/PageLink"), folder, rawfolder)))
+                    Directory.CreateDirectory(Path.Combine(Server.MapPath("~/PageLink"), folder, rawfolder));
+                if (!Directory.Exists(Path.Combine(Server.MapPath("~/PageLink"), folder, "Clear")))
+                    Directory.CreateDirectory(Path.Combine(Server.MapPath("~/PageLink"), folder, "Clear"));
                 List<PageModel> pageModels = new List<PageModel>();
                 for (int i = 0; i < AnhTrang.Count(); i++)
                 {
+
                     PageModel pageModel = new PageModel();
                     var filename = ListFullName[i] + ".png";
-                    var path = Path.Combine(Server.MapPath("~/PageLink"), filename);
+                    var path = Path.Combine(Server.MapPath("~/PageLink"), folder, rawfolder, filename);
                     AnhTrang[i].SaveAs(path);
                     pageModel.AccountId = account.AccountId;
-                    pageModel.PageLink = filename;
+                    pageModel.PageLink = folder + "/Raw/" + filename;
                     pageModel.OrderNumber = int.Parse(ListOrderNumber[i]);
                     pageModel.FullName = ListFullName[i];
                     pageModels.Add(pageModel);
@@ -79,19 +86,12 @@ namespace MyWebsite.Controllers
         [HttpPost]
         public JsonResult UpdateLinkPage(HttpPostedFileBase fileupload)
         {
+
             var PageId = int.Parse(Request.Form["PageId"]);
-            var filename = Path.GetFileName(fileupload.FileName);
-            var path = Path.Combine(Server.MapPath("~/PageLink"), filename);
+            var page = data.Pages.Find(PageId).PageLink;
+            var path = Path.Combine(Server.MapPath("~/PageLink"), page);
             fileupload.SaveAs(path);
-            string PageLink = filename;
-            if (chapterService.UpdateRawPage(PageId, PageLink,true))
-            {
-                return Json(true);
-            }
-            else
-            {
-                return Json(false);
-            }
+            return Json(true);
         }
         [HttpPost]
         public JsonResult UpdateStatusPage(int PageId, bool StatusActive)
@@ -111,27 +111,44 @@ namespace MyWebsite.Controllers
             var res = data.Chapters.SingleOrDefault(m => m.ChapterId == model.ChapterId);
             res.OrderNumber = model.OrderNumber;
             res.FullName = model.FullName;
-            
+
             data.SaveChanges();
             return Json("Lưu thành công");
         }
         [HttpPost]
-        public ActionResult AddNewPage(Chapter model, HttpPostedFileBase[] AnhTrang,int CurrentPage)
+        public ActionResult AddNewPage(Chapter model, HttpPostedFileBase[] AnhTrang, int CurrentPage)
         {
 
             AccountModel account = (AccountModel)Session["UserInfo"];
             var next = CurrentPage + 1;
+            var folder = "";
             List<PageModel> pageModels = new List<PageModel>();
+            var page = data.Pages.FirstOrDefault(m => m.ChapterId == model.ChapterId);
+
+            if (page != null)
+            {
+                folder = page.PageLink.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries)[0];
+            }
+            else
+            {
+                folder = Path.GetRandomFileName();
+                if (!Directory.Exists(Path.Combine(Server.MapPath("~/PageLink"), folder)))
+                    Directory.CreateDirectory(Path.Combine(Server.MapPath("~/PageLink"), folder));
+                var rawfolder = "Raw";
+                if (!Directory.Exists(Path.Combine(Server.MapPath("~/PageLink"), folder, rawfolder)))
+                    Directory.CreateDirectory(Path.Combine(Server.MapPath("~/PageLink"), folder, rawfolder));
+            }
             for (int i = 0; i < AnhTrang.Count(); i++)
             {
+
                 PageModel pageModel = new PageModel();
-                var filename = Path.GetFileName(AnhTrang[i].FileName);
-                var path = Path.Combine(Server.MapPath("~/PageLink"), filename);
+                var filename = "trang " + (next + i) + "-" + model.FullName;
+                var path = Path.Combine(Server.MapPath("~/PageLink"), folder, "Raw", filename + ".png");
                 AnhTrang[i].SaveAs(path);
                 pageModel.AccountId = account.AccountId;
-                pageModel.PageLink = filename;
+                pageModel.PageLink = folder + "/Raw/" + filename + ".png";
                 pageModel.OrderNumber = next + i;
-                pageModel.FullName = "trang " + (next+i) + "-" + model.FullName;
+                pageModel.FullName = filename;
                 pageModels.Add(pageModel);
             }
 
@@ -143,25 +160,28 @@ namespace MyWebsite.Controllers
             {
                 return View(model);
             }
-            return View(model);
         }
         public JsonResult AddNewCleartextPage(HttpPostedFileBase fileupload)
         {
-            AccountModel account = (AccountModel)Session["UserInfo"];
-            var PageId = int.Parse(Request.Form["PageId"]);
-            var PageFA = data.Pages.SingleOrDefault(m => m.PageId == PageId);
-            var filename = "";
-            if(PageFA != null)
+            try
             {
-                filename = PageFA.FullName + "-Clear-text" + ".png";
+                AccountModel account = (AccountModel)Session["UserInfo"];
+                var PageId = int.Parse(Request.Form["PageId"]);
+                var PageFA = data.Pages.SingleOrDefault(m => m.PageId == PageId);
+                var folder = PageFA.PageLink.Split(new char[] { '/' }, StringSplitOptions.RemoveEmptyEntries)[0];
+                var filename = PageFA.FullName + "-Clear-text" + ".png";
+                var path = Path.Combine(Server.MapPath("~/PageLink"), folder, "Clear", filename);
+                fileupload.SaveAs(path);
+                string PageLink = folder + "/Clear/" + filename;
+                var res = chapterService.AddNewCleartextPage(account.AccountId, PageFA, PageLink);
+                return Json(res);
             }
-            else
-            filename = Path.GetFileName(fileupload.FileName);
-            var path = Path.Combine(Server.MapPath("~/PageLink"), filename);
-            fileupload.SaveAs(path);
-            string PageLink = filename;
-            var res = chapterService.AddNewCleartextPage(account.AccountId, PageId, PageLink);
-            return Json(res);
+            catch
+            {
+                return Json(2);
+            }
+
+            
         }
 
     }
